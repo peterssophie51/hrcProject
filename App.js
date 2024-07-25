@@ -20,6 +20,14 @@ function ConsentPage ({ navagation }) {
   )
 }
 
+function UsagePage ({ navagation }) {
+  return (
+    <View>
+      <Text>Usage</Text>
+    </View>
+  )
+}
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {
@@ -28,6 +36,7 @@ export default function App() {
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Consent" component={ConsentPage}/>
+        <Drawer.Screen name="Usage" component={UsagePage}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );

@@ -7,7 +7,15 @@ import { NavigationContainer } from '@react-navigation/native'
 function HomeScreen( {navagation}) {
   return (
     <View>
-      <Text>Home Page</Text>
+      <Text></Text>
+    </View>
+  )
+}
+
+function ConsentPage ({ navagation }) {
+  return (
+    <View>
+      <Text>Consents</Text>
     </View>
   )
 }
@@ -19,6 +27,7 @@ export default function App() {
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Consent" component={ConsentPage}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );

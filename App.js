@@ -71,9 +71,11 @@ export default function App() {
         screenOptions={{
           drawerStyle: {
             width: '100%',
-          }
+          }, 
+          swipeEnabled: false
         }}
         drawerContent={(props) => <CustomDrawerContent{...props}/>}
+        options={{gestureEnabled: 'false'}}
       >
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Consent" component={ConsentPage}/>

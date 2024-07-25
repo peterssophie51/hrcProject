@@ -50,7 +50,7 @@ function CustomDrawerContent(props) {
   return (
     <View style={{flex:1, paddingTop:30}}>
       <Pressable onPress={() => props.navigation.closeDrawer()}>
-        <Image source={require('./images/crossWhite.png')} style={{width:40, height:40, marginLeft:310, marginTop:15}} />
+        <Image source={require('./images/crossWhite.png')} style={{width:40, height:40, marginLeft:'85%', marginTop:15}} />
       </Pressable>
       
       <DrawerContentScrollView {...props}>
@@ -92,11 +92,11 @@ export default function App() {
           headerTitle: '',
           drawerLabelStyle: {
             fontSize: 40,
-            marginLeft:25,
+            marginLeft:'10%',
             textAlign: 'center',
-            marginTop: 20,
+            marginTop: '10%',
             fontWeight: "bold"
-          }
+          },
         }}
         drawerContent={(props) => <CustomDrawerContent{...props}/>}
         options={{gestureEnabled: 'false'}}
@@ -117,8 +117,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  buttonH: {
-    paddingTop:100
   }
 });

@@ -50,7 +50,7 @@ function CustomDrawerContent(props) {
   return (
     <View style={{flex:1, paddingTop:30}}>
       <Pressable onPress={() => props.navigation.closeDrawer()}>
-        <Image source={require('./images/crossBlack.png')} style={{width:30, height:30, marginLeft:340, marginTop:15}} />
+        <Image source={require('./images/crossWhite.png')} style={{width:40, height:40, marginLeft:310, marginTop:15}} />
       </Pressable>
       
       <DrawerContentScrollView {...props}>
@@ -72,15 +72,39 @@ export default function App() {
           drawerStyle: {
             width: '100%',
           }, 
-          swipeEnabled: false
+          swipeEnabled: false,
+          drawerActiveTintColor: '#72BF44',
+          drawerActiveBackgroundColor: 'transperant',
+          drawerInactiveTintColor: 'white',
+          drawerInactiveBackgroundColor: 'transperant',
+          drawerStyle: {
+            backgroundColor: 'black',
+            width: '100%'
+          },
+          headerStyle: {
+            height: 100,
+            backgroundColor: 'black',
+          },
+          headerTitleStyle: {
+            color: 'white'
+          },
+          headerTintColor: '#ffffff', 
+          headerTitle: '',
+          drawerLabelStyle: {
+            fontSize: 40,
+            marginLeft:25,
+            textAlign: 'center',
+            marginTop: 20,
+            fontWeight: "bold"
+          }
         }}
         drawerContent={(props) => <CustomDrawerContent{...props}/>}
         options={{gestureEnabled: 'false'}}
       >
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Consent" component={ConsentPage}/>
-        <Drawer.Screen name="Usage" component={UsagePage}/>
-        <Drawer.Screen name="River" component={RiverPage}/>
+        <Drawer.Screen name="HOME" component={HomeScreen} />
+        <Drawer.Screen name="CONSENT" component={ConsentPage}/>
+        <Drawer.Screen name="USAGE" component={UsagePage}/>
+        <Drawer.Screen name="RIVER" component={RiverPage}/>
         <Drawer.Screen name="FAQ" component={FAQPage}/>
       </Drawer.Navigator>
     </NavigationContainer>

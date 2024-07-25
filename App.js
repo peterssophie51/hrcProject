@@ -1,3 +1,4 @@
+import './gesture-handler'; //always has to be at the top
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 

@@ -36,6 +36,14 @@ function RiverPage ({ navagation }) {
   )
 }
 
+function FAQPage ({navagation}) {
+  return (
+    <View>
+      <Text>FAQ</Text>
+    </View>
+  )
+}
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {
@@ -46,6 +54,7 @@ export default function App() {
         <Drawer.Screen name="Consent" component={ConsentPage}/>
         <Drawer.Screen name="Usage" component={UsagePage}/>
         <Drawer.Screen name="River" component={RiverPage}/>
+        <Drawer.Screen name="FAQ" component={FAQPage}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );

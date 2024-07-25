@@ -1,21 +1,12 @@
 import './gesture-handler'; //always has to be at the top
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { StyleSheet, Text, View, Button, Image, Pressable } from 'react-native';
+import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native'
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 
-function DrawerExit(props) {
-  return (
-    <DrawerContentScrollView>
-      <DrawerItemList
-        label="X"
-        onPress={() => navigation.closeDrawer()}
-        />
-    </DrawerContentScrollView>
-  )
-}
-function HomeScreen( {navagation}) {
+
+function HomeScreen( {navagation, navigation}) {
   return (
     <View>
       <Text></Text>
@@ -55,6 +46,21 @@ function FAQPage ({navagation}) {
   )
 }
 
+function CustomDrawerContent(props) {
+  return (
+    <View style={{flex:1, paddingTop:30}}>
+      <Pressable onPress={() => props.navigation.closeDrawer()}>
+        <Image source={require('./images/crossBlack.png')} style={{width:30, height:30, marginLeft:340, marginTop:15}} />
+      </Pressable>
+      
+      <DrawerContentScrollView {...props}>
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+    </View>
+    
+  );
+}
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {
@@ -65,8 +71,9 @@ export default function App() {
         screenOptions={{
           drawerStyle: {
             width: '100%',
-          },
+          }
         }}
+        drawerContent={(props) => <CustomDrawerContent{...props}/>}
       >
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Consent" component={ConsentPage}/>
@@ -85,4 +92,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  buttonH: {
+    paddingTop:100
+  }
 });

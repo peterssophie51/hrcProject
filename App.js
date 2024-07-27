@@ -62,6 +62,7 @@ function CustomDrawerContent(props) {
 }
 
 const Drawer = createDrawerNavigator();
+const images = require('./images/dropDownWhite.png')
 
 export default function App() {
   return (
@@ -90,6 +91,9 @@ export default function App() {
           },
           headerTintColor: '#ffffff', 
           headerTitle: '',
+          headerTitleStyle: {
+            fontWeight: 'bold'
+          },
           drawerLabelStyle: {
             fontSize: 40,
             marginLeft:'10%',
@@ -97,6 +101,7 @@ export default function App() {
             marginTop: '10%',
             fontWeight: "bold"
           },
+
         }}
         drawerContent={(props) => <CustomDrawerContent{...props}/>}
         options={{gestureEnabled: 'false'}}

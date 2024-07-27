@@ -9,6 +9,7 @@ import { ConsentPage } from './pages/consentPage.js';
 import { RiverPage } from './pages/riverPage.js';
 import { UsagePage } from './pages/usagePage.js';
 import { FAQPage } from './pages/faqPage.js';
+import { DrawerCloseCross } from './components/drawerClose.js';
 
 function DrawerCloseCross(props) {
   return (

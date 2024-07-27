@@ -11,21 +11,6 @@ import { UsagePage } from './pages/usagePage.js';
 import { FAQPage } from './pages/faqPage.js';
 import { DrawerCloseCross } from './components/drawerClose.js';
 
-function DrawerCloseCross(props) {
-  return (
-    <View style={{flex:1, paddingTop:30}}>
-      <Pressable onPress={() => props.navigation.closeDrawer()}>
-        <Image source={require('./images/crossWhite.png')} style={{width:35, height:35, marginLeft:'85%', marginTop:15}} />
-      </Pressable>
-      
-      <DrawerContentScrollView {...props}>
-        <DrawerItemList {...props} />
-      </DrawerContentScrollView>
-    </View>
-    
-  );
-}
-
 const Drawer = createDrawerNavigator();
 
 

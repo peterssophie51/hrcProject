@@ -1,8 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Image, Pressable, TouchableOpacity } from 'react-native';
-import { createDrawerNavigator, DrawerItem , DrawerToggleButton} from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native'
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { Text, View } from 'react-native';
 
 export function RiverPage ({ navagation }) {
     return (
@@ -11,3 +7,6 @@ export function RiverPage ({ navagation }) {
       </View>
     )
   }
+
+
+  

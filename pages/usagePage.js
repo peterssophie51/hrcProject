@@ -7,3 +7,5 @@ export function UsagePage ({ navagation }) {
       </View>
     )
   }
+
+  

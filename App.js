@@ -50,7 +50,7 @@ function DrawerCloseCross(props) {
   return (
     <View style={{flex:1, paddingTop:30}}>
       <Pressable onPress={() => props.navigation.closeDrawer()}>
-        <Image source={require('./images/crossWhite.png')} style={{width:40, height:40, marginLeft:'85%', marginTop:15}} />
+        <Image source={require('./images/crossWhite.png')} style={{width:35, height:35, marginLeft:'85%', marginTop:15}} />
       </Pressable>
       
       <DrawerContentScrollView {...props}>
@@ -72,7 +72,7 @@ export default function App() {
         screenOptions={({navigation}) => ({
           headerLeft: (props) => (
             <Pressable onPress={() => navigation.toggleDrawer()}>
-              <Image source={require('./images/crossWhite.png')} style={{width:40, height:40}} />
+              <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'20%'}} />
             </Pressable>
           ),
           swipeEnabled: false,

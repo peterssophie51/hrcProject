@@ -1,7 +1,7 @@
 import './gesture-handler'; //always has to be at the top
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Image, Pressable } from 'react-native';
-import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+import { StyleSheet, Text, View, Button, Image, Pressable, TouchableOpacity } from 'react-native';
+import { createDrawerNavigator, DrawerItem , DrawerToggleButton} from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native'
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 
@@ -46,7 +46,7 @@ function FAQPage ({navagation}) {
   )
 }
 
-function CustomDrawerContent(props) {
+function DrawerCloseCross(props) {
   return (
     <View style={{flex:1, paddingTop:30}}>
       <Pressable onPress={() => props.navigation.closeDrawer()}>
@@ -62,17 +62,19 @@ function CustomDrawerContent(props) {
 }
 
 const Drawer = createDrawerNavigator();
-const images = require('./images/dropDownWhite.png')
+
 
 export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator 
         initialRouteName="Home"
-        screenOptions={{
-          drawerStyle: {
-            width: '100%',
-          }, 
+        screenOptions={({navigation}) => ({
+          headerLeft: (props) => (
+            <Pressable onPress={() => navigation.toggleDrawer()}>
+              <Image source={require('./images/crossWhite.png')} style={{width:40, height:40}} />
+            </Pressable>
+          ),
           swipeEnabled: false,
           drawerActiveTintColor: '#72BF44',
           drawerActiveBackgroundColor: 'transperant',
@@ -83,7 +85,6 @@ export default function App() {
             width: '100%'
           },
           headerStyle: {
-            height: 100,
             backgroundColor: 'black',
           },
           headerTitleStyle: {
@@ -92,7 +93,8 @@ export default function App() {
           headerTintColor: '#ffffff', 
           headerTitle: '',
           headerTitleStyle: {
-            fontWeight: 'bold'
+            fontWeight: '600',
+            fontSize: 50
           },
           drawerLabelStyle: {
             fontSize: 40,
@@ -102,8 +104,8 @@ export default function App() {
             fontWeight: "bold"
           },
 
-        }}
-        drawerContent={(props) => <CustomDrawerContent{...props}/>}
+        })}
+        drawerContent={(props) => <DrawerCloseCross{...props}/>}
         options={{gestureEnabled: 'false'}}
       >
         <Drawer.Screen name="HOME" component={HomeScreen} />

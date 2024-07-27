@@ -2,49 +2,13 @@ import './gesture-handler'; //always has to be at the top
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, Pressable, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator, DrawerItem , DrawerToggleButton} from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-
-
-function HomeScreen( {navagation, navigation}) {
-  return (
-    <View>
-      <Text></Text>
-    </View>
-  )
-}
-
-function ConsentPage ({ navagation }) {
-  return (
-    <View>
-      <Text>Consents</Text>
-    </View>
-  )
-}
-
-function UsagePage ({ navagation }) {
-  return (
-    <View>
-      <Text>Usage</Text>
-    </View>
-  )
-}
-
-function RiverPage ({ navagation }) {
-  return (
-    <View>
-      <Text>River</Text>
-    </View>
-  )
-}
-
-function FAQPage ({navagation}) {
-  return (
-    <View>
-      <Text>FAQ</Text>
-    </View>
-  )
-}
+import { HomeScreen } from './pages/homeScreen.js';
+import { ConsentPage } from './pages/consentPage.js';
+import { RiverPage } from './pages/riverPage.js';
+import { UsagePage } from './pages/usagePage.js';
+import { FAQPage } from './pages/faqPage.js';
 
 function DrawerCloseCross(props) {
   return (
@@ -72,7 +36,7 @@ export default function App() {
         screenOptions={({navigation}) => ({
           headerLeft: (props) => (
             <Pressable onPress={() => navigation.toggleDrawer()}>
-              <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'20%'}} />
+              <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'15%'}} />
             </Pressable>
           ),
           swipeEnabled: false,

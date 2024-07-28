@@ -1,4 +1,5 @@
 import './gesture-handler'; //always has to be at the top
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, Pressable, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator, DrawerItem , DrawerToggleButton} from '@react-navigation/drawer';
@@ -11,10 +12,14 @@ import { UsagePage } from './pages/usagePage.js';
 import { FAQPage } from './pages/faqPage.js';
 import { DrawerCloseCross } from './components/drawerClose.js';
 
+
 const Drawer = createDrawerNavigator();
 
 
 export default function App() {
+
+
+
   return (
     <NavigationContainer>
       <Drawer.Navigator 

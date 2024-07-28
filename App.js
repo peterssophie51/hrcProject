@@ -1,4 +1,5 @@
 import './gesture-handler'; //always has to be at the top
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, Pressable, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator, DrawerItem , DrawerToggleButton} from '@react-navigation/drawer';
@@ -10,11 +11,31 @@ import { RiverPage } from './pages/riverPage.js';
 import { UsagePage } from './pages/usagePage.js';
 import { FAQPage } from './pages/faqPage.js';
 import { DrawerCloseCross } from './components/drawerClose.js';
+import { useEffect, useState } from 'react';
+import * as Font from 'expo-font';
+
 
 const Drawer = createDrawerNavigator();
 
 
 export default function App() {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+    useEffect(() => {
+        async function loadFont() {
+            await Font.loadAsync({
+                'CalibriBold': require('./assets/fonts/calibrib.ttf'), // Adjust the path as necessary
+            });
+            setFontLoaded(true);
+        }
+
+        loadFont();
+    }, []);
+
+    if (!fontLoaded) {
+        return null; 
+    }
+
   return (
     <NavigationContainer>
       <Drawer.Navigator 
@@ -22,7 +43,7 @@ export default function App() {
         screenOptions={({navigation}) => ({
           headerLeft: (props) => (
             <Pressable onPress={() => navigation.toggleDrawer()}>
-              <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'15%'}} />
+              <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'25%'}} />
             </Pressable>
           ),
           swipeEnabled: false,
@@ -47,11 +68,11 @@ export default function App() {
             fontSize: 50
           },
           drawerLabelStyle: {
-            fontSize: 40,
+            fontSize: 50,
             marginLeft:'10%',
             textAlign: 'center',
-            marginTop: '10%',
-            fontWeight: "bold"
+            marginTop: '5%',
+            fontFamily: "CalibriBold"
           },
 
         })}

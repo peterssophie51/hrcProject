@@ -1,9 +1,10 @@
 import { Text, View } from 'react-native';
+import { PageTitle } from '../components/pageTitle';
 
 export function RiverPage ({ navagation }) {
     return (
       <View>
-        <Text>River</Text>
+        < PageTitle title="River" />
       </View>
     )
   }

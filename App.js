@@ -43,7 +43,7 @@ export default function App() {
         screenOptions={({navigation}) => ({
           headerLeft: (props) => (
             <Pressable onPress={() => navigation.toggleDrawer()}>
-              <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'15%'}} />
+              <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'25%'}} />
             </Pressable>
           ),
           swipeEnabled: false,

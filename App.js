@@ -13,6 +13,7 @@ import { FAQPage } from './pages/faqPage.js';
 import { DrawerCloseCross } from './components/drawerClose.js';
 import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
+import { ConsentDropdownHeader } from './components/consentDropDown.js';
 
 
 const Drawer = createDrawerNavigator();
@@ -42,9 +43,11 @@ export default function App() {
         initialRouteName="Home"
         screenOptions={({navigation}) => ({
           headerLeft: (props) => (
-            <Pressable onPress={() => navigation.toggleDrawer()}>
-              <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'25%'}} />
-            </Pressable>
+            <View style={{display: 'flex', flexDirection: 'row', }}>
+              <Pressable onPress={() => navigation.toggleDrawer()}>
+                <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'25%'}} />
+              </Pressable>
+            </View>
           ),
           swipeEnabled: false,
           drawerActiveTintColor: '#72BF44',

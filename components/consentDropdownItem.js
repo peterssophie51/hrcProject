@@ -5,7 +5,10 @@ import { List, } from 'react-native-paper';
 
 export function ConsentDropdownItem(props) {
     return(
-        <List.Item title={props.title} description={props.description} onPress={() => {props.setcurrentConsent(props.title); props.setcurrentConsentATH(props.description)}} 
+        <List.Item 
+        title={props.title} 
+        description={props.description} 
+        onPress={() => {props.setcurrentConsent(props.title); props.setcurrentConsentATH(props.description)}} 
         right={() => 
             <View style={{display:'flex', flexDirection:'row'}}>
                 <Image source={require('../images/editBlack.png')} style={{height:25, width:25, marginRight:20}}/>
@@ -13,3 +16,4 @@ export function ConsentDropdownItem(props) {
             </View>}/>
     )
 }
+

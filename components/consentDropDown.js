@@ -24,24 +24,12 @@ export function ConsentDropdownHeader() {
   return (
       <List.Accordion title={currentConsent} description={currentConsentATH}>
         <List.Item title="Farm Water Consent" description="ATH-2002009085" onPress={() => {setcurrentConsent("Farm Water Consent"); setcurrentConsentATH("ATH-2002009085")}} 
-        right={() => 
-          <View style={{display:'flex', flexDirection:'row'}}>
-            <Image source={require('../images/editBlack.png')} style={{height:25, width:25, marginRight:20}}/>
-            <Image source={require('../images/crossBlack.png')} style={{height:25, width:25}}/>
-          </View>}/>
+        right={() => <ConsentDropdownButton />}/>
         <List.Item title="Crops Water Consent" description="ATH-2002008648" onPress={() => {setcurrentConsent("Crops Water Consent"); setcurrentConsentATH("ATH-2002008648")}}
-        right={() => 
-          <View style={{display:'flex', flexDirection:'row'}}>
-            <Image source={require('../images/editBlack.png')} style={{height:25, width:25, marginRight:20}}/>
-            <Image source={require('../images/crossBlack.png')} style={{height:25, width:25}}/>
-          </View>}
+        right={() => <ConsentDropdownButton />}
           />
         <List.Item title="Animals Water Consent" description="ATH-2002009348" onPress={() => {setcurrentConsent("Animals Water Consent"); setcurrentConsentATH("ATH-2002009348")}}
-          right={() => 
-            <View style={{display:'flex', flexDirection:'row'}}>
-              <Image source={require('../images/editBlack.png')} style={{height:25, width:25, marginRight:20}}/>
-              <Image source={require('../images/crossBlack.png')} style={{height:25, width:25}}/>
-            </View>}/>
+          right={() => <ConsentDropdownButton />}/>
         <List.Item title="+ Add New Consent" />
       </List.Accordion>
 

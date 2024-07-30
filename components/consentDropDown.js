@@ -1,6 +1,21 @@
 import * as React from 'react';
+import { List, } from 'react-native-paper';
 import { Pressable } from 'react-native';
-import { List } from 'react-native-paper';
+import { Image, View } from 'react-native';
+import { ConsentDropdownButton } from './consentDropdownButtons';
+
+function ConsentDropDownButtons() {
+  return (
+    <View>
+      <Pressable>
+        <Image source='../images/editBlack.png'/>
+      </Pressable>
+      <Pressable>
+        <Image source='../images/crossBlack.png'/>
+      </Pressable>
+    </View>
+  )
+}
 
 export function ConsentDropdownHeader() {
   const [currentConsent, setcurrentConsent] = React.useState("Farm Water Consent")
@@ -8,9 +23,26 @@ export function ConsentDropdownHeader() {
 
   return (
       <List.Accordion title={currentConsent} description={currentConsentATH}>
-        <List.Item title="Farm Water Consent" description="ATH-2002009085" onPress={() => {setcurrentConsent("Farm Water Consent"); setcurrentConsentATH("ATH-2002009085")}}/>
-        <List.Item title="Crops Water Consent" description="ATH-2002008648" onPress={() => {setcurrentConsent("Crops Water Consent"); setcurrentConsentATH("ATH-2002008648")}}/>
-        <List.Item title="Animals Water Consent" description="ATH-2002009348" onPress={() => {setcurrentConsent("Animals Water Consent"); setcurrentConsentATH("ATH-2002009348")}}/>
+        <List.Item title="Farm Water Consent" description="ATH-2002009085" onPress={() => {setcurrentConsent("Farm Water Consent"); setcurrentConsentATH("ATH-2002009085")}} 
+        right={() => 
+          <View style={{display:'flex', flexDirection:'row'}}>
+            <Image source={require('../images/editBlack.png')} style={{height:25, width:25, marginRight:20}}/>
+            <Image source={require('../images/crossBlack.png')} style={{height:25, width:25}}/>
+          </View>}/>
+        <List.Item title="Crops Water Consent" description="ATH-2002008648" onPress={() => {setcurrentConsent("Crops Water Consent"); setcurrentConsentATH("ATH-2002008648")}}
+        right={() => 
+          <View style={{display:'flex', flexDirection:'row'}}>
+            <Image source={require('../images/editBlack.png')} style={{height:25, width:25, marginRight:20}}/>
+            <Image source={require('../images/crossBlack.png')} style={{height:25, width:25}}/>
+          </View>}
+          />
+        <List.Item title="Animals Water Consent" description="ATH-2002009348" onPress={() => {setcurrentConsent("Animals Water Consent"); setcurrentConsentATH("ATH-2002009348")}}
+          right={() => 
+            <View style={{display:'flex', flexDirection:'row'}}>
+              <Image source={require('../images/editBlack.png')} style={{height:25, width:25, marginRight:20}}/>
+              <Image source={require('../images/crossBlack.png')} style={{height:25, width:25}}/>
+            </View>}/>
+        <List.Item title="+ Add New Consent" />
       </List.Accordion>
 
  

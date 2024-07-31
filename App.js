@@ -16,6 +16,7 @@ import * as Font from 'expo-font';
 import { ConsentDropdownHeader } from './components/consentDropDown.js';
 
 
+
 const Drawer = createDrawerNavigator();
 
 
@@ -47,6 +48,7 @@ export default function App() {
               <Pressable onPress={() => navigation.toggleDrawer()}>
                 <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'25%'}} />
               </Pressable>
+              <ConsentDropdownHeader />
             </View>
           ),
           swipeEnabled: false,

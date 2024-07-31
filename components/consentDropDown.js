@@ -12,7 +12,7 @@ export function ConsentDropdownHeader() {
 
   return (
     <View>
-      <List.Accordion title={currentConsent} description={currentConsentATH}>
+      <List.Accordion style={{backgroundColor:'yellow', marginTop:100, marginLeft:0, width:300}}title={currentConsent} description={currentConsentATH}>
         <ConsentDropdownItem 
           description="ATH-2002009085" 
           currentConsentATH={currentConsentATH}

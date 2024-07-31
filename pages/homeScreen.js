@@ -5,7 +5,6 @@ import { ConsentDropdownHeader } from '../components/consentDropDown';
 export function HomeScreen( {navagation, navigation}) {
     return (
       <View>
-        <ConsentDropdownHeader />
       </View>
     )
   }

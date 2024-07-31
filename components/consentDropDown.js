@@ -15,14 +15,17 @@ export function ConsentDropdownHeader() {
       <List.Accordion title={currentConsent} description={currentConsentATH}>
         <ConsentDropdownItem 
           description="ATH-2002009085" 
+          currentConsentATH={currentConsentATH}
           setcurrentConsent={setcurrentConsent} 
           setcurrentConsentATH={setcurrentConsentATH}/>
         <ConsentDropdownItem 
           description="ATH-2002008648" 
+          currentConsentATH={currentConsentATH}
           setcurrentConsent={setcurrentConsent} 
           setcurrentConsentATH={setcurrentConsentATH}/>
         <ConsentDropdownItem 
           description="ATH-2002009348" 
+          currentConsentATH={currentConsentATH}
           setcurrentConsent={setcurrentConsent} 
           setcurrentConsentATH={setcurrentConsentATH}/>
         <List.Item title="+ Add New Consent" />

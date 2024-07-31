@@ -14,7 +14,13 @@ export function ConsentDropdownItem(props) {
         setVisible(!visible);
       };
 
-    
+    const handlePress = () => {
+        if (props.currentConsentATH == props.description) {
+            props.setcurrentConsent(currentName)
+        }
+        toggleVisibility()
+        setconsentNickname(currentName)
+    }
       
 
     return(
@@ -35,7 +41,7 @@ export function ConsentDropdownItem(props) {
             {visible && (
                 <>
                     <TextInput style={{ height: 50, width: 100, backgroundColor: 'pink' }} onChangeText={setcurrentName} />
-                    <Button title="Submit" onPress={() => {toggleVisibility(); setconsentNickname(currentName)}}/>
+                    <Button title="Submit" onPress={() => handlePress()}/>
                     <Button title="Cancel" onPress={toggleVisibility} />
                 </>
     )}

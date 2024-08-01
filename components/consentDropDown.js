@@ -12,7 +12,7 @@ export function ConsentDropdownHeader(props) {
   const [currentConsentATH, setcurrentConsentATH] = React.useState("ATH-2002009085")
 
   return (
-    <View style={{display:'flex', flexDirection:'row'}}>
+    <View style={{display:'flex', flexDirection:'row', position:'absolute'}}>
        <Pressable style={{position:'absolute', zIndex:2}} onPress={() => props.navigation.toggleDrawer()}>
                 <Image source={require('../images/whiteHamburger.png')} style={{width:50, height:50, marginTop:15, marginLeft: 20, }} />
               </Pressable>
@@ -39,7 +39,7 @@ export function ConsentDropdownHeader(props) {
           currentConsentATH={currentConsentATH}
           setcurrentConsent={setcurrentConsent} 
           setcurrentConsentATH={setcurrentConsentATH}/>
-        <List.Item title="+ Add New Consent" style={{}}/>
+        <List.Item title="+ Add New Consent" style={{backgroundColor:'white', width:383}}/>
       </List.Accordion>
     </View>
   )

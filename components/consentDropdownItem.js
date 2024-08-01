@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, View, Pressable, TextInput, Button, TouchableOpacity } from 'react-native';
+import { Image, View, Pressable, Text, TextInput, Button, TouchableOpacity } from 'react-native';
 import { List, } from 'react-native-paper';
 import { useState } from 'react';
 
@@ -24,11 +24,11 @@ export function ConsentDropdownItem(props) {
       
 
     return(
-        <View>
+        <View style={{borderWidth:10, borderColor:'black'}}>
         <List.Item 
         title={consentNickname}
         titleStyle={{color: 'black'}}
-        style={{}}
+        style={{backgroundColor:'white', width:383}}
         descriptionStyle={{}}
         description={props.description} 
         onPress={() => {props.setcurrentConsent(consentNickname); props.setcurrentConsentATH(props.description)}} 
@@ -43,11 +43,14 @@ export function ConsentDropdownItem(props) {
         <View>
             {visible && (
                 <>
-                <View style={{display:'flex', flexDirection:'row'}}>
-                    <TextInput style={{ width:'62%', backgroundColor: '#eeeeeee', marginLeft:10, marginRight:10, paddingLeft:10 }} onChangeText={setcurrentName} />
-                    
-                        <Button style={{marginRight:20}} title="Submit" onPress={() => handlePress()}/>
-                        <Button style={{backgroundColor:'green'}}title="Cancel" onPress={toggleVisibility} />
+                <View style={{display:'flex', flexDirection:'row', }}>
+                    <TextInput style={{ width:215, height:45, backgroundColor: '#999999', margin:10, borderRadius:10 }} onChangeText={setcurrentName} />
+                        <TouchableOpacity onPress={() => handlePress()} style={{width: 50, height:45, backgroundColor:'#72BF44', margin:10, borderRadius:10}}>
+                            <Text style={{color:'white'}}>\/</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={toggleVisibility} style={{width:50, height:45, backgroundColor:'#CE202F', margin:10, borderRadius:10}}>
+                            <Text>X</Text>
+                        </TouchableOpacity>
                     </View>
                 </>
     )}

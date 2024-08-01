@@ -27,12 +27,15 @@ export function ConsentDropdownItem(props) {
         <View>
         <List.Item 
         title={consentNickname}
+        titleStyle={{color: 'black'}}
+        style={{}}
+        descriptionStyle={{}}
         description={props.description} 
         onPress={() => {props.setcurrentConsent(consentNickname); props.setcurrentConsentATH(props.description)}} 
         right={() => 
             <View style={{display:'flex', flexDirection:'row'}}>
                 <TouchableOpacity onPress={toggleVisibility}>
-                    <Image source={require('../images/editBlack.png')} style={{height:25, width:25, marginRight:20}}/>
+                    <Image source={require('../images/editBlack.png')} style={{height:25, width:25, marginRight:25}}/>
                 </TouchableOpacity>
                 <Image source={require('../images/crossBlack.png')} style={{height:25, width:25}}/>
             </View>}
@@ -40,9 +43,12 @@ export function ConsentDropdownItem(props) {
         <View>
             {visible && (
                 <>
-                    <TextInput style={{ height: 50, width: 100, backgroundColor: 'pink' }} onChangeText={setcurrentName} />
-                    <Button title="Submit" onPress={() => handlePress()}/>
-                    <Button title="Cancel" onPress={toggleVisibility} />
+                <View style={{display:'flex', flexDirection:'row'}}>
+                    <TextInput style={{ width:'62%', backgroundColor: '#eeeeeee', marginLeft:10, marginRight:10, paddingLeft:10 }} onChangeText={setcurrentName} />
+                    
+                        <Button style={{marginRight:20}} title="Submit" onPress={() => handlePress()}/>
+                        <Button style={{backgroundColor:'green'}}title="Cancel" onPress={toggleVisibility} />
+                    </View>
                 </>
     )}
     </View>

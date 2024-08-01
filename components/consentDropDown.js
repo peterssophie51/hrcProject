@@ -6,13 +6,24 @@ import { ConsentDropdownItem } from './consentDropdownItem';
 
 import { useState } from 'react';
 
-export function ConsentDropdownHeader() {
+export function ConsentDropdownHeader(props) {
+  
   const [currentConsent, setcurrentConsent] = React.useState("Farm Water Consent")
   const [currentConsentATH, setcurrentConsentATH] = React.useState("ATH-2002009085")
 
   return (
-    <View>
-      <List.Accordion style={{backgroundColor:'yellow', marginTop:100, marginLeft:0, width:300}}title={currentConsent} description={currentConsentATH}>
+    <View style={{display:'flex', flexDirection:'row'}}>
+       <Pressable style={{position:'absolute', zIndex:2}} onPress={() => props.navigation.toggleDrawer()}>
+                <Image source={require('../images/whiteHamburger.png')} style={{width:50, height:50, marginTop:15, marginLeft: 20, }} />
+              </Pressable>
+      <List.Accordion 
+        style={{ zIndex:1, width:'550%', backgroundColor:'black'}}
+        title={currentConsent} 
+        description={currentConsentATH}
+        titleStyle={{marginLeft:70, color:'white'}}
+        descriptionStyle={{marginLeft:70, color:'white'}}
+        
+        >
         <ConsentDropdownItem 
           description="ATH-2002009085" 
           currentConsentATH={currentConsentATH}
@@ -28,7 +39,7 @@ export function ConsentDropdownHeader() {
           currentConsentATH={currentConsentATH}
           setcurrentConsent={setcurrentConsent} 
           setcurrentConsentATH={setcurrentConsentATH}/>
-        <List.Item title="+ Add New Consent" />
+        <List.Item title="+ Add New Consent" style={{}}/>
       </List.Accordion>
     </View>
   )

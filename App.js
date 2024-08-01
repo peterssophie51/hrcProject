@@ -43,14 +43,7 @@ export default function App() {
       <Drawer.Navigator 
         initialRouteName="Home"
         screenOptions={({navigation}) => ({
-          headerLeft: (props) => (
-            <View style={{display: 'flex', flexDirection: 'row', }}>
-              <Pressable onPress={() => navigation.toggleDrawer()}>
-                <Image source={require('./images/whiteHamburger.png')} style={{width:40, height:40, marginLeft: '15%', marginBottom:'25%'}} />
-              </Pressable>
-              <ConsentDropdownHeader />
-            </View>
-          ),
+          header: () => < ConsentDropdownHeader navigation={navigation} />,
           swipeEnabled: false,
           drawerActiveTintColor: '#72BF44',
           drawerActiveBackgroundColor: 'transperant',

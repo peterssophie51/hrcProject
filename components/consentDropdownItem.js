@@ -24,12 +24,12 @@ export function ConsentDropdownItem(props) {
       
 
     return(
-        <View style={{borderWidth:10, borderColor:'black'}}>
+        <View style={{}}>
         <List.Item 
         title={consentNickname}
-        titleStyle={{color: 'black'}}
+        titleStyle={{color: 'black', fontSize:20}}
         style={{backgroundColor:'white', width:383}}
-        descriptionStyle={{}}
+        descriptionStyle={{color:'black', fontSize:17}}
         description={props.description} 
         onPress={() => {props.setcurrentConsent(consentNickname); props.setcurrentConsentATH(props.description)}} 
         right={() => 
@@ -46,10 +46,10 @@ export function ConsentDropdownItem(props) {
                 <View style={{display:'flex', flexDirection:'row', }}>
                     <TextInput style={{ width:215, height:45, backgroundColor: '#999999', margin:10, borderRadius:10 }} onChangeText={setcurrentName} />
                         <TouchableOpacity onPress={() => handlePress()} style={{width: 50, height:45, backgroundColor:'#72BF44', margin:10, borderRadius:10}}>
-                            <Text style={{color:'white'}}>\/</Text>
+                            <Image source={require('../images/tickWhiteThick.png')} style={{height:30, width:40, marginLeft:5, marginTop:7}}/>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={toggleVisibility} style={{width:50, height:45, backgroundColor:'#CE202F', margin:10, borderRadius:10}}>
-                            <Text>X</Text>
+                            <Image source={require('../images/crossWhiteThick.png')} style={{height:30, width:30, marginLeft:10, marginRight:10, marginTop:7}}/>
                         </TouchableOpacity>
                     </View>
                 </>

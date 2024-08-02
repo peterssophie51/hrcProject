@@ -20,8 +20,8 @@ export function ConsentDropdownHeader(props) {
         style={{ zIndex:1, width:'550%', backgroundColor:'black'}}
         title={currentConsent} 
         description={currentConsentATH}
-        titleStyle={{marginLeft:70, color:'white'}}
-        descriptionStyle={{marginLeft:70, color:'white'}}
+        titleStyle={{marginLeft:70, color:'white', fontSize:25}}
+        descriptionStyle={{marginLeft:70, color:'white', fontSize:20}}
         
         >
         <ConsentDropdownItem 
@@ -39,7 +39,7 @@ export function ConsentDropdownHeader(props) {
           currentConsentATH={currentConsentATH}
           setcurrentConsent={setcurrentConsent} 
           setcurrentConsentATH={setcurrentConsentATH}/>
-        <List.Item title="+ Add New Consent" style={{backgroundColor:'white', width:383}}/>
+        <List.Item title="+ Add New Consent" titleStyle={{fontSize:20}} style={{backgroundColor:'white', width:383}}/>
       </List.Accordion>
     </View>
   )

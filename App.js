@@ -14,6 +14,7 @@ import { DrawerCloseCross } from './components/drawerClose.js';
 import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 import { ConsentDropdownHeader } from './components/consentDropDown.js';
+import { Dimensions } from 'react-native';
 
 
 

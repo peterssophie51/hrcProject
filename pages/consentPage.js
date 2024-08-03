@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
-import { CalibriBoldText } from '../components/calibriBoldFont.js';
-import { CalibriText } from '../components/calibriFont.js';
+import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
+import { CalibriText } from '../components/fonts/calibriFont.js';
 
 export function ConsentPage ({ navagation }) {
     return (

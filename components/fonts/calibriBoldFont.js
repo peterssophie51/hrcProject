@@ -4,13 +4,13 @@ import { Text, StyleSheet } from 'react-native';
 
 
 
-export function CalibriText(props) {
+export function CalibriBoldText(props) {
     const [fontLoaded, setFontLoaded] = useState(false);
 
     useEffect(() => {
         async function loadFont() {
             await Font.loadAsync({
-                'Calibri': require('../assets/fonts/Calibri.ttf'), // Adjust the path as necessary
+                'CalibriBold': require('../../assets/fonts/calibrib.ttf'), // 
             });
             setFontLoaded(true);
         }
@@ -23,7 +23,7 @@ export function CalibriText(props) {
     }
 
     return (
-        <Text style={[props.style, {fontFamily: 'Calibri'}]}>{props.title}</Text>
+        <Text style={[props.style, {fontFamily: 'CalibriBold'}]}>{props.title}</Text>
     );
 }
 

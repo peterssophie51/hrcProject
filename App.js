@@ -1,20 +1,20 @@
-import './gesture-handler'; //always has to be at the top
+//always has to be at the top
+import './gesture-handler'; 
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Image, Pressable, TouchableOpacity } from 'react-native';
-import { createDrawerNavigator, DrawerItem , DrawerToggleButton} from '@react-navigation/drawer';
+import { useEffect, useState } from 'react';
+import * as Font from 'expo-font';
+import { StyleSheet } from 'react-native';
+//imports to create drawer navigator
+import { createDrawerNavigator} from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { DrawerCloseCross } from './components/header/drawerClose.js';
+import { ConsentDropdownHeader } from './components/header/consentDropDown.js';
+//importing different pages
 import { HomeScreen } from './pages/homeScreen.js';
 import { ConsentPage } from './pages/consentPage.js';
 import { RiverPage } from './pages/riverPage.js';
 import { UsagePage } from './pages/usagePage.js';
 import { FAQPage } from './pages/faqPage.js';
-import { DrawerCloseCross } from './components/drawerClose.js';
-import { useEffect, useState } from 'react';
-import * as Font from 'expo-font';
-import { ConsentDropdownHeader } from './components/consentDropDown.js';
-import { Dimensions } from 'react-native';
 
 
 
@@ -22,6 +22,8 @@ const Drawer = createDrawerNavigator();
 
 
 export default function App() {
+  
+  //function to load in bold calibri font
   const [fontLoaded, setFontLoaded] = useState(false);
 
     useEffect(() => {
@@ -39,11 +41,15 @@ export default function App() {
         return null; 
     }
 
+
+
   return (
+    //creating drawer navigator
     <NavigationContainer>
       <Drawer.Navigator 
         initialRouteName="Home"
         screenOptions={({navigation}) => ({
+          //custom header for drawer navigator
           header: () => < ConsentDropdownHeader navigation={navigation} />,
           swipeEnabled: false,
           drawerActiveTintColor: '#72BF44',
@@ -75,9 +81,11 @@ export default function App() {
           },
 
         })}
+        //adding in content for drawers and  disabling swipe open for drawer navigator
         drawerContent={(props) => <DrawerCloseCross{...props}/>}
         options={{gestureEnabled: 'false'}}
       >
+        {/*all different pages*/}
         <Drawer.Screen name="HOME" component={HomeScreen} />
         <Drawer.Screen name="CONSENT" component={ConsentPage}/>
         <Drawer.Screen name="USAGE" component={UsagePage}/>
@@ -87,3 +95,7 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  
+})

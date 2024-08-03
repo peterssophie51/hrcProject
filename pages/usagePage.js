@@ -1,5 +1,5 @@
-import { Text, View } from 'react-native';
-import { CalibriBoldText } from '../components/calibriBoldFont.js';
+import { View } from 'react-native';
+import { CalibriBoldText } from '../components/fonts/calibriBoldFont';
 
 export function UsagePage ({ navagation }) {
     return (

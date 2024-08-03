@@ -45,11 +45,19 @@ export function ConsentDropdownItem(props) {
         <View style={{ borderLeftWidth: Dimensions.get('window').width * 0.05, borderRightWidth:Dimensions.get('window').width * 0.05, borderColor: 'black' }}>
             
             <List.Item 
-                title={consentNickname} 
-                titleStyle={{ color: 'black', fontSize: 20, fontFamily:'CalibriBold'}}
-                style={{ backgroundColor: 'white', width: Dimensions.get('window').width * 0.9 }}
-                descriptionStyle={{ color: 'black', fontSize: 17, fontFamily:'Calibri' }}
+                title={consentNickname}
                 description={props.description}
+
+                titleStyle={props.currentConsentATH == props.description
+                    ? {color: '#72BF44', fontSize: 20, fontFamily:'CalibriBold'}
+                    : {color: 'black', fontSize: 20, fontFamily:'CalibriBold'}
+                  }
+                descriptionStyle={props.currentConsentATH == props.description
+                    ? {color: '#72BF44', fontSize: 17, fontFamily:'Calibri'}
+                    : {color: 'black', fontSize: 17, fontFamily:'Calibri'}
+                  }
+
+                style={{ backgroundColor: 'white', width: Dimensions.get('window').width * 0.9 }}
                 onPress={() => {
                     props.setcurrentConsent(consentNickname); 
                     props.setcurrentConsentATH(props.description);
@@ -57,9 +65,21 @@ export function ConsentDropdownItem(props) {
                 right={() => (
                     <View style={{ display: 'flex', flexDirection: 'row' }}>
                         <TouchableOpacity onPress={toggleVisibility}>
-                            <Image source={require('../images/editBlack.png')} style={{ height: ButtonDim, width: ButtonDim, marginRight: 25, marginTop:3 }} />
+                            <Image 
+                                source={props.currentConsentATH == props.description
+                                    ? require('../images/editGreen.png')  
+                                    : require('../images/editBlack.png') 
+                                }
+                                style={{ height: ButtonDim, width: ButtonDim, marginRight: 25, marginTop:3 }} 
+                                />
                         </TouchableOpacity>
-                        <Image source={require('../images/crossBlack.png')} style={{ height: ButtonDim, width: ButtonDim, marginTop:3 }} />
+                        <Image 
+                            source={props.currentConsentATH == props.description
+                                ? require('../images/crossGreen.png')  
+                                : require('../images/crossBlack.png') 
+                            }
+                            style={{ height: ButtonDim, width: ButtonDim, marginTop:3 }} 
+                        />
                     </View>
                 )}
             />

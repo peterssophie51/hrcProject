@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, View, TextInput, TouchableOpacity, Dimensions } from 'react-native';
+import { Image, View, TextInput, TouchableOpacity, Dimensions, StyleSheet } from 'react-native';
 import { List } from 'react-native-paper';
 import { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
@@ -104,7 +104,7 @@ export function ConsentDropdownItem(props) {
                                 onChangeText={setCurrentName} 
                             />
                             {/*button to submit new consent nickname*/}
-                            <TouchableOpacity onPress={handlePress} style={submitButtonContainer}>
+                            <TouchableOpacity onPress={handlePress} style={styles.submitButtonContainer}>
                                 <Image source={require('../../images/tickWhiteThick.png')} style={styles.submitButton} />
                             </TouchableOpacity>
                             {/*button to cancel editing consent nickname*/}

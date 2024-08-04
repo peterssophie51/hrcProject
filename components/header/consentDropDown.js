@@ -89,7 +89,7 @@ export function ConsentDropdownHeader(props) {
         />
         <List.Item
           title="+ Add New Consent"
-          titleStyle={{ fontSize: 20 }}
+          titleStyle={{ fontStyle:'Calibri' ,fontSize: 20 }}
           style={styles.addConsent}
         />
       </List.Accordion>

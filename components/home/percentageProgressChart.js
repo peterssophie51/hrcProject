@@ -1,6 +1,5 @@
 import { PieChart } from "react-native-gifted-charts";
 import { Dimensions, View, StyleSheet, Text } from "react-native";
-import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
 import { useState, useEffect } from "react";
 import * as Font from 'expo-font';
@@ -46,12 +45,19 @@ export function ProgressChart() {
                     return (
                         <View style={{marginTop:-35}}>
                             <Text style={[styles.headerText, {fontSize:90}]}>{percentage}<Text style={[styles.headerText, {fontSize:70}]}>%</Text></Text>
-                            <CalibriText title={'106M3 of 2000M3 per day'} style={styles.subText}/>
-                            <CalibriText title={'Last Recorded at 20:00 (NZST)\nJune 14th 2024'} style={styles.subText}/>
+                            <View style={{flexDirection:'row', alignItems:'flex-start', justifyContent:'center'}}>
+                              <Text style={styles.subText}>160</Text>
+                                <Text style={styles.units}>M</Text>
+                                  <Text style={styles.superscript}>3 </Text>
+                              <Text style={styles.subText}>of 2000</Text>
+                                <Text style={styles.units}>M</Text>
+                                  <Text style={styles.superscript}>3 </Text>
+                              <Text style={styles.subText}>per day</Text>
+                            </View>
+                        <CalibriText title={'Last Recorded at 20:00 (NZST)\nJune 14th 2024'} style={styles.subText}/>
                         </View>
                     );
                     }}
-                
             />
         </View>
     );};
@@ -64,6 +70,19 @@ const styles = StyleSheet.create({
     },
     subText: {
         fontSize: 18,
-        textAlign:'center'
+        textAlign:'center',
+        lineHeight:18,
+        fontFamily:'Calibri'
+    }, 
+    superscript: {
+      fontSize:10,
+      textAlign:'center',
+      lineHeight:10,
+      fontFamily:'Calibri'
+    },
+    units: {
+      fontSize:14,
+      lineHeight:16,
+      fontFamily:'Calibri'
     }
 })

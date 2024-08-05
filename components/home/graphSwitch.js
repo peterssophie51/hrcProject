@@ -6,10 +6,10 @@ import * as Font from 'expo-font'
 import { useState, useEffect } from "react";
 
 
-export function GraphSwitch() {
+export function GraphSwitch(props) {
   const options = [
-    { label: "Annual", value: "0", activeColor:'#72BF44'},
-    { label: "Today", value: "1", activeColor:'#72BF44' },
+    { label: "Annual", value: 'annual', activeColor:'#72BF44'},
+    { label: "Today", value: 'day', activeColor:'#72BF44' },
   ];
 
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -46,9 +46,10 @@ export function GraphSwitch() {
       fontSize={25}
       textStyle={{fontFamily:'CalibriBold', color:'white'}}
       selectedTextStyle={{fontFamily:'CalibriBold', color:'black'}}
+      onPress={value => props.setgraphTime(value)} //set value to current switch value
     />)}
 
-    
+
 const styles = StyleSheet.create({
   switch: {
     marginTop: Dimensions.get('window').width * 0.05, 

@@ -4,10 +4,13 @@ import { CalibriText } from "../fonts/calibriFont";
 import { useState, useEffect } from "react";
 import * as Font from 'expo-font';
         
-export function ProgressChart() {
-  const [timePeriod, settimePeriod] = useState('day') //set time period to day or annual for display
+export function ProgressChart(props) {
+  function roundNumber(num) {
+    return num % 1 === 0 ? num : Math.round(num * 100) / 100;
+  }
+
   const abstracted = 160 //amount abstracted in time period
-  const max = 2000 //max for time period
+  const max = 20 //max for time period
   const percentage = ((abstracted/max) * 100) //percentage use
   const data = [{value: percentage, color:'#00A7CF'}, {value: 100-percentage, color:'#95C6DD'}];  //values for pie chart
   const screenWidth = Dimensions.get('window').width
@@ -37,29 +40,31 @@ export function ProgressChart() {
   }
 
     return (
-        <View style={{marginTop:'28%', marginLeft:screenWidth * 0.08}}> 
+        <View style={{marginTop:'28%', marginLeft:screenWidth * 0.1}}> 
             <PieChart 
                 donut
-                radius={screenWidth * 0.42}
+                radius={screenWidth * 0.40}
                 innerRadius={screenWidth * 0.3} //use to set the width of the progress bar
                 data={data}
                 centerLabelComponent={() => { //text inside the progress chart
                     return (
                         <View style={{marginTop:-35}}>
                           
-                            <Text style={[styles.headerText, {fontSize:90}]}> {percentage.toFixed(2)} 
+                            <Text style={[styles.headerText, {fontSize:90}]}> {roundNumber(percentage)} 
                               <Text style={[styles.headerText, {fontSize:60}]}>%</Text>
                             </Text>
 
                             <View style={{flexDirection:'row', alignItems:'flex-start', justifyContent:'center'}}>
-                              <Text style={styles.subText}>{abstracted.toFixed(2)}</Text>
+                              <Text style={styles.subText}>{roundNumber(abstracted)}</Text>
                                 <Text style={styles.units}>M</Text>
                                   <Text style={styles.superscript}>3 </Text>
-                              <Text style={styles.subText}>of {max.toFixed(2)}</Text>
+                              <Text style={styles.subText}>of {roundNumber(max)}</Text>
                                 <Text style={styles.units}>M</Text>
                                   <Text style={styles.superscript}>3 </Text>
-                              <Text style={styles.subText}>per {timePeriod}</Text>
+                              <Text style={styles.subText}>per {props.graphTime}</Text>
                             </View>
+
+
 
                         <CalibriText title={'Last Recorded at 20:00 (NZST)\nJune 14th 2024'} style={styles.subText}/>
                         </View>

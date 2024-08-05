@@ -5,14 +5,16 @@ import { useState, useEffect } from "react";
 import * as Font from 'expo-font';
         
 export function ProgressChart() {
-    //values for pie chart
-    const percentage = 8
-    const data = [{value: percentage, color:'#00A7CF'}, {value: 100-percentage, color:'#95C6DD'}];
-    const screenWidth = Dimensions.get('window').width
+  const [timePeriod, settimePeriod] = useState('day') //set time period to day or annual for display
+  const abstracted = 160 //amount abstracted in time period
+  const max = 2000 //max for time period
+  const percentage = ((abstracted/max) * 100) //percentage use
+  const data = [{value: percentage, color:'#00A7CF'}, {value: 100-percentage, color:'#95C6DD'}];  //values for pie chart
+  const screenWidth = Dimensions.get('window').width
 
-    const [fontLoaded, setFontLoaded] = useState(false);
 
-    //function to load in calibri bold and calibri font
+  const [fontLoaded, setFontLoaded] = useState(false);
+  //function to load in calibri bold and calibri font
   useEffect(() => {
     async function loadFont() {
       try {
@@ -35,25 +37,30 @@ export function ProgressChart() {
   }
 
     return (
-        <View style={{marginTop:'28%', marginLeft:screenWidth * 0.08}}>
+        <View style={{marginTop:'28%', marginLeft:screenWidth * 0.08}}> 
             <PieChart 
                 donut
                 radius={screenWidth * 0.42}
                 innerRadius={screenWidth * 0.3} //use to set the width of the progress bar
                 data={data}
-                centerLabelComponent={() => {
+                centerLabelComponent={() => { //text inside the progress chart
                     return (
                         <View style={{marginTop:-35}}>
-                            <Text style={[styles.headerText, {fontSize:90}]}>{percentage}<Text style={[styles.headerText, {fontSize:70}]}>%</Text></Text>
+                          
+                            <Text style={[styles.headerText, {fontSize:90}]}> {percentage.toFixed(2)} 
+                              <Text style={[styles.headerText, {fontSize:60}]}>%</Text>
+                            </Text>
+
                             <View style={{flexDirection:'row', alignItems:'flex-start', justifyContent:'center'}}>
-                              <Text style={styles.subText}>160</Text>
+                              <Text style={styles.subText}>{abstracted.toFixed(2)}</Text>
                                 <Text style={styles.units}>M</Text>
                                   <Text style={styles.superscript}>3 </Text>
-                              <Text style={styles.subText}>of 2000</Text>
+                              <Text style={styles.subText}>of {max.toFixed(2)}</Text>
                                 <Text style={styles.units}>M</Text>
                                   <Text style={styles.superscript}>3 </Text>
-                              <Text style={styles.subText}>per day</Text>
+                              <Text style={styles.subText}>per {timePeriod}</Text>
                             </View>
+
                         <CalibriText title={'Last Recorded at 20:00 (NZST)\nJune 14th 2024'} style={styles.subText}/>
                         </View>
                     );

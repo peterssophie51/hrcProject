@@ -3,6 +3,7 @@ import { ProgressChart } from '../components/home/percentageProgressChart';
 import { GraphSwitch } from '../components/home/graphSwitch';
 import { useState } from 'react';
 import { TakeWater } from '../components/home/takeWater';
+import { RiverFlow } from '../components/home/riverFlow';
 
 export function HomeScreen( {navagation, navigation}) {
   const [graphTime, setgraphTime] = useState('day')
@@ -14,6 +15,7 @@ export function HomeScreen( {navagation, navigation}) {
         <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime}/>
         <GraphSwitch graphTime={graphTime} setgraphTime={setgraphTime}/>
         <TakeWater take={take}/>
+        <RiverFlow />
       </View>
     )
   }

@@ -53,8 +53,7 @@ export function GraphSwitch(props) {
 const styles = StyleSheet.create({
   switch: {
     marginTop: Dimensions.get('window').width * 0.05, 
-    width:Dimensions.get('window').width * 0.84, 
-    marginLeft:Dimensions.get('window').width *0.08, 
-    marginRight:Dimensions.get('window').width * 0.08,
+    width:Dimensions.get('window').width * 0.7, 
+    marginLeft:Dimensions.get('window').width *0.15, 
   }
 })

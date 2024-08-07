@@ -11,17 +11,22 @@
   "dependencies": {
     "@react-navigation/drawer": "^6.7.2",
     "expo": "~51.0.22",
-    "expo-app-loading": "^1.1.2",
+    "expo-app-loading": "^1.0.3",
     "expo-font": "~12.0.9",
     "expo-splash-screen": "~0.27.5",
     "expo-status-bar": "~1.12.1",
+    "gifted-charts-core": "^0.1.27",
     "react": "18.2.0",
     "react-native": "0.74.3",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-element-dropdown": "^2.12.1",
     "react-native-gesture-handler": "~2.16.1",
+    "react-native-gifted-charts": "^1.4.25",
+    "react-native-linear-gradient": "^2.8.3",
     "react-native-paper": "^5.12.5",
-    "react-native-reanimated": "~3.10.1"
+    "react-native-reanimated": "~3.10.1",
+    "react-native-svg": "^15.4.0",
+    "react-native-switch-selector": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

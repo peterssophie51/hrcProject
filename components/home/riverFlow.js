@@ -1,27 +1,36 @@
 import React from "react";
-import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
 
 export function RiverFlow(props) {
-    const riverFlow = 45.7
-    const restriction = 30.22
-    const restrictionText = "RESTRICTION AT " + restriction
-    const timePeriod = '20:00 (NZST) June 14th 2024'
+    const riverFlow = 45.7 // river flow value
+    const restriction = 30.22 //river flow at restriction
+    const timePeriod = '20:00 (NZST) June 14th 2024' //time period data collected
+    const restrictionText = "RESTRICTION AT " + roundNumber(restriction, 3)
     const timePeriodText = 'Last Recorded at ' + timePeriod
+    
+    function roundNumber(num, roundTo) {
+        if (Number.isInteger(num) == false) {  //function that rounds numbers to desired d.p.
+          return num.toFixed(roundTo)
+        } else {
+          return num
+        }
+    }
+
     return(
-        <View style={styles.container}>
-            <View style={styles.topTextContainer}>
+        <View style={styles.container}> 
+            <View style={styles.topTextContainer}> 
                 <CalibriBoldText title={riverFlow} style={styles.flow}/>
                     <CalibriBoldText style={styles.units} title='M'/>
                         <CalibriBoldText style={styles.superscript} title='3'/>
                     <CalibriBoldText style={styles.units} title='/S'/>
-                <View style={{display:'flex', flexDirection:'column'}}>
+                <View style={{display:'flex', flexDirection:'column'}}> 
                     <CalibriBoldText title="CURRENT RIVER" style={styles.title} />
                     <CalibriBoldText title="FLOW" style={styles.title} />
                 </View>
             </View>
-            <View style={styles.subTextContainer}>
+            <View style={styles.subTextContainer}> 
                 <CalibriText style={styles.subText} title={restrictionText} />
                 <CalibriText style={styles.subText} title={timePeriodText} />
             </View>

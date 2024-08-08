@@ -3,6 +3,7 @@ import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
 import { Dimensions, StyleSheet } from 'react-native';
 import { CalibriText } from '../components/fonts/calibriFont.js';
 import { RiverFlowTitle } from '../components/river/riverFlow.js';
+import { RiverFlowChart } from '../components/river/riverFlowChart.js';
 
 export function RiverPage ({ navagation }) {
   const flowsite = "Rangitikei at Mangaweka"
@@ -12,6 +13,7 @@ export function RiverPage ({ navagation }) {
         <CalibriBoldText  style={styles.flowsite} title={flowsite} />
         <CalibriText style={styles.timeRecorded} title='Last Recorded at 20:00 (NZST) June 14th 2024'/>
         <RiverFlowTitle />
+        <RiverFlowChart />
       </View>
     )
   }

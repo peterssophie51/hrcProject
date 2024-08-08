@@ -4,6 +4,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { CalibriText } from '../components/fonts/calibriFont.js';
 import { RiverFlowTitle } from '../components/river/riverFlow.js';
 import { RiverFlowChart } from '../components/river/riverFlowChart.js';
+import { TimeRadios } from '../components/river/graphRadios.js';
 
 export function RiverPage ({ navagation }) {
   const flowsite = "Rangitikei at Mangaweka"
@@ -14,6 +15,7 @@ export function RiverPage ({ navagation }) {
         <CalibriText style={styles.timeRecorded} title='Last Recorded at 20:00 (NZST) June 14th 2024'/>
         <RiverFlowTitle />
         <RiverFlowChart />
+        <TimeRadios />
       </View>
     )
   }

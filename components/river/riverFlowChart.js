@@ -9,7 +9,7 @@ export function RiverFlowChart() {
             <LineChart 
                 data = {data} 
                 width={Dimensions.get('window').width * 0.7} 
-                height={Dimensions.get('window').height * 0.40}
+                height={Dimensions.get('window').height * 0.35}
                 maxValue={120}
                 noOfSections={12}
                 initialSpacing={Dimensions.get('window').width * 0.05}

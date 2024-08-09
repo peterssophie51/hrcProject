@@ -11,16 +11,18 @@ export function RiverPage ({ navagation }) {
   const [selectedTime, setselectedTime] =  useState('1 DAY')
   const flowsite = "Rangitikei at Mangaweka"
 
-  const oneDayData= [{value: 400}, {value: 400}, {value: 400}, {value: 400},
-    {value: 400}, {value: 400}, {value: 400}, {value: 400}, 
-    {value: 400}, {value: 400}, {value: 400}, {value: 400}
+  const oneDayData= [{value: 4000}, {value: 4200}, {value: 4100}, {value: 4050},
+    {value: 4000}, {value: 4000}, {value: 3950}, {value: 4000}, 
+    {value: 4100}, {value: 4150}, {value: 4750}, {value: 4700}
 ]
-  const sevenDayData = [{value:200}, {value:300}, {value:500}, {value:100}, {value:600}, {value:800}, {value:500}]
-  const oneMonthData = []
-  const annualData = []
+  const sevenDayData = [{value:4700}, {value:4800}, {value:5000}, {value:4500}, {value:4300}, {value:4400}, {value:4500}]
+  const oneMonthData = [{value:4500}, {value:4650}, {value:4300}, {value:4000}, {value:5000}, {value:4700}, {value:4650}]
+  const annualData = [{value: 3800}, {value:3600}, {value:3500}, {value:4000}, 
+    {value:4500}, {value: 4700}, {value:4500}, {value:4900},
+  {value:5000}, {value:4500}, {value:4200}, {value:4100}]
 
   const oneDayLabels = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00']
-  const sevenDaysLabels = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+  const sevenDayLabels = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
   const oneMonthLabels = ['1ST', '5TH', '10TH', '15TH', '20TH', '25TH', '30TH']
   const annualLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
 
@@ -35,10 +37,10 @@ export function RiverPage ({ navagation }) {
         <CalibriBoldText  style={styles.flowsite} title={flowsite} />
         <CalibriText style={styles.timeRecorded} title='Last Recorded at 20:00 (NZST) June 14th 2024'/>
         <RiverFlowTitle />
-        <RiverFlowChart selectedTime={selectedTime} currentData={currentData} setcurrentData={setcurrentData}/>
+        <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels}/>
         <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
         oneDayData={oneDayData} sevenDayData={sevenDayData} oneMonthData={oneMonthData} annualData={annualData}
-        oneDayLabels={oneDayLabels} sevenDaysLabels={sevenDaysLabels} oneMonthLabels={oneMonthLabels} annualLabels={annualLabels}/>
+        oneDayLabels={oneDayLabels} sevenDayLabels={sevenDayLabels} oneMonthLabels={oneMonthLabels} annualLabels={annualLabels}/>
       </View>
     )
   }

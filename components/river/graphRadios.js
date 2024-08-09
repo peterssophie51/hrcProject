@@ -28,13 +28,20 @@ export function TimeRadios(props) {
     if (!fontLoaded) {
         return null; 
     }
+    
+    const handlePress = (name, data, labels) => {
+        props.setselectedTime(name);
+        props.setcurrentData(data)
+        props.setcurrentLabels(labels)
+        
+    }
 
     return (
         <View style={styles.container}>
             <View style={{display:'flex', flexDirection:'row'}}>
                 <View style={styles.radioTopLeft}>
                     <RadioGroup 
-                        onPress={props.setselectedTime}
+                        onPress={() => handlePress('1 DAY', props.oneDayData, props.oneDayLabels)}
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'1 DAY', label:'1 DAY', color:'#72BF44', 
@@ -46,7 +53,7 @@ export function TimeRadios(props) {
                 </View>
                 <View style={styles.radioTopRight}>
                     <RadioGroup 
-                        onPress={props.setselectedTime}
+                        onPress={() => handlePress('7 DAYS', props.sevenDayData, props.sevenDayLabels)}
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'7 DAYS', label:'7 DAYS', color:'#72BF44', 
@@ -60,7 +67,7 @@ export function TimeRadios(props) {
             <View style={{display:'flex',flexDirection:'row'}}>
                 <View style={styles.radioBottomLeft}>
                     <RadioGroup 
-                        onPress={props.setselectedTime}
+                        onPress={() => handlePress('1 MONTH', props.oneMonthData, props.oneMonthLabels)}
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'1 MONTH', label:'1 MONTH', color:'#72BF44', 
@@ -72,7 +79,7 @@ export function TimeRadios(props) {
                 </View>
                 <View style={styles.radioBottomRight}>
                     <RadioGroup 
-                        onPress={props.setselectedTime}
+                        onPress={() => handlePress('ANNUAL', props.annualData, props.annualLabels)}
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'ANNUAL', label:'ANNUAL', color:'#72BF44', 

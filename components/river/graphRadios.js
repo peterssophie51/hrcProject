@@ -4,8 +4,7 @@ import { View, StyleSheet, Dimensions, Text } from "react-native";
 import { useEffect } from "react";
 import * as Font from 'expo-font'
 
-export function TimeRadios() {
-    const [selectedTime, setselectedTime] =  useState('1 DAY')
+export function TimeRadios(props) {
 
     const [fontLoaded, setFontLoaded] = useState(false);
     //function to load in calibri bold and calibri font
@@ -35,11 +34,11 @@ export function TimeRadios() {
             <View style={{display:'flex', flexDirection:'row'}}>
                 <View style={styles.radioTopLeft}>
                     <RadioGroup 
-                        onPress={setselectedTime}
-                        selectedId={selectedTime}
+                        onPress={props.setselectedTime}
+                        selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'1 DAY', label:'1 DAY', color:'#72BF44', 
-                                borderColor: selectedTime == '1 DAY' ? '#72BF44' : 'black'}]}
+                                borderColor: props.selectedTime == '1 DAY' ? '#72BF44' : 'black'}]}
                         layout='vertical'
                         labelStyle={styles.labels}
                         style={styles.radios}
@@ -47,11 +46,11 @@ export function TimeRadios() {
                 </View>
                 <View style={styles.radioTopRight}>
                     <RadioGroup 
-                        onPress={setselectedTime}
-                        selectedId={selectedTime}
+                        onPress={props.setselectedTime}
+                        selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'7 DAYS', label:'7 DAYS', color:'#72BF44', 
-                                borderColor: selectedTime == '7 DAYS' ? '#72BF44' : 'black'}]}
+                                borderColor: props.selectedTime == '7 DAYS' ? '#72BF44' : 'black'}]}
                         layout='vertical'
                         labelStyle={styles.labels}
                         style={styles.radios}
@@ -61,11 +60,11 @@ export function TimeRadios() {
             <View style={{display:'flex',flexDirection:'row'}}>
                 <View style={styles.radioBottomLeft}>
                     <RadioGroup 
-                        onPress={setselectedTime}
-                        selectedId={selectedTime}
+                        onPress={props.setselectedTime}
+                        selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'1 MONTH', label:'1 MONTH', color:'#72BF44', 
-                                borderColor: selectedTime == '1 MONTH' ? '#72BF44' : 'black'}]}
+                                borderColor: props.selectedTime == '1 MONTH' ? '#72BF44' : 'black'}]}
                         layout='vertical'
                         labelStyle={styles.labels}
                         style={styles.radios}
@@ -73,11 +72,11 @@ export function TimeRadios() {
                 </View>
                 <View style={styles.radioBottomRight}>
                     <RadioGroup 
-                        onPress={setselectedTime}
-                        selectedId={selectedTime}
+                        onPress={props.setselectedTime}
+                        selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'ANNUAL', label:'ANNUAL', color:'#72BF44', 
-                                borderColor: selectedTime == 'ANNUAL' ? '#72BF44' : 'black'}]}
+                                borderColor: props.selectedTime == 'ANNUAL' ? '#72BF44' : 'black'}]}
                         layout='vertical'
                         labelStyle={styles.labels}
                         style={styles.radios}

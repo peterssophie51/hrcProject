@@ -11,15 +11,15 @@ export function RiverPage ({ navagation }) {
   const [selectedTime, setselectedTime] =  useState('1 DAY')
   const flowsite = "Rangitikei at Mangaweka"
 
-  const oneDayData= [{value: 4000}, {value: 4200}, {value: 4100}, {value: 4050},
-    {value: 4000}, {value: 4000}, {value: 3950}, {value: 4000}, 
-    {value: 4100}, {value: 4150}, {value: 4750}, {value: 4700}
+  const oneDayData= [{value: 4286}, {value: 4232}, {value: 4277}, {value: 4211},
+    {value: 4209}, {value: 4300}, {value: 4289}, {value: 4295}, 
+    {value: 4273}, {value: 4270}, {value: 4269}, {value: 4218}
 ]
-  const sevenDayData = [{value:4700}, {value:4800}, {value:5000}, {value:4500}, {value:4300}, {value:4400}, {value:4500}]
-  const oneMonthData = [{value:4500}, {value:4650}, {value:4300}, {value:4000}, {value:5000}, {value:4700}, {value:4650}]
-  const annualData = [{value: 3800}, {value:3600}, {value:3500}, {value:4000}, 
-    {value:4500}, {value: 4700}, {value:4500}, {value:4900},
-  {value:5000}, {value:4500}, {value:4200}, {value:4100}]
+  const sevenDayData = [{value:4267}, {value:4213}, {value: 4299}, {value:4187}, {value:4304}, {value:4265}, {value:4258}]
+  const oneMonthData = [{value:4213}, {value:4189}, {value:4194}, {value:4205}, {value:4279}, {value:4304}, {value:4289}]
+  const annualData = [{value: 4189}, {value:4167}, {value:4205}, {value:4255}, 
+    {value:4289}, {value: 4261}, {value:4202}, {value:4216},
+  {value:4199}, {value:4200}, {value:4233}, {value:4149}]
 
   const oneDayLabels = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00']
   const sevenDayLabels = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']

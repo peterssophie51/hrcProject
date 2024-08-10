@@ -4,9 +4,12 @@ import { CalibriText } from "../fonts/calibriFont";
 
 export function SmallCard(props) {
     return (
-        <View style={styles.container}>
-            <Image source={require('../../images/tickWhiteThick.png')} style={styles.image}/>
-            <CalibriText title={props.title} style={styles.complianceText}/>
+        <View style={[styles.container, props.value && {backgroundColor:'#72BF44'}]}>
+            <Image source={props.value == true 
+                ? require('../../images/tickWhiteThick.png')
+                : require('../../images/crossWhiteThick.png')}
+                style={[styles.image, props.value && {width:Dimensions.get('window').width * 0.185}]}/>
+            <CalibriText title={props.title} style={styles.text}/>
         </View>
     )
 }
@@ -18,16 +21,15 @@ const styles= StyleSheet.create({
         height:Dimensions.get('window').width * 0.4, 
         marginLeft:Dimensions.get('window').width * 0.05, 
         borderRadius: 20,
-        backgroundColor: '#72BF44',
+        backgroundColor: '#CE202F',
     },
     image: {
-        height: Dimensions.get('window').width * 0.16,
-        width: Dimensions.get('window').width * 0.2,
+        height: Dimensions.get('window').width * 0.15,
+        width: Dimensions.get('window').width * 0.15,
         marginTop: Dimensions.get('window').height * 0.02,
-        marginLeft: Dimensions.get('window').width * 0.12,
-        width:75,
+        marginLeft: Dimensions.get('window').width * 0.13,
     },
-    complianceText: {
+    text: {
         color: 'white',
         textAlign: 'center',
         fontSize: 19, 

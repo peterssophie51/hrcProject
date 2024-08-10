@@ -3,8 +3,7 @@ import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
 import { CalibriText } from '../components/fonts/calibriFont.js';
 import { StyleSheet, Dimensions } from 'react-native';
 import { ConsentInfo } from '../components/consents/consentInfo.js';
-import { ComplianceCard } from '../components/consents/complianceCard.js';
-import { TakeCard } from '../components/consents/takeCard.js';
+import { SmallCard } from '../components/consents/smallCard.js';
 
 export function ConsentPage ({ navagation }) {
     return (
@@ -12,8 +11,8 @@ export function ConsentPage ({ navagation }) {
         <CalibriBoldText  style={styles.title} title="Consent" />
         <ConsentInfo consentExpiration="June 25th 2028" consentFlowSite="Rangitikei at Mangaweka" annualMax="No recorded data"/>
         <View style={{display:'flex', flexDirection:'row'}}>
-          <ComplianceCard />
-          <TakeCard />
+          <SmallCard title="Complied" />
+          <SmallCard title="Take water" />
         </View>
       </View>
     )

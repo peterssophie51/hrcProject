@@ -7,7 +7,8 @@ export function FAQPage ({ navagation }) {
       <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height * 2, backgroundColor:'white', flex:1}}>
         < CalibriBoldText  style={styles.title} title="FAQ" />
         <View style={styles.container}>
-          <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={'ONE'}/>
+          <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={'ONE'}
+          data={{flowAtRestriction: 45, instaneous: 34}}/>
         </View>
       </View>
     )

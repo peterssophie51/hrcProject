@@ -23,6 +23,7 @@ export function ConsentPage ({ navagation }) {
           <SmallCard title={(take == true) ? 'You can take\nwater today': 'You can not take\nwater today'} value={take}/>
         </View>
         <FlowbasedRestriction />
+        <View style={{height: Dimensions.get('window').height * 0.03}}></View>
         </ScrollView>
       </View>
     )

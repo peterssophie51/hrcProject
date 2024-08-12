@@ -7,8 +7,8 @@ export function FAQPage ({ navagation }) {
       <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height * 2, backgroundColor:'white', flex:1}}>
         < CalibriBoldText  style={styles.title} title="FAQ" />
         <View style={styles.container}>
-          <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={'ONE'}
-          data={{flowAtRestriction: 45, instaneous: 34}}/>
+          <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={'NONE'}
+          data={{flowAtRestriction: 45, instaneous: 34, hourlyRestriction: 28, dailyRestriction: 140., annualRestriction: 2800, dailyRestriction: 40}}/>
         </View>
       </View>
     )
@@ -24,7 +24,7 @@ export function FAQPage ({ navagation }) {
       backgroundColor: '#eeeeee',
       borderRadius: 20,
       width: Dimensions.get('window').width * 0.9,
-      height: Dimensions.get('window').height * 0.3,
+      height: Dimensions.get('window').height * 0.42,
       marginLeft: Dimensions.get('window').width * 0.05,
       marginTop: Dimensions.get('window').width * 0.05
     }

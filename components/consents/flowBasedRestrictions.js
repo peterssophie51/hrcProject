@@ -5,27 +5,77 @@ import { StyleSheet, Dimensions } from "react-native";
 import { RestrictionInfo } from "./restrictionInfo";
 
 export function FlowbasedRestriction() {
-     const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(true);
+    const [currentRestriction, setcurrentRestriction] = React.useState('TWO')
 
-  const handlePress = () => setExpanded(!expanded);
+    const restrictions= [
+        {
+            restriction:'NONE', 
+            flowAtRestriction: '', 
+            instaneous: 41.5, 
+            hourlyRestriction: '', 
+            dailyRestriction: 2000,
+            annualRestriction: ''
+        },
+        {
+            restriction:'ONE', 
+            flowAtRestriction: 13.900, 
+            instaneous: 20.75, 
+            hourlyRestriction: '', 
+            dailyRestriction: 2000,
+            annualRestriction: ''
+        },
+        {
+            restriction:'TWO', 
+            flowAtRestriction: 11.100, 
+            instaneous: '', 
+            hourlyRestriction: '', 
+            dailyRestriction: 140,
+            annualRestriction: ''
+        },
+    ]
+  
+    const index = restrictions.findIndex(item => item.restriction === currentRestriction);
+    const maxIndex =restrictions.length -1
+
+
     return (
         <View>
         <List.Accordion style={styles.container}
-        left={() => <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={'NONE'}
-        data={{
-          instaneous: 41.5,
-          dailyRestriction: 2000
-        }}
-        right={() => <Text style={{marginLeft:-100, fontSize: 20, zIndex: 2}}>Test</Text>}
-        />} 
-
+        expanded={expanded}
+        onPress={() => setExpanded(!expanded)}
+        left={() => 
+            <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={restrictions[index].restriction} 
+                visible={expanded == true? false : true} lessMore={'more'} expanded={expanded} setExpanded={setExpanded}
+                data={{
+                    flowAtRestriction: restrictions[index].flowAtRestriction,
+                    instaneous: restrictions[index].instaneous,
+                    hourlyRestriction: restrictions[index].hourlyRestriction,
+                    dailyRestriction: restrictions[index].dailyRestriction,
+                    annualRestriction: restrictions[index].annualRestriction
+                }}
+            />} 
         >
         <List.Item left={ () => 
             <View>
-                <RestrictionInfo restrictionTitle={'FLOW BASED RESTRICTION: '} restriction={'ONE'}
-                    data={{ flowAtRestriction: 13.900, instaneous: 20.75, dailyRestriction: 2000}}/>
-                <RestrictionInfo restrictionTitle={'FLOW BASED RESTRICTION: '} restriction={'TWO'}
-                    data={{ flowAtRestriction: 11.100, dailyRestriction: 140}} />
+                 {restrictions.map((item, itemIndex) => {
+                    if (itemIndex === index) {
+                        return null; 
+                    }
+                    return (
+                        <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={item.restriction} 
+                            visible={itemIndex === maxIndex || (itemIndex === maxIndex - 1 && index === maxIndex)} lessMore='less'
+                           expanded={expanded} setExpanded={setExpanded}
+                            data={{
+                                flowAtRestriction: item.flowAtRestriction,
+                                instaneous: item.instaneous,
+                                hourlyRestriction: item.hourlyRestriction,
+                                dailyRestriction: item.dailyRestriction,
+                                annualRestriction: item.annualRestriction
+                    	    }}
+                        />
+                    );
+                })}
             </View>
             
         } style={styles.dropDown}/>
@@ -38,7 +88,7 @@ const styles = StyleSheet.create({
     container:{
         marginTop: Dimensions.get('window').width * 0.04, 
         width: Dimensions.get('window').width * 0.9,
-        height:Dimensions.get('window').height * 0.38, 
+        height:Dimensions.get('window').height * 0.42, 
         marginLeft:Dimensions.get('window').width *0.05, 
         marginRight:Dimensions.get('window').width * 0.08,
         borderRadius: 20,
@@ -50,7 +100,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#eeeeee',
         marginLeft: Dimensions.get('window').width *0.05, 
         width: Dimensions.get('window').width * 0.9,
-        height: Dimensions.get('window').height * 0.74,
+        height: Dimensions.get('window').height * 0.81,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
     },

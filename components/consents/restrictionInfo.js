@@ -1,11 +1,15 @@
-import React from "react";
-import { View, StyleSheet, Text, Dimensions } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from "react-native";
 import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
 import { VerticalData } from "./verticalRestrictionData";
 
-export function RestrictionInfo({restriction, restrictionTitle, data ={}}) {
-
+export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, visible, restrictionTitle, data ={}}) {
+   
+    const handlePress = () => {
+        setExpanded(!expanded)
+    };
+    
     const { 
         flowAtRestriction = '', 
         instaneous = '', 
@@ -21,6 +25,7 @@ export function RestrictionInfo({restriction, restrictionTitle, data ={}}) {
             return Math.floor(value)
         }
     }
+    
 
     return(
         <View style={styles.container}>
@@ -45,6 +50,11 @@ export function RestrictionInfo({restriction, restrictionTitle, data ={}}) {
                 <VerticalData rate="DAILY" time='DAY' data={roundNumber(dailyRestriction)}/>
                 <VerticalData rate="ANNUALLY" time='ANNUAL' data={roundNumber(annualRestriction)}/>
             </View>
+            {visible && ( 
+                <TouchableOpacity onPress={handlePress}>
+                    <CalibriText style={styles.viewMoreLess} title={'View ' + lessMore + ' restrictions'}/>
+                </TouchableOpacity>
+            )}
         </View>
     )
 }
@@ -115,6 +125,12 @@ const styles = StyleSheet.create({
         fontSize: 40,
         color: '#243746',
         marginTop: Dimensions.get('window').height * 0.01
+    },
+    viewMoreLess: {
+        textDecorationLine: 'underline',
+        fontSize: 15, 
+        marginTop: Dimensions.get('window').height * 0.01, 
+        marginLeft: Dimensions.get('window').width * 0.045
     }
 })
 

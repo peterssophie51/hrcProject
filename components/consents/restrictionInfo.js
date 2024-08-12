@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
+import { VerticalData } from "./verticalRestrictionData";
 
 export function RestrictionInfo(props) {
     return(
@@ -23,33 +24,9 @@ export function RestrictionInfo(props) {
                 <CalibriText style={[styles.horizontalData, {marginLeft: Dimensions.get('window').width * 0.38}]} title={props.data.instaneous}/>
             </View>
             <View style={styles.verticalDataContainer}>
-                <View style={styles.verticalContainer}>
-                    <CalibriBoldText title="HOURLY" style={styles.verticalDataTitle}/>
-                    <View style={styles.verticalDataTitleContainer}>
-                        <CalibriText title="M" style={styles.verticalDataTitleUnits}/>
-                        <CalibriText title="3" style={styles.verticalDataTitleSuperscript}/>
-                        <CalibriText title="/HOUR" style={styles.verticalDataTitleUnits}/>
-                    </View>
-                    <CalibriBoldText title={props.data.hourlyRestriction} style={styles.verticalData} />
-                </View>
-                <View style={styles.verticalContainer}>
-                    <CalibriBoldText title="DAILY" style={styles.verticalDataTitle}/>
-                    <View style={styles.verticalDataTitleContainer}>
-                        <CalibriText title="M" style={styles.verticalDataTitleUnits}/>
-                        <CalibriText title="3" style={styles.verticalDataTitleSuperscript}/>
-                        <CalibriText title="/DAY" style={styles.verticalDataTitleUnits}/>
-                    </View>
-                    <CalibriBoldText title={props.data.dailyRestriction} style={styles.verticalData} />
-                </View>
-                <View style={styles.verticalContainer}>
-                    <CalibriBoldText title="ANNUALLY" style={styles.verticalDataTitle} />
-                    <View style={styles.verticalDataTitleContainer}>
-                        <CalibriText title="M" style={styles.verticalDataTitleUnits} />
-                        <CalibriText title="3" style={styles.verticalDataTitleSuperscript}/>
-                        <CalibriText title="/ANNUAL" style={styles.verticalDataTitleUnits} />
-                    </View>
-                    <CalibriBoldText title={props.data.annualRestriction} style={styles.verticalData} />
-                </View>
+                <VerticalData rate="HOURLY" time='HOUR' data={props.data.hourlyRestriction}/>
+                <VerticalData rate="DAILY" time='DAY' data={props.data.dailyRestriction}/>
+                <VerticalData rate="DAILY" time='DAY' data={props.data.annualRestriction}/>
             </View>
         </View>
     )

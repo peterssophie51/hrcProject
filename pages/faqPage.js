@@ -8,7 +8,14 @@ export function FAQPage ({ navagation }) {
         < CalibriBoldText  style={styles.title} title="FAQ" />
         <View style={styles.container}>
           <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={'NONE'}
-          data={{flowAtRestriction: 45, instaneous: 34, hourlyRestriction: 28, dailyRestriction: 140., annualRestriction: 2800, dailyRestriction: 40}}/>
+          data={{
+            flowAtRestriction: 45, 
+            instaneous: 34, 
+            hourlyRestriction: 28, 
+            dailyRestriction: 140., 
+            annualRestriction: 2800, 
+            dailyRestriction: 40
+          }}/>
         </View>
       </View>
     )

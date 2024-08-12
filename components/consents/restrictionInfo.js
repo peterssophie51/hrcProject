@@ -16,17 +16,17 @@ export function RestrictionInfo(props) {
                 <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(M'} />
                 <CalibriBoldText style={styles.horizontalDataTitleSuperscript} title={'3'} />
                 <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'/S)'} />
-                <CalibriText style={[styles.horizontalData, {marginLeft: Dimensions.get('window').width * 0.14}]} title={props.data.flowAtRestriction}/>
+                <CalibriText style={[styles.horizontalData, {marginLeft: Dimensions.get('window').width * 0.14}]} title={Math.floor(props.data.flowAtRestriction)}/>
             </View>
             <View style={styles.horizontalDataContainer}>
                 <CalibriBoldText style={styles.horizontalDataTitle} title={'INSTANEOUS '}/>
                 <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(L/S)'} />
-                <CalibriText style={[styles.horizontalData, {marginLeft: Dimensions.get('window').width * 0.38}]} title={props.data.instaneous}/>
+                <CalibriText style={[styles.horizontalData, {marginLeft: Dimensions.get('window').width * 0.38}]} title={Math.floor(props.data.instaneous)}/>
             </View>
             <View style={styles.verticalDataContainer}>
-                <VerticalData rate="HOURLY" time='HOUR' data={props.data.hourlyRestriction}/>
-                <VerticalData rate="DAILY" time='DAY' data={props.data.dailyRestriction}/>
-                <VerticalData rate="DAILY" time='DAY' data={props.data.annualRestriction}/>
+                <VerticalData rate="HOURLY" time='HOUR' data={Math.floor(props.data.hourlyRestriction)}/>
+                <VerticalData rate="DAILY" time='DAY' data={Math.floor(props.data.dailyRestriction)}/>
+                <VerticalData rate="DAILY" time='DAY' data={Math.floor(props.data.annualRestriction)}/>
             </View>
         </View>
     )

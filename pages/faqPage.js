@@ -12,7 +12,6 @@ export function FAQPage ({ navagation }) {
             flowAtRestriction: 45, 
             instaneous: 34, 
             hourlyRestriction: 28, 
-            dailyRestriction: 140., 
             annualRestriction: 2800, 
             dailyRestriction: 40
           }}/>

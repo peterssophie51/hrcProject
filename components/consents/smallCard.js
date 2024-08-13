@@ -7,8 +7,8 @@ export function SmallCard(props) {
         <View style={[styles.container, props.value && {backgroundColor:'#72BF44'}]}>
             <Image source={props.value == true 
                 ? require('../../images/tickWhiteThick.png')
-                : require('../../images/crossWhiteThick.png')} // change image source depending on take or not
-                style={[styles.image, props.value && {width:Dimensions.get('window').width * 0.185}]}/>
+                : require('../../images/crossWhiteThick.png')}
+                style={[styles.image, props.value && {width:Dimensions.get('window').width * 0.185}]}/> 
             <CalibriText title={props.title} style={styles.text}/>
         </View>
     )

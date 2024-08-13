@@ -25,7 +25,7 @@ export function ProgressChart(props) {
   useEffect(() => {
     async function loadFont() {
       try {
-        await Font.loadAsync({ //other actions can be completed simultaneously
+        await Font.loadAsync({ 
           'CalibriBold': require('../../assets/fonts/calibrib.ttf'),
           'Calibri': require('../../assets/fonts/Calibri.ttf'),
         });
@@ -48,9 +48,9 @@ export function ProgressChart(props) {
             <PieChart 
                 donut
                 radius={screenWidth * 0.40}
-                innerRadius={screenWidth * 0.3} //use to set the width of the progress bar
+                innerRadius={screenWidth * 0.3} 
                 data={data}
-                centerLabelComponent={() => { //text inside the progress chart
+                centerLabelComponent={() => { 
                     return (
                         <View style={{marginTop:-35}}>
                           

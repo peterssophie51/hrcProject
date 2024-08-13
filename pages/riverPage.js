@@ -32,16 +32,15 @@ export function RiverPage ({ navagation }) {
 
 
     return (
-      <View  style={styles.page}> {/*page container*/}
-        <CalibriBoldText style={styles.title} title="River" /> {/*page title*/}
-        <CalibriBoldText  style={styles.flowsite} title={flowsite} /> {/*current flowsite*/}
-        <CalibriText style={styles.timeRecorded} title='Last Recorded at 20:00 (NZST) June 14th 2024'/> {/*when dataa was recorded*/}
-        <RiverFlowTitle riverFlow={41.5}/> {/*river flow component*/}
-        <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels}/> {/*graph of data, sending current data and labels as determined by radios*/}
+      <View  style={styles.page}> 
+        <CalibriBoldText style={styles.title} title="River" /> 
+        <CalibriBoldText  style={styles.flowsite} title={flowsite} />
+        <CalibriText style={styles.timeRecorded} title='Last Recorded at 20:00 (NZST) June 14th 2024'/> 
+        <RiverFlowTitle riverFlow={41.5}/> 
+        <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels}/> 
         <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
         oneDayData={oneDayData} sevenDayData={sevenDayData} oneMonthData={oneMonthData} annualData={annualData}
         oneDayLabels={oneDayLabels} sevenDayLabels={sevenDayLabels} oneMonthLabels={oneMonthLabels} annualLabels={annualLabels}/>
-        {/*radio buttons with all data and labels sent (to set current on change of radios)*/}
       </View>
     )
   }

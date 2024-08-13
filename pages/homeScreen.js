@@ -13,11 +13,11 @@ export function HomeScreen( {navagation, navigation}) {
 
     return (
       <View style={styles.page}>
-        <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime}/> {/*progress chart*/}
-        <GraphSwitch graphTime={graphTime} setgraphTime={setgraphTime}/> {/*switch to change time period of graph*/}
-        <TakeWater take={take}/> {/*card for taken/no take water*/}
-        <RiverFlow /> {/*card showing river flow*/}
-        <Image source={require('../images/horizonsFlowTransperant.png')} style={styles.image} /> {/*horizons logo*/}
+        <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime}/>
+        <GraphSwitch graphTime={graphTime} setgraphTime={setgraphTime}/> 
+        <TakeWater take={take}/> 
+        <RiverFlow /> 
+        <Image source={require('../images/horizonsFlowTransperant.png')} style={styles.image} /> 
       </View>
     )
   }

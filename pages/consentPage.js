@@ -13,19 +13,19 @@ export function ConsentPage ({ navagation }) {
   const [take, settake] = useState(false) //consent can take water or not
 
     return (
-      <View style={styles.page}> {/*page background container*/}
-        <CalibriBoldText  style={styles.title} title="Consent" /> {/*page title*/}
-        <ScrollView> {/*allow page to be scrolled*/}
+      <View style={styles.page}> 
+        <CalibriBoldText  style={styles.title} title="Consent" /> 
+        <ScrollView> 
         <ConsentInfo 
           consentExpiration="June 25th 2028" 
           consentFlowSite="Rangitikei at Mangaweka" 
-          annualMax="No recorded data"/> {/*info for consent details card*/}
+          annualMax="No recorded data"/> 
         <View style={{display:'flex', flexDirection:'row'}}>
           <SmallCard title={(compliance == true) ? 'You took less than your daily limit yesterday' : 
-            'You took more than your daily limit yesterday'} value={compliance} /> {/*send appropriate message to compliance card based on state*/}
-          <SmallCard title={(take == true) ? 'You can take\nwater today': 'You can not take\nwater today'} value={take}/> {/*send appropriate message to take water card based on state*/}
+            'You took more than your daily limit yesterday'} value={compliance} /> 
+          <SmallCard title={(take == true) ? 'You can take\nwater today': 'You can not take\nwater today'} value={take}/>
         </View>
-        <FlowbasedRestriction /> {/*flow based restrictions component*/}
+        <FlowbasedRestriction /> 
         <View style={{height: Dimensions.get('window').height * 0.03}}></View>
         </ScrollView>
       </View>

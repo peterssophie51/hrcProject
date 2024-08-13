@@ -17,7 +17,7 @@ export function GraphSwitch(props) {
   useEffect(() => {
     async function loadFont() {
       try {
-        await Font.loadAsync({ //other actions can be completed simultaneously
+        await Font.loadAsync({ 
           'CalibriBold': require('../../assets/fonts/calibrib.ttf'),
           'Calibri': require('../../assets/fonts/Calibri.ttf'),
         });
@@ -41,12 +41,12 @@ export function GraphSwitch(props) {
       style={styles.switch}
       options={options}
       initial={0}
-      backgroundColor='#243746' //backgroud color of switch option of ot clicked
+      backgroundColor='#243746' 
       height={Dimensions.get('window').height * 0.07}
       fontSize={25}
       textStyle={{fontFamily:'CalibriBold', color:'white'}}
       selectedTextStyle={{fontFamily:'CalibriBold', color:'black'}}
-      onPress={value => props.setgraphTime(value)} //set value to current switch value
+      onPress={value => props.setgraphTime(value)} 
     />)}
 
 

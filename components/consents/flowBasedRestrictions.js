@@ -5,11 +5,12 @@ import { StyleSheet, Dimensions } from "react-native";
 import { RestrictionInfo } from "./restrictionInfo";
 
 export function FlowbasedRestriction() {
-    const [expanded, setExpanded] = React.useState(true);
-    const [currentRestriction, setcurrentRestriction] = React.useState('TWO')
+    const [expanded, setExpanded] = React.useState(false);
+    const [currentRestriction, setcurrentRestriction] = React.useState('NONE')
 
     const restrictions= [
-        {
+        {   
+            id: 0,
             restriction:'NONE', 
             flowAtRestriction: '', 
             instaneous: 41.5, 
@@ -18,6 +19,7 @@ export function FlowbasedRestriction() {
             annualRestriction: ''
         },
         {
+            id:1,
             restriction:'ONE', 
             flowAtRestriction: 13.900, 
             instaneous: 20.75, 
@@ -25,14 +27,15 @@ export function FlowbasedRestriction() {
             dailyRestriction: 2000,
             annualRestriction: ''
         },
-        {
+        /*{
+            id: 1,
             restriction:'TWO', 
             flowAtRestriction: 11.100, 
             instaneous: '', 
             hourlyRestriction: '', 
             dailyRestriction: 140,
             annualRestriction: ''
-        },
+        }, */
     ]
   
     const index = restrictions.findIndex(item => item.restriction === currentRestriction);
@@ -43,10 +46,14 @@ export function FlowbasedRestriction() {
         <View>
         <List.Accordion style={styles.container}
         expanded={expanded}
-        onPress={() => setExpanded(!expanded)}
+        onPress={() => {
+            if (restrictions.length !== 1) {
+                setExpanded(!expanded);
+            }
+        }}
         left={() => 
             <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={restrictions[index].restriction} 
-                visible={expanded == true? false : true} lessMore={'more'} expanded={expanded} setExpanded={setExpanded}
+                visible={(expanded == true || restrictions.length == 1) ? false : true} lessMore={'more'} expanded={expanded} setExpanded={setExpanded}
                 data={{
                     flowAtRestriction: restrictions[index].flowAtRestriction,
                     instaneous: restrictions[index].instaneous,
@@ -63,7 +70,7 @@ export function FlowbasedRestriction() {
                         return null; 
                     }
                     return (
-                        <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={item.restriction} 
+                        <RestrictionInfo restrictionTitle={'FLOW BASED RESTRICTION: '} restriction={item.restriction} 
                             visible={itemIndex === maxIndex || (itemIndex === maxIndex - 1 && index === maxIndex)} lessMore='less'
                            expanded={expanded} setExpanded={setExpanded}
                             data={{
@@ -78,7 +85,9 @@ export function FlowbasedRestriction() {
                 })}
             </View>
             
-        } style={styles.dropDown}/>
+        } style={[styles.dropDown, 
+            {height:(Dimensions.get('window').height * 0.43 + 
+                (Dimensions.get('window').height * 0.38 * (restrictions.length -2)))}]}/>
       </List.Accordion>
       </View>
     )
@@ -88,7 +97,7 @@ const styles = StyleSheet.create({
     container:{
         marginTop: Dimensions.get('window').width * 0.04, 
         width: Dimensions.get('window').width * 0.9,
-        height:Dimensions.get('window').height * 0.42, 
+        height:Dimensions.get('window').height * 0.425, 
         marginLeft:Dimensions.get('window').width *0.05, 
         marginRight:Dimensions.get('window').width * 0.08,
         borderRadius: 20,
@@ -100,7 +109,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#eeeeee',
         marginLeft: Dimensions.get('window').width *0.05, 
         width: Dimensions.get('window').width * 0.9,
-        height: Dimensions.get('window').height * 0.81,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
     },

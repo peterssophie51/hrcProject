@@ -18,13 +18,6 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
         annualRestriction = '' 
     } = data;
 
-    const roundNumber = (value) => {
-        if (value == '') {
-            return value
-        } else {
-            return Math.floor(value)
-        }
-    }
     
 
     return(
@@ -34,21 +27,23 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
                 <CalibriText title={restriction} style={styles.titleRestriction}/>
             </Text>
             <View style={styles.horizontalDataContainer}>
-                <CalibriBoldText style={styles.horizontalDataTitle} title={'FLOW AT RESTRICTION '}/>
-                <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(M'} />
-                <CalibriBoldText style={styles.horizontalDataTitleSuperscript} title={'3'} />
-                <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'/S)'} />
-                <CalibriText style={[styles.horizontalData, {marginLeft: Dimensions.get('window').width * 0.14}]} title={roundNumber(flowAtRestriction)}/>
+                <CalibriBoldText style={styles.horizontalDataTitle} title={'FLOW AT\nRESTRICTION '}/>
+                <View style={styles.m3container}>
+                    <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(M'} />
+                    <CalibriBoldText style={styles.horizontalDataTitleSuperscript} title={'3'} />
+                    <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'/S)'} />
+                </View>
+                <CalibriText style={[styles.horizontalDataFlow, {marginLeft: Dimensions.get('window').width * 0.26}]} title={flowAtRestriction}/>
             </View>
             <View style={styles.horizontalDataContainer}>
                 <CalibriBoldText style={styles.horizontalDataTitle} title={'INSTANEOUS '}/>
                 <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(L/S)'} />
-                <CalibriText style={[styles.horizontalData, {marginLeft: Dimensions.get('window').width * 0.38}]} title={roundNumber(instaneous)}/>
+                <CalibriText style={[styles.horizontalData, {fontSize: 22, marginLeft: Dimensions.get('window').width * 0.3}]} title={instaneous}/>
             </View>
             <View style={styles.verticalDataContainer}>
-                <VerticalData rate="HOURLY" time='HOUR' data={roundNumber(hourlyRestriction)}/>
-                <VerticalData rate="DAILY" time='DAY' data={roundNumber(dailyRestriction)}/>
-                <VerticalData rate="ANNUALLY" time='ANNUAL' data={roundNumber(annualRestriction)}/>
+                <VerticalData rate="HOURLY" time='HOUR' data={hourlyRestriction}/>
+                <VerticalData rate="DAILY" time='DAY' data={dailyRestriction}/>
+                <VerticalData rate="ANNUALLY" time='ANNUAL' data={annualRestriction}/>
             </View>
             {visible && ( 
                 <TouchableOpacity onPress={handlePress}>
@@ -61,7 +56,7 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: Dimensions.get('window').height * 0.02,
+        marginBottom: Dimensions.get('window').height * 0.03,
     },
     titleContainer: {
         marginLeft: Dimensions.get('window').width * 0.045
@@ -73,6 +68,11 @@ const styles = StyleSheet.create({
     titleRestriction: {
         color: 'black',
         fontSize: 27
+    },
+    horizontalDataFlow: {
+        fontSize: 22,
+        marginTop: Dimensions.get('window').height * 0.015,
+        marginLeft: Dimensions.get('window').width * 0.5,
     },
     horizontalDataContainer: {
         marginLeft: Dimensions.get('window').width * 0.045,
@@ -86,10 +86,6 @@ const styles = StyleSheet.create({
     horizontalDataTitleUnits: {
         fontSize:16,
         lineHeight: 28, 
-    },
-    horizontalData: {
-        fontSize: 22,
-        textAlign: 'right',
     },
     horizontalDataTitleSuperscript: {
         fontSize: 12
@@ -117,6 +113,7 @@ const styles = StyleSheet.create({
     },
     verticalDataTitleUnits: {
         fontSize: 15,
+
     }, 
     verticalDataTitleSuperscript: {
         fontSize: 12
@@ -128,9 +125,14 @@ const styles = StyleSheet.create({
     },
     viewMoreLess: {
         textDecorationLine: 'underline',
-        fontSize: 15, 
-        marginTop: Dimensions.get('window').height * 0.01, 
+        fontSize: 17, 
+        marginTop: Dimensions.get('window').height * 0.02, 
         marginLeft: Dimensions.get('window').width * 0.045
+    },
+    m3container: {
+        marginTop: Dimensions.get('window').height * 0.027, 
+        display: 'flex',
+        flexDirection: 'row'
     }
 })
 

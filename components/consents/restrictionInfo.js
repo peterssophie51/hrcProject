@@ -47,7 +47,7 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
             </View>
             {visible && ( 
                 <TouchableOpacity onPress={handlePress}>
-                    <CalibriText style={styles.viewMoreLess} title={'View ' + lessMore + ' restrictions'}/>
+                    <CalibriText style={styles.viewMoreLess} title={'View ' + lessMore + ' authorised volumes'}/>
                 </TouchableOpacity>
             )}
         </View>

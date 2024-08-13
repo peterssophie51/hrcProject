@@ -27,7 +27,7 @@ export function FlowbasedRestriction() {
             dailyRestriction: 2000,
             annualRestriction: ''
         },
-        /*{
+        {
             id: 1,
             restriction:'TWO', 
             flowAtRestriction: 11.100, 
@@ -35,7 +35,7 @@ export function FlowbasedRestriction() {
             hourlyRestriction: '', 
             dailyRestriction: 140,
             annualRestriction: ''
-        }, */
+        }, 
     ]
   
     const index = restrictions.findIndex(item => item.restriction === currentRestriction);

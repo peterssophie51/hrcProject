@@ -5,11 +5,11 @@ import { CalibriBoldText } from "../fonts/calibriBoldFont";
 export function TakeWater(props) {
     return(
         <View style={[styles.container, props.take && {backgroundColor:'#72BF44'}]}>
-            <Image source={props.take == true 
+            <Image source={props.take == true  //change image to cross or tick depending on if can take or not
                 ? require('../../images/tickWhiteThick.png')
                 : require('../../images/crossWhiteThick.png')}
                 style={[styles.image, props.take && {width:Dimensions.get('window').width * 0.12}]}/>
-            <CalibriBoldText title={props.take == true
+            <CalibriBoldText title={props.take == true //change message depending on status of take
                 ? 'Can take water!'
                 : "Can't take water"
             } style={styles.text}/>

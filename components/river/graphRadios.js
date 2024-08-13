@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RadioGroup } from "react-native-radio-buttons-group";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
-import { useEffect } from "react";
 import * as Font from 'expo-font'
 
 export function TimeRadios(props) {
@@ -30,19 +29,18 @@ export function TimeRadios(props) {
     }
     
     const handlePress = (name, data, labels) => {
-        props.setselectedTime(name);
-        props.setcurrentData(data)
-        props.setcurrentLabels(labels)
-        
-    }
+        props.setselectedTime(name); //set selected radio button 
+        props.setcurrentData(data) //set current data to display on graph
+        props.setcurrentLabels(labels) //set current labels to show on x axis of graph
+    } //handle press of radio buttons
 
     return (
         <View style={styles.container}>
             <View style={{display:'flex', flexDirection:'row'}}>
                 <View style={styles.radioTopLeft}>
-                    <RadioGroup 
-                        onPress={() => handlePress('1 DAY', props.oneDayData, props.oneDayLabels)}
-                        selectedId={props.selectedTime}
+                    <RadioGroup //render radio button for one day option
+                        onPress={() => handlePress('1 DAY', props.oneDayData, props.oneDayLabels)} //handle press of one day
+                        selectedId={props.selectedTime} 
                         radioButtons={[
                             {id:'1 DAY', label:'1 DAY', color:'#72BF44', 
                                 borderColor: props.selectedTime == '1 DAY' ? '#72BF44' : 'black'}]}
@@ -52,8 +50,8 @@ export function TimeRadios(props) {
                     />
                 </View>
                 <View style={styles.radioTopRight}>
-                    <RadioGroup 
-                        onPress={() => handlePress('7 DAYS', props.sevenDayData, props.sevenDayLabels)}
+                    <RadioGroup //render radio button for 7 days option
+                        onPress={() => handlePress('7 DAYS', props.sevenDayData, props.sevenDayLabels)} //handle press of seven days
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'7 DAYS', label:'7 DAYS', color:'#72BF44', 
@@ -66,8 +64,8 @@ export function TimeRadios(props) {
             </View>
             <View style={{display:'flex',flexDirection:'row'}}>
                 <View style={styles.radioBottomLeft}>
-                    <RadioGroup 
-                        onPress={() => handlePress('1 MONTH', props.oneMonthData, props.oneMonthLabels)}
+                    <RadioGroup //render radio button for one month option
+                        onPress={() => handlePress('1 MONTH', props.oneMonthData, props.oneMonthLabels)} //handle press of one month option
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'1 MONTH', label:'1 MONTH', color:'#72BF44', 
@@ -78,8 +76,8 @@ export function TimeRadios(props) {
                     />
                 </View>
                 <View style={styles.radioBottomRight}>
-                    <RadioGroup 
-                        onPress={() => handlePress('ANNUAL', props.annualData, props.annualLabels)}
+                    <RadioGroup //render radio button for one year option
+                        onPress={() => handlePress('ANNUAL', props.annualData, props.annualLabels)} //handle press of one year option
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'ANNUAL', label:'ANNUAL', color:'#72BF44', 

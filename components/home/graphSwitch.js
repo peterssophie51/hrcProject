@@ -10,7 +10,7 @@ export function GraphSwitch(props) {
   const options = [
     { label: "Annual", value: 'annual', activeColor:'#72BF44'},
     { label: "Today", value: 'day', activeColor:'#72BF44' },
-  ];
+  ]; //options in switch
 
   const [fontLoaded, setFontLoaded] = useState(false);
   //function to load in calibri bold and calibri font
@@ -41,7 +41,7 @@ export function GraphSwitch(props) {
       style={styles.switch}
       options={options}
       initial={0}
-      backgroundColor='#243746'
+      backgroundColor='#243746' //backgroud color of switch option of ot clicked
       height={Dimensions.get('window').height * 0.07}
       fontSize={25}
       textStyle={{fontFamily:'CalibriBold', color:'white'}}

@@ -1,13 +1,14 @@
 import React from "react";
-import { Text, View, Button } from "react-native";
+import { View, } from "react-native";
 import { List } from "react-native-paper";
 import { StyleSheet, Dimensions } from "react-native";
 import { RestrictionInfo } from "./restrictionInfo";
 
 export function FlowbasedRestriction() {
-    const [expanded, setExpanded] = React.useState(false);
-    const [currentRestriction, setcurrentRestriction] = React.useState('NONE')
+    const [expanded, setExpanded] = React.useState(false); //set whether accordion is expanded or not
+    const [currentRestriction, setcurrentRestriction] = React.useState('NONE') //set which flow based restriction is currently in effect
 
+    //all data for different flow based restrictions
     const restrictions= [
         {   
             id: 0,
@@ -38,23 +39,28 @@ export function FlowbasedRestriction() {
         }, 
     ]
   
-    const index = restrictions.findIndex(item => item.restriction === currentRestriction);
-    const maxIndex =restrictions.length -1
+    const index = restrictions.findIndex(item => item.restriction === currentRestriction); //index in restriction list for current flow based restriction
+    const maxIndex =restrictions.length -1 //max index of list
 
 
     return (
         <View>
-        <List.Accordion style={styles.container}
+        <List.Accordion style={styles.container} 
         expanded={expanded}
-        onPress={() => {
+        onPress={() => { //when current flow based restriction clicked, show more restrictions (if there are more to show)
             if (restrictions.length !== 1) {
                 setExpanded(!expanded);
             }
         }}
         left={() => 
-            <RestrictionInfo restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} restriction={restrictions[index].restriction} 
-                visible={(expanded == true || restrictions.length == 1) ? false : true} lessMore={'more'} expanded={expanded} setExpanded={setExpanded}
-                data={{
+            <RestrictionInfo //render current flow based restriction
+                restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} 
+                restriction={restrictions[index].restriction} 
+                visible={(expanded == true || restrictions.length == 1) ? false : true} //show view more only if there are more flow based restrictions to show
+                lessMore={'more'} //set text to "view more authorised volumes"
+                expanded={expanded} 
+                setExpanded={setExpanded}
+                data={{ //send all data to component
                     flowAtRestriction: restrictions[index].flowAtRestriction,
                     instaneous: restrictions[index].instaneous,
                     hourlyRestriction: restrictions[index].hourlyRestriction,
@@ -65,15 +71,17 @@ export function FlowbasedRestriction() {
         >
         <List.Item left={ () => 
             <View>
-                 {restrictions.map((item, itemIndex) => {
+                 {restrictions.map((item, itemIndex) => { //render flow based restriction component for every item in restriction list that is not current flow based restriction
                     if (itemIndex === index) {
                         return null; 
                     }
                     return (
-                        <RestrictionInfo restrictionTitle={'FLOW BASED RESTRICTION: '} restriction={item.restriction} 
-                            visible={itemIndex === maxIndex || (itemIndex === maxIndex - 1 && index === maxIndex)} lessMore='less'
-                           expanded={expanded} setExpanded={setExpanded}
-                            data={{
+                        <RestrictionInfo 
+                            restrictionTitle={'FLOW BASED RESTRICTION: '} 
+                            restriction={item.restriction} 
+                            visible={itemIndex === maxIndex || (itemIndex === maxIndex - 1 && index === maxIndex)} //don't show "view less" if last flow based restriction rendered                            lessMore='less' //set tet to "view less authorised volumes"
+                            expanded={expanded} setExpanded={setExpanded}
+                            data={{ //send all data to restrction
                                 flowAtRestriction: item.flowAtRestriction,
                                 instaneous: item.instaneous,
                                 hourlyRestriction: item.hourlyRestriction,
@@ -85,9 +93,8 @@ export function FlowbasedRestriction() {
                 })}
             </View>
             
-        } style={[styles.dropDown, 
-            {height:(Dimensions.get('window').height * 0.43 + 
-                (Dimensions.get('window').height * 0.38 * (restrictions.length -2)))}]}/>
+        } style={[styles.dropDown, {height:(Dimensions.get('window').height * 0.45 + 
+                (Dimensions.get('window').height * 0.4 * (restrictions.length -2)))}]} /* vary drop down height depending on how many other authorised volumes *//>
       </List.Accordion>
       </View>
     )
@@ -97,7 +104,7 @@ const styles = StyleSheet.create({
     container:{
         marginTop: Dimensions.get('window').width * 0.04, 
         width: Dimensions.get('window').width * 0.9,
-        height:Dimensions.get('window').height * 0.425, 
+        height:Dimensions.get('window').height * 0.45, 
         marginLeft:Dimensions.get('window').width *0.05, 
         marginRight:Dimensions.get('window').width * 0.08,
         borderRadius: 20,

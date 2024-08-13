@@ -4,14 +4,15 @@ import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
 
 export function ConsentInfo(props) {
+
     return(
         <View style={styles.container}>
-            <CalibriBoldText title="CONSENT EXPIRATION" style={styles.subHeader}/>
-                <CalibriText title={props.consentExpiration} style={styles.subText}/>
-            <CalibriBoldText title="CONSENT FLOW SITE" style={styles.subHeader}/>
-                <CalibriText title={props.consentFlowSite} style={styles.subText}/>
-            <CalibriBoldText title="ANNUAL MAX" style={styles.subHeader}/>
-                <CalibriText title={props.annualMax} style={styles.subText}/>
+            <CalibriBoldText title="CONSENT EXPIRATION" style={styles.subHeader}/> {/*consent expiration date title*/}
+                <CalibriText title={props.consentExpiration} style={styles.subText}/> {/*consent expiration date*/}
+            <CalibriBoldText title="CONSENT FLOW SITE" style={styles.subHeader}/> {/*consent flowsite title*/}
+                <CalibriText title={props.consentFlowSite} style={styles.subText}/> {/*consent flowsite*/}
+            <CalibriBoldText title="ANNUAL MAX" style={styles.subHeader}/> {/*annual max of abstraction for consent title*/}
+                <CalibriText title={props.annualMax} style={styles.subText}/> {/*annual max of abstraction for consent*/}
         </View>
     )
 }

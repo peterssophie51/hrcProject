@@ -8,9 +8,9 @@ export function VerticalData(props) {
         <View style={styles.verticalContainer}>
             <CalibriBoldText title={props.rate} style={styles.verticalDataTitle}/>
             <View style={styles.verticalDataTitleContainer}>
-                <CalibriText title="M" style={styles.verticalDataTitleUnits}/>
-                <CalibriText title="3" style={styles.verticalDataTitleSuperscript}/>
-                <CalibriText title={'/' + props.time} style={styles.verticalDataTitleUnits}/>
+                <CalibriText title="M" style={styles.verticalDataTitleUnits}/> {/*units*/}
+                <CalibriText title="3" style={styles.verticalDataTitleSuperscript}/> {/*superscript*/}
+                <CalibriText title={'/' + props.time} style={styles.verticalDataTitleUnits}/> {/*units*/}
             </View>
             <CalibriBoldText title={props.data} style={styles.verticalData} />
 </View>

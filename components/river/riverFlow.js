@@ -4,20 +4,19 @@ import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
 
-export function RiverFlowTitle() {
-    const riverFlow = 45.7 // river flow value
+export function RiverFlowTitle(props) {
 
     return(
         <View style={styles.container}>
             <View style={styles.titleContainer}>
-                <CalibriBoldText title="RIVER" style={styles.title}/>
+                <CalibriBoldText title="RIVER" style={styles.title}/> {/*river flow data title*/}
                 <CalibriBoldText title="FLOW" style={styles.title}/>
             </View>
             <View style={styles.value}>
-                <CalibriBoldText title={riverFlow} style={styles.flow}/>
-                    <CalibriBoldText style={styles.units} title='M'/>
-                        <CalibriBoldText style={styles.superscript} title='3'/>
-                    <CalibriBoldText style={styles.units} title='/S'/>
+                <CalibriBoldText title={props.riverFlow} style={styles.flow}/> {/*river flow data*/}
+                    <CalibriBoldText style={styles.units} title='M'/> {/*units*/}
+                        <CalibriBoldText style={styles.superscript} title='3'/> {/*superscript*/}
+                    <CalibriBoldText style={styles.units} title='/S'/> {/*units*/}
             </View>
         </View>
     )

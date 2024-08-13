@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from "react-native";
 import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
@@ -8,7 +8,7 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
    
     const handlePress = () => {
         setExpanded(!expanded)
-    };
+    }; //handle press of "view more/less" to expand or unexpand accordion
     
     const { 
         flowAtRestriction = '', 
@@ -16,40 +16,40 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
         hourlyRestriction = '', 
         dailyRestriction = '', 
         annualRestriction = '' 
-    } = data;
+    } = data; //default values for all data
 
     
 
     return(
         <View style={styles.container}>
             <Text style={styles.titleContainer}>
-                <CalibriBoldText title={restrictionTitle} style={styles.titleHead}/>
-                <CalibriText title={restriction} style={styles.titleRestriction}/>
+                <CalibriBoldText title={restrictionTitle} style={styles.titleHead}/> {/*title for flow based restriction data*/}
+                <CalibriText title={restriction} style={styles.titleRestriction}/>{/*which flow based restriction*/}
             </Text>
-            <View style={styles.horizontalDataContainer}>
-                <CalibriBoldText style={styles.horizontalDataTitle} title={'FLOW AT\nRESTRICTION '}/>
+            <View style={styles.horizontalDataContainer}> {/*horizontal data on component*/}
+                <CalibriBoldText style={styles.horizontalDataTitle} title={'FLOW AT\nRESTRICTION '}/> {/*title for flow at restriction*/}
                 <View style={styles.m3container}>
-                    <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(M'} />
-                    <CalibriBoldText style={styles.horizontalDataTitleSuperscript} title={'3'} />
-                    <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'/S)'} />
+                    <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(M'} /> {/*units*/}
+                    <CalibriBoldText style={styles.horizontalDataTitleSuperscript} title={'3'} /> {/*superscript*/}
+                    <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'/S)'} /> {/*untis*/}
                 </View>
-                <CalibriText style={[styles.horizontalDataFlow, {marginLeft: Dimensions.get('window').width * 0.26}]} title={flowAtRestriction}/>
+                <CalibriText style={[styles.horizontalDataFlow, {marginLeft: Dimensions.get('window').width * 0.26}]} title={flowAtRestriction}/> {/*flow at restriction data*/}
             </View>
             <View style={styles.horizontalDataContainer}>
-                <CalibriBoldText style={styles.horizontalDataTitle} title={'INSTANEOUS '}/>
-                <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(L/S)'} />
-                <CalibriText style={[styles.horizontalData, {fontSize: 22, marginLeft: Dimensions.get('window').width * 0.3}]} title={instaneous}/>
+                <CalibriBoldText style={styles.horizontalDataTitle} title={'INSTANEOUS '}/> {/*title for instaneous data*/}
+                <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(L/S)'} /> {/*units*/}
+                <CalibriText style={[styles.horizontalData, {fontSize: 22, marginLeft: Dimensions.get('window').width * 0.3}]} title={instaneous}/> {/*instaneous data*/}
             </View>
             <View style={styles.verticalDataContainer}>
-                <VerticalData rate="HOURLY" time='HOUR' data={hourlyRestriction}/>
-                <VerticalData rate="DAILY" time='DAY' data={dailyRestriction}/>
-                <VerticalData rate="ANNUALLY" time='ANNUAL' data={annualRestriction}/>
+                <VerticalData rate="HOURLY" time='HOUR' data={hourlyRestriction}/> {/*vertical data component for hourly rate at restriction*/}
+                <VerticalData rate="DAILY" time='DAY' data={dailyRestriction}/> {/*vertical data component for daily rate at restriction*/}
+                <VerticalData rate="ANNUALLY" time='ANNUAL' data={annualRestriction}/> {/*vertical data component for annual rate at restriction*/}
             </View>
             {visible && ( 
                 <TouchableOpacity onPress={handlePress}>
                     <CalibriText style={styles.viewMoreLess} title={'View ' + lessMore + ' authorised volumes'}/>
                 </TouchableOpacity>
-            )}
+            )} {/*set view more/less to visible based on supplied prop*/}
         </View>
     )
 }

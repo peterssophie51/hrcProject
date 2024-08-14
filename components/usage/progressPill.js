@@ -1,33 +1,58 @@
 import React from "react";
 import { View, Dimensions, StyleSheet, Text } from "react-native";
+import { CalibriBoldText} from '../fonts/calibriBoldFont'
 
 export function ProgressPill(props) {
     const type ='proportional'
-    let totalPercentage = 0.7
-    const max = 20
+    let totalPercentage = 0.6
+    const max = 100
 
-    const items=[{value: 'Flowmeter One', usage: 30, color: 'pink'}, {value:'Flowmeter One', usage: 40, color:'orange'}]
+    const flowmeters=[
+        { 
+            key: 'Flowmeter One', 
+            usage: 20, 
+        }, 
+        { 
+            key:'Flowmeter Two', 
+            usage: 20, 
+        }, 
+        {
+            key:'Flowmeter Three', 
+            usage: 20, 
+        }]
 
     if (type === 'proportional') {
         let totalSum = 0
 
-        props.flowMeters.forEach(meter => {
+        flowmeters.forEach(meter => {
             totalSum = totalSum + meter.usage
         })
     
         totalPercentage = totalSum/max
+    } else {
+        
     }
 
-    return(
+    return (
         <View style={styles.pillContainer}>
-            <View style={[styles.totalContainer, {height: Dimensions.get('window').height * 0.26 * totalPercentage , 
-                marginTop: (Dimensions.get('window').height * 0.26) - (Dimensions.get('window').height * 0.26 * totalPercentage)}]}>
-            </View>
+            { type == 'totalled' && (
+                <View style={[styles.totalContainer, {height: Dimensions.get('window').height * 0.26 * totalPercentage , 
+                    marginTop: (Dimensions.get('window').height * 0.26) - (Dimensions.get('window').height * 0.26 * totalPercentage)}]}>
+                </View>
+
+            )}
             <View style={{marginTop: (Dimensions.get('window').height * 0.26) - (Dimensions.get('window').height * 0.26 * totalPercentage)}}>
-            { type === 'proportional' && items.map((item, index) => (
-                    <View style={[styles.subContainer, {height: Dimensions.get('window').height * 0.26 * (item.usage/max), backgroundColor:item.color}]}></View>
+            { type === 'proportional' && flowmeters.map((item, index) => (
+                    <View key={item.key} style={[styles.subContainer, 
+                        {height: Dimensions.get('window').height * 0.26 * (item.usage/max), backgroundColor:item.color, 
+                            borderTopRightRadius: index == 0 ? 20 : 0, 
+                            borderTopLeftRadius: index == 0 ? 20 : 0, 
+                            borderBottomLeftRadius: (flowmeters.length - 1) == index ? 20 :0, 
+                            borderBottomRightRadius: (flowmeters.length - 1) == index ? 20 :0 ,
+                            backgroundColor: index & 1 ? '#00A7CF' : '#007DA5'}]}>
+                        <CalibriBoldText title={index + 1} style={styles.flowMeterLabel}/></View>
                 ))} 
-            </View>  
+            </View>
         </View>
     )
 }
@@ -49,6 +74,10 @@ const styles = StyleSheet.create({
     },
     subContainer: {
         width: Dimensions.get('window').width * 0.08,
-        borderRadius: 20
+        justifyContent: 'center'
+    },
+    flowMeterLabel: {
+        color: 'white', 
+        textAlign: 'center', 
     }
 })

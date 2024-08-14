@@ -3,11 +3,20 @@ import { View, StyleSheet, Dimensions, Text} from "react-native";
 import { ProgressPill } from "./progressPill";
 import { PercentageCardText } from "./percentageText";
 
-export function PercentagePill() {
+export function PercentagePill(props) {
     return(
         <View style={styles.cardContainer}>
-            <ProgressPill flowMeters={[{value: 'Flowmeter One', usage:45}, {value: 'Flowmeter Two', usage: 20}]}/>
-            <PercentageCardText />
+            <ProgressPill 
+                type={props.type}
+                max={props.max} 
+                flowMeters={props.data}
+            />
+            <PercentageCardText 
+                time={props.time}
+                type={props.type}
+                max={props.max}
+                flowMeters={props.data}
+            />
         </View>
     )
 }

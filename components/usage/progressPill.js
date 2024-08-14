@@ -9,15 +9,15 @@ export function ProgressPill(props) {
 
     const flowmeters=[
         { 
-            key: 'Flowmeter One', 
+            key: 'Flow One', 
             usage: 20, 
         }, 
         { 
-            key:'Flowmeter Two', 
+            key:'Flowm Two', 
             usage: 20, 
         }, 
         {
-            key:'Flowmeter Three', 
+            key:'Flow Three', 
             usage: 20, 
         }]
 

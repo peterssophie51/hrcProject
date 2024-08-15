@@ -29,7 +29,7 @@ export function ProgressPill(props) {
                 (Dimensions.get('window').height * 0.26) - (Dimensions.get('window').height * 0.26 * totalPercentage)}}>
             { props.type === 'proportional' && props.flowMeters.map((item, index) => (
                     <View key={item.key} style={[styles.subContainer, 
-                        {height: Dimensions.get('window').height * 0.26 * (item.usage/totalSum), backgroundColor:item.color, 
+                        {height: props.max==0 ? Dimensions.get('window').height * 0.26 * (item.usage/totalSum) : Dimensions.get('window').height * 0.26 * (item.usage/props.max), backgroundColor:item.color, 
                             borderTopRightRadius: index == 0 ? 20 : 0, 
                             borderTopLeftRadius: index == 0 ? 20 : 0, 
                             borderBottomLeftRadius: (props.flowMeters.length - 1) == index ? 20 :0, 

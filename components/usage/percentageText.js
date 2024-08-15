@@ -47,7 +47,7 @@ export function PercentageCardText(props) {
                             </View>
                             <View style={[styles.textHorizontal, {justifyContent:'flex-start'}]}>
                                 <Text style={{fontFamily: 'CalibriBold', fontSize: 16}}>Usage </Text>
-                                <Text style={{fontFamily: 'Calibri', fontSize: 16, lineHeight: 22}}>{item.usage}</Text>
+                                <Text style={{fontFamily: 'Calibri', fontSize: 16, lineHeight: 22}}>{item.usage.toFixed(1)}</Text>
                                 <Text style={{fontFamily: 'Calibri', lineHeight: 24, fontSize:13}}>M</Text>
                                 <Text style={{fontFamily: 'Calibri', lineHeight:18, fontSize: 10}}>3</Text>
                                 <Text style={{fontFamily: 'Calibri', lineHeight: 24, fontSize: 13}}>/S</Text>
@@ -60,7 +60,7 @@ export function PercentageCardText(props) {
             {props.type=='totalled' && (
                <View style={styles.container}>
                <View style={styles.textHorizontal}>
-                   <Text style={[styles.percentageTitle, {fontFamily:'CalibriBold'}]}>{totalPercentage}
+                   <Text style={[styles.percentageTitle, {fontFamily:'CalibriBold'}]}>{totalPercentage.toFixed(1)}
                        <Text style={{fontFamily:'CalibriBold', fontSize:30}}>%</Text>
                    </Text>
                </View>
@@ -87,7 +87,7 @@ export function PercentageCardText(props) {
                ) : (
                     <View>
                     <View style={styles.textHorizontal}>
-                        <Text style={{fontFamily:'Calibri', fontSize: 22}}>{totalSum}</Text>
+                        <Text style={{fontFamily:'Calibri', fontSize: 22}}>{totalSum.toFixed(1)}</Text>
                         <Text style={{fontFamily:'Calibri', fontSize: 17, lineHeight: 28}}>M</Text>
                         <Text style={{fontFamily:'Calibri', fontSize: 13}}>3</Text>
                         <Text style={{fontFamily:'Calibri', fontSize: 17, lineHeight: 28}}>/S</Text>

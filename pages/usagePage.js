@@ -4,6 +4,7 @@ import { CalibriBoldText } from '../components/fonts/calibriBoldFont';
 import { CalibriText } from '../components/fonts/calibriFont.js'
 import { PercentagePill } from '../components/usage/percentageCard.js';
 import { Switch } from '../components/switch.js';
+import { DatatypeSelector } from '../components/usage/datatypeSelector.js';
 
 export function UsagePage ({ navagation }) {
   const dataCollected = '20:00 (NZST) June 14th 2024'
@@ -29,6 +30,7 @@ export function UsagePage ({ navagation }) {
             { label: "Proportional", value: 'proportional', activeColor:'#72BF44' },
           ]} action={settype}
         />
+        <DatatypeSelector/>
         
       </View>
     )

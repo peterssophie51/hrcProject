@@ -29,6 +29,7 @@ export function UsagePage ({ navagation }) {
             { label: "Proportional", value: 'proportional', activeColor:'#72BF44' },
           ]} action={settype}
         />
+        
       </View>
     )
   }

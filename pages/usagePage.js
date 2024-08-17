@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont';
 import { CalibriText } from '../components/fonts/calibriFont.js'
 import { PercentagePill } from '../components/usage/percentageCard.js';
@@ -18,28 +18,28 @@ export function UsagePage ({ navagation }) {
       <View style={styles.page}>
         <CalibriBoldText  style={styles.title} title="Usage" />
         <CalibriText style={styles.lastRecorded} title={'Last Recorded ' + dataCollected} time='annual'/>
-        <View style={{display: 'flex', flexDirection:'row'}}>
-          <PercentagePill data={annualData} type={type} max={annualMax} time='annual'/>
-          <PercentagePill data={dailyData} type={type} max={dailyMax} time='day'/>
-        </View>
-        <Switch style={{
-          marginTop: Dimensions.get('window').width * 0.05, 
-          width:Dimensions.get('window').width * 0.9, 
-          marginLeft:Dimensions.get('window').width *0.05, }} options={[
-            { label: "Totalled", value: 'totalled', activeColor:'#72BF44'},
-            { label: "Proportional", value: 'proportional', activeColor:'#72BF44' },
-          ]} action={settype}
-        />
-        <DatatypeSelector/>
-        
+        <ScrollView>
+          <View style={{display: 'flex', flexDirection:'row'}}>
+            <PercentagePill data={annualData} type={type} max={annualMax} time='annual'/>
+            <PercentagePill data={dailyData} type={type} max={dailyMax} time='day'/>
+          </View>
+          <Switch style={{
+            marginTop: Dimensions.get('window').width * 0.05, 
+            width:Dimensions.get('window').width * 0.9, 
+            marginLeft:Dimensions.get('window').width *0.05, }} options={[
+              { label: "Totalled", value: 'totalled', activeColor:'#72BF44'},
+              { label: "Proportional", value: 'proportional', activeColor:'#72BF44' },
+            ]} action={settype}
+          />
+          <DatatypeSelector/>
+        </ScrollView>
       </View>
     )
   }
 
 const styles = StyleSheet.create({
   page: {
-    width:Dimensions.get('window').width, 
-    height:Dimensions.get('window').height * 2, 
+    flex: 1,
     backgroundColor:'white'
   },
   title: {

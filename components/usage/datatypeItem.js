@@ -2,7 +2,7 @@ import React from "react";
 import { List } from "react-native-paper";
 import { useState, useEffect } from "react";
 import * as Font from 'expo-font'
-import { Dimensions, Image, View, StyleSheet, Text} from "react-native";
+import { Dimensions, Image, View, StyleSheet, Text, TextInput} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 
@@ -68,7 +68,20 @@ export function DatatypeItem(props) {
             
             { visibility && (
                 <>
-                    <Text>Edit Section here</Text>
+                    <View style={styles.editContainer}>
+                        <TextInput 
+                                placeholder="Enter flow meter nickname" 
+                                style={styles.editInput} 
+                                
+                        />
+                        <TouchableOpacity style={styles.submitButtonContainer}>
+                            <Image source={require('../../images/tickWhiteThick.png')} style={styles.submitButton} />
+                        </TouchableOpacity>
+                        <TouchableOpacity  style={styles.crossButtonContainer}>
+                            <Image source={require('../../images/crossWhiteThick.png')} style={styles.crossButton} />
+                        </TouchableOpacity>
+
+                    </View>
                 </>
 
             )}
@@ -78,48 +91,52 @@ export function DatatypeItem(props) {
 }
 
 const styles = StyleSheet.create({
+    editContainer: {
+        width: Dimensions.get('window').width * 0.9,
+        marginLeft: Dimensions.get('window').width * 0.05,
+        display:'flex',
+        flexDirection:'row',
+        backgroundColor:'#eeeeee'
+    },
     editInput: {
         fontSize: 18, 
         width: Dimensions.get('window').width * 0.53, 
-        height: 45, 
-        backgroundColor: '#eeeeee', 
+        height: Dimensions.get('window').width * 0.12, 
+        backgroundColor: 'white', 
         borderColor: '#999999', 
         borderWidth: 2, 
-        margin: 10, 
+        margin: Dimensions.get('window').width * 0.02, 
         borderRadius: 10, 
         padding: 10, 
         fontFamily:'Calibri', 
         color:'black'
     },
     submitButtonContainer: {
-        marginLeft: '0.5%', 
-        width:Dimensions.get('window').width * 0.135 , 
-        height: 45, 
         backgroundColor: '#72BF44', 
-        marginTop: 10, 
-        marginBottom: 10, 
+        width:Dimensions.get('window').width * 0.135 , 
+        height: Dimensions.get('window').width * 0.12, 
+        marginTop: Dimensions.get('window').width * 0.02, 
         borderRadius: 10
     },
     submitButton: {
-        height: 30, 
-        width: 40, 
-        marginLeft: 5, 
-        marginTop: 7 
+        height: Dimensions.get('window').width * 0.08, 
+        width: Dimensions.get('window').width * 0.1, 
+        marginLeft: Dimensions.get('window').width * 0.0175, 
+        marginTop: Dimensions.get('window').width * 0.02
     },
     crossButtonContainer: {
-        marginLeft: '2%', 
-        width:Dimensions.get('window').width * 0.135, 
-        height: 45, 
         backgroundColor: '#CE202F', 
-        marginTop: 10, 
-        marginBottom: 10, 
+        marginLeft: Dimensions.get('window').width * 0.02, 
+        width:Dimensions.get('window').width * 0.135 , 
+        height: Dimensions.get('window').width * 0.12, 
+        marginTop: Dimensions.get('window').width * 0.02, 
         borderRadius: 10
+        
     },
     crossButton: {
-        height: 30, 
-        width: 30, 
-        marginLeft: 10, 
-        marginRight: 10, 
-        marginTop: 7 
+        height: Dimensions.get('window').width * 0.09, 
+        width: Dimensions.get('window').width * 0.09, 
+        marginLeft: Dimensions.get('window').width * 0.0225, 
+        marginTop: Dimensions.get('window').width * 0.015
     }
 })

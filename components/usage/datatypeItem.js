@@ -3,32 +3,30 @@ import { List } from "react-native-paper";
 import { useState, useEffect } from "react";
 import * as Font from 'expo-font'
 import { Dimensions, Image, View, StyleSheet, Text, TextInput} from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 
 
 export function DatatypeItem(props) {
     const [fontLoaded, setFontLoaded] = useState(false)
     const [visibility, setvisibility] = useState(false)
     const [name, setname] = useState('')
-    const [nickname, setnickname] = useState('Nickname')
     
     const handlePress = () => {
-
-        props.setcurrentDatatypeNickname(nickname); 
+        props.setcurrentDatatypeNickname(props.flowMeter['name']); 
         props.setcurrentDatatype(props.description)
     }
 
-    const handleEditPress = () => {
+    const handleEditPress = (e) => {
         setvisibility(!visibility)
     }
 
     const handleSubmit = () => {
-        setnickname(name)
-        if (props.currentDatatype === props.description) {
+        setvisibility(false)
+        const updatedFlowMeter = { ...props.flowMeter, name };
+        props.updateFlowMeter(updatedFlowMeter)
+        if (props.description == props.currentDatatype) {
             props.setcurrentDatatypeNickname(name)
-            setvisibility(false)
-        } 
-        console.log(props.currentDatatypeNickname)
+        }
     }
 
     const handleCancel = () => {
@@ -60,7 +58,7 @@ export function DatatypeItem(props) {
     return (
         <View>
             <List.Item 
-                title={nickname} 
+                title={props.flowMeter['name']} 
                 titleStyle={{fontFamily:'Calibri', fontSize:18, 
                     color:props.currentDatatype === props.description ? '#72BF44': 'black'}}
                 descriptionStyle={{fontFamily:'Calibri', fontSize:15, 
@@ -104,12 +102,14 @@ const styles = StyleSheet.create({
     itemContainer: {
         backgroundColor:'#eeeeee',
         width: Dimensions.get('window').width * 0.9,
-        marginLeft: Dimensions.get('window').width * 0.05 
+        marginLeft: Dimensions.get('window').width * 0.05,
+        zIndex: 1
     },
     editButton: {
         height: Dimensions.get('window').width  * 0.068, 
         width: Dimensions.get('window').width  * 0.07,
-        marginTop: Dimensions.get('window').width * 0.01
+        marginTop: Dimensions.get('window').width * 0.01,
+        zIndex:2
     },
     editContainer: {
         width: Dimensions.get('window').width * 0.9,

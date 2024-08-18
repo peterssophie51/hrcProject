@@ -10,10 +10,10 @@ export function DatatypeSelector() {
     const [fontLoaded, setFontLoaded] = useState(false);
     const [currentDatatypeNickname, setcurrentDatatypeNickname] =useState('Total Water Usage')
     const [currentDatatype, setcurrentDataype] = useState('')
-    const flowMeters = [
-        {meter: 'FLOW METER 1'},
-        {meter: 'FLOW METER 2'},
-    ]
+    const [flowMeters, setflowMeters] = useState([
+        {meter: 'FLOW METER 1', name: 'Animals'},
+        {meter: 'FLOW METER 2', name:'Farm'},
+    ])
 
     const handlePress = () => setExpanded(!expanded)
 
@@ -21,6 +21,13 @@ export function DatatypeSelector() {
         setcurrentDatatypeNickname('Total Water Usage')
         setcurrentDataype('')
     }
+
+    const updateFlowMeter = (updatedFlowMeter) => {
+        const updatedFlowMeters = flowMeters.map((flowMeter) =>
+            flowMeter.meter === updatedFlowMeter.meter ? updatedFlowMeter : flowMeter
+        );
+        setflowMeters(updatedFlowMeters);
+    };
 
     //function to load in calibri bold and calibri font
     useEffect(() => {
@@ -73,7 +80,9 @@ export function DatatypeSelector() {
                             setcurrentDatatypeNickname={setcurrentDatatypeNickname} 
                             setcurrentDatatype={setcurrentDataype}
                             currentDatatype={currentDatatype} 
-                            currentDatatypeNickname={currentDatatypeNickname}/>
+                            currentDatatypeNickname={currentDatatypeNickname}
+                            flowMeter={flowMeters[itemIndex]}
+                            updateFlowMeter={updateFlowMeter}/>
                     );
                 })}
                 <List.Item title="Total Water Usage" 

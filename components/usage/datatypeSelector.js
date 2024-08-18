@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, Image } from "react-native";
 import { List } from "react-native-paper";
 import { DatatypeItem } from "./datatypeItem";
 import { useEffect } from "react";
@@ -10,6 +10,10 @@ export function DatatypeSelector() {
     const [fontLoaded, setFontLoaded] = useState(false);
     const [currentDatatypeNickname, setcurrentDatatypeNickname] =useState('Total Water Usage')
     const [currentDatatype, setcurrentDataype] = useState('')
+    const flowMeters = [
+        {meter: 'FLOW METER 1'},
+        {meter: 'FLOW METER 2'},
+    ]
 
     const handlePress = () => setExpanded(!expanded)
 
@@ -48,22 +52,30 @@ export function DatatypeSelector() {
                 descriptionStyle={{fontSize:16, fontFamily: 'Calibri', color:'black'}}
                 expanded={expanded}
                 onPress={handlePress}
-                style={{
-                    borderTopLeftRadius:20, 
-                    borderTopRightRadius:20, 
-                    backgroundColor:'#eeeeee', 
-                    borderBottomLeftRadius: (expanded == true) ? 0 : 20,
-                    borderBottomRightRadius: (expanded == true) ? 0 : 20,
-                    width: Dimensions.get('window').width * 0.9,
-                    marginLeft: Dimensions.get('window').width * 0.05,
-                    marginTop: Dimensions.get('window').width * 0.05
-                }}>
-                <DatatypeItem description='FLOW METER 1' 
-                    setcurrentDatatypeNickname={setcurrentDatatypeNickname} setcurrentDatatype={setcurrentDataype}
-                    currentDatatype={currentDatatype} currentDatatypeNickname={currentDatatypeNickname}/>
-                <DatatypeItem description="FLOW METER 2"
-                    setcurrentDatatypeNickname={setcurrentDatatypeNickname} setcurrentDatatype={setcurrentDataype}
-                    currentDatatype={currentDatatype} currentDatatypeNickname={currentDatatypeNickname}/>
+                right={() => (
+                    <Image
+                      source={expanded 
+                        //show drop up image if accordion dropped down
+                        ? require('../../images/dropUpBlack.png')  
+                        //show drop down image if accordion dropped up
+                        : require('../../images/dropDownBlack.png') 
+                      }
+                      style={{ height: 15, width: 25 }}
+                    />
+                  )}
+                style={[styles.accordion, {borderBottomLeftRadius: (expanded == true) ? 0 : 20,
+                    borderBottomRightRadius: (expanded == true) ? 0 : 20,}]}>
+                {flowMeters.map((item, itemIndex) => { 
+                    return (
+                        <DatatypeItem 
+                            key={item.meter}
+                            description={item.meter} 
+                            setcurrentDatatypeNickname={setcurrentDatatypeNickname} 
+                            setcurrentDatatype={setcurrentDataype}
+                            currentDatatype={currentDatatype} 
+                            currentDatatypeNickname={currentDatatypeNickname}/>
+                    );
+                })}
                 <List.Item title="Total Water Usage" 
                     onPress={handleDataClick}
                     titleStyle={{fontFamily:'Calibri', fontSize:18, 
@@ -77,3 +89,14 @@ export function DatatypeSelector() {
             </List.Accordion>
     );
 }
+
+const styles = StyleSheet.create({
+    accordion: {
+    borderTopLeftRadius:20, 
+    borderTopRightRadius:20, 
+    backgroundColor:'#eeeeee', 
+    width: Dimensions.get('window').width * 0.9,
+    marginLeft: Dimensions.get('window').width * 0.05,
+    marginTop: Dimensions.get('window').width * 0.05
+    }
+})

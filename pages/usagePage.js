@@ -5,6 +5,7 @@ import { CalibriText } from '../components/fonts/calibriFont.js'
 import { PercentagePill } from '../components/usage/percentageCard.js';
 import { Switch } from '../components/switch.js';
 import { DatatypeSelector } from '../components/usage/datatypeSelector.js';
+import { UsageChart } from '../components/usage/usageChart.js';
 
 export function UsagePage ({ navagation }) {
   const dataCollected = '20:00 (NZST) June 14th 2024'
@@ -32,7 +33,7 @@ export function UsagePage ({ navagation }) {
             ]} action={settype}
           />
           <DatatypeSelector/>
-          <Text>Testing</Text>
+          <UsageChart/>
         </ScrollView>
       </View>
     )

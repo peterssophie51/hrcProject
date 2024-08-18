@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { View, StyleSheet, Dimensions, ScrollView, Text } from 'react-native';
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont';
 import { CalibriText } from '../components/fonts/calibriFont.js'
 import { PercentagePill } from '../components/usage/percentageCard.js';
@@ -32,6 +32,7 @@ export function UsagePage ({ navagation }) {
             ]} action={settype}
           />
           <DatatypeSelector/>
+          <Text>Testing</Text>
         </ScrollView>
       </View>
     )

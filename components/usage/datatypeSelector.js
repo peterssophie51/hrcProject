@@ -101,11 +101,11 @@ export function DatatypeSelector() {
 
 const styles = StyleSheet.create({
     accordion: {
-    borderTopLeftRadius:20, 
-    borderTopRightRadius:20, 
-    backgroundColor:'#eeeeee', 
-    width: Dimensions.get('window').width * 0.9,
-    marginLeft: Dimensions.get('window').width * 0.05,
-    marginTop: Dimensions.get('window').width * 0.05
+        borderTopLeftRadius:20, 
+        borderTopRightRadius:20, 
+        backgroundColor:'#eeeeee', 
+        width: Dimensions.get('window').width * 0.9,
+        marginLeft: Dimensions.get('window').width * 0.05,
+        marginTop: Dimensions.get('window').width * 0.05,
     }
 })

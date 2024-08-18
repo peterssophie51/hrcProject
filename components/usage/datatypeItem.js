@@ -8,15 +8,31 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 export function DatatypeItem(props) {
     const [fontLoaded, setFontLoaded] = useState(false)
-    const [ visibility, setvisibility] = useState(false)
+    const [visibility, setvisibility] = useState(false)
+    const [name, setname] = useState('')
+    const [nickname, setnickname] = useState('Nickname')
     
     const handlePress = () => {
-        props.setcurrentDatatypeNickname(props.title); 
+
+        props.setcurrentDatatypeNickname(nickname); 
         props.setcurrentDatatype(props.description)
     }
 
     const handleEditPress = () => {
         setvisibility(!visibility)
+    }
+
+    const handleSubmit = () => {
+        setnickname(name)
+        if (props.currentDatatype === props.description) {
+            props.setcurrentDatatypeNickname(name)
+            setvisibility(false)
+        } 
+        console.log(props.currentDatatypeNickname)
+    }
+
+    const handleCancel = () => {
+        setvisibility(false)
     }
 
       //function to load in calibri bold and calibri font
@@ -44,25 +60,19 @@ export function DatatypeItem(props) {
     return (
         <View>
             <List.Item 
-                title={props.title} 
+                title={nickname} 
                 titleStyle={{fontFamily:'Calibri', fontSize:18, 
                     color:props.currentDatatype === props.description ? '#72BF44': 'black'}}
                 descriptionStyle={{fontFamily:'Calibri', fontSize:15, 
                     color:props.currentDatatype === props.description ? '#72BF44': 'black'}}
                 description={props.description}
                 onPress={handlePress}
-                style={{
-                    backgroundColor:'#eeeeee',
-                    width: Dimensions.get('window').width * 0.9,
-                    marginLeft: Dimensions.get('window').width * 0.05 }}
+                style={styles.itemContainer}
                 right={() => (
                     <TouchableOpacity onPress={handleEditPress}>
                         <Image source={props.currentDatatype == props.description ? 
                             require('../../images/editGreen.png') : require('../../images/editBlack.png')} 
-                            style={{
-                                height: Dimensions.get('window').width  * 0.068, 
-                                width: Dimensions.get('window').width  * 0.07,
-                                marginTop: Dimensions.get('window').width * 0.01}}/>
+                            style={styles.editButton}/>
                     </TouchableOpacity>)}
             />
             
@@ -72,12 +82,12 @@ export function DatatypeItem(props) {
                         <TextInput 
                                 placeholder="Enter flow meter nickname" 
                                 style={styles.editInput} 
-                                
+                                onChangeText={setname}
                         />
-                        <TouchableOpacity style={styles.submitButtonContainer}>
+                        <TouchableOpacity style={styles.submitButtonContainer} onPress={handleSubmit}>
                             <Image source={require('../../images/tickWhiteThick.png')} style={styles.submitButton} />
                         </TouchableOpacity>
-                        <TouchableOpacity  style={styles.crossButtonContainer}>
+                        <TouchableOpacity  style={styles.crossButtonContainer} onPress={handleCancel}>
                             <Image source={require('../../images/crossWhiteThick.png')} style={styles.crossButton} />
                         </TouchableOpacity>
 
@@ -91,6 +101,16 @@ export function DatatypeItem(props) {
 }
 
 const styles = StyleSheet.create({
+    itemContainer: {
+        backgroundColor:'#eeeeee',
+        width: Dimensions.get('window').width * 0.9,
+        marginLeft: Dimensions.get('window').width * 0.05 
+    },
+    editButton: {
+        height: Dimensions.get('window').width  * 0.068, 
+        width: Dimensions.get('window').width  * 0.07,
+        marginTop: Dimensions.get('window').width * 0.01
+    },
     editContainer: {
         width: Dimensions.get('window').width * 0.9,
         marginLeft: Dimensions.get('window').width * 0.05,

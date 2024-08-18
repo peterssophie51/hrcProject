@@ -8,9 +8,11 @@ import * as Font from 'expo-font'
 export function DatatypeSelector() {
     const [expanded, setExpanded] = useState(false);
     const [fontLoaded, setFontLoaded] = useState(false);
+    const [currentDatatypeNickname, setcurrentDatatypeNickname] =useState('Total Water Usage')
+    const [currentDatatype, setcurrentDataype] = useState('')
+
     const handlePress = () => setExpanded(!expanded)
-    const [currentDatatypeNickname, setcurrentDatatypeNickname] =useState('Datatype Nickname')
-    const [currentDatatype, setcurrentDataype] = useState('Datatype')
+
     const handleDataClick = () => {
         setcurrentDatatypeNickname('Total Water Usage')
         setcurrentDataype('')
@@ -56,10 +58,10 @@ export function DatatypeSelector() {
                     marginLeft: Dimensions.get('window').width * 0.05,
                     marginTop: Dimensions.get('window').width * 0.05
                 }}>
-                <DatatypeItem title='Crop Irrigator 1' description='FLOW METER 1' 
+                <DatatypeItem description='FLOW METER 1' 
                     setcurrentDatatypeNickname={setcurrentDatatypeNickname} setcurrentDatatype={setcurrentDataype}
-                    currentDatatype={currentDatatype} currentDatatypeNickname={currentDatatype}/>
-                <DatatypeItem title="Crop Irrigator 2" description="FLOW METER 2"
+                    currentDatatype={currentDatatype} currentDatatypeNickname={currentDatatypeNickname}/>
+                <DatatypeItem description="FLOW METER 2"
                     setcurrentDatatypeNickname={setcurrentDatatypeNickname} setcurrentDatatype={setcurrentDataype}
                     currentDatatype={currentDatatype} currentDatatypeNickname={currentDatatypeNickname}/>
                 <List.Item title="Total Water Usage" 

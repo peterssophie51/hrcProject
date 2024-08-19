@@ -16,7 +16,10 @@ export function UsagePage ({ navagation }) {
   const annualData = [{key: 'Flow One', usage: 100}, {key: 'Flow Two', usage: 100}, {key:'Flow Three', usage: 200}]
   const annualMax = 700
 
-  //I0 = one day I1= seven days I2= one month I3=annual
+  //I0 = one day 
+  //I1= seven days 
+  //I2= one month 
+  //I3=annual
   const totalWaterUsage =[[], [], [], []]
   const flowMeterOne = [
     [{value: 60}, {value: 21}, {value: 43}], 
@@ -28,6 +31,18 @@ export function UsagePage ({ navagation }) {
     [{value:11}, {value:34}, {value:26}], 
     [{value:51}, {value:89}, {value:123}], 
     [{value:142}, {value:202}, {value:121}]]
+
+  const flowMeters = [{name:'FLOW METER 1', data:[
+    [{value: 60}, {value: 21}, {value: 43}], 
+    [{value:109}, {value:98}, {value:131}], 
+    [{value:289}, {value:398}, {value:403}], 
+    [{value:862}, {value:987}, {value:1079}]]},
+                      {name: 'FLOW METER 2', data:[
+    [{value:20}, {value: 39}, {value: 7}], 
+    [{value:11}, {value:34}, {value:26}], 
+    [{value:51}, {value:89}, {value:123}], 
+    [{value:142}, {value:202}, {value:121}]] }
+  ]
 
   flowMeterOne.map((datatype, datatypeIndex) => (
     datatype.map((value, valueIndex) => (
@@ -70,6 +85,7 @@ export function UsagePage ({ navagation }) {
             setcurrentDatatype={setcurrentDatatype}
             setcurrentData={setcurrentData}
             totalWaterUsage={totalWaterUsage}
+            flow
             flowMeterOne={flowMeterOne}
             flowMeterTwo={flowMeterTwo}
             selectedTime={selectedTime}/>
@@ -85,8 +101,7 @@ export function UsagePage ({ navagation }) {
             setcurrentData={setcurrentData}
             currentDatatype={currentDatatype}
             totalWaterUsage={totalWaterUsage}
-            flowMeterOne={flowMeterOne}
-            flowMeterTwo={flowMeterTwo}/>
+            flowMeters={flowMeters}/>
           <View style={{height: 20}}></View>
         </ScrollView>
       </View>

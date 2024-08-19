@@ -28,17 +28,18 @@ export function GraphRadios(props) {
         return null; 
     }
 
-    const handlePress = (name, labels, index) => {
+    const handlePress = (name, labels, listIndex) => {
         props.setselectedTime(name);
         props.setcurrentLabels(labels)
-        if (props.currentDatatype == 'FLOW METER 1') {
-            props.setcurrentData(props.flowMeterOne[index])
-        } else if (props.currentDatatype == 'FLOW METER 2') {
-            props.setcurrentData(props.flowMeterTwo[index])
-        } else if (props.currentDatatype == '') {
-            props.setcurrentData(props.totalWaterUsage[index])
-        }
-    }
+        props.flowMeters.map((item, index) => {
+            if (props.currentDatatype == item['name']) {
+                props.setcurrentData(item['data'][listIndex])
+            }
+        })
+        if (props.currentDatatype == '') {
+            props.setcurrentData(props.totalWaterUsage[listIndex])
+        }}
+
 
     return (
         <View style={styles.container}>

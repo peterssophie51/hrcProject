@@ -21,7 +21,7 @@ export function DatatypeItem(props) {
         } else if (props.selectedTime == '1 MONTH') {
             props.setcurrentData(props.data[2])
         } else if (props.selectedTime == 'ANNUAL') {
-            props.setcurrentData(props.data[2])
+            props.setcurrentData(props.data[3])
         }
     }
 

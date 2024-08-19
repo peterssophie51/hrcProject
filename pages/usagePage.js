@@ -6,6 +6,7 @@ import { PercentagePill } from '../components/usage/percentageCard.js';
 import { Switch } from '../components/switch.js';
 import { DatatypeSelector } from '../components/usage/datatypeSelector.js';
 import { UsageChart } from '../components/usage/usageChart.js';
+import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 
 export function UsagePage ({ navagation }) {
   const dataCollected = '20:00 (NZST) June 14th 2024'
@@ -14,6 +15,33 @@ export function UsagePage ({ navagation }) {
   const dailyMax = 200
   const annualData = [{key: 'Flow One', usage: 100}, {key: 'Flow Two', usage: 100}, {key:'Flow Three', usage: 200}]
   const annualMax = 700
+
+  //I0 = one day I1= seven days I2= one month I3=annual
+  const totalWaterUsage =[[], [], [], []]
+  const flowMeterOne = [
+    [{value: 60}, {value: 21}, {value: 43}], 
+    [{value:109}, {value:98}, {value:131}], 
+    [{value:289}, {value:398}, {value:403}], 
+    [{value:862}, {value:987}, {value:1079}]]
+  const flowMeterTwo = [
+    [{value:20}, {value: 39}, {value: 7}], 
+    [{value:11}, {value:34}, {value:26}], 
+    [{value:51}, {value:89}, {value:123}], 
+    [{value:142}, {value:202}, {value:121}]]
+
+  flowMeterOne.map((datatype, datatypeIndex) => (
+    datatype.map((value, valueIndex) => (
+        totalWaterUsage[datatypeIndex].push({value: 
+          flowMeterOne[datatypeIndex][valueIndex]['value'] + flowMeterTwo[datatypeIndex][valueIndex]['value']})
+      ))))
+  
+  const oneDayLabels = ['00:00', '02:00', '04:00'] 
+  const sevenDayLabels = ['MON', 'TUE', 'WED'] 
+  const oneMonthLabels = ['1ST', '5TH', '10TH'] 
+  const annualLabels = ['JAN', 'FEB', 'MAR'] 
+
+  const [currentData, setcurrentData] = useState(totalWaterUsage[0])
+  const [currentLabels, setcurrentLabels] = useState(oneDayLabels)
 
     return (
       <View style={styles.page}>
@@ -34,6 +62,7 @@ export function UsagePage ({ navagation }) {
           />
           <DatatypeSelector/>
           <UsageChart/>
+          <GraphRadios />
         </ScrollView>
       </View>
     )

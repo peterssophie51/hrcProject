@@ -14,6 +14,15 @@ export function DatatypeItem(props) {
     const handlePress = () => {
         props.setcurrentDatatypeNickname(props.flowMeter['name']); 
         props.setcurrentDatatype(props.description)
+        if (props.selectedTime == '1 DAY') {
+            props.setcurrentData(props.data[0])
+        } else if (props.selectedTime == '7 DAYS') {
+            props.setcurrentData(props.data[1])
+        } else if (props.selectedTime == '1 MONTH') {
+            props.setcurrentData(props.data[2])
+        } else if (props.selectedTime == 'ANNUAL') {
+            props.setcurrentData(props.data[2])
+        }
     }
 
     const handleEditPress = (e) => {

@@ -5,8 +5,6 @@ import * as Font from 'expo-font'
 
 export function GraphRadios(props) {
 
-    const [selectedTime, setselectedTime] = useState('1 DAY')
-
     const [fontLoaded, setFontLoaded] = useState(false);
     //function to load in calibri bold and calibri font
     useEffect(() => {
@@ -30,9 +28,16 @@ export function GraphRadios(props) {
         return null; 
     }
 
-    const handlePress = (name, labels) => {
-        setselectedTime(name);
+    const handlePress = (name, labels, index) => {
+        props.setselectedTime(name);
         props.setcurrentLabels(labels)
+        if (props.currentDatatype == 'FLOW METER 1') {
+            props.setcurrentData(props.flowMeterOne[index])
+        } else if (props.currentDatatype == 'FLOW METER 2') {
+            props.setcurrentData(props.flowMeterTwo[index])
+        } else if (props.currentDatatype == '') {
+            props.setcurrentData(props.totalWaterUsage[index])
+        }
     }
 
     return (
@@ -40,11 +45,11 @@ export function GraphRadios(props) {
             <View style={{display:'flex', flexDirection:'row'}}>
                 <View style={styles.radioTopLeft}>
                     <RadioGroup 
-                        onPress={() => handlePress('1 DAY', props.oneDayLabels)} 
-                        selectedId={selectedTime} 
+                        onPress={() => handlePress('1 DAY', props.oneDayLabels, 0)} 
+                        selectedId={props.selectedTime} 
                         radioButtons={[
                             {id:'1 DAY', label:'1 DAY', color:'#72BF44', 
-                                borderColor: selectedTime == '1 DAY' ? '#72BF44' : 'black'}]}
+                                borderColor: props.selectedTime == '1 DAY' ? '#72BF44' : 'black'}]}
                         layout='vertical'
                         labelStyle={styles.labels}
                         style={styles.radios}
@@ -52,11 +57,11 @@ export function GraphRadios(props) {
                 </View>
                 <View style={styles.radioTopRight}>
                     <RadioGroup 
-                        onPress={() => handlePress('7 DAYS', props.sevenDayLabels)} 
-                        selectedId={selectedTime}
+                        onPress={() => handlePress('7 DAYS', props.sevenDayLabels, 1)} 
+                        selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'7 DAYS', label:'7 DAYS', color:'#72BF44', 
-                                borderColor: selectedTime == '7 DAYS' ? '#72BF44' : 'black'}]}
+                                borderColor: props.selectedTime == '7 DAYS' ? '#72BF44' : 'black'}]}
                         layout='vertical'
                         labelStyle={styles.labels}
                         style={styles.radios}
@@ -66,11 +71,11 @@ export function GraphRadios(props) {
             <View style={{display:'flex',flexDirection:'row'}}>
                 <View style={styles.radioBottomLeft}>
                     <RadioGroup 
-                        onPress={() => handlePress('1 MONTH', props.oneMonthLabels)} 
-                        selectedId={selectedTime}
+                        onPress={() => handlePress('1 MONTH', props.oneMonthLabels, 2)} 
+                        selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'1 MONTH', label:'1 MONTH', color:'#72BF44', 
-                                borderColor: selectedTime == '1 MONTH' ? '#72BF44' : 'black'}]}
+                                borderColor: props.selectedTime == '1 MONTH' ? '#72BF44' : 'black'}]}
                         layout='vertical'
                         labelStyle={styles.labels}
                         style={styles.radios}
@@ -78,11 +83,11 @@ export function GraphRadios(props) {
                 </View>
                 <View style={styles.radioBottomRight}>
                     <RadioGroup 
-                        onPress={() => handlePress('ANNUAL', props.annualLabels)} 
-                        selectedId={selectedTime}
+                        onPress={() => handlePress('ANNUAL', props.annualLabels, 3)} 
+                        selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'ANNUAL', label:'ANNUAL', color:'#72BF44', 
-                                borderColor: selectedTime == 'ANNUAL' ? '#72BF44' : 'black'}]}
+                                borderColor: props.selectedTime == 'ANNUAL' ? '#72BF44' : 'black'}]}
                         layout='vertical'
                         labelStyle={styles.labels}
                         style={styles.radios}

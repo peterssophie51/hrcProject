@@ -9,8 +9,8 @@ export function DatatypeSelector(props) {
     const [expanded, setExpanded] = useState(false);
     const [fontLoaded, setFontLoaded] = useState(false);
     const [flowMeters, setflowMeters] = useState([
-        {meter: 'FLOW METER 1', name: 'Animals'},
-        {meter: 'FLOW METER 2', name:'Farm'},
+        {meter: 'FLOW METER 1', name: 'Animals', data: props.flowMeterOne},
+        {meter: 'FLOW METER 2', name:'Farm', data: props.flowMeterTwo},
     ])
 
     const handlePress = () => setExpanded(!expanded)
@@ -18,6 +18,15 @@ export function DatatypeSelector(props) {
     const handleDataClick = () => {
         props.setcurrentDatatypeNickname('Total Water Usage')
         props.setcurrentDatatype('')
+        if (props.selectedTime == '1 DAY') {
+            props.setcurrentData(props.totalWaterUsage[0])
+        } else if (props.selectedTime == '7 DAYS') {
+            props.setcurrentData(props.totalWaterUsage[1])
+        } else if (props.selectedTime == '1 MONTH') {
+            props.setcurrentData(props.totalWaterUsage[2])
+        } else if (props.selectedTime == 'ANNUAL') {
+            props.setcurrentData(props.totalWaterUsage[2])
+        }
     }
 
     const updateFlowMeter = (updatedFlowMeter) => {
@@ -81,7 +90,10 @@ export function DatatypeSelector(props) {
                             currentDatatype={props.currentDatatype} 
                             currentDatatypeNickname={props.currentDatatypeNickname}
                             flowMeter={flowMeters[itemIndex]}
-                            updateFlowMeter={updateFlowMeter}/>
+                            updateFlowMeter={updateFlowMeter}
+                            setcurrentData={props.setcurrentData}
+                            data ={item.data}
+                            selectedTime={props.selectedTime}/>
                     );
                 })}
                 <List.Item title="Total Water Usage" 

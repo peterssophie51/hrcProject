@@ -12,10 +12,10 @@ export function UsageChart(props) {
         <View style={styles.container}>
             <LineChart 
                 style={{zIndex:0}}
-                data = {data} 
+                data = {props.currentData} 
                 width={Dimensions.get('window').width * 0.75} 
                 height={Dimensions.get('window').height * 0.35}
-                maxValue={Math.max(...data.map(item => item.value)) * 1.1} 
+                maxValue={Math.max(...props.currentData.map(item => item.value)) * 1.1} 
                 noOfSections={12} 
                 initialSpacing={0}
                 yAxisTextStyle={{fontSize:12}} 

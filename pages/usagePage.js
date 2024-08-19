@@ -44,6 +44,7 @@ export function UsagePage ({ navagation }) {
   const [currentLabels, setcurrentLabels] = useState(oneDayLabels)
   const [currentDatatypeNickname, setcurrentDatatypeNickname] =useState('Total Water Usage')
   const [currentDatatype, setcurrentDatatype] = useState('')
+  const [selectedTime, setselectedTime] = useState('1 DAY')
 
     return (
       <View style={styles.page}>
@@ -66,14 +67,26 @@ export function UsagePage ({ navagation }) {
             currentDatatypeNickname={currentDatatypeNickname} 
             setcurrentDatatypeNickname={setcurrentDatatypeNickname}
             currentDatatype={currentDatatype}
-            setcurrentDatatype={setcurrentDatatype}/>
-          <UsageChart currentLabels={currentLabels}/>
+            setcurrentDatatype={setcurrentDatatype}
+            setcurrentData={setcurrentData}
+            totalWaterUsage={totalWaterUsage}
+            flowMeterOne={flowMeterOne}
+            flowMeterTwo={flowMeterTwo}
+            selectedTime={selectedTime}/>
+          <UsageChart currentLabels={currentLabels} currentData={currentData}/>
           <GraphRadios 
+            selectedTime={selectedTime}
+            setselectedTime={setselectedTime}
             setcurrentLabels={setcurrentLabels}
             oneDayLabels={oneDayLabels} 
             sevenDayLabels={sevenDayLabels} 
             oneMonthLabels={oneMonthLabels} 
-            annualLabels={annualLabels}/>
+            annualLabels={annualLabels}
+            setcurrentData={setcurrentData}
+            currentDatatype={currentDatatype}
+            totalWaterUsage={totalWaterUsage}
+            flowMeterOne={flowMeterOne}
+            flowMeterTwo={flowMeterTwo}/>
           <View style={{height: 20}}></View>
         </ScrollView>
       </View>

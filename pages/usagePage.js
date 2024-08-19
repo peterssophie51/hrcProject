@@ -42,6 +42,8 @@ export function UsagePage ({ navagation }) {
 
   const [currentData, setcurrentData] = useState(totalWaterUsage[0])
   const [currentLabels, setcurrentLabels] = useState(oneDayLabels)
+  const [currentDatatypeNickname, setcurrentDatatypeNickname] =useState('Total Water Usage')
+  const [currentDatatype, setcurrentDatatype] = useState('')
 
     return (
       <View style={styles.page}>
@@ -60,9 +62,14 @@ export function UsagePage ({ navagation }) {
               { label: "Proportional", value: 'proportional', activeColor:'#72BF44' },
             ]} action={settype}
           />
-          <DatatypeSelector/>
+          <DatatypeSelector 
+            currentDatatypeNickname={currentDatatypeNickname} 
+            setcurrentDatatypeNickname={setcurrentDatatypeNickname}
+            currentDatatype={currentDatatype}
+            setcurrentDatatype={setcurrentDatatype}/>
           <UsageChart/>
-          <GraphRadios />
+          <GraphRadios setcurrentLabels={setcurrentLabels}
+            oneDayLabels={oneDayLabels} sevenDayLabels={sevenDayLabels} oneMonthLabels={oneMonthLabels} annualLabels={annualLabels}/>
         </ScrollView>
       </View>
     )

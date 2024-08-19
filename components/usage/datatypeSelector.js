@@ -5,11 +5,9 @@ import { DatatypeItem } from "./datatypeItem";
 import { useEffect } from "react";
 import * as Font from 'expo-font'
 
-export function DatatypeSelector() {
+export function DatatypeSelector(props) {
     const [expanded, setExpanded] = useState(false);
     const [fontLoaded, setFontLoaded] = useState(false);
-    const [currentDatatypeNickname, setcurrentDatatypeNickname] =useState('Total Water Usage')
-    const [currentDatatype, setcurrentDataype] = useState('')
     const [flowMeters, setflowMeters] = useState([
         {meter: 'FLOW METER 1', name: 'Animals'},
         {meter: 'FLOW METER 2', name:'Farm'},
@@ -18,8 +16,8 @@ export function DatatypeSelector() {
     const handlePress = () => setExpanded(!expanded)
 
     const handleDataClick = () => {
-        setcurrentDatatypeNickname('Total Water Usage')
-        setcurrentDataype('')
+        props.setcurrentDatatypeNickname('Total Water Usage')
+        props.setcurrentDatatype('')
     }
 
     const updateFlowMeter = (updatedFlowMeter) => {
@@ -54,8 +52,8 @@ export function DatatypeSelector() {
     return (
         <View style={[styles.container]}>
             <List.Accordion
-                title={currentDatatypeNickname}
-                description={currentDatatype}
+                title={props.currentDatatypeNickname}
+                description={props.currentDatatype}
                 titleStyle={{fontSize:22, fontFamily:'CalibriBold', color:'black'}}
                 descriptionStyle={{fontSize:16, fontFamily: 'Calibri', color:'black'}}
                 expanded={expanded}
@@ -78,10 +76,10 @@ export function DatatypeSelector() {
                         <DatatypeItem 
                             key={item.meter}
                             description={item.meter} 
-                            setcurrentDatatypeNickname={setcurrentDatatypeNickname} 
-                            setcurrentDatatype={setcurrentDataype}
-                            currentDatatype={currentDatatype} 
-                            currentDatatypeNickname={currentDatatypeNickname}
+                            setcurrentDatatypeNickname={props.setcurrentDatatypeNickname} 
+                            setcurrentDatatype={props. setcurrentDatatype}
+                            currentDatatype={props.currentDatatype} 
+                            currentDatatypeNickname={props.currentDatatypeNickname}
                             flowMeter={flowMeters[itemIndex]}
                             updateFlowMeter={updateFlowMeter}/>
                     );
@@ -89,7 +87,7 @@ export function DatatypeSelector() {
                 <List.Item title="Total Water Usage" 
                     onPress={handleDataClick}
                     titleStyle={{fontFamily:'Calibri', fontSize:18, 
-                        color: currentDatatypeNickname == 'Total Water Usage' ? '#72BF44' : 'black'}}
+                        color: props.currentDatatypeNickname == 'Total Water Usage' ? '#72BF44' : 'black'}}
                     style={{
                         width: Dimensions.get('window').width * 0.9,
                         marginLeft: Dimensions.get('window').width * 0.05,

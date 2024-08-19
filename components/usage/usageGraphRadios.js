@@ -30,13 +30,17 @@ export function GraphRadios(props) {
         return null; 
     }
 
+    const handlePress = (name, labels) => {
+        setselectedTime(name);
+        props.setcurrentLabels(labels)
+    }
 
     return (
         <View style={styles.container}>
             <View style={{display:'flex', flexDirection:'row'}}>
                 <View style={styles.radioTopLeft}>
                     <RadioGroup 
-                        onPress={() => setselectedTime('1 DAY')} 
+                        onPress={() => handlePress('1 DAY', props.oneDayLabels)} 
                         selectedId={selectedTime} 
                         radioButtons={[
                             {id:'1 DAY', label:'1 DAY', color:'#72BF44', 
@@ -48,7 +52,7 @@ export function GraphRadios(props) {
                 </View>
                 <View style={styles.radioTopRight}>
                     <RadioGroup 
-                        onPress={() => setselectedTime('7 DAYS')} 
+                        onPress={() => handlePress('7 DAYS', props.sevenDaysLabels)} 
                         selectedId={selectedTime}
                         radioButtons={[
                             {id:'7 DAYS', label:'7 DAYS', color:'#72BF44', 
@@ -62,7 +66,7 @@ export function GraphRadios(props) {
             <View style={{display:'flex',flexDirection:'row'}}>
                 <View style={styles.radioBottomLeft}>
                     <RadioGroup 
-                        onPress={() => setselectedTime('1 MONTH')} 
+                        onPress={() => handlePress('1 MONTH', props.oneMonthLabels)} 
                         selectedId={selectedTime}
                         radioButtons={[
                             {id:'1 MONTH', label:'1 MONTH', color:'#72BF44', 
@@ -74,7 +78,7 @@ export function GraphRadios(props) {
                 </View>
                 <View style={styles.radioBottomRight}>
                     <RadioGroup 
-                        onPress={() => setselectedTime('ANNUAL')} 
+                        onPress={() => handlePress('ANNUAL', props.annualLabels)} 
                         selectedId={selectedTime}
                         radioButtons={[
                             {id:'ANNUAL', label:'ANNUAL', color:'#72BF44', 

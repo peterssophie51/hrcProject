@@ -45,8 +45,10 @@ export function UsageChart(props) {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: Dimensions.get('window').width * 0.05, 
+        marginTop: (Dimensions.get('window').width * 0.1) + (Dimensions.get('window').height * 0.11), 
         marginLeft:Dimensions.get('window').width *0.04, 
+        zIndex: 0,
+
     },
     axis: {
         fontSize: 12

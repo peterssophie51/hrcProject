@@ -52,6 +52,7 @@ export function DatatypeSelector() {
     }
 
     return (
+        <View style={[styles.container]}>
             <List.Accordion
                 title={currentDatatypeNickname}
                 description={currentDatatype}
@@ -94,8 +95,10 @@ export function DatatypeSelector() {
                         marginLeft: Dimensions.get('window').width * 0.05,
                         borderBottomLeftRadius:20, 
                         borderBottomRightRadius:20, 
+                        zIndex: 2,
                         backgroundColor:'#eeeeee'}}/>
             </List.Accordion>
+        </View>
     );
 }
 
@@ -104,8 +107,16 @@ const styles = StyleSheet.create({
         borderTopLeftRadius:20, 
         borderTopRightRadius:20, 
         backgroundColor:'#eeeeee', 
+        alignContent: 'center',
+        justifyContent: 'center',
         width: Dimensions.get('window').width * 0.9,
+        height: Dimensions.get('window').height * 0.11,
         marginLeft: Dimensions.get('window').width * 0.05,
         marginTop: Dimensions.get('window').width * 0.05,
+        zIndex: 2
+    },
+    container: {
+        top: (Dimensions.get('window').height * 0.39) + (Dimensions.get('window').width * 0.05),
+        position:'absolute'
     }
 })

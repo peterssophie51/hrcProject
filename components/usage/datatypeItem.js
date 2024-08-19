@@ -56,7 +56,7 @@ export function DatatypeItem(props) {
     }
 
     return (
-        <View>
+        <View style={{zIndex:2}}>
             <List.Item 
                 title={props.flowMeter['name']} 
                 titleStyle={{fontFamily:'Calibri', fontSize:18, 
@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
         backgroundColor:'#eeeeee',
         width: Dimensions.get('window').width * 0.9,
         marginLeft: Dimensions.get('window').width * 0.05,
-        zIndex: 1
     },
     editButton: {
         height: Dimensions.get('window').width  * 0.068, 

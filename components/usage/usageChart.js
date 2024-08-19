@@ -7,6 +7,7 @@ export function UsageChart(props) {
     {value: 24}, {value: 37}, {value: 42}, {value: 8}, 
     {value: 11}, {value: 56}, {value: 49}, {value: 71}]
 
+
     return(
         <View style={styles.container}>
             <LineChart 
@@ -17,9 +18,9 @@ export function UsageChart(props) {
                 maxValue={Math.max(...data.map(item => item.value)) * 1.1} 
                 noOfSections={12} 
                 initialSpacing={0}
-                yAxisTextStyle={styles.axis} 
-                //xAxisLabelTexts={props.currentLabels}
-                //xAxisLabelTextStyle={styles.axis}
+                yAxisTextStyle={{fontSize:12}} 
+                xAxisLabelTexts={props.currentLabels}
+                xAxisLabelTextStyle={styles.xaxis}
                 color={'#00A7CF'} 
                 thickness={3}
                 showVerticalLines 
@@ -50,7 +51,8 @@ const styles = StyleSheet.create({
         zIndex: 0,
 
     },
-    axis: {
-        fontSize: 12
+    xaxis: {
+        fontSize: 12,
+        marginLeft:20
     }
 })

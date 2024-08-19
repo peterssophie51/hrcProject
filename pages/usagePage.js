@@ -67,9 +67,14 @@ export function UsagePage ({ navagation }) {
             setcurrentDatatypeNickname={setcurrentDatatypeNickname}
             currentDatatype={currentDatatype}
             setcurrentDatatype={setcurrentDatatype}/>
-          <UsageChart/>
-          <GraphRadios setcurrentLabels={setcurrentLabels}
-            oneDayLabels={oneDayLabels} sevenDayLabels={sevenDayLabels} oneMonthLabels={oneMonthLabels} annualLabels={annualLabels}/>
+          <UsageChart currentLabels={currentLabels}/>
+          <GraphRadios 
+            setcurrentLabels={setcurrentLabels}
+            oneDayLabels={oneDayLabels} 
+            sevenDayLabels={sevenDayLabels} 
+            oneMonthLabels={oneMonthLabels} 
+            annualLabels={annualLabels}/>
+          <View style={{height: 20}}></View>
         </ScrollView>
       </View>
     )

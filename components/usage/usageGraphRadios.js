@@ -52,7 +52,7 @@ export function GraphRadios(props) {
                 </View>
                 <View style={styles.radioTopRight}>
                     <RadioGroup 
-                        onPress={() => handlePress('7 DAYS', props.sevenDaysLabels)} 
+                        onPress={() => handlePress('7 DAYS', props.sevenDayLabels)} 
                         selectedId={selectedTime}
                         radioButtons={[
                             {id:'7 DAYS', label:'7 DAYS', color:'#72BF44', 
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: '#eeeeee',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     labels: {
         fontSize:25, 

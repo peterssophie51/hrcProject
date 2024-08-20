@@ -20,7 +20,6 @@ export function UsagePage ({ navagation }) {
   //I1= seven days 
   //I2= one month 
   //I3=annual
-  const totalWaterUsage =[[], [], [], []]
 
   const [flowMeters, setflowMeters] = useState([{name:'FLOW METER 1', nickname:'Animals', data:[
     [{value: 60}, {value: 21}, {value: 43}], 
@@ -36,22 +35,25 @@ export function UsagePage ({ navagation }) {
       [{value:220}, {value: 319}, {value: 72}], 
       [{value:121}, {value:344}, {value:226}], 
       [{value:521}, {value:839}, {value:1223}], 
-      [{value:1432}, {value:2032}, {value:1231}]] }
+      [{value:1432}, {value:2032}, {value:1231}]] },
+      
   ])
 
-  flowMeters.forEach((flowMeter) => {
-    flowMeter.data.forEach((row, rowIndex) => {
-      row.forEach((item, columnIndex) => {
-        if (!totalWaterUsage[rowIndex]) {
-          totalWaterUsage[rowIndex] = [];
+  const totalWaterUsage = flowMeters.reduce((acc, flowMeter) => {
+    flowMeter.data.forEach((currentArray, i) => {
+      currentArray.forEach((item, index) => {
+        if (acc[i] && acc[i][index]) {
+          acc[i][index].value += item.value;
+        } else {
+          if (!acc[i]) acc[i] = [];
+          acc[i][index] = { value: item.value };
         }
-        if (!totalWaterUsage[rowIndex][columnIndex]) {
-          totalWaterUsage[rowIndex][columnIndex] = 0;
-        }
-        totals[rowIndex][columnIndex] += item.value;
       });
     });
-  });
+    return acc;
+  }, []);
+  
+  
   
   const oneDayLabels = ['00:00', '02:00', '04:00'] 
   const sevenDayLabels = ['MON', 'TUE', 'WED'] 

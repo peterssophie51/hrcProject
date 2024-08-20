@@ -3,10 +3,6 @@ import { LineChart } from "react-native-gifted-charts";
 import { Dimensions, View, StyleSheet, Text, Alert } from "react-native";
 
 export function UsageChart(props) {
-    const data = [{value: 70}, {value: 45}, {value: 50}, {value: 61},
-    {value: 24}, {value: 37}, {value: 42}, {value: 8}, 
-    {value: 11}, {value: 56}, {value: 49}, {value: 71}]
-
 
     return(
         <View style={styles.container}>

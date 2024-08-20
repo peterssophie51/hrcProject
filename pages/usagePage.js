@@ -21,16 +21,6 @@ export function UsagePage ({ navagation }) {
   //I2= one month 
   //I3=annual
   const totalWaterUsage =[[], [], [], []]
-  const flowMeterOne = [
-    [{value: 60}, {value: 21}, {value: 43}], 
-    [{value:109}, {value:98}, {value:131}], 
-    [{value:289}, {value:398}, {value:403}], 
-    [{value:862}, {value:987}, {value:1079}]]
-  const flowMeterTwo = [
-    [{value:20}, {value: 39}, {value: 7}], 
-    [{value:11}, {value:34}, {value:26}], 
-    [{value:51}, {value:89}, {value:123}], 
-    [{value:142}, {value:202}, {value:121}]]
 
   const [flowMeters, setflowMeters] = useState([{name:'FLOW METER 1', nickname:'Animals', data:[
     [{value: 60}, {value: 21}, {value: 43}], 
@@ -49,11 +39,19 @@ export function UsagePage ({ navagation }) {
       [{value:1432}, {value:2032}, {value:1231}]] }
   ])
 
-  flowMeterOne.map((datatype, datatypeIndex) => (
-    datatype.map((value, valueIndex) => (
-        totalWaterUsage[datatypeIndex].push({value: 
-          flowMeterOne[datatypeIndex][valueIndex]['value'] + flowMeterTwo[datatypeIndex][valueIndex]['value']})
-      ))))
+  flowMeters.forEach((flowMeter) => {
+    flowMeter.data.forEach((row, rowIndex) => {
+      row.forEach((item, columnIndex) => {
+        if (!totalWaterUsage[rowIndex]) {
+          totalWaterUsage[rowIndex] = [];
+        }
+        if (!totalWaterUsage[rowIndex][columnIndex]) {
+          totalWaterUsage[rowIndex][columnIndex] = 0;
+        }
+        totals[rowIndex][columnIndex] += item.value;
+      });
+    });
+  });
   
   const oneDayLabels = ['00:00', '02:00', '04:00'] 
   const sevenDayLabels = ['MON', 'TUE', 'WED'] 

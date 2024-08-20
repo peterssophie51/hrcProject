@@ -8,12 +8,11 @@ import * as Font from 'expo-font'
 export function DatatypeSelector(props) {
     const [expanded, setExpanded] = useState(false);
     const [fontLoaded, setFontLoaded] = useState(false);
-    const [flowMeters, setflowMeters] = useState([
-        {meter: 'FLOW METER 1', name: 'Animals', data: props.flowMeterOne},
-        {meter: 'FLOW METER 2', name:'Farm', data: props.flowMeterTwo},
-    ])
 
-    const handlePress = () => setExpanded(!expanded)
+    const handlePress = () => {
+        setExpanded(!expanded)
+        console.log(props.flowMeters)
+    }
 
     const handleDataClick = () => {
         props.setcurrentDatatypeNickname('Total Water Usage')
@@ -30,10 +29,17 @@ export function DatatypeSelector(props) {
     }
 
     const updateFlowMeter = (updatedFlowMeter) => {
-        const updatedFlowMeters = flowMeters.map((flowMeter) =>
-            flowMeter.meter === updatedFlowMeter.meter ? updatedFlowMeter : flowMeter
-        );
-        setflowMeters(updatedFlowMeters);
+        const updatedFlowMeters =[]
+        props.flowMeters.map((flowMeter, index) => {
+            if (flowMeter['name'] == updatedFlowMeter.name) {
+                flowMeter['nickname'] = updatedFlowMeter['nickname']
+                updatedFlowMeters.push(flowMeter)
+            } else {
+                console.log(flowMeter)
+                updatedFlowMeters.push(flowMeter)
+            }
+        })
+        props.setflowMeters(updatedFlowMeters);
     };
 
     //function to load in calibri bold and calibri font
@@ -80,19 +86,19 @@ export function DatatypeSelector(props) {
                   )}
                 style={[styles.accordion, {borderBottomLeftRadius: (expanded == true) ? 0 : 20,
                     borderBottomRightRadius: (expanded == true) ? 0 : 20,}]}>
-                {flowMeters.map((item, itemIndex) => { 
-                    return (
+                {props.flowMeters.map((item, itemIndex) => { 
+                    return ( 
                         <DatatypeItem 
                             key={item.meter}
-                            description={item.meter} 
+                            description={item.name} 
                             setcurrentDatatypeNickname={props.setcurrentDatatypeNickname} 
                             setcurrentDatatype={props. setcurrentDatatype}
                             currentDatatype={props.currentDatatype} 
                             currentDatatypeNickname={props.currentDatatypeNickname}
-                            flowMeter={flowMeters[itemIndex]}
+                            flowMeter={props.flowMeters[itemIndex]}
                             updateFlowMeter={updateFlowMeter}
                             setcurrentData={props.setcurrentData}
-                            data ={item.data}
+                            data ={item['data']}
                             selectedTime={props.selectedTime}/>
                     );
                 })}

@@ -32,17 +32,22 @@ export function UsagePage ({ navagation }) {
     [{value:51}, {value:89}, {value:123}], 
     [{value:142}, {value:202}, {value:121}]]
 
-  const flowMeters = [{name:'FLOW METER 1', data:[
+  const [flowMeters, setflowMeters] = useState([{name:'FLOW METER 1', nickname:'Animals', data:[
     [{value: 60}, {value: 21}, {value: 43}], 
     [{value:109}, {value:98}, {value:131}], 
     [{value:289}, {value:398}, {value:403}], 
     [{value:862}, {value:987}, {value:1079}]]},
-                      {name: 'FLOW METER 2', data:[
+                      {name: 'FLOW METER 2', nickname: 'Farm', data:[
     [{value:20}, {value: 39}, {value: 7}], 
     [{value:11}, {value:34}, {value:26}], 
     [{value:51}, {value:89}, {value:123}], 
-    [{value:142}, {value:202}, {value:121}]] }
-  ]
+    [{value:142}, {value:202}, {value:121}]] },
+    {name: 'FLOW METER 3', nickname: 'asd', data:[
+      [{value:220}, {value: 319}, {value: 72}], 
+      [{value:121}, {value:344}, {value:226}], 
+      [{value:521}, {value:839}, {value:1223}], 
+      [{value:1432}, {value:2032}, {value:1231}]] }
+  ])
 
   flowMeterOne.map((datatype, datatypeIndex) => (
     datatype.map((value, valueIndex) => (
@@ -57,8 +62,10 @@ export function UsagePage ({ navagation }) {
 
   const [currentData, setcurrentData] = useState(totalWaterUsage[0])
   const [currentLabels, setcurrentLabels] = useState(oneDayLabels)
+
   const [currentDatatypeNickname, setcurrentDatatypeNickname] =useState('Total Water Usage')
   const [currentDatatype, setcurrentDatatype] = useState('')
+
   const [selectedTime, setselectedTime] = useState('1 DAY')
 
     return (
@@ -85,10 +92,9 @@ export function UsagePage ({ navagation }) {
             setcurrentDatatype={setcurrentDatatype}
             setcurrentData={setcurrentData}
             totalWaterUsage={totalWaterUsage}
-            flow
-            flowMeterOne={flowMeterOne}
-            flowMeterTwo={flowMeterTwo}
-            selectedTime={selectedTime}/>
+            flowMeters={flowMeters}
+            selectedTime={selectedTime}
+            setflowMeters={setflowMeters}/>
           <UsageChart currentLabels={currentLabels} currentData={currentData}/>
           <GraphRadios 
             selectedTime={selectedTime}
@@ -101,7 +107,8 @@ export function UsagePage ({ navagation }) {
             setcurrentData={setcurrentData}
             currentDatatype={currentDatatype}
             totalWaterUsage={totalWaterUsage}
-            flowMeters={flowMeters}/>
+            flowMeters={flowMeters}
+            setflowMeters={setflowMeters}/>
           <View style={{height: 20}}></View>
         </ScrollView>
       </View>

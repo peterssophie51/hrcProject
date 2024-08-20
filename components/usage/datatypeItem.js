@@ -12,8 +12,9 @@ export function DatatypeItem(props) {
     const [name, setname] = useState('')
     
     const handlePress = () => {
-        props.setcurrentDatatypeNickname(props.flowMeter['name']); 
+        props.setcurrentDatatypeNickname(props.flowMeter['nickname']); 
         props.setcurrentDatatype(props.description)
+        
         if (props.selectedTime == '1 DAY') {
             props.setcurrentData(props.data[0])
         } else if (props.selectedTime == '7 DAYS') {
@@ -31,8 +32,9 @@ export function DatatypeItem(props) {
 
     const handleSubmit = () => {
         setvisibility(false)
-        const updatedFlowMeter = { ...props.flowMeter, name };
+        const updatedFlowMeter = { ...props.flowMeters, name:props.description, nickname:name };
         props.updateFlowMeter(updatedFlowMeter)
+        
         if (props.description == props.currentDatatype) {
             props.setcurrentDatatypeNickname(name)
         }
@@ -67,7 +69,7 @@ export function DatatypeItem(props) {
     return (
         <View style={{zIndex:2}}>
             <List.Item 
-                title={props.flowMeter['name']} 
+                title={props.flowMeter['nickname']} 
                 titleStyle={{fontFamily:'Calibri', fontSize:18, 
                     color:props.currentDatatype === props.description ? '#72BF44': 'black'}}
                 descriptionStyle={{fontFamily:'Calibri', fontSize:15, 

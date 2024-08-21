@@ -1,6 +1,7 @@
 import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
 import { ContactCard } from '../components/faq/contactCard.js';
+import { FAQCard } from '../components/faq/faqCard.js';
 
 export function FAQPage ({ navagation }) {
   const contacts = ['Horizons website', 'Horizons phone number', 'Horizons fax', 'Horizons email']
@@ -16,6 +17,7 @@ export function FAQPage ({ navagation }) {
           })
           }
           <CalibriBoldText style={styles.subtitle} title="FAQ"/>
+            <FAQCard question='Question asjadasjsahgaajdsasdsaajsasajsasdghasdjg' answer='Answer'/>
         </ScrollView>
       </View>
     )

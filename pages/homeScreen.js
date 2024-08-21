@@ -8,7 +8,7 @@ import { RiverFlow } from '../components/home/riverFlow';
 import { Switch } from '../components/switch';
 
 export function HomeScreen( {navagation, navigation}) {
-  const [graphTime, setgraphTime] = useState('day') //text for center of circular progress chart
+  const [graphTime, setgraphTime] = useState('annual') //text for center of circular progress chart
   const [take, settake] = useState(true) //whether water can be taken or not
 
     return (

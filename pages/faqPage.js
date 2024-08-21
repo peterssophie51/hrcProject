@@ -1,12 +1,13 @@
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
-import { RestrictionInfo } from '../components/consents/restrictionInfo.js';
+import { ContactCard } from '../components/faq/contactCard.js';
 
 export function FAQPage ({ navagation }) {
     return (
       <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height * 2, backgroundColor:'white', flex:1}}>
         <CalibriBoldText style={styles.title} title="FAQ" />
         <CalibriBoldText style={styles.subtitle} title="Contacts"/>
+          <ContactCard/>
         <CalibriBoldText style={styles.subtitle} title="FAQ"/>
       </View>
     )

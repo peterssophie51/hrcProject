@@ -17,7 +17,7 @@ export function FAQPage ({ navagation }) {
           })
           }
           <CalibriBoldText style={styles.subtitle} title="FAQ"/>
-            <FAQCard question='Question asjadasjsahgaajdsasdsaajsasajsasdghasdjg' answer='Answer'/>
+            <FAQCard question='Question' answer='Answer'/>
         </ScrollView>
       </View>
     )

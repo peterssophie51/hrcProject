@@ -19,10 +19,12 @@ export function FAQCard(props) {
                     {borderBottomLeftRadius:20, borderBottomRightRadius:20}]}
             left={() => <View style={{width:Dimensions.get('window').width * 0.7, alignContent:'center'}}><CalibriBoldText title={props.question} style={styles.question}/></View>}
             right={() => (
+                <View style={{flex:1, justifyContent: 'center'}}>
                     <Image
                     source={expanded ? require('../../images/dropUpBlack.png') : require('../../images/dropDownBlack.png')}
                     style={styles.arrow}
                     />
+                </View>
               )}>
             <List.Item 
                 left={() => <CalibriText title={props.answer} style={styles.answer}/>} 

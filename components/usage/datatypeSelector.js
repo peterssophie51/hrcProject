@@ -11,7 +11,7 @@ export function DatatypeSelector(props) {
 
     const handlePress = () => {
         setExpanded(!expanded)
-        console.log(props.flowMeters)
+     
     }
 
     const handleDataClick = () => {

@@ -6,7 +6,7 @@ import { CalibriText } from "../fonts/calibriFont";
 export function ContactCard(props) {
     return(
         <View style={styles.container}>
-            <CalibriBoldText title="Horizons Website" style={styles.contacts}/>
+            <CalibriBoldText title={props.title} style={styles.contacts}/>
         </View>
     )
 }
@@ -14,7 +14,8 @@ export function ContactCard(props) {
 const styles = StyleSheet.create({
     container: {
         width: Dimensions.get('window').width * 0.9,
-        margin: Dimensions.get('window').width * 0.05,
+        marginLeft: Dimensions.get('window').width * 0.05,
+        marginTop: Dimensions.get('window').height * 0.02,
         backgroundColor: '#eeeeee',
         borderRadius: 20
     },

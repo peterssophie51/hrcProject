@@ -2,22 +2,21 @@ import React, { useState } from "react";
 import { LineChart } from "react-native-gifted-charts";
 import { Dimensions, View, StyleSheet, Text, Alert } from "react-native";
 
-export function RiverFlowChart(props) {
-    const data = props.currentData
+export function UsageChart(props) {
 
     return(
         <View style={styles.container}>
             <LineChart 
                 style={{zIndex:0}}
-                data = {data} 
+                data = {props.currentData} 
                 width={Dimensions.get('window').width * 0.75} 
                 height={Dimensions.get('window').height * 0.35}
-                maxValue={Math.max(...data.map(item => item.value)) * 1.1} 
+                maxValue={Math.max(...props.currentData.map(item => item.value)) * 1.1} 
                 noOfSections={12} 
                 initialSpacing={0}
-                yAxisTextStyle={styles.axis} 
+                yAxisTextStyle={{fontSize:12}} 
                 xAxisLabelTexts={props.currentLabels}
-                xAxisLabelTextStyle={styles.axis}
+                xAxisLabelTextStyle={styles.xaxis}
                 color={'#00A7CF'} 
                 thickness={3}
                 showVerticalLines 
@@ -43,10 +42,13 @@ export function RiverFlowChart(props) {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: Dimensions.get('window').width * 0.05, 
+        marginTop: (Dimensions.get('window').width * 0.1) + (Dimensions.get('window').height * 0.11), 
         marginLeft:Dimensions.get('window').width *0.04, 
+        zIndex: 0,
+
     },
-    axis: {
-        fontSize: 12
+    xaxis: {
+        fontSize: 12,
+        marginLeft:20
     }
 })

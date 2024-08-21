@@ -9,14 +9,14 @@ export function RiverFlowTitle(props) {
     return(
         <View style={styles.container}>
             <View style={styles.titleContainer}>
-                <CalibriBoldText title="RIVER" style={styles.title}/> {/*river flow data title*/}
+                <CalibriBoldText title="RIVER" style={styles.title}/> 
                 <CalibriBoldText title="FLOW" style={styles.title}/>
             </View>
             <View style={styles.value}>
-                <CalibriBoldText title={props.riverFlow} style={styles.flow}/> {/*river flow data*/}
-                    <CalibriBoldText style={styles.units} title='M'/> {/*units*/}
-                        <CalibriBoldText style={styles.superscript} title='3'/> {/*superscript*/}
-                    <CalibriBoldText style={styles.units} title='/S'/> {/*units*/}
+                <CalibriBoldText title={props.riverFlow} style={styles.flow}/> 
+                    <CalibriBoldText style={styles.units} title='M'/> 
+                        <CalibriBoldText style={styles.superscript} title='3'/> 
+                    <CalibriBoldText style={styles.units} title='/S'/> 
             </View>
         </View>
     )

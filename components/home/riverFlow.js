@@ -11,12 +11,12 @@ export function RiverFlow(props) {
     const timePeriodText = 'Last Recorded at ' + timePeriod
     
     function roundNumber(num, roundTo) {
-        if (Number.isInteger(num) == false) {  //function that rounds numbers to desired d.p.
+        if (Number.isInteger(num) == false) {  
           return num.toFixed(roundTo)
         } else {
           return num
         }
-    }
+    } 
 
     return(
         <View style={styles.container}> 

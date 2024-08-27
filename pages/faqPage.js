@@ -4,7 +4,33 @@ import { ContactCard } from '../components/faq/contactCard.js';
 import { FAQCard } from '../components/faq/faqCard.js';
 
 export function FAQPage ({ navagation }) {
-  const contacts = ['Horizons website', 'Horizons phone number', 'Horizons fax', 'Horizons email']
+  const contacts = [
+    {
+      key: 0,
+      name: 'Horizons website',
+      method: 'https',
+      link: 'www.horizons.govt.nz//'
+    },
+    {
+      key: 1,
+      name: 'Horizons phone number',
+      method: 'sms',
+      link:'+64 6 9522 800'
+    },
+    {
+      key: 2,
+      name: 'Horizons fax',
+      //method:
+      //link:
+    },
+    {
+      key: 3,
+      name: 'Horizons email',
+      method:'mailto',
+      link: 'help@horizons.govt.nz'
+    }
+  ]
+  
   const faq = [
     {   
       key: 0, 
@@ -18,14 +44,15 @@ export function FAQPage ({ navagation }) {
     }
   
   ]
+
     return (
       <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height * 2, backgroundColor:'white', flex:1}}>
         <CalibriBoldText style={styles.title} title="FAQ" />
         <ScrollView>
           <CalibriBoldText style={styles.subtitle} title="Contacts"/>
           {contacts.map((item, index) => {
-            return(
-              <ContactCard key={item} title={item}/>
+            return (
+              <ContactCard key={item.key} title={item.name} method={item.method} link={item.link}/>
             )
           })
           }

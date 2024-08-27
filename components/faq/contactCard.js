@@ -1,14 +1,27 @@
 import React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, TouchableOpacity, Linking } from "react-native";
 import { CalibriBoldText } from "../fonts/calibriBoldFont";
-import { CalibriText } from "../fonts/calibriFont";
 
 export function ContactCard(props) {
-    return(
+
+    const handlePress = async () => {
+        const url = `${props.method}:${props.link}`;
+        const supported = await Linking.canOpenURL(url);
+
+        if (supported) {
+            await Linking.openURL(url);
+        } else {
+            console.log(`Cannot open this URL: ${url}`);
+        }
+    };
+    
+    return (
         <View style={styles.container}>
-            <CalibriBoldText title={props.title} style={styles.contacts}/>
+            <TouchableOpacity onPress={handlePress}>
+                <CalibriBoldText title={props.title} style={styles.contacts} />
+            </TouchableOpacity>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -23,4 +36,4 @@ const styles = StyleSheet.create({
         fontSize: 25,
         margin: Dimensions.get('window').width * 0.05
     }
-})
+});

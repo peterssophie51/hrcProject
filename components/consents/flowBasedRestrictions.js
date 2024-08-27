@@ -29,7 +29,7 @@ export function FlowbasedRestriction() {
             annualRestriction: ''
         },
         {
-            id: 1,
+            id: 2,
             restriction:'TWO', 
             flowAtRestriction: 11.100, 
             instaneous: '', 
@@ -77,6 +77,7 @@ export function FlowbasedRestriction() {
                     }
                     return (
                         <RestrictionInfo 
+                            key={item.id}
                             restrictionTitle={'FLOW BASED RESTRICTION: '} 
                             restriction={item.restriction} 
                             visible={itemIndex === maxIndex || (itemIndex === maxIndex - 1 && index === maxIndex)} 

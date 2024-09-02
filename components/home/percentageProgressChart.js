@@ -13,8 +13,8 @@ export function ProgressChart(props) {
       }
   }
 
-  const abstracted = 33.2 //amount abstracted in time period
-  const max = 51.7 //max for time period
+  const abstracted = 11.3 //amount abstracted in time period
+  const max = 58.11 //max for time period
   const percentage = ((abstracted/max) * 100) //percentage use
   const data = [{value: percentage, color:'#00A7CF'}, {value: 100-percentage, color:'#95C6DD'}];  //values for pie chart
   const screenWidth = Dimensions.get('window').width

@@ -10,9 +10,9 @@ import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 
 export function UsagePage ({ navagation }) {
   const dataCollected = '20:00 (NZST) June 14th 2024'
-  const dailyData= [{ key: 'Flow One', usage: 60}, {key:'Flow Two', usage: 40}, {key:'Flow Three', usage: 55}]
+  const dailyData= [{ key: 'Flow One', usage: 40}, {key:'Flow Two', usage: 30}, {key:'Flow Three', usage: 20}]
+  const dailyMax = 100
   const [type, settype] = useState('totalled')
-  const dailyMax = 200
   const annualData = [{key: 'Flow One', usage: 100}, {key: 'Flow Two', usage: 100}, {key:'Flow Three', usage: 200}]
   const annualMax = 700
 
@@ -36,6 +36,7 @@ export function UsagePage ({ navagation }) {
       [{value:121}, {value:344}, {value:226}], 
       [{value:521}, {value:839}, {value:1223}], 
       [{value:1432}, {value:2032}, {value:1231}]] },
+      
       
   ])
 

@@ -13,6 +13,9 @@ export function ConsentDropdownHeader(props) {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
+  //variables
+  const [consents, setconsents] = useState([{ath:'ATH-2002009085'}, {ath:'ATH-2002008648'}, {ath:'ATH-2002009348'}])
+
   //change variable when header expanded/minimised
   const handlePress = () => setExpanded(!expanded);
 
@@ -69,24 +72,17 @@ export function ConsentDropdownHeader(props) {
         )}
       >
         {/*all different consents*/}
-        <ConsentDropdownItem
-          description="ATH-2002009085"
-          currentConsentATH={currentConsentATH}
-          setcurrentConsent={setCurrentConsent}
-          setcurrentConsentATH={setCurrentConsentATH}
-        />
-        <ConsentDropdownItem
-          description="ATH-2002008648"
-          currentConsentATH={currentConsentATH}
-          setcurrentConsent={setCurrentConsent}
-          setcurrentConsentATH={setCurrentConsentATH}
-        />
-        <ConsentDropdownItem
-          description="ATH-2002009348"
-          currentConsentATH={currentConsentATH}
-          setcurrentConsent={setCurrentConsent}
-          setcurrentConsentATH={setCurrentConsentATH}
-        />
+        { consents.map((item, index) => {
+          return(
+          <ConsentDropdownItem 
+            description={item.ath}
+            currentConsentATH={currentConsentATH}
+            setcurrentConsent={setCurrentConsent}
+            setcurrentConsentATH={setCurrentConsentATH}/>
+        )})
+
+        }
+     
         <List.Item
           title="+ Add New Consent"
           titleStyle={{ fontStyle:'Calibri' ,fontSize: 20 }}

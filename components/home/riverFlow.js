@@ -4,8 +4,8 @@ import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
 
 export function RiverFlow(props) {
-    const riverFlow = 45.7 // river flow value
-    const restriction = 30.22 //river flow at restriction
+    const riverFlow = 1.222 // river flow value
+    const restriction = 39.2 //river flow at restriction
     const timePeriod = '20:00 (NZST) June 14th 2024' //time period data collected
     const restrictionText = "RESTRICTION AT " + roundNumber(restriction, 3)
     const timePeriodText = 'Last Recorded at ' + timePeriod

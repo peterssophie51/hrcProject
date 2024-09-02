@@ -34,7 +34,7 @@ export function FAQPage ({ navagation }) {
   const faq = [
     {   
       key: 0, 
-      question:'How do I find my Consent ATH?', 
+      question:'This is a long question in the FAQ', 
       answer:"You should already have your consent ATH when applyig for a consent, if you don't have this infrormation, please contact us at Horizons!"
     },
     {

@@ -36,7 +36,7 @@ export function RiverPage ({ navagation }) {
         <CalibriBoldText style={styles.title} title="River" /> 
         <CalibriBoldText  style={styles.flowsite} title={flowsite} />
         <CalibriText style={styles.timeRecorded} title='Last Recorded at 20:00 (NZST) June 14th 2024'/> 
-        <RiverFlowTitle riverFlow={41.5}/> 
+        <RiverFlowTitle riverFlow={40}/> 
         <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels}/> 
         <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
         oneDayData={oneDayData} sevenDayData={sevenDayData} oneMonthData={oneMonthData} annualData={annualData}

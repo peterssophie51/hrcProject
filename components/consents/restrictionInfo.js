@@ -18,7 +18,11 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
         annualRestriction = '' 
     } = data; //default values for all data
 
-    
+    const horizontalDataDynamicFont = (text) => {
+        return (
+        text.toString().length > 6 ? 22 - (text.toString().length - 6) * 3 : 22
+        )
+    }
 
     return(
         <View style={styles.container}>
@@ -33,12 +37,12 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
                     <CalibriBoldText style={styles.horizontalDataTitleSuperscript} title={'3'} /> 
                     <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'/S)'} /> 
                 </View>
-                <CalibriText style={[styles.horizontalDataFlow, {marginLeft: Dimensions.get('window').width * 0.26}]} title={flowAtRestriction}/> 
+                <CalibriText style={[styles.horizontalDataFlow, {fontSize:horizontalDataDynamicFont(flowAtRestriction) ,marginLeft: Dimensions.get('window').width * 0.245}]} title={flowAtRestriction}/> 
             </View>
             <View style={styles.horizontalDataContainer}>
                 <CalibriBoldText style={styles.horizontalDataTitle} title={'INSTANTANEOUS '}/> 
                 <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(L/S)'} /> 
-                <CalibriText style={[styles.horizontalData, {fontSize: 22, marginLeft: Dimensions.get('window').width * 0.2}]} title={instantaneous}/> 
+                <CalibriText style={[styles.horizontalData, {fontSize: horizontalDataDynamicFont(instantaneous), marginLeft: Dimensions.get('window').width * 0.2}]} title={instantaneous}/> 
             </View>
             <View style={styles.verticalDataContainer}>
                 <VerticalData rate="HOURLY" time='HOUR' data={hourlyRestriction}/> 

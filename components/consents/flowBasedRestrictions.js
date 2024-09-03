@@ -13,17 +13,17 @@ export function FlowbasedRestriction() {
         {   
             id: 0,
             restriction:'NONE', 
-            flowAtRestriction: '', 
-            instantaneous: 41.5, 
+            flowAtRestriction: 41.58, 
+            instantaneous: 5000000, 
             hourlyRestriction: '', 
-            dailyRestriction: 200.6,
+            dailyRestriction: 2000000,
             annualRestriction: ''
         },
         {
             id:1,
             restriction:'ONE', 
-            flowAtRestriction: 13.900, 
-            instantaneous: 20.75888, 
+            flowAtRestriction: 13.9007, 
+            instantaneous: 20.75, 
             hourlyRestriction: '', 
             dailyRestriction: 2000,
             annualRestriction: ''
@@ -78,6 +78,7 @@ export function FlowbasedRestriction() {
                     return (
                         <RestrictionInfo 
                             key={item.id}
+                            lessMore={'less'}
                             restrictionTitle={'FLOW BASED RESTRICTION: '} 
                             restriction={item.restriction} 
                             visible={itemIndex === maxIndex || (itemIndex === maxIndex - 1 && index === maxIndex)} 

@@ -4,6 +4,14 @@ import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
 
 export function VerticalData(props) {
+
+    const verticalDataDynamicFont = (text) => {
+        return (
+            text.toString().length > 4 ? 40 - (text.toString().length - 4) * 4 : 40
+        )
+    }
+
+
     return(
         <View style={styles.verticalContainer}>
             <CalibriBoldText title={props.rate} style={styles.verticalDataTitle}/>
@@ -12,7 +20,7 @@ export function VerticalData(props) {
                 <CalibriText title="3" style={styles.verticalDataTitleSuperscript}/> 
                 <CalibriText title={'/' + props.time} style={styles.verticalDataTitleUnits}/> 
             </View>
-            <CalibriBoldText title={props.data} style={styles.verticalData} />
+            <CalibriBoldText title={props.data} style={[styles.verticalData, {fontSize: verticalDataDynamicFont(props.data)}]} />
 </View>
     )
 }

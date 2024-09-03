@@ -13,6 +13,9 @@ export function ProgressPill(props) {
 
     if (props.max !== 0) {
         totalPercentage = totalSum/props.max
+        if (totalPercentage > 1) {
+            totalPercentage = 1
+        }
     }
 
 
@@ -21,7 +24,6 @@ export function ProgressPill(props) {
             { props.type == 'totalled' && (
                 <View style={[styles.totalContainer, {height: Dimensions.get('window').height * 0.26 * totalPercentage , 
                     marginTop: (Dimensions.get('window').height * 0.26) - (Dimensions.get('window').height * 0.26 * totalPercentage)}]}>
-            
                 </View>
 
             )}
@@ -29,7 +31,10 @@ export function ProgressPill(props) {
                 (Dimensions.get('window').height * 0.26) - (Dimensions.get('window').height * 0.26 * totalPercentage)}}>
             { props.type === 'proportional' && props.flowMeters.map((item, index) => (
                     <View key={item.key} style={[styles.subContainer, 
-                        {height: props.max==0 ? Dimensions.get('window').height * 0.26 * (item.usage/totalSum) : Dimensions.get('window').height * 0.26 * (item.usage/props.max), backgroundColor:item.color, 
+                        {height: props.max == 0 || totalPercentage == 1 ? 
+                            Dimensions.get('window').height * 0.26 * (item.usage/totalSum) : 
+                            Dimensions.get('window').height * 0.26 * (item.usage/props.max), 
+                            backgroundColor:item.color, 
                             borderTopRightRadius: index == 0 ? 20 : 0, 
                             borderTopLeftRadius: index == 0 ? 20 : 0, 
                             borderBottomLeftRadius: (props.flowMeters.length - 1) == index ? 20 :0, 

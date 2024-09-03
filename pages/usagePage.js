@@ -11,7 +11,7 @@ import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 export function UsagePage ({ navagation }) {
   const dataCollected = '20:00 (NZST) June 14th 2024'
   const dailyData= [{ key: 'Flow One', usage: 40}, {key:'Flow Two', usage: 30}, {key:'Flow Three', usage: 20}]
-  const dailyMax = 50
+  const dailyMax = 0.1
   const [type, settype] = useState('totalled')
   const annualData = [{key: 'Flow One', usage: 100}, {key: 'Flow Two', usage: 100}, {key:'Flow Three', usage: 200}]
   const annualMax = 700

@@ -91,6 +91,7 @@ export function ConsentDropdownHeader(props) {
         { consents.map((item, index) => {
           return(
           <ConsentDropdownItem 
+            key={item.ath}
             nickname={item.nickname}
             description={item.ath}
             currentConsentATH={currentConsentATH}

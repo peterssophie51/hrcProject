@@ -16,14 +16,14 @@ export function FlowbasedRestriction() {
             flowAtRestriction: '', 
             instantaneous: 41.5, 
             hourlyRestriction: '', 
-            dailyRestriction: 2000,
+            dailyRestriction: 200.6,
             annualRestriction: ''
         },
         {
             id:1,
             restriction:'ONE', 
             flowAtRestriction: 13.900, 
-            instantaneous: 20.75, 
+            instantaneous: 20.75888, 
             hourlyRestriction: '', 
             dailyRestriction: 2000,
             annualRestriction: ''

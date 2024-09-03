@@ -14,7 +14,7 @@ export function FlowbasedRestriction() {
             id: 0,
             restriction:'NONE', 
             flowAtRestriction: '', 
-            instaneous: 41.5, 
+            instantaneous: 41.5, 
             hourlyRestriction: '', 
             dailyRestriction: 2000,
             annualRestriction: ''
@@ -23,7 +23,7 @@ export function FlowbasedRestriction() {
             id:1,
             restriction:'ONE', 
             flowAtRestriction: 13.900, 
-            instaneous: 20.75, 
+            instantaneous: 20.75, 
             hourlyRestriction: '', 
             dailyRestriction: 2000,
             annualRestriction: ''
@@ -32,7 +32,7 @@ export function FlowbasedRestriction() {
             id: 2,
             restriction:'TWO', 
             flowAtRestriction: 11.100, 
-            instaneous: '', 
+            instantaneous: '', 
             hourlyRestriction: '', 
             dailyRestriction: 140,
             annualRestriction: ''
@@ -62,7 +62,7 @@ export function FlowbasedRestriction() {
                 setExpanded={setExpanded}
                 data={{ 
                     flowAtRestriction: restrictions[index].flowAtRestriction,
-                    instaneous: restrictions[index].instaneous,
+                    instantaneous: restrictions[index].instantaneous,
                     hourlyRestriction: restrictions[index].hourlyRestriction,
                     dailyRestriction: restrictions[index].dailyRestriction,
                     annualRestriction: restrictions[index].annualRestriction
@@ -84,7 +84,7 @@ export function FlowbasedRestriction() {
                             expanded={expanded} setExpanded={setExpanded}
                             data={{ 
                                 flowAtRestriction: item.flowAtRestriction,
-                                instaneous: item.instaneous,
+                                instantaneous: item.instantaneous,
                                 hourlyRestriction: item.hourlyRestriction,
                                 dailyRestriction: item.dailyRestriction,
                                 annualRestriction: item.annualRestriction

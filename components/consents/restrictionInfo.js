@@ -12,7 +12,7 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
     
     const { 
         flowAtRestriction = '', 
-        instaneous = '', 
+        instantaneous = '', 
         hourlyRestriction = '', 
         dailyRestriction = '', 
         annualRestriction = '' 
@@ -36,9 +36,9 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
                 <CalibriText style={[styles.horizontalDataFlow, {marginLeft: Dimensions.get('window').width * 0.26}]} title={flowAtRestriction}/> 
             </View>
             <View style={styles.horizontalDataContainer}>
-                <CalibriBoldText style={styles.horizontalDataTitle} title={'INSTANEOUS '}/> 
+                <CalibriBoldText style={styles.horizontalDataTitle} title={'INSTANTANEOUS '}/> 
                 <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(L/S)'} /> 
-                <CalibriText style={[styles.horizontalData, {fontSize: 22, marginLeft: Dimensions.get('window').width * 0.3}]} title={instaneous}/> 
+                <CalibriText style={[styles.horizontalData, {fontSize: 22, marginLeft: Dimensions.get('window').width * 0.2}]} title={instantaneous}/> 
             </View>
             <View style={styles.verticalDataContainer}>
                 <VerticalData rate="HOURLY" time='HOUR' data={hourlyRestriction}/> 

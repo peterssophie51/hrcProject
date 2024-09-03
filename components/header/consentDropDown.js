@@ -12,12 +12,28 @@ export function ConsentDropdownHeader(props) {
   const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085");
   const [fontLoaded, setFontLoaded] = useState(false);
   const [expanded, setExpanded] = useState(false);
-
+  
   //variables
-  const [consents, setconsents] = useState([{ath:'ATH-2002009085'}, {ath:'ATH-2002008648'}, {ath:'ATH-2002009348'}])
+  const [consents, setconsents] = useState([
+    {ath:'ATH-2002009085', nickname: 'Farm'}, 
+    {ath:'ATH-2002008648', nickname: 'Water'}, 
+    {ath:'ATH-2002009348', nickname: 'Crops'}])
 
   //change variable when header expanded/minimised
   const handlePress = () => setExpanded(!expanded);
+  
+  const updateConsent = (updatedConsent) => {
+    const updatedConsents = []
+    consents.map((item, index) => {
+      if (item['ath'] == updatedConsent['ath']) {
+        item['nickname'] = updatedConsent['nickname']
+        updatedConsents.push(item)
+      } else {
+        updatedConsents.push(item)
+      }
+    })
+    setconsents(updatedConsents)
+  }
 
   //function to load in calibri bold and calibri font
   useEffect(() => {
@@ -75,10 +91,13 @@ export function ConsentDropdownHeader(props) {
         { consents.map((item, index) => {
           return(
           <ConsentDropdownItem 
+            nickname={item.nickname}
             description={item.ath}
             currentConsentATH={currentConsentATH}
             setcurrentConsent={setCurrentConsent}
-            setcurrentConsentATH={setCurrentConsentATH}/>
+            setcurrentConsentATH={setCurrentConsentATH}
+            updateConsent={updateConsent}
+            consents={consents}/>
         )})
 
         }

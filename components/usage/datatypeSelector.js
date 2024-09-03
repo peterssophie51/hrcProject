@@ -35,7 +35,6 @@ export function DatatypeSelector(props) {
                 flowMeter['nickname'] = updatedFlowMeter['nickname']
                 updatedFlowMeters.push(flowMeter)
             } else {
-                console.log(flowMeter)
                 updatedFlowMeters.push(flowMeter)
             }
         })

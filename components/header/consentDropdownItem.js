@@ -22,7 +22,10 @@ export function ConsentDropdownItem(props) {
             props.setcurrentConsent(currentName);
         }
         toggleVisibility();
-        setConsentNickname(currentName);
+        const updatedConsent = {ath:'', nickname:''}
+        updatedConsent['ath'] = props.description
+        updatedConsent['nickname'] = currentName
+        props.updateConsent(updatedConsent)
     };
 
     //function to load in calibri bold and calibri fonts
@@ -48,7 +51,7 @@ export function ConsentDropdownItem(props) {
         <View style={styles.container}>
             
             <List.Item 
-                title={consentNickname}
+                title={props.nickname}
                 description={props.description}
 
                 titleStyle={props.currentConsentATH == props.description
@@ -64,7 +67,7 @@ export function ConsentDropdownItem(props) {
 
                 style={{ backgroundColor: 'white', width: Dimensions.get('window').width * 0.9 }}
                 onPress={() => {
-                    props.setcurrentConsent(consentNickname); 
+                    props.setcurrentConsent(props.nickname); 
                     props.setcurrentConsentATH(props.description);
                 }} 
                 right={() => (

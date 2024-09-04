@@ -1,13 +1,13 @@
 import React from "react";
-import { View, } from "react-native";
+import { View, StyleSheet, Dimensions} from "react-native";
 import { List } from "react-native-paper";
-import { StyleSheet, Dimensions } from "react-native";
+//importing components
 import { RestrictionInfo } from "./restrictionInfo";
 
+//accordion list of all flow based restrictions at bottom of consents page
 export function FlowbasedRestriction() {
     const [expanded, setExpanded] = React.useState(false); //set whether accordion is expanded or not
     const [currentRestriction, setcurrentRestriction] = React.useState('NONE') //set which flow based restriction is currently in effect
-
     //all data for different flow based restrictions
     const restrictions= [
         {   
@@ -38,7 +38,6 @@ export function FlowbasedRestriction() {
             annualRestriction: ''
         }, 
     ]
-  
     const index = restrictions.findIndex(item => item.restriction === currentRestriction); //index in restriction list for current flow based restriction
     const maxIndex =restrictions.length -1 //max index of list
 
@@ -47,11 +46,13 @@ export function FlowbasedRestriction() {
         <View>
         <List.Accordion style={styles.container} 
         expanded={expanded}
+        //expand the flow based restrictions (if there are restrictions to show)
         onPress={() => { 
             if (restrictions.length !== 1) {
                 setExpanded(!expanded);
             }
         }}
+        //show current flow based restriction data
         left={() => 
             <RestrictionInfo 
                 restrictionTitle={'CURRENT FLOW BASED RESTRICTION: '} 
@@ -69,13 +70,16 @@ export function FlowbasedRestriction() {
                 }}
             />} 
         >
+        {/*map through list of differet restrictions to show other flow based restrictions*/}
         <List.Item left={ () => 
             <View>
                  {restrictions.map((item, itemIndex) => { 
+                    //do not repeat the current flow based restrictions
                     if (itemIndex === index) {
                         return null; 
                     }
                     return (
+                        //render the flow based restriction
                         <RestrictionInfo 
                             key={item.id}
                             lessMore={'less'}
@@ -103,7 +107,7 @@ export function FlowbasedRestriction() {
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container:{ //style the container of the flow based restrictions
         marginTop: Dimensions.get('window').width * 0.04, 
         width: Dimensions.get('window').width * 0.9,
         height:Dimensions.get('window').height * 0.45, 
@@ -113,21 +117,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#eeeeee',
         
     },
-    dropDown: {
+    dropDown: { //style the container of all other flow based restrictions
         marginTop: Dimensions.get('window').width * -0.04,
         backgroundColor: '#eeeeee',
         marginLeft: Dimensions.get('window').width *0.05, 
         width: Dimensions.get('window').width * 0.9,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-    },
-    currentText: {
-        fontSize: 30,
-        marginLeft: Dimensions.get('window').width * 0.05
-    },
-    droppedText: {
-        fontSize: 30, 
-        marginLeft: Dimensions.get('window').width * 0.05,
-        marginTop: Dimensions.get('window').height * 0.01
     }
 })

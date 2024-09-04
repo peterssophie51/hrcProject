@@ -1,15 +1,18 @@
 import React from "react";
 import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from "react-native";
+//import components
 import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
 import { VerticalData } from "./verticalRestrictionData";
 
+//individual component for each flow based restriction in flow based restriction card
 export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, visible, restrictionTitle, data ={}}) {
    
     const handlePress = () => {
         setExpanded(!expanded)
     }; //handle press of "view more/less" to expand or unexpand accordion
     
+    //default values for flow meter data 
     const { 
         flowAtRestriction = '', 
         instantaneous = '', 
@@ -18,6 +21,7 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
         annualRestriction = '' 
     } = data; //default values for all data
 
+    //function to make horizontal data dynamic sizes if other max character length (6)
     const horizontalDataDynamicFont = (text) => {
         return (
         text.toString().length > 6 ? 22 - (text.toString().length - 6) * 3 : 22
@@ -26,29 +30,43 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
 
     return(
         <View style={styles.container}>
+            {/*title of flow based restriction (eg current or other)*/}
             <Text style={styles.titleContainer}>
                 <CalibriBoldText title={restrictionTitle} style={styles.titleHead}/> 
                 <CalibriText title={restriction} style={styles.titleRestriction}/>
             </Text>
+            {/*flow at restriction*/}
             <View style={styles.horizontalDataContainer}> 
-                <CalibriBoldText style={styles.horizontalDataTitle} title={'FLOW AT\nRESTRICTION '}/> 
+                {/*title*/}
+                <CalibriBoldText style={styles.horizontalDataTitle} title={'FLOW AT\nRESTRICTION '}/>
+                {/*units container to use subscript*/} 
                 <View style={styles.m3container}>
                     <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(M'} /> 
                     <CalibriBoldText style={styles.horizontalDataTitleSuperscript} title={'3'} /> 
                     <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'/S)'} /> 
                 </View>
+                {/*iflow at restriction value*/}
                 <CalibriText style={[styles.horizontalDataFlow, {fontSize:horizontalDataDynamicFont(flowAtRestriction) ,marginLeft: Dimensions.get('window').width * 0.245}]} title={flowAtRestriction}/> 
             </View>
+            {/*instantaneous rate*/}
             <View style={styles.horizontalDataContainer}>
+                {/*title*/}
                 <CalibriBoldText style={styles.horizontalDataTitle} title={'INSTANTANEOUS '}/> 
+                {/*units*/}
                 <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(L/S)'} /> 
-                <CalibriText style={[styles.horizontalData, {fontSize: horizontalDataDynamicFont(instantaneous), marginLeft: Dimensions.get('window').width * 0.2}]} title={instantaneous}/> 
+                {/*instantaneous value*/}
+                <CalibriText style={[{fontSize: horizontalDataDynamicFont(instantaneous), marginLeft: Dimensions.get('window').width * 0.2}]} title={instantaneous}/> 
             </View>
+            {/*container of all vertical boxes*/}
             <View style={styles.verticalDataContainer}>
+                {/*vertical component for hourly rate*/}
                 <VerticalData rate="HOURLY" time='HOUR' data={hourlyRestriction}/> 
+                {/*vertical component for daily rate*/}
                 <VerticalData rate="DAILY" time='DAY' data={dailyRestriction}/> 
+                {/*vertical component for annually rate*/}
                 <VerticalData rate="ANNUALLY" time='ANNUAL' data={annualRestriction}/> 
             </View>
+            {/*if the restriction is the last restriction rendered, show view less*/}
             {visible && ( 
                 <TouchableOpacity onPress={handlePress}>
                     <CalibriText style={styles.viewMoreLess} title={'View ' + lessMore + ' authorised volumes'}/>
@@ -59,81 +77,53 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container: { //styling container of flow based restriction
         marginBottom: Dimensions.get('window').height * 0.03,
     },
-    titleContainer: {
+    titleContainer: { //styling container of the title for flow based restriction
         marginLeft: Dimensions.get('window').width * 0.045
     },
-    titleHead: {
+    titleHead: { //styling text of title for flow based restriction
         color: '#72BF44',
         fontSize: 27
     },
-    titleRestriction: {
+    titleRestriction: { //styling flow based restriction title
         color: 'black',
         fontSize: 27
     },
-    horizontalDataFlow: {
+    horizontalDataFlow: { //styling flow at restriction text
         fontSize: 22,
         marginTop: Dimensions.get('window').height * 0.015,
         marginLeft: Dimensions.get('window').width * 0.5,
-    },
-    horizontalDataContainer: {
+    }, 
+    horizontalDataContainer: { //styling contaienr for horizontal data
         marginLeft: Dimensions.get('window').width * 0.045,
         marginTop: Dimensions.get('window').height * 0.01,
         display: 'flex',
         flexDirection: 'row'
     },
-    horizontalDataTitle: {
+    horizontalDataTitle: { //styling title for title of horizontal data 
         fontSize: 22,
     },
-    horizontalDataTitleUnits: {
+    horizontalDataTitleUnits: { //styling units in title of horizontal data
         fontSize:16,
         lineHeight: 28, 
     },
-    horizontalDataTitleSuperscript: {
+    horizontalDataTitleSuperscript: { //stying superscript in title of horizontal data
         fontSize: 12
     },
-    verticalDataContainer: {
+    verticalDataContainer: { //styling container for data in vertical data component
         display: 'flex',
         flexDirection: 'row',
         marginTop: Dimensions.get('window').height * 0.02
     },
-    verticalContainer: {
-        backgroundColor: '#cccccc',
-        borderRadius: 20,
-        width: Dimensions.get('window').width * (0.8/3),
-        height: Dimensions.get('window').height * 0.15,
-        marginLeft: Dimensions.get('window').width * 0.025,
-        alignItems: 'center'
-    },
-    verticalDataTitleContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
-    verticalDataTitle: {
-        fontSize: 18,
-        marginTop: Dimensions.get('window').height * 0.005
-    },
-    verticalDataTitleUnits: {
-        fontSize: 15,
-
-    }, 
-    verticalDataTitleSuperscript: {
-        fontSize: 12
-    },
-    verticalData: {
-        fontSize: 40,
-        color: '#243746',
-        marginTop: Dimensions.get('window').height * 0.01
-    },
-    viewMoreLess: {
+    viewMoreLess: { //styling view/more less expand button
         textDecorationLine: 'underline',
         fontSize: 17, 
         marginTop: Dimensions.get('window').height * 0.02, 
         marginLeft: Dimensions.get('window').width * 0.045
     },
-    m3container: {
+    m3container: { //styling container for m3 units text
         marginTop: Dimensions.get('window').height * 0.027, 
         display: 'flex',
         flexDirection: 'row'

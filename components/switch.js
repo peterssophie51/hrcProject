@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import * as Font from 'expo-font'
 import { useState, useEffect } from "react";
 
-
+//
 export function Switch(props) {
 
   const [fontLoaded, setFontLoaded] = useState(false);

@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Dimensions, Image } from "react-native";
 import { List } from "react-native-paper";
-import { DatatypeItem } from "./datatypeItem";
 import { useEffect } from "react";
 import * as Font from 'expo-font'
+//importing components
+import { DatatypeItem } from "./datatypeItem";
 
+//component that allows users to choose the data displayed on the graph
 export function DatatypeSelector(props) {
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(false); //manage whether datatype selector expanded or not
     const [fontLoaded, setFontLoaded] = useState(false);
 
+    //function to handle click of drop down/up arrow
     const handlePress = () => {
         setExpanded(!expanded)
      
     }
 
+    //handle total water usage clicked
     const handleDataClick = () => {
-        props.setcurrentDatatypeNickname('Total Water Usage')
-        props.setcurrentDatatype('')
+        props.setcurrentDatatypeNickname('Total Water Usage') //set current datatype name
+        props.setcurrentDatatype('') //set flow meter type
+        //depending on the selected timeframe, change the data
         if (props.selectedTime == '1 DAY') {
             props.setcurrentData(props.totalWaterUsage[0])
         } else if (props.selectedTime == '7 DAYS') {
@@ -28,17 +33,18 @@ export function DatatypeSelector(props) {
         }
     }
 
+    //function to handle the edited nickname
     const updateFlowMeter = (updatedFlowMeter) => {
-        const updatedFlowMeters =[]
+        const updatedFlowMeters =[] //list of new updated flow meters
         props.flowMeters.map((flowMeter, index) => {
-            if (flowMeter['name'] == updatedFlowMeter.name) {
+            if (flowMeter['name'] == updatedFlowMeter.name) { //if edited flowmeter, fetch new nickname and append with other same info to list
                 flowMeter['nickname'] = updatedFlowMeter['nickname']
                 updatedFlowMeters.push(flowMeter)
             } else {
-                updatedFlowMeters.push(flowMeter)
+                updatedFlowMeters.push(flowMeter) //if not edited flowmeter push same value to list
             }
         })
-        props.setflowMeters(updatedFlowMeters);
+        props.setflowMeters(updatedFlowMeters); //update flowmeters
     };
 
     //function to load in calibri bold and calibri font
@@ -64,7 +70,9 @@ export function DatatypeSelector(props) {
     }
 
     return (
+        //container for datatype selector
         <View style={[styles.container]}>
+            {/*datatype selecctor*/}
             <List.Accordion
                 title={props.currentDatatypeNickname}
                 description={props.currentDatatype}
@@ -72,7 +80,7 @@ export function DatatypeSelector(props) {
                 descriptionStyle={{fontSize:16, fontFamily: 'Calibri', color:'black'}}
                 expanded={expanded}
                 onPress={handlePress}
-                right={() => (
+                right={() => ( //image to expand/unexpand depending on whether expanded or not
                     <Image
                       source={expanded 
                         //show drop up image if accordion dropped down
@@ -84,8 +92,8 @@ export function DatatypeSelector(props) {
                     />
                   )}
                 style={[styles.accordion, {borderBottomLeftRadius: (expanded == true) ? 0 : 20,
-                    borderBottomRightRadius: (expanded == true) ? 0 : 20,}]}>
-                {props.flowMeters.map((item, itemIndex) => { 
+                    borderBottomRightRadius: (expanded == true) ? 0 : 20,}]}> {/*round corners of accordion based on expanded or not*/}
+                {props.flowMeters.map((item, itemIndex) => {  //map through list of flowmeters to show item for each flow meter
                     return ( 
                         <DatatypeItem 
                             key={item.meter}
@@ -101,7 +109,7 @@ export function DatatypeSelector(props) {
                             selectedTime={props.selectedTime}/>
                     );
                 })}
-                <List.Item title="Total Water Usage" 
+                <List.Item title="Total Water Usage" //list item for total water usage as needs to be seperate
                     onPress={handleDataClick}
                     titleStyle={{fontFamily:'Calibri', fontSize:18, 
                         color: props.currentDatatypeNickname == 'Total Water Usage' ? '#72BF44' : 'black'}}
@@ -118,7 +126,7 @@ export function DatatypeSelector(props) {
 }
 
 const styles = StyleSheet.create({
-    accordion: {
+    accordion: { //style datatype selector
         borderTopLeftRadius:20, 
         borderTopRightRadius:20, 
         backgroundColor:'#eeeeee', 
@@ -130,7 +138,7 @@ const styles = StyleSheet.create({
         marginTop: Dimensions.get('window').width * 0.05,
         zIndex: 2
     },
-    container: {
+    container: { //style container for datatype selector
         top: (Dimensions.get('window').height * 0.39) + (Dimensions.get('window').width * 0.05),
         position:'absolute'
     }

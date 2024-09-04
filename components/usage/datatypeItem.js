@@ -2,19 +2,21 @@ import React from "react";
 import { List } from "react-native-paper";
 import { useState, useEffect } from "react";
 import * as Font from 'expo-font'
-import { Dimensions, Image, View, StyleSheet, Text, TextInput} from "react-native";
+import { Dimensions, Image, View, StyleSheet, TextInput} from "react-native";
 import { TouchableOpacity } from "react-native";
 
-
+//inividual component for each of the datatypes in dropdown mneu to selected datatypes
 export function DatatypeItem(props) {
-    const [fontLoaded, setFontLoaded] = useState(false)
-    const [visibility, setvisibility] = useState(false)
-    const [name, setname] = useState('')
+    const [fontLoaded, setFontLoaded] = useState(false) 
+    const [visibility, setvisibility] = useState(false) //manage visibility of edit section
+    const [name, setname] = useState('') //manage the edited nickname
     
+    //function to handle datatype being selected
     const handlePress = () => {
-        props.setcurrentDatatypeNickname(props.flowMeter['nickname']); 
-        props.setcurrentDatatype(props.description)
+        props.setcurrentDatatypeNickname(props.flowMeter['nickname']); //change current nickname in title
+        props.setcurrentDatatype(props.description) //change current flow meter in title
         
+        //depending on current time selected, change the data type depending onclick
         if (props.selectedTime == '1 DAY') {
             props.setcurrentData(props.data[0])
         } else if (props.selectedTime == '7 DAYS') {
@@ -26,20 +28,23 @@ export function DatatypeItem(props) {
         }
     }
 
-    const handleEditPress = (e) => {
+    //function to handle the press of the edit button
+    const handleEditPress = () => {
         setvisibility(!visibility)
     }
 
+    //handle the user subimitting the changed nickname
     const handleSubmit = () => {
         setvisibility(false)
-        const updatedFlowMeter = { ...props.flowMeters, name:props.description, nickname:name };
-        props.updateFlowMeter(updatedFlowMeter)
+        const updatedFlowMeter = { ...props.flowMeters, name:props.description, nickname:name }; //create variable of changed datatype
+        props.updateFlowMeter(updatedFlowMeter) //run function to update state of flowmeters
         
         if (props.description == props.currentDatatype) {
             props.setcurrentDatatypeNickname(name)
-        }
+        } //change current datatype nickname on edit if currently selected
     }
 
+    //handle the user cancelling editing the nicknames
     const handleCancel = () => {
         setvisibility(false)
     }
@@ -68,34 +73,38 @@ export function DatatypeItem(props) {
 
     return (
         <View style={{zIndex:2}}>
+            {/*datatype container*/}
             <List.Item 
                 title={props.flowMeter['nickname']} 
                 titleStyle={{fontFamily:'Calibri', fontSize:18, 
-                    color:props.currentDatatype === props.description ? '#72BF44': 'black'}}
+                    color:props.currentDatatype === props.description ? '#72BF44': 'black'}} //changes colour depending on if active
                 descriptionStyle={{fontFamily:'Calibri', fontSize:15, 
-                    color:props.currentDatatype === props.description ? '#72BF44': 'black'}}
+                    color:props.currentDatatype === props.description ? '#72BF44': 'black'}} //changes colour depending on if active
                 description={props.description}
                 onPress={handlePress}
                 style={styles.itemContainer}
-                right={() => (
+                right={() => ( //render image of edit button to click and edit nickname
                     <TouchableOpacity onPress={handleEditPress}>
                         <Image source={props.currentDatatype == props.description ? 
-                            require('../../images/editGreen.png') : require('../../images/editBlack.png')} 
+                            require('../../images/editGreen.png') : require('../../images/editBlack.png')} //different colour icon if active
                             style={styles.editButton}/>
                     </TouchableOpacity>)}
             />
             
-            { visibility && (
+            { visibility && ( //show edit section if visibility true
                 <>
+                    {/*container of edit section*/}
                     <View style={styles.editContainer}>
                         <TextInput 
                                 placeholder="Enter flow meter nickname" 
                                 style={styles.editInput} 
                                 onChangeText={setname}
                         />
+                        {/*submit edited nickname*/}
                         <TouchableOpacity style={styles.submitButtonContainer} onPress={handleSubmit}>
                             <Image source={require('../../images/tickWhiteThick.png')} style={styles.submitButton} />
                         </TouchableOpacity>
+                        {/*cancel editing nickname*/}
                         <TouchableOpacity  style={styles.crossButtonContainer} onPress={handleCancel}>
                             <Image source={require('../../images/crossWhiteThick.png')} style={styles.crossButton} />
                         </TouchableOpacity>
@@ -110,25 +119,25 @@ export function DatatypeItem(props) {
 }
 
 const styles = StyleSheet.create({
-    itemContainer: {
+    itemContainer: { //style container of datatype
         backgroundColor:'#eeeeee',
         width: Dimensions.get('window').width * 0.9,
         marginLeft: Dimensions.get('window').width * 0.05,
     },
-    editButton: {
+    editButton: { //style edit button image
         height: Dimensions.get('window').width  * 0.068, 
         width: Dimensions.get('window').width  * 0.07,
         marginTop: Dimensions.get('window').width * 0.01,
         zIndex:2
     },
-    editContainer: {
+    editContainer: { //style container of edit section on visible
         width: Dimensions.get('window').width * 0.9,
         marginLeft: Dimensions.get('window').width * 0.05,
         display:'flex',
         flexDirection:'row',
         backgroundColor:'#eeeeee'
     },
-    editInput: {
+    editInput: { //style text input to edit nickname
         fontSize: 18, 
         width: Dimensions.get('window').width * 0.53, 
         height: Dimensions.get('window').width * 0.12, 
@@ -141,20 +150,20 @@ const styles = StyleSheet.create({
         fontFamily:'Calibri', 
         color:'black'
     },
-    submitButtonContainer: {
+    submitButtonContainer: { //style container of submit button for edited nickname
         backgroundColor: '#72BF44', 
         width:Dimensions.get('window').width * 0.135 , 
         height: Dimensions.get('window').width * 0.12, 
         marginTop: Dimensions.get('window').width * 0.02, 
         borderRadius: 10
     },
-    submitButton: {
+    submitButton: { //style button to submit edited nickname
         height: Dimensions.get('window').width * 0.08, 
         width: Dimensions.get('window').width * 0.1, 
         marginLeft: Dimensions.get('window').width * 0.0175, 
         marginTop: Dimensions.get('window').width * 0.02
     },
-    crossButtonContainer: {
+    crossButtonContainer: { //style container of cancel button for edited nickname
         backgroundColor: '#CE202F', 
         marginLeft: Dimensions.get('window').width * 0.02, 
         width:Dimensions.get('window').width * 0.135 , 
@@ -163,7 +172,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
         
     },
-    crossButton: {
+    crossButton: { //tyle button to cancel edited nickname
         height: Dimensions.get('window').width * 0.09, 
         width: Dimensions.get('window').width * 0.09, 
         marginLeft: Dimensions.get('window').width * 0.0225, 

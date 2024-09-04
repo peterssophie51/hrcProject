@@ -27,7 +27,7 @@ export function RiverFlowChart(props) {
                 dataPointsColor="#00A7CF" 
                 focusEnabled //allow datapoints click
                 textShiftY={-10} //text shift for data point values
-                textShiftX={-10} //text shift for data point valyes
+                textShiftX={-10} //text shift for data point values
                 textColor="black" 
                 textFontSize={12} 
                 focusedDataPointColor={'#00A7CF'} 

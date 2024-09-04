@@ -3,6 +3,7 @@ import { RadioGroup } from "react-native-radio-buttons-group";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
 import * as Font from 'expo-font'
 
+//
 export function GraphRadios(props) {
 
     const [fontLoaded, setFontLoaded] = useState(false);

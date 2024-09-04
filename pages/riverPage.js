@@ -1,13 +1,14 @@
 import { View } from 'react-native';
 import { useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
-//components
+//importing components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
 import { CalibriText } from '../components/fonts/calibriFont.js';
 import { RiverFlowTitle } from '../components/river/riverFlow.js';
 import { RiverFlowChart } from '../components/river/riverFlowChart.js';
 import { TimeRadios } from '../components/river/graphRadios.js';
 
+//component for the river page
 export function RiverPage ({ navagation }) {
   const [selectedTime, setselectedTime] =  useState('1 DAY') //current timeframe for data
   const flowsite = "Rangitikei at Mangaweka" //current flowsite
@@ -29,15 +30,19 @@ export function RiverPage ({ navagation }) {
   const [currentData, setcurrentData] = useState(oneDayData) //set current data (as by radios)
   const [currentLabels, setcurrentLabels] = useState(oneDayLabels) //set current labels (as by radios)
 
-
-
     return (
       <View  style={styles.page}> 
+        {/*page title*/}
         <CalibriBoldText style={styles.title} title="River" /> 
+        {/*consent flowsite*/}
         <CalibriBoldText  style={styles.flowsite} title={flowsite} />
+        {/*when data recorded*/}
         <CalibriText style={styles.timeRecorded} title='Last Recorded at 20:00 (NZST) June 14th 2024'/> 
+        {/*river flow card*/}
         <RiverFlowTitle riverFlow={40000}/> 
+        {/*river flow chart*/}
         <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels}/> 
+        {/*graph radios*/}
         <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
         oneDayData={oneDayData} sevenDayData={sevenDayData} oneMonthData={oneMonthData} annualData={annualData}
         oneDayLabels={oneDayLabels} sevenDayLabels={sevenDayLabels} oneMonthLabels={oneMonthLabels} annualLabels={annualLabels}/>
@@ -46,22 +51,22 @@ export function RiverPage ({ navagation }) {
   }
 
 const styles = StyleSheet.create({
-  page: {
+  page: { //style page container
     width:Dimensions.get('window').width, 
     height:Dimensions.get('window').height * 2, 
     backgroundColor:'white'
   },
-  title: {
+  title: { //style title of page
     textAlign:'center', 
     fontSize:40, 
     marginTop: Dimensions.get('window').height * 0.12
   },
-  flowsite: {
+  flowsite: { //style consent flow site text
     textAlign: 'center', 
     fontSize: 30, 
     marginTop: Dimensions.get('window').height * 0.01
   },
-  timeRecorded: {
+  timeRecorded: { //style time recorded text
     textAlign: 'center',
     fontSize: 18,
     marginTop: Dimensions.get('window').height * 0.01

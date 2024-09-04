@@ -1,19 +1,22 @@
 import { View, Dimensions } from 'react-native';
 import { useState } from 'react';
 import { Image,  StyleSheet } from 'react-native';
-//components
+//importing components
 import { ProgressChart } from '../components/home/percentageProgressChart';
 import { TakeWater } from '../components/home/takeWater';
 import { RiverFlow } from '../components/home/riverFlow';
 import { Switch } from '../components/switch';
 
+//home screen component
 export function HomeScreen( {navagation, navigation}) {
   const [graphTime, setgraphTime] = useState('annual') //text for center of circular progress chart
   const [take, settake] = useState(false) //whether water can be taken or not
 
     return (
       <View style={styles.page}>
+        {/*pie chart at top of home screen*/}
         <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime}/>
+        {/*switch to handle values shown on pie chart*/}
         <Switch options={[
           { label: "Annual", value: 'annual', activeColor:'#72BF44'},
           { label: "Today", value: 'day', activeColor:'#72BF44' }]} style={{
@@ -21,21 +24,24 @@ export function HomeScreen( {navagation, navigation}) {
             width:Dimensions.get('window').width * 0.7, 
             marginLeft:Dimensions.get('window').width *0.15}} action={setgraphTime}
         />
+        {/*take water card*/}
         <TakeWater take={take}/> 
+        {/*river flow card*/}
         <RiverFlow /> 
+        {/*horizons logo at the bottom of the page*/}
         <Image source={require('../images/horizonsFlowTransperant.png')} style={styles.image} /> 
       </View>
     )
   }
 
 const styles = StyleSheet.create({
-  image: {
+  image: { ///styling horizons logo
     marginTop: Dimensions.get('window').width * 0.01, 
     marginLeft: Dimensions.get('window').width * 0.12, 
     width: Dimensions.get('window').width * 0.75,
     height: Dimensions.get('window').width * 0.25,
   }, 
-  page: {
+  page: { //styling page container
     width:Dimensions.get('window').width, 
     height:Dimensions.get('window').height * 2, 
     backgroundColor:'white'

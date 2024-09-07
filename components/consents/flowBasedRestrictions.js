@@ -14,9 +14,9 @@ export function FlowbasedRestriction() {
             id: 0,
             restriction:'NONE', 
             flowAtRestriction: 41.58, 
-            instantaneous: 5000000, 
+            instantaneous:1.605, 
             hourlyRestriction: '', 
-            dailyRestriction: 2000000,
+            dailyRestriction: 200,
             annualRestriction: ''
         },
         {
@@ -70,7 +70,7 @@ export function FlowbasedRestriction() {
                 }}
             />} 
         >
-        {/*map through list of differet restrictions to show other flow based restrictions*/}
+    
         <List.Item left={ () => 
             <View>
                  {restrictions.map((item, itemIndex) => { 

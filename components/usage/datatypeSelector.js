@@ -72,7 +72,7 @@ export function DatatypeSelector(props) {
     return (
         //container for datatype selector
         <View style={[styles.container]}>
-            {/*datatype selecctor*/}
+          
             <List.Accordion
                 title={props.currentDatatypeNickname}
                 description={props.currentDatatype}
@@ -92,7 +92,7 @@ export function DatatypeSelector(props) {
                     />
                   )}
                 style={[styles.accordion, {borderBottomLeftRadius: (expanded == true) ? 0 : 20,
-                    borderBottomRightRadius: (expanded == true) ? 0 : 20,}]}> {/*round corners of accordion based on expanded or not*/}
+                    borderBottomRightRadius: (expanded == true) ? 0 : 20,}]}> 
                 {props.flowMeters.map((item, itemIndex) => {  //map through list of flowmeters to show item for each flow meter
                     return ( 
                         <DatatypeItem 

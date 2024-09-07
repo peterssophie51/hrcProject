@@ -73,7 +73,7 @@ export function DatatypeItem(props) {
 
     return (
         <View style={{zIndex:2}}>
-            {/*datatype container*/}
+         
             <List.Item 
                 title={props.flowMeter['nickname']} 
                 titleStyle={{fontFamily:'Calibri', fontSize:18, 
@@ -93,18 +93,16 @@ export function DatatypeItem(props) {
             
             { visibility && ( //show edit section if visibility true
                 <>
-                    {/*container of edit section*/}
                     <View style={styles.editContainer}>
                         <TextInput 
                                 placeholder="Enter flow meter nickname" 
                                 style={styles.editInput} 
                                 onChangeText={setname}
                         />
-                        {/*submit edited nickname*/}
                         <TouchableOpacity style={styles.submitButtonContainer} onPress={handleSubmit}>
                             <Image source={require('../../images/tickWhiteThick.png')} style={styles.submitButton} />
                         </TouchableOpacity>
-                        {/*cancel editing nickname*/}
+                      
                         <TouchableOpacity  style={styles.crossButtonContainer} onPress={handleCancel}>
                             <Image source={require('../../images/crossWhiteThick.png')} style={styles.crossButton} />
                         </TouchableOpacity>

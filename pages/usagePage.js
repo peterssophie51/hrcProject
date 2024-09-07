@@ -13,7 +13,7 @@ import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 export function UsagePage ({ navagation }) {
   const dataCollected = '20:00 (NZST) June 14th 2024' //when data was collected
   const dailyData= [{ key: 'Flow One', usage: 40}, {key:'Flow Two', usage: 30}, {key:'Flow Three', usage: 20}] //example data for daily usage
-  const dailyMax = 0.1 //example data for daily maximum abstraction
+  const dailyMax = 100 //example data for daily maximum abstraction
   const [type, settype] = useState('totalled') //manage state of switch and top percentage cards
   const annualData = [{key: 'Flow One', usage: 100}, {key: 'Flow Two', usage: 100}, {key:'Flow Three', usage: 200}] //example data for annual usage
   const annualMax = 700 //example data for annual maximum abstraction
@@ -29,14 +29,7 @@ export function UsagePage ({ navagation }) {
     [{value:20}, {value: 39}, {value: 7}], 
     [{value:11}, {value:34}, {value:26}], 
     [{value:51}, {value:89}, {value:123}], 
-    [{value:142}, {value:202}, {value:121}]] },
-    {name: 'FLOW METER 3', nickname: 'asd', data:[
-      [{value:220}, {value: 319}, {value: 72}], 
-      [{value:121}, {value:344}, {value:226}], 
-      [{value:521}, {value:839}, {value:1223}], 
-      [{value:1432}, {value:2032}, {value:1231}]] },
-      
-      
+    [{value:142}, {value:202}, {value:121}]] }
   ])
 
   //function to total the water usage for total water usage based in flow meter usage

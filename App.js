@@ -22,6 +22,46 @@ const Drawer = createDrawerNavigator();
 
 
 export default function App() {
+  //variables
+  const contacts = [
+    {
+      key: 0,
+      name: 'Horizons website',
+      method: 'https',
+      link: 'www.horizons.govt.nz//'
+    },
+    {
+      key: 1,
+      name: 'Horizons phone number',
+      method: 'sms',
+      link:'+64 6 9522 800'
+    },
+    {
+      key: 2,
+      name: 'Horizons fax',
+      //method:
+      //link:
+    },
+    {
+      key: 3,
+      name: 'Horizons email',
+      method:'mailto',
+      link: 'help@horizons.govt.nz'
+    }
+  ] //all contacts to be rendered in contacts card
+  const faq = [
+    {   
+      key: 0, 
+      question:'This is a long question in the FAQ', 
+      answer:"You should already have your consent ATH when applyig for a consent, if you don't have this infrormation, please contact us at Horizons!"
+    },
+    {
+      key: 1,
+      question:'What is my consent flowsite?',
+      answer:'This is the section of the river that is linked to your abstraction. For more information, you can visit out website or contact us at Horizons!'
+    }
+  
+  ] //all faq questions and answers to be rendered in faq cards
   
   //function to load in bold calibri font
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -86,11 +126,11 @@ export default function App() {
         options={{gestureEnabled: 'false'}}
       >
         {/*all different pages*/}
-        <Drawer.Screen name="HOME" component={HomeScreen} />
+        <Drawer.Screen name="HOME" component={HomeScreen}/>
         <Drawer.Screen name="CONSENT" component={ConsentPage}/>
         <Drawer.Screen name="USAGE" component={UsagePage}/>
         <Drawer.Screen name="RIVER" component={RiverPage}/>
-        <Drawer.Screen name="FAQ" component={FAQPage}/>
+        <Drawer.Screen name="FAQ" component={FAQPage} initialParams={{ contacts: contacts, faq: faq }} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

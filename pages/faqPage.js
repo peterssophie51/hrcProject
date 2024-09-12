@@ -1,50 +1,14 @@
 import { View, StyleSheet, Dimensions, ScrollView, Image } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 //import components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
 import { ContactCard } from '../components/faq/contactCard.js';
 import { FAQCard } from '../components/faq/faqCard.js';
 
 //component for the faq page
-export function FAQPage ({ navagation }) {
-  const contacts = [
-    {
-      key: 0,
-      name: 'Horizons website',
-      method: 'https',
-      link: 'www.horizons.govt.nz//'
-    },
-    {
-      key: 1,
-      name: 'Horizons phone number',
-      method: 'sms',
-      link:'+64 6 9522 800'
-    },
-    {
-      key: 2,
-      name: 'Horizons fax',
-      //method:
-      //link:
-    },
-    {
-      key: 3,
-      name: 'Horizons email',
-      method:'mailto',
-      link: 'help@horizons.govt.nz'
-    }
-  ] //all contacts to be rendered in contacts card
-  const faq = [
-    {   
-      key: 0, 
-      question:'This is a long question in the FAQ', 
-      answer:"You should already have your consent ATH when applyig for a consent, if you don't have this infrormation, please contact us at Horizons!"
-    },
-    {
-      key: 1,
-      question:'What is my consent flowsite?',
-      answer:'This is the section of the river that is linked to your abstraction. For more information, you can visit out website or contact us at Horizons!'
-    }
-  
-  ] //all faq questions and answers to be rendered in faq cards
+export function FAQPage ({ navagation, props }) {
+  const route = useRoute()
+  const { contacts, faq } = route.params;
 
     return (
       <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height * 2, backgroundColor:'white', flex:1}}>

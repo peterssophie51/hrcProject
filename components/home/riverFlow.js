@@ -6,11 +6,8 @@ import { CalibriText } from "../fonts/calibriFont";
 
 //rievr flow card to indicate river flows
 export function RiverFlow(props) {
-    const riverFlow = 1.222 // river flow value
-    const restriction = 39.2 //river flow at restriction
-    const timePeriod = '20:00 (NZST) June 14th 2024' //time period data collected
-    const restrictionText = "RESTRICTION AT " + roundNumber(restriction, 3) //when data is restricted
-    const timePeriodText = 'Last Recorded at ' + timePeriod //when data was last recorded
+    const restrictionText = "RESTRICTION AT " + roundNumber(props.restriction, 3) //when data is restricted
+    const timePeriodText = 'Last Recorded at ' + props.timePeriod //when data was last recorded
     
     //function to round the number to a certain amount of decimal points
     function roundNumber(num, roundTo) {
@@ -27,7 +24,7 @@ export function RiverFlow(props) {
             {/*container for river flow and title at the top of the page*/} 
             <View style={styles.topTextContainer}> 
                 {/*river flow value*/}
-                <CalibriBoldText title={riverFlow} style={styles.flow}/>
+                <CalibriBoldText title={props.riverFlow} style={styles.flow}/>
                     {/*units for river flow*/}
                     <CalibriBoldText style={styles.units} title='M'/>
                         <CalibriBoldText style={styles.superscript} title='3'/>

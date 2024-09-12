@@ -8,14 +8,14 @@ import { RiverFlow } from '../components/home/riverFlow';
 import { Switch } from '../components/switch';
 
 //home screen component
-export function HomeScreen( {navagation, navigation}) {
+export function HomeScreen( {route, navigation}) {
   const [graphTime, setgraphTime] = useState('annual') //text for center of circular progress chart
-  const [take, settake] = useState(false) //whether water can be taken or not
+  const { take, settake, abstracted, annualMax, data, riverFlow, restriction, timePeriod } = route.params;
 
     return (
       <View style={styles.page}>
         {/*pie chart at top of home screen*/}
-        <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime}/>
+        <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime} abstracted={abstracted} max={annualMax} data={data}/>
         {/*switch to handle values shown on pie chart*/}
         <Switch options={[
           { label: "Annual", value: 'annual', activeColor:'#72BF44'},
@@ -27,7 +27,7 @@ export function HomeScreen( {navagation, navigation}) {
         {/*take water card*/}
         <TakeWater take={take}/> 
         {/*river flow card*/}
-        <RiverFlow /> 
+        <RiverFlow riverFlow={riverFlow} restriction={restriction} timePeriod={timePeriod}/> 
         {/*horizons logo at the bottom of the page*/}
         <Image source={require('../images/horizonsFlowTransperant.png')} style={styles.image} /> 
       </View>

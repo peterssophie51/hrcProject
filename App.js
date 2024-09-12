@@ -71,7 +71,7 @@ export default function App() {
   const annualData = [{value: 4189}, {value:4167}, {value:4205}, {value:4255}, 
     {value:4289}, {value: 4261}, {value:4202}, {value:4216},
   {value:4199}, {value:4200}, {value:4233}, {value:4149}] //example data for annual timeframe
-  const dataCollected = '20:00 (NZST) June 14th 2024' //when data was collected
+  const dataCollected = '20:00 (NZST) June 16th 2024' //when data was collected
   const dailyDataUsage= [{ key: 'Flow One', usage: 40}, {key:'Flow Two', usage: 30}, {key:'Flow Three', usage: 20}] //example data for daily usage
   const dailyMax = 100 //example data for daily maximum abstraction
   const annualDataUsage = [{key: 'Flow One', usage: 100}, {key: 'Flow Two', usage: 100}, {key:'Flow Three', usage: 200}] //example data for annual usage
@@ -91,7 +91,7 @@ export default function App() {
   ])
   const [compliance, setcompliance] = useState(true) //consent has complied or not
   const [take, settake] = useState(false) //consent can take water or not
-  const consentExpiration = "June 25th 2028" 
+  const consentExpiration = "June 25th 2028asd" 
   //all data for different flow based restrictions
   const restrictions= [
     {   
@@ -122,9 +122,14 @@ export default function App() {
         annualRestriction: ''
     }, 
 ]
-
-
-
+  const abstracted = 20; //amount abstracted in time period
+  const data = [
+    { value: (abstracted/annualMax) * 100 > 100 ? 100 : ((abstracted/annualMax) * 100), color: '#00A7CF' },
+    { value: (abstracted/annualMax) * 100 > 100 ? 0 : 100 - ((abstracted/annualMax) * 100), color: '#95C6DD' }
+  ];  //values for pie chart
+  const riverFlow = 1.255 // river flow value
+  const restriction = 39.2 //river flow at restriction
+ 
 
 
 
@@ -191,7 +196,8 @@ export default function App() {
         options={{gestureEnabled: 'false'}}
       >
         {/*all different pages*/}
-        <Drawer.Screen name="HOME" component={HomeScreen}/>
+        <Drawer.Screen name="HOME" component={HomeScreen} 
+          initialParams={{take: take, settake: settake, abstracted: abstracted, annualMax: annualMax, data: data, riverFlow:riverFlow, restriction:restriction, timePeriod: dataCollected}}/>
         <Drawer.Screen name="CONSENT" component={ConsentPage}
           initialParams={{
             compliance: compliance, setcompliance: setcompliance, take: take, settake: settake,

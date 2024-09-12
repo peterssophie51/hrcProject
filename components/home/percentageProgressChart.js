@@ -12,13 +12,9 @@ export function ProgressChart(props) {
     return Number.isInteger(num) ? num : num.toFixed(roundTo);
   }
 
-  const abstracted = 11.3; //amount abstracted in time period
-  const max = 50; //max for time period
-  const percentage = (abstracted / max) * 100; //percentage use
-  const data = [
-    { value: percentage > 100 ? 100 : percentage, color: '#00A7CF' },
-    { value: percentage > 100 ? 0 : 100 - percentage, color: '#95C6DD' }
-  ];  //values for pie chart
+  const percentage = (props.abstracted / props.max) * 100; //percentage use
+  
+  
   const screenWidth = Dimensions.get('window').width; //screen width of page
 
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -51,7 +47,7 @@ export function ProgressChart(props) {
         donut
         radius={screenWidth * 0.40}
         innerRadius={screenWidth * 0.3}
-        data={data}
+        data={props.data}
         centerLabelComponent={() => { //component to render text in the middle of the progress chart
           return (
             <View style={{ marginTop: percentage > 100 ? -25 : -35 }}>
@@ -64,12 +60,12 @@ export function ProgressChart(props) {
               {/*container of values in pie chart*/}
               <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center' }}>
                 {/*amount abstracted rounded to 2 dp*/}
-                <Text style={styles.subText}>{roundNumber(abstracted, 2)}</Text>
+                <Text style={styles.subText}>{roundNumber(props.abstracted, 2)}</Text>
                 {/*units*/}
                 <Text style={styles.units}>M</Text>
                 <Text style={styles.superscript}>3 </Text>
                 {/*maximum*/}
-                <Text style={styles.subText}>of {roundNumber(max, 2)}</Text>
+                <Text style={styles.subText}>of {roundNumber(props.max, 2)}</Text>
                 {/*units*/}
                 <Text style={styles.units}>M</Text>
                 <Text style={styles.superscript}>3 </Text>

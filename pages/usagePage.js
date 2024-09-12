@@ -13,7 +13,7 @@ import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 //compoennt for the usage page
 export function UsagePage ({ navagation }) {
   const route = useRoute()
-  const { dataCollected, dailyData, dailyMax, annualData, annualMax } = route.params;
+  const { dataCollected, dailyData, dailyMax, annualData, annualMax, flowMeters, setflowMeters } = route.params;
   const [type, settype] = useState('totalled') //manage state of switch and top percentage cards
 
   //function to total the water usage for total water usage based in flow meter usage

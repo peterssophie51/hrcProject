@@ -161,7 +161,7 @@ export default function App() {
         <Drawer.Screen name="HOME" component={HomeScreen}/>
         <Drawer.Screen name="CONSENT" component={ConsentPage}/>
         <Drawer.Screen name="USAGE" component={UsagePage}
-          initialParams={{dataCollected: dataCollected, dailyData: dailyDataUsage, dailyMax: dailyMax, annualData: annualDataUsage, annualMax: annualMax}}/>
+          initialParams={{dataCollected: dataCollected, dailyData: dailyDataUsage, dailyMax: dailyMax, annualData: annualDataUsage, annualMax: annualMax, flowMeters:flowMeters, setflowMeters:setflowMeters}}/>
         <Drawer.Screen name="RIVER" component={RiverPage} 
           initialParams={{flowsite: flowsite, oneDayData: oneDayData, sevenDayData:sevenDayData, oneMonthData: oneMonthData, annualData:annualData}}/>
         <Drawer.Screen name="FAQ" component={FAQPage} 

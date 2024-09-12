@@ -71,7 +71,30 @@ export default function App() {
   const annualData = [{value: 4189}, {value:4167}, {value:4205}, {value:4255}, 
     {value:4289}, {value: 4261}, {value:4202}, {value:4216},
   {value:4199}, {value:4200}, {value:4233}, {value:4149}] //example data for annual timeframe
-  
+  const dataCollected = '20:00 (NZST) June 14th 2024' //when data was collected
+  const dailyDataUsage= [{ key: 'Flow One', usage: 40}, {key:'Flow Two', usage: 30}, {key:'Flow Three', usage: 20}] //example data for daily usage
+  const dailyMax = 100 //example data for daily maximum abstraction
+  const annualDataUsage = [{key: 'Flow One', usage: 100}, {key: 'Flow Two', usage: 100}, {key:'Flow Three', usage: 200}] //example data for annual usage
+  const annualMax = 700 //example data for annual maximum abstraction
+  //example flowmeter data
+  //index 0 is one day data, index 1 is seven day data, index 2 is one month data and idnex 3 is annual data
+  const [flowMeters, setflowMeters] = useState([{name:'FLOW METER 1', nickname:'Animals', data:[
+    [{value: 60}, {value: 21}, {value: 43}], 
+    [{value:109}, {value:98}, {value:131}], 
+    [{value:289}, {value:398}, {value:403}], 
+    [{value:862}, {value:987}, {value:1079}]]},
+                      {name: 'FLOW METER 2', nickname: 'Farm', data:[
+    [{value:20}, {value: 39}, {value: 7}], 
+    [{value:11}, {value:34}, {value:26}], 
+    [{value:51}, {value:89}, {value:123}], 
+    [{value:142}, {value:202}, {value:121}]] }
+  ])
+
+
+
+
+
+
   //function to load in bold calibri font
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -137,7 +160,8 @@ export default function App() {
         {/*all different pages*/}
         <Drawer.Screen name="HOME" component={HomeScreen}/>
         <Drawer.Screen name="CONSENT" component={ConsentPage}/>
-        <Drawer.Screen name="USAGE" component={UsagePage}/>
+        <Drawer.Screen name="USAGE" component={UsagePage}
+          initialParams={{dataCollected: dataCollected, dailyData: dailyDataUsage, dailyMax: dailyMax, annualData: annualDataUsage, annualMax: annualMax}}/>
         <Drawer.Screen name="RIVER" component={RiverPage} 
           initialParams={{flowsite: flowsite, oneDayData: oneDayData, sevenDayData:sevenDayData, oneMonthData: oneMonthData, annualData:annualData}}/>
         <Drawer.Screen name="FAQ" component={FAQPage} 

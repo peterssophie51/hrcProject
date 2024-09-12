@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 //importing components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont';
 import { CalibriText } from '../components/fonts/calibriFont.js'
@@ -11,26 +12,9 @@ import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 
 //compoennt for the usage page
 export function UsagePage ({ navagation }) {
-  const dataCollected = '20:00 (NZST) June 14th 2024' //when data was collected
-  const dailyData= [{ key: 'Flow One', usage: 40}, {key:'Flow Two', usage: 30}, {key:'Flow Three', usage: 20}] //example data for daily usage
-  const dailyMax = 100 //example data for daily maximum abstraction
+  const route = useRoute()
+  const { dataCollected, dailyData, dailyMax, annualData, annualMax } = route.params;
   const [type, settype] = useState('totalled') //manage state of switch and top percentage cards
-  const annualData = [{key: 'Flow One', usage: 100}, {key: 'Flow Two', usage: 100}, {key:'Flow Three', usage: 200}] //example data for annual usage
-  const annualMax = 700 //example data for annual maximum abstraction
-
-  //example flowmeter data
-  //index 0 is one day data, index 1 is seven day data, index 2 is one month data and idnex 3 is annual data
-  const [flowMeters, setflowMeters] = useState([{name:'FLOW METER 1', nickname:'Animals', data:[
-    [{value: 60}, {value: 21}, {value: 43}], 
-    [{value:109}, {value:98}, {value:131}], 
-    [{value:289}, {value:398}, {value:403}], 
-    [{value:862}, {value:987}, {value:1079}]]},
-                      {name: 'FLOW METER 2', nickname: 'Farm', data:[
-    [{value:20}, {value: 39}, {value: 7}], 
-    [{value:11}, {value:34}, {value:26}], 
-    [{value:51}, {value:89}, {value:123}], 
-    [{value:142}, {value:202}, {value:121}]] }
-  ])
 
   //function to total the water usage for total water usage based in flow meter usage
   const totalWaterUsage = flowMeters.reduce((acc, flowMeter) => {

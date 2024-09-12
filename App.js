@@ -22,7 +22,7 @@ const Drawer = createDrawerNavigator();
 
 
 export default function App() {
-  //variables
+  //VARIABLES
   const contacts = [
     {
       key: 0,
@@ -62,6 +62,15 @@ export default function App() {
     }
   
   ] //all faq questions and answers to be rendered in faq cards
+  const flowsite = "Rangitikei at Mangaweka" //current flowsite
+  const oneDayData= [{value: 4286}, {value: 4232}, {value: 4277}, {value: 4211},
+    {value: 4209}, {value: 4300}, {value: 4289}, {value: 4295}, 
+    {value: 4273}, {value: 4270}, {value: 4269}, {value: 4218}] //example data for one day timeframe
+  const sevenDayData = [{value:4267}, {value:4213}, {value: 4299}, {value:4187}, {value:4304}, {value:4265}, {value:4258}] //example data for seven days timeframe
+  const oneMonthData = [{value:4213}, {value:4189}, {value:4194}, {value:4205}, {value:4279}, {value:4304}, {value:4289}] //example data for one month timeframe
+  const annualData = [{value: 4189}, {value:4167}, {value:4205}, {value:4255}, 
+    {value:4289}, {value: 4261}, {value:4202}, {value:4216},
+  {value:4199}, {value:4200}, {value:4233}, {value:4149}] //example data for annual timeframe
   
   //function to load in bold calibri font
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -129,8 +138,10 @@ export default function App() {
         <Drawer.Screen name="HOME" component={HomeScreen}/>
         <Drawer.Screen name="CONSENT" component={ConsentPage}/>
         <Drawer.Screen name="USAGE" component={UsagePage}/>
-        <Drawer.Screen name="RIVER" component={RiverPage}/>
-        <Drawer.Screen name="FAQ" component={FAQPage} initialParams={{ contacts: contacts, faq: faq }} />
+        <Drawer.Screen name="RIVER" component={RiverPage} 
+          initialParams={{flowsite: flowsite, oneDayData: oneDayData, sevenDayData:sevenDayData, oneMonthData: oneMonthData, annualData:annualData}}/>
+        <Drawer.Screen name="FAQ" component={FAQPage} 
+          initialParams={{ contacts: contacts, faq: faq }} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

@@ -89,6 +89,39 @@ export default function App() {
     [{value:51}, {value:89}, {value:123}], 
     [{value:142}, {value:202}, {value:121}]] }
   ])
+  const [compliance, setcompliance] = useState(true) //consent has complied or not
+  const [take, settake] = useState(false) //consent can take water or not
+  const consentExpiration = "June 25th 2028" 
+  //all data for different flow based restrictions
+  const restrictions= [
+    {   
+        id: 0,
+        restriction:'AA', 
+        flowAtRestriction: 41.58, 
+        instantaneous:1.605, 
+        hourlyRestriction: '', 
+        dailyRestriction: 200,
+        annualRestriction: ''
+    },
+    {
+        id:1,
+        restriction:'ONE', 
+        flowAtRestriction: 13.9007, 
+        instantaneous: 20.75, 
+        hourlyRestriction: '', 
+        dailyRestriction: 2000,
+        annualRestriction: ''
+    },
+    {
+        id: 2,
+        restriction:'TWO', 
+        flowAtRestriction: 11.100, 
+        instantaneous: '', 
+        hourlyRestriction: '', 
+        dailyRestriction: 140,
+        annualRestriction: ''
+    }, 
+]
 
 
 
@@ -159,7 +192,10 @@ export default function App() {
       >
         {/*all different pages*/}
         <Drawer.Screen name="HOME" component={HomeScreen}/>
-        <Drawer.Screen name="CONSENT" component={ConsentPage}/>
+        <Drawer.Screen name="CONSENT" component={ConsentPage}
+          initialParams={{
+            compliance: compliance, setcompliance: setcompliance, take: take, settake: settake,
+            flowsite: flowsite, consentExpiration: consentExpiration, annualMax: annualMax, restrictions: restrictions}}/>
         <Drawer.Screen name="USAGE" component={UsagePage}
           initialParams={{dataCollected: dataCollected, dailyData: dailyDataUsage, dailyMax: dailyMax, annualData: annualDataUsage, annualMax: annualMax, flowMeters:flowMeters, setflowMeters:setflowMeters}}/>
         <Drawer.Screen name="RIVER" component={RiverPage} 

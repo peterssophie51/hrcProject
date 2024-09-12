@@ -1,6 +1,7 @@
 import { View } from 'react-native';
 import { StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { useState } from 'react';
+import { useRoute } from '@react-navigation/native';
 //importing components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
 import { ConsentInfo } from '../components/consents/consentInfo.js';
@@ -9,8 +10,8 @@ import { FlowbasedRestriction } from '../components/consents/flowBasedRestrictio
 
 //component for the consent page
 export function ConsentPage ({ navagation }) {
-  const [compliance, setcompliance] = useState(true) //consent has complied or not
-  const [take, settake] = useState(false) //consent can take water or not
+  const route = useRoute()
+  const { compliance, setcompliance, take, settake, flowsite, consentExpiration, annualMax, restrictions} = route.params;
 
     return (
       //styling the container for the page
@@ -21,9 +22,9 @@ export function ConsentPage ({ navagation }) {
         <ScrollView> 
           {/*consent info card*/}
           <ConsentInfo 
-            consentExpiration="June 25th 2028" 
-            consentFlowSite="Rangitikei at Mangaweka" 
-            annualMax="No recorded data"/> 
+            consentExpiration= {consentExpiration}
+            consentFlowSite= {flowsite}
+            annualMax={annualMax}/> 
           {/*container to arrange small cards next to each other*/}
           <View style={{display:'flex', flexDirection:'row'}}>
             {/*compliance card*/}
@@ -33,7 +34,7 @@ export function ConsentPage ({ navagation }) {
             <SmallCard title={(take == true) ? 'You can take\nwater today': 'You can not take\nwater today'} value={take}/>
           </View>
           {/*card for flow based restrictions*/}
-          <FlowbasedRestriction /> 
+          <FlowbasedRestriction restrictions={restrictions}/> 
           {/*gap at the bottom of the page*/}
           <View style={{height: Dimensions.get('window').height * 0.03}}></View>
         </ScrollView>

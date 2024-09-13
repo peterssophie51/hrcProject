@@ -73,7 +73,7 @@ export function ProgressChart(props) {
                 <Text style={styles.subText}>per {props.graphTime}</Text>
               </View>
               {/*show when data was recorded*/}
-              <CalibriText title={'Last Recorded at 20:00 (NZST)\nJune 14th 2024'} style={styles.subText} />
+              <CalibriText title={'Last Recorded at ' + props.timeframe} style={styles.subText} />
             </View>
           );
         }}

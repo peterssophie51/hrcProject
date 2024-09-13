@@ -1,7 +1,5 @@
 import { View } from 'react-native';
 import { StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { useState } from 'react';
-import { useRoute } from '@react-navigation/native';
 //importing components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
 import { ConsentInfo } from '../components/consents/consentInfo.js';
@@ -9,10 +7,8 @@ import { SmallCard } from '../components/consents/smallCard.js';
 import { FlowbasedRestriction } from '../components/consents/flowBasedRestrictions.js';
 
 //component for the consent page
-export function ConsentPage ({ navagation }) {
-  const route = useRoute()
-  const { compliance, setcompliance, take, settake, flowsite, consentExpiration, annualMax, restrictions} = route.params;
-
+export function ConsentPage ({ route, navagation, compliance, setcompliance, take, settake, flowsite, consentExpiration, annualMax, restrictions }) {
+  
     return (
       //styling the container for the page
       <View style={styles.page}> 

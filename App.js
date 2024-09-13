@@ -90,7 +90,7 @@ export default function App() {
     [{value:142}, {value:202}, {value:121}]] }
   ])
   const [compliance, setcompliance] = useState(true) //consent has complied or not
-  const [take, settake] = useState(false) //consent can take water or not
+  const [take, settake] = useState(true) //consent can take water or not
   const consentExpiration = "Consent expiration" 
   //all data for different flow based restrictions
   const restrictions= [
@@ -127,8 +127,8 @@ export default function App() {
     { value: (abstracted/annualMax) * 100 > 100 ? 100 : ((abstracted/annualMax) * 100), color: '#00A7CF' },
     { value: (abstracted/annualMax) * 100 > 100 ? 0 : 100 - ((abstracted/annualMax) * 100), color: '#95C6DD' }
   ];  //values for pie chart
-  const riverFlow = 67 // river flow value
-  const restriction = 40 //river flow at restriction
+  const riverFlow = 40 // river flow value
+  const restriction = 10 //river flow at restriction
  
 
 
@@ -196,18 +196,33 @@ export default function App() {
         options={{gestureEnabled: 'false'}}
       >
         {/*all different pages*/}
-        <Drawer.Screen name="HOME" component={HomeScreen} 
-          initialParams={{take: take, settake: settake, abstracted: abstracted, annualMax: annualMax, data: data, riverFlow:riverFlow, restriction:restriction, timePeriod: dataCollected}}/>
-        <Drawer.Screen name="CONSENT" component={ConsentPage}
-          initialParams={{
-            compliance: compliance, setcompliance: setcompliance, take: take, settake: settake,
-            flowsite: flowsite, consentExpiration: consentExpiration, annualMax: annualMax, restrictions: restrictions}}/>
-        <Drawer.Screen name="USAGE" component={UsagePage}
-          initialParams={{dataCollected: dataCollected, dailyData: dailyDataUsage, dailyMax: dailyMax, annualData: annualDataUsage, annualMax: annualMax, flowMeters:flowMeters, setflowMeters:setflowMeters}}/>
-        <Drawer.Screen name="RIVER" component={RiverPage} 
-          initialParams={{flowsite: flowsite, oneDayData: oneDayData, sevenDayData:sevenDayData, oneMonthData: oneMonthData, annualData:annualData}}/>
-        <Drawer.Screen name="FAQ" component={FAQPage} 
-          initialParams={{ contacts: contacts, faq: faq }} />
+        <Drawer.Screen name="HOME">
+          {props => <HomeScreen {...props} take={take} settake={settake} abstracted={abstracted} 
+              annualMax={annualMax} data={data} riverFlow={riverFlow} restriction={restriction} 
+              timePeriod={dataCollected} />}
+        </Drawer.Screen>
+
+        <Drawer.Screen name="CONSENT">
+          {props => <ConsentPage {...props} compliance={compliance} setcompliance={setcompliance} 
+          take={take} settake={settake} flowsite={flowsite} consentExpiration={consentExpiration} 
+          annualMax={annualMax} restrictions={restrictions} />}
+        </Drawer.Screen>
+
+        <Drawer.Screen name="USAGE">
+          {props => <UsagePage {...props} dataCollected={dataCollected} dailyData={dailyDataUsage} 
+          dailyMax={dailyMax} annualData={annualDataUsage} annualMax={annualMax} flowMeters={flowMeters} 
+          setflowMeters={setflowMeters} />}
+        </Drawer.Screen>
+
+        <Drawer.Screen name="RIVER">
+          {props => <RiverPage {...props} flowsite={flowsite} oneDayData={oneDayData} 
+          sevenDayData={sevenDayData} oneMonthData={oneMonthData} annualData={annualData} />}
+        </Drawer.Screen>
+
+        <Drawer.Screen name="FAQ">
+          {props => <FAQPage {...props} contacts={contacts} faq={faq} />}
+        </Drawer.Screen>
+
       </Drawer.Navigator>
     </NavigationContainer>
   );

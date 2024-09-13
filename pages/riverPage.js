@@ -1,7 +1,6 @@
 import { View } from 'react-native';
 import { useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
-import { useRoute } from '@react-navigation/native';
 //importing components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
 import { CalibriText } from '../components/fonts/calibriFont.js';
@@ -10,9 +9,7 @@ import { RiverFlowChart } from '../components/river/riverFlowChart.js';
 import { TimeRadios } from '../components/river/graphRadios.js';
 
 //component for the river page
-export function RiverPage ({ navagation }) {
-  const route = useRoute()
-  const { flowsite, oneDayData, sevenDayData, oneMonthData, annualData } = route.params;
+export function RiverPage ({ route, navagation, flowsite, oneDayData, sevenDayData, oneMonthData, annualData }) {
 
   const [selectedTime, setselectedTime] =  useState('1 DAY') //current timeframe for data
   const [currentData, setcurrentData] = useState(oneDayData) //set current data (as by radios)

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { useRoute } from '@react-navigation/native';
 //importing components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont';
 import { CalibriText } from '../components/fonts/calibriFont.js'
@@ -11,9 +10,7 @@ import { UsageChart } from '../components/usage/usageChart.js';
 import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 
 //compoennt for the usage page
-export function UsagePage ({ navagation }) {
-  const route = useRoute()
-  const { dataCollected, dailyData, dailyMax, annualData, annualMax, flowMeters, setflowMeters } = route.params;
+export function UsagePage ({ navagation, dataCollected, dailyData, dailyMax, annualData, annualMax, flowMeters, setflowMeters }) {
   const [type, settype] = useState('totalled') //manage state of switch and top percentage cards
 
   //function to total the water usage for total water usage based in flow meter usage

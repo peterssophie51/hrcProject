@@ -1,14 +1,11 @@
 import { View, StyleSheet, Dimensions, ScrollView, Image } from 'react-native';
-import { useRoute } from '@react-navigation/native';
 //import components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
 import { ContactCard } from '../components/faq/contactCard.js';
 import { FAQCard } from '../components/faq/faqCard.js';
 
 //component for the faq page
-export function FAQPage ({ navagation, props }) {
-  const route = useRoute()
-  const { contacts, faq } = route.params;
+export function FAQPage ({ route, navagation, props, contacts, faq }) {
 
     return (
       <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height * 2, backgroundColor:'white', flex:1}}>

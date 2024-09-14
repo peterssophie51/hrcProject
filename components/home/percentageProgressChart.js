@@ -12,8 +12,12 @@ export function ProgressChart(props) {
     return Number.isInteger(num) ? num : num.toFixed(roundTo);
   }
 
-  const percentage = (props.abstracted / props.max) * 100; //percentage use
+  const percentage = (props.abstracted / props.max) * 100; //percentage 
   
+  const data = [
+    { value: (props.abstracted/props.max) * 100 > 100 ? 100 : ((props.abstracted/props.max) * 100), color: '#00A7CF' },
+    { value: (props.abstracted/props.max) * 100 > 100 ? 0 : 100 - ((props.abstracted/props.max) * 100), color: '#95C6DD' }
+  ];  //values for pie chart
   
   const screenWidth = Dimensions.get('window').width; //screen width of page
 
@@ -47,7 +51,7 @@ export function ProgressChart(props) {
         donut
         radius={screenWidth * 0.40}
         innerRadius={screenWidth * 0.3}
-        data={props.data}
+        data={data}
         centerLabelComponent={() => { //component to render text in the middle of the progress chart
           return (
             <View style={{ marginTop: percentage > 100 ? -25 : -35 }}>

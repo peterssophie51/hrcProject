@@ -9,7 +9,7 @@ import { RiverFlowChart } from '../components/river/riverFlowChart.js';
 import { TimeRadios } from '../components/river/graphRadios.js';
 
 //component for the river page
-export function RiverPage ({ route, navagation, flowsite, oneDayData, sevenDayData, oneMonthData, annualData }) {
+export function RiverPage ({ route, navagation, flowsite, oneDayData, sevenDayData, oneMonthData, annualData, timeframe, riverFlow }) {
 
   const [selectedTime, setselectedTime] =  useState('1 DAY') //current timeframe for data
   const [currentData, setcurrentData] = useState(oneDayData) //set current data (as by radios)
@@ -27,9 +27,9 @@ export function RiverPage ({ route, navagation, flowsite, oneDayData, sevenDayDa
         {/*consent flowsite*/}
         <CalibriBoldText  style={styles.flowsite} title={flowsite} />
         {/*when data recorded*/}
-        <CalibriText style={styles.timeRecorded} title='Last Recorded at 20:00 (NZST) June 14th 2024'/> 
+        <CalibriText style={styles.timeRecorded} title={`Last Recorded at ${timeframe}`} />
         {/*river flow card*/}
-        <RiverFlowTitle riverFlow={40000}/> 
+        <RiverFlowTitle riverFlow={riverFlow}/> 
         {/*river flow chart*/}
         <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels}/> 
         {/*graph radios*/}

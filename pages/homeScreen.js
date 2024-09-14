@@ -8,13 +8,14 @@ import { RiverFlow } from '../components/home/riverFlow';
 import { Switch } from '../components/switch';
 
 //home screen component
-export function HomeScreen( {navigation, take, abstracted, annualMax, data, riverFlow, restriction, timePeriod}) {
+export function HomeScreen( {navigation, take, annualUsage, dailyUsage, annualMax, dailyMax, riverFlow, restriction, timePeriod}) {
   const [graphTime, setgraphTime] = useState('annual') //text for center of circular progress chart
 
     return (
       <View style={styles.page}>
         {/*pie chart at top of home screen*/}
-        <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime} abstracted={abstracted} max={annualMax} data={data} timeframe={timePeriod}/>
+        <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime} abstracted={(graphTime=='annual') ? annualUsage : dailyUsage} 
+        max={(graphTime == 'annual') ? annualMax : dailyMax} timeframe={timePeriod}/>
         {/*switch to handle values shown on pie chart*/}
         <Switch options={[
           { label: "Annual", value: 'annual', activeColor:'#72BF44'},

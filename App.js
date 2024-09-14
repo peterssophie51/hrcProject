@@ -63,6 +63,10 @@ export default function App() {
   
   ] //all faq questions and answers to be rendered in faq cards
   const flowsite = "Flowsite" //current flowsite
+  const dataCollected = 'Data collected' //when data was collected
+  const dailyMax = 100 //example data for daily maximum abstraction
+  const annualMax = 200 //example data for annual maximum abstraction
+  
   const oneDayData= [{value: 4286}, {value: 4232}, {value: 4277}, {value: 4211},
     {value: 4209}, {value: 4300}, {value: 4289}, {value: 4295}, 
     {value: 4273}, {value: 4270}, {value: 4269}, {value: 4218}] //example data for one day timeframe
@@ -71,11 +75,8 @@ export default function App() {
   const annualData = [{value: 4189}, {value:4167}, {value:4205}, {value:4255}, 
     {value:4289}, {value: 4261}, {value:4202}, {value:4216},
   {value:4199}, {value:4200}, {value:4233}, {value:4149}] //example data for annual timeframe
-  const dataCollected = 'Data collected' //when data was collected
   const dailyDataUsage= [{ key: 'Flow One', usage: 40}, {key:'Flow Two', usage: 30}, {key:'Flow Three', usage: 20}] //example data for daily usage
-  const dailyMax = 100 //example data for daily maximum abstraction
   const annualDataUsage = [{key: 'Flow One', usage: 100}, {key: 'Flow Two', usage: 100}, {key:'Flow Three', usage: 200}] //example data for annual usage
-  const annualMax = 700 //example data for annual maximum abstraction
   //example flowmeter data
   //index 0 is one day data, index 1 is seven day data, index 2 is one month data and idnex 3 is annual data
   const [flowMeters, setflowMeters] = useState([{name:'FLOW METER 1', nickname:'Animals', data:[
@@ -89,8 +90,12 @@ export default function App() {
     [{value:51}, {value:89}, {value:123}], 
     [{value:142}, {value:202}, {value:121}]] }
   ])
+  const dailyUsage = 50;
+  const annualUsage = 0;
+
+  
   const [compliance, setcompliance] = useState(true) //consent has complied or not
-  const [take, settake] = useState(true) //consent can take water or not
+  const [take, settake] = useState(false) //consent can take water or not
   const consentExpiration = "Consent expiration" 
   //all data for different flow based restrictions
   const restrictions= [
@@ -122,12 +127,8 @@ export default function App() {
         annualRestriction: ''
     }, 
 ]
-  const abstracted = 200; //amount abstracted in time period
-  const data = [
-    { value: (abstracted/annualMax) * 100 > 100 ? 100 : ((abstracted/annualMax) * 100), color: '#00A7CF' },
-    { value: (abstracted/annualMax) * 100 > 100 ? 0 : 100 - ((abstracted/annualMax) * 100), color: '#95C6DD' }
-  ];  //values for pie chart
-  const riverFlow = 40 // river flow value
+
+  const riverFlow = 3 // river flow value
   const restriction = 10 //river flow at restriction
  
 
@@ -197,9 +198,9 @@ export default function App() {
       >
         {/*all different pages*/}
         <Drawer.Screen name="HOME">
-          {props => <HomeScreen {...props} take={take} settake={settake} abstracted={abstracted} 
-              annualMax={annualMax} data={data} riverFlow={riverFlow} restriction={restriction} 
-              timePeriod={dataCollected} />}
+          {props => <HomeScreen {...props} take={take} settake={settake} dailyUsage={dailyUsage} annualUsage={annualUsage}
+              annualMax={annualMax} riverFlow={riverFlow} restriction={restriction} 
+              timePeriod={dataCollected} dailyMax={dailyMax} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="CONSENT">
@@ -216,7 +217,7 @@ export default function App() {
 
         <Drawer.Screen name="RIVER">
           {props => <RiverPage {...props} flowsite={flowsite} oneDayData={oneDayData} 
-          sevenDayData={sevenDayData} oneMonthData={oneMonthData} annualData={annualData} />}
+          sevenDayData={sevenDayData} oneMonthData={oneMonthData} annualData={annualData} timeframe={dataCollected} riverFlow={riverFlow} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="FAQ">

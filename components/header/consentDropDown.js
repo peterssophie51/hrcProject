@@ -9,16 +9,8 @@ import { ConsentDropdownItem } from './consentDropdownItem';
 //consent header function
 export function ConsentDropdownHeader(props) {
   //handling values
-  const [currentConsent, setCurrentConsent] = useState("Farm Water Consent");
-  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085");
   const [fontLoaded, setFontLoaded] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  
-  //all consents in list 
-  const [consents, setconsents] = useState([
-    {ath:'ATH-2002009085', nickname: 'Farm'}, 
-    {ath:'ATH-2002008648', nickname: 'Water'}, 
-    {ath:'ATH-2002009348', nickname: 'Crops'}])
 
   //change variable when header expanded/minimised
   const handlePress = () => setExpanded(!expanded);
@@ -26,7 +18,7 @@ export function ConsentDropdownHeader(props) {
   //update the consents information
   const updateConsent = (updatedConsent) => {
     const updatedConsents = []
-    consents.map((item, index) => {
+    props.consents.map((item, index) => {
       if (item['ath'] == updatedConsent['ath']) {
         item['nickname'] = updatedConsent['nickname'] //if consent is updated consent, update info and push new value to list
         updatedConsents.push(item)
@@ -34,7 +26,7 @@ export function ConsentDropdownHeader(props) {
         updatedConsents.push(item) //if consent not updated, push current values to list
       }
     }) 
-    setconsents(updatedConsents) //update consents
+    props.setconsents(updatedConsents) //update consents
   }
 
   //function to load in calibri bold and calibri font
@@ -71,8 +63,8 @@ export function ConsentDropdownHeader(props) {
       {/*accordion drop down section*/}
       <List.Accordion
         style={styles.accordionDropDown}
-        title={currentConsent}
-        description={currentConsentATH}
+        title={props.currentConsent}
+        description={props.currentConsentATH}
         titleStyle={{ marginLeft: 70, color: 'white', fontSize: 25, fontFamily: 'CalibriBold' }}
         descriptionStyle={{ marginLeft: 70, color: 'white', fontSize: 20, fontFamily: 'Calibri' }}
         expanded={expanded}
@@ -90,17 +82,17 @@ export function ConsentDropdownHeader(props) {
         )}
       >
         {/*all different consents*/}
-        { consents.map((item, index) => {
+        { props.consents.map((item, index) => {
           return(
           <ConsentDropdownItem 
             key={item.ath}
             nickname={item.nickname}
             description={item.ath}
-            currentConsentATH={currentConsentATH}
-            setcurrentConsent={setCurrentConsent}
-            setcurrentConsentATH={setCurrentConsentATH}
+            currentConsentATH={props.currentConsentATH}
+            setcurrentConsent={props.setCurrentConsent}
+            setcurrentConsentATH={props.setCurrentConsentATH}
             updateConsent={updateConsent}
-            consents={consents}/>
+            consents={props.consents}/>
         )})
 
         }

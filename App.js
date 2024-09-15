@@ -64,6 +64,14 @@ export default function App() {
   ] //all faq questions and answers to be rendered in faq cards
   const flowsite = "Flowsite" //current flowsite
   const dataCollected = 'Data collected' //when data was collected
+  //all consents in list 
+  const [consents, setconsents] = useState([
+    {ath:'ATH-2002009085', nickname: 'Farm'}, 
+    {ath:'ATH-2002008648', nickname: 'Water'}, 
+    {ath:'ATH-2002009348', nickname: 'Crops'}])
+  const [currentConsent, setCurrentConsent] = useState("Farm Water Consent");
+  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085");
+
   const dailyMax = 100 //example data for daily maximum abstraction
   const annualMax = 200 //example data for annual maximum abstraction
   
@@ -91,7 +99,7 @@ export default function App() {
     [{value:142}, {value:202}, {value:121}]] }
   ])
   const dailyUsage = 50;
-  const annualUsage = 0;
+  const annualUsage = 80;
 
   
   const [compliance, setcompliance] = useState(true) //consent has complied or not
@@ -161,7 +169,9 @@ export default function App() {
         initialRouteName="Home"
         screenOptions={({navigation}) => ({
           //custom header for drawer navigator
-          header: () => < ConsentDropdownHeader navigation={navigation} />,
+          header: () => < ConsentDropdownHeader navigation={navigation} consents={consents} setconsents={setconsents}
+            currentConsent={currentConsent} setCurrentConsent={setCurrentConsent} currentConsentATH={currentConsentATH} setCurrentConsentATH={setCurrentConsentATH}
+          />,
           swipeEnabled: false,
           drawerActiveTintColor: '#72BF44',
           drawerActiveBackgroundColor: 'transperant',

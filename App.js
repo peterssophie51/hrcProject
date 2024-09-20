@@ -62,89 +62,181 @@ export default function App() {
     }
   
   ] //all faq questions and answers to be rendered in faq cards
-  const flowsite = "Flowsite" //current flowsite
-  const dataCollected = 'Data collected' //when data was collected
-  //all consents in list 
+
+   //all consents in list 
   const [consents, setconsents] = useState([
     {ath:'ATH-2002009085', nickname: 'Farm'}, 
     {ath:'ATH-2002008648', nickname: 'Water'}, 
-    {ath:'ATH-2002009348', nickname: 'Crops'}])
-  const [currentConsent, setCurrentConsent] = useState("Farm Water Consent");
-  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085");
-
-  const dailyMax = 100 //example data for daily maximum abstraction
-  const annualMax = 200 //example data for annual maximum abstraction
-  
-  const oneDayData= [{value: 4286}, {value: 4232}, {value: 4277}, {value: 4211},
-    {value: 4209}, {value: 4300}, {value: 4289}, {value: 4295}, 
-    {value: 4273}, {value: 4270}, {value: 4269}, {value: 4218}] //example data for one day timeframe
-  const sevenDayData = [{value:4267}, {value:4213}, {value: 4299}, {value:4187}, {value:4304}, {value:4265}, {value:4258}] //example data for seven days timeframe
-  const oneMonthData = [{value:4213}, {value:4189}, {value:4194}, {value:4205}, {value:4279}, {value:4304}, {value:4289}] //example data for one month timeframe
-  const annualData = [{value: 4189}, {value:4167}, {value:4205}, {value:4255}, 
-    {value:4289}, {value: 4261}, {value:4202}, {value:4216},
-  {value:4199}, {value:4200}, {value:4233}, {value:4149}] //example data for annual timeframe
-  const dailyDataUsage= [{ key: 'Flow One', usage: 40}, {key:'Flow Two', usage: 30}, {key:'Flow Three', usage: 20}] //example data for daily usage
-  const annualDataUsage = [{key: 'Flow One', usage: 100}, {key: 'Flow Two', usage: 100}, {key:'Flow Three', usage: 200}] //example data for annual usage
-  //example flowmeter data
-  //index 0 is one day data, index 1 is seven day data, index 2 is one month data and idnex 3 is annual data
-  const [flowMeters, setflowMeters] = useState([{name:'FLOW METER 1', nickname:'Animals', data:[
-    [{value: 60}, {value: 21}, {value: 43}], 
-    [{value:109}, {value:98}, {value:131}], 
-    [{value:289}, {value:398}, {value:403}], 
-    [{value:862}, {value:987}, {value:1079}]]},
-                      {name: 'FLOW METER 2', nickname: 'Farm', data:[
-    [{value:20}, {value: 39}, {value: 7}], 
-    [{value:11}, {value:34}, {value:26}], 
-    [{value:51}, {value:89}, {value:123}], 
-    [{value:142}, {value:202}, {value:121}]] }
+    {ath:'ATH-2002009348', nickname: 'Crops'}
   ])
-  const dailyUsage = 50;
-  const annualUsage = 80;
+  const [currentConsent, setCurrentConsent] = useState("Farm Water Consent"); //current consent nickname
+  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085"); //current consent ath
 
-  
-  const [compliance, setcompliance] = useState(true) //consent has complied or not
+  var dailyMax = 0 //maximum abstraction for a day
+  var annualMax = 0 //maximum abstraction for a year
   const [take, settake] = useState(false) //consent can take water or not
-  const consentExpiration = "Consent expiration" 
-  //all data for different flow based restrictions
-  const restrictions= [
-    {   
-        id: 0,
-        restriction:'AA', 
-        flowAtRestriction: 41.58, 
-        instantaneous:1.605, 
-        hourlyRestriction: '', 
-        dailyRestriction: 200,
-        annualRestriction: ''
+  const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
+  var currentRiverFlow = 0 //current river flow
+  var flowAtRestriction = 0 //restriction value in home page
+  var dataRecorded = '2025-01-01T00:00:00' //when all data was recorded
+  var consentExpiration = '2024-09-19T00:00:00' //when the consent expires
+  var flowsite = 'Rangitikei at Mangaweka' //flowsite for consent
+  //flow meter data
+  //in data, 0: one day data  1: seven day data  2: one month data  3: annual data
+  const [flowmeters, setflowmeters] = useState([
+    {
+      name:'Flow 1',
+      nickname: 'Farm',
+      annualUsage: 0,
+      dailyUsage: 0,
+      data:[
+        [
+          {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-19T01:00:00'}, {value: 0, time: '2024-09-19T02:00:00'},
+          {value: 0, time: '2024-09-19T03:00:00'}, {value: 0, time: '2024-09-19T04:00:00'}, {value: 0, time: '2024-09-19T05:00:00'},
+          {value: 0, time: '2024-09-19T06:00:00'}, {value: 0, time: '2024-09-19T07:00:00'}, {value: 0, time: '2024-09-19T08:00:00'},
+          {value: 0, time: '2024-09-19T09:00:00'}, {value: 0, time: '2024-09-1910:00:00'}, {value: 0, time: '2024-09-19T11:00:00'},
+          {value: 0, time: '2024-09-19T12:00:00'}, {value: 0, time: '2024-09-19T13:00:00'}, {value: 0, time: '2024-09-19T14:00:00'},
+          {value: 0, time: '2024-09-19T15:00:00'}, {value: 0, time: '2024-09-19T16:00:00'}, {value: 0, time: '2024-09-19T17:00:00'},
+          {value: 0, time: '2024-09-19T18:00:00'}, {value: 0, time: '2024-09-19T19:00:00'}, {value: 0, time: '2024-09-19T20:00:00'},
+          {value: 0, time: '2024-09-19T21:00:00'}, {value: 0, time: '2024-09-19T22:00:00'}, {value: 0, time: '2024-09-19T23:00:00'}
+        ],
+        [
+          {value: 0, time: '2024-09-20T00:00:00'}, {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-18T00:00:00'},
+          {value: 0, time: '2024-09-17T00:00:00'}, {value: 0, time: '2024-09-16T00:00:00'}, {value: 0, time: '2024-09-15T00:00:00'},
+          {value: 0, time: '2024-09-14T00:00:00'}
+        ],
+        [
+          {value: 0, time: '2024-09-20T00:00:00'}, {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-18T00:00:00'},
+          {value: 0, time: '2024-09-17T00:00:00'}, {value: 0, time: '2024-09-16T00:00:00'}, {value: 0, time: '2024-09-15T00:00:00'},
+          {value: 0, time: '2024-09-14T00:00:00'}, {value: 0, time: '2024-09-13T00:00:00'}, {value: 0, time: '2024-09-12T00:00:00'}, 
+          {value: 0, time: '2024-09-11T00:00:00'}, {value: 0, time: '2024-09-10T00:00:00'}, {value: 0, time: '2024-09-09T00:00:00'}, 
+          {value: 0, time: '2024-08-15T00:00:00'}, {value: 0, time: '2024-09-07T00:00:00'}, {value: 0, time: '2024-09-06T00:00:00'}, 
+          {value: 0, time: '2024-09-05T00:00:00'}, {value: 0, time: '2024-09-04T00:00:00'}, {value: 0, time: '2024-09-03T00:00:00'}, 
+          {value: 0, time: '2024-09-02T00:00:00'}, {value: 0, time: '2024-09-01T00:00:00'}, {value: 0, time: '2024-08-31T00:00:00'},
+          {value: 0, time: '2024-08-30T00:00:00'}, {value: 0, time: '2024-08-29T00:00:00'}, {value: 0, time: '2024-08-28T00:00:00'},
+          {value: 0, time: '2024-08-27T00:00:00'}, {value: 0, time: '2024-08-26T00:00:00'}, {value: 0, time: '2024-08-25T00:00:00'},
+          {value: 0, time: '2024-08-24T00:00:00'}
+        ],
+        [
+          {value: 0, time: '2024-01-31T00:00:00'}, {value: 0, time: '2024-02-28T00:00:00'}, {value: 0, time: '2024-03-31T00:00:00'},
+          {value: 0, time: '2024-04-30T00:00:00'}, {value: 0, time: '2024-05-31T00:00:00'}, {value: 0, time: '2024-06-30T00:00:00'},
+          {value: 0, time: '2024-07-31T00:00:00'}, {value: 0, time: '2024-08-31T00:00:00'}, {value: 0, time: '2024-09-30T00:00:00'}, 
+          {value: 0, time: '2024-10-31T00:00:00'}, {value: 0, time: '2024-11-30T00:00:00'}, {value: 0, time: '2024-12-31T00:00:00'}, 
+        ]
+      ]
     },
     {
-        id:1,
-        restriction:'ONE', 
-        flowAtRestriction: 13.9007, 
-        instantaneous: 20.75, 
-        hourlyRestriction: '', 
-        dailyRestriction: 2000,
-        annualRestriction: ''
+      name:'Flow 2',
+      nickname: 'Animals',
+      annualUsage: 0,
+      dailyUsage: 0,
+      data:[
+        [
+          {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-19T01:00:00'}, {value: 0, time: '2024-09-19T02:00:00'},
+          {value: 0, time: '2024-09-19T03:00:00'}, {value: 0, time: '2024-09-19T04:00:00'}, {value: 0, time: '2024-09-19T05:00:00'},
+          {value: 0, time: '2024-09-19T06:00:00'}, {value: 0, time: '2024-09-19T07:00:00'}, {value: 0, time: '2024-09-19T08:00:00'},
+          {value: 0, time: '2024-09-19T09:00:00'}, {value: 0, time: '2024-09-1910:00:00'}, {value: 0, time: '2024-09-19T11:00:00'},
+          {value: 0, time: '2024-09-19T12:00:00'}, {value: 0, time: '2024-09-19T13:00:00'}, {value: 0, time: '2024-09-19T14:00:00'},
+          {value: 0, time: '2024-09-19T15:00:00'}, {value: 0, time: '2024-09-19T16:00:00'}, {value: 0, time: '2024-09-19T17:00:00'},
+          {value: 0, time: '2024-09-19T18:00:00'}, {value: 0, time: '2024-09-19T19:00:00'}, {value: 0, time: '2024-09-19T20:00:00'},
+          {value: 0, time: '2024-09-19T21:00:00'}, {value: 0, time: '2024-09-19T22:00:00'}, {value: 0, time: '2024-09-19T23:00:00'}
+        ],
+        [
+          {value: 0, time: '2024-09-20T00:00:00'}, {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-18T00:00:00'},
+          {value: 0, time: '2024-09-17T00:00:00'}, {value: 0, time: '2024-09-16T00:00:00'}, {value: 0, time: '2024-09-15T00:00:00'},
+          {value: 0, time: '2024-09-14T00:00:00'}
+        ],
+        [
+          {value: 0, time: '2024-09-20T00:00:00'}, {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-18T00:00:00'},
+          {value: 0, time: '2024-09-17T00:00:00'}, {value: 0, time: '2024-09-16T00:00:00'}, {value: 0, time: '2024-09-15T00:00:00'},
+          {value: 0, time: '2024-09-14T00:00:00'}, {value: 0, time: '2024-09-13T00:00:00'}, {value: 0, time: '2024-09-12T00:00:00'}, 
+          {value: 0, time: '2024-09-11T00:00:00'}, {value: 0, time: '2024-09-10T00:00:00'}, {value: 0, time: '2024-09-09T00:00:00'}, 
+          {value: 0, time: '2024-08-15T00:00:00'}, {value: 0, time: '2024-09-07T00:00:00'}, {value: 0, time: '2024-09-06T00:00:00'}, 
+          {value: 0, time: '2024-09-05T00:00:00'}, {value: 0, time: '2024-09-04T00:00:00'}, {value: 0, time: '2024-09-03T00:00:00'}, 
+          {value: 0, time: '2024-09-02T00:00:00'}, {value: 0, time: '2024-09-01T00:00:00'}, {value: 0, time: '2024-08-31T00:00:00'},
+          {value: 0, time: '2024-08-30T00:00:00'}, {value: 0, time: '2024-08-29T00:00:00'}, {value: 0, time: '2024-08-28T00:00:00'},
+          {value: 0, time: '2024-08-27T00:00:00'}, {value: 0, time: '2024-08-26T00:00:00'}, {value: 0, time: '2024-08-25T00:00:00'},
+          {value: 0, time: '2024-08-24T00:00:00'}
+        ],
+        [
+          {value: 0, time: '2024-01-31T00:00:00'}, {value: 0, time: '2024-02-28T00:00:00'}, {value: 0, time: '2024-03-31T00:00:00'},
+          {value: 0, time: '2024-04-30T00:00:00'}, {value: 0, time: '2024-05-31T00:00:00'}, {value: 0, time: '2024-06-30T00:00:00'},
+          {value: 0, time: '2024-07-31T00:00:00'}, {value: 0, time: '2024-08-31T00:00:00'}, {value: 0, time: '2024-09-30T00:00:00'}, 
+          {value: 0, time: '2024-10-31T00:00:00'}, {value: 0, time: '2024-11-30T00:00:00'}, {value: 0, time: '2024-12-31T00:00:00'}, 
+        ]
+      ]
+    },
+  ])
+  //river flow data for flowsite (averaged)
+  //0: one day data  1: seven day data  2: one month data  3: annual data
+  var riverFlow = [
+    [
+      {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-19T01:00:00'}, {value: 0, time: '2024-09-19T02:00:00'},
+      {value: 0, time: '2024-09-19T03:00:00'}, {value: 0, time: '2024-09-19T04:00:00'}, {value: 0, time: '2024-09-19T05:00:00'},
+      {value: 0, time: '2024-09-19T06:00:00'}, {value: 0, time: '2024-09-19T07:00:00'}, {value: 0, time: '2024-09-19T08:00:00'},
+      {value: 0, time: '2024-09-19T09:00:00'}, {value: 0, time: '2024-09-1910:00:00'}, {value: 0, time: '2024-09-19T11:00:00'},
+      {value: 0, time: '2024-09-19T12:00:00'}, {value: 0, time: '2024-09-19T13:00:00'}, {value: 0, time: '2024-09-19T14:00:00'},
+      {value: 0, time: '2024-09-19T15:00:00'}, {value: 0, time: '2024-09-19T16:00:00'}, {value: 0, time: '2024-09-19T17:00:00'},
+      {value: 0, time: '2024-09-19T18:00:00'}, {value: 0, time: '2024-09-19T19:00:00'}, {value: 0, time: '2024-09-19T20:00:00'},
+      {value: 0, time: '2024-09-19T21:00:00'}, {value: 0, time: '2024-09-19T22:00:00'}, {value: 0, time: '2024-09-19T23:00:00'}
+    ],
+    [
+      {value: 0, time: '2024-09-20T00:00:00'}, {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-18T00:00:00'},
+      {value: 0, time: '2024-09-17T00:00:00'}, {value: 0, time: '2024-09-16T00:00:00'}, {value: 0, time: '2024-09-15T00:00:00'},
+      {value: 0, time: '2024-09-14T00:00:00'}
+    ],
+    [
+      {value: 0, time: '2024-09-20T00:00:00'}, {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-18T00:00:00'},
+      {value: 0, time: '2024-09-17T00:00:00'}, {value: 0, time: '2024-09-16T00:00:00'}, {value: 0, time: '2024-09-15T00:00:00'},
+      {value: 0, time: '2024-09-14T00:00:00'}, {value: 0, time: '2024-09-13T00:00:00'}, {value: 0, time: '2024-09-12T00:00:00'}, 
+      {value: 0, time: '2024-09-11T00:00:00'}, {value: 0, time: '2024-09-10T00:00:00'}, {value: 0, time: '2024-09-09T00:00:00'}, 
+      {value: 0, time: '2024-08-15T00:00:00'}, {value: 0, time: '2024-09-07T00:00:00'}, {value: 0, time: '2024-09-06T00:00:00'}, 
+      {value: 0, time: '2024-09-05T00:00:00'}, {value: 0, time: '2024-09-04T00:00:00'}, {value: 0, time: '2024-09-03T00:00:00'}, 
+      {value: 0, time: '2024-09-02T00:00:00'}, {value: 0, time: '2024-09-01T00:00:00'}, {value: 0, time: '2024-08-31T00:00:00'},
+      {value: 0, time: '2024-08-30T00:00:00'}, {value: 0, time: '2024-08-29T00:00:00'}, {value: 0, time: '2024-08-28T00:00:00'},
+      {value: 0, time: '2024-08-27T00:00:00'}, {value: 0, time: '2024-08-26T00:00:00'}, {value: 0, time: '2024-08-25T00:00:00'},
+      {value: 0, time: '2024-08-24T00:00:00'}
+    ],
+    [
+      {value: 0, time: '2024-01-31T00:00:00'}, {value: 0, time: '2024-02-28T00:00:00'}, {value: 0, time: '2024-03-31T00:00:00'},
+      {value: 0, time: '2024-04-30T00:00:00'}, {value: 0, time: '2024-05-31T00:00:00'}, {value: 0, time: '2024-06-30T00:00:00'},
+      {value: 0, time: '2024-07-31T00:00:00'}, {value: 0, time: '2024-08-31T00:00:00'}, {value: 0, time: '2024-09-30T00:00:00'}, 
+      {value: 0, time: '2024-10-31T00:00:00'}, {value: 0, time: '2024-11-30T00:00:00'}, {value: 0, time: '2024-12-31T00:00:00'}, 
+    ]
+  ]
+  //all information for flow based restrictions
+  var flowbasedRestrictions = [
+    {
+      restriction: 'One',
+      flowAtRestriction: 0,
+      instantaneous: 0,
+      hourly: 0,
+      daily: 0,
+      annually: 0
     },
     {
-        id: 2,
-        restriction:'TWO', 
-        flowAtRestriction: 11.100, 
-        instantaneous: '', 
-        hourlyRestriction: '', 
-        dailyRestriction: 140,
-        annualRestriction: ''
-    }, 
-]
-
-  const riverFlow = 3 // river flow value
-  const restriction = 10 //river flow at restriction
+      restriction: 'Two',
+      flowAtRestriction: 0,
+      instantaneous: 0,
+      hourly: 0,
+      daily: 0,
+      annually: 0
+    },
+    {
+      restriction: 'Three',
+      flowAtRestriction: 0,
+      instantaneous: 0,
+      hourly: 0,
+      daily: 0,
+      annually: 0
+    }
+  ]
+  var annualUsage = 0 //total annual usage
+  var dailyUsage = 0 //total daily usage
  
-
-
 
   //function to load in bold calibri font
   const [fontLoaded, setFontLoaded] = useState(false);
-
     useEffect(() => {
         async function loadFont() {
             await Font.loadAsync({
@@ -209,25 +301,25 @@ export default function App() {
         {/*all different pages*/}
         <Drawer.Screen name="HOME">
           {props => <HomeScreen {...props} take={take} settake={settake} dailyUsage={dailyUsage} annualUsage={annualUsage}
-              annualMax={annualMax} riverFlow={riverFlow} restriction={restriction} 
-              timePeriod={dataCollected} dailyMax={dailyMax} />}
+              annualMax={annualMax} riverFlow={currentRiverFlow} restriction={flowAtRestriction} 
+              timePeriod={dataRecorded} dailyMax={dailyMax} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="CONSENT">
-          {props => <ConsentPage {...props} compliance={compliance} setcompliance={setcompliance} 
+          {props => <ConsentPage {...props} compliance={compliedYesterday}  
           take={take} settake={settake} flowsite={flowsite} consentExpiration={consentExpiration} 
-          annualMax={annualMax} restrictions={restrictions} />}
+          annualMax={annualMax} restrictions={flowbasedRestrictions} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="USAGE">
-          {props => <UsagePage {...props} dataCollected={dataCollected} dailyData={dailyDataUsage} 
-          dailyMax={dailyMax} annualData={annualDataUsage} annualMax={annualMax} flowMeters={flowMeters} 
-          setflowMeters={setflowMeters} />}
+          {props => <UsagePage {...props} dataCollected={dataRecorded} 
+          dailyMax={dailyMax} annualMax={annualMax} flowMeters={flowmeters} 
+          setflowMeters={setflowmeters} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="RIVER">
-          {props => <RiverPage {...props} flowsite={flowsite} oneDayData={oneDayData} 
-          sevenDayData={sevenDayData} oneMonthData={oneMonthData} annualData={annualData} timeframe={dataCollected} riverFlow={riverFlow} />}
+          {props => <RiverPage {...props} flowsite={flowsite}  
+          timeframe={dataRecorded} riverFlow={currentRiverFlow} data={riverFlow}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="FAQ">

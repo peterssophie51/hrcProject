@@ -9,16 +9,29 @@ import { RiverFlowChart } from '../components/river/riverFlowChart.js';
 import { TimeRadios } from '../components/river/graphRadios.js';
 
 //component for the river page
-export function RiverPage ({ route, navagation, flowsite, oneDayData, sevenDayData, oneMonthData, annualData, timeframe, riverFlow }) {
+export function RiverPage ({ flowsite, data, timeframe, riverFlow }) {
+  console.log(riverFlow)
 
   const [selectedTime, setselectedTime] =  useState('1 DAY') //current timeframe for data
-  const [currentData, setcurrentData] = useState(oneDayData) //set current data (as by radios)
+  const [currentData, setcurrentData] = useState(data[0]) //set current data (as by radios)
+  console.log(currentData)
   const [currentLabels, setcurrentLabels] = useState(oneDayLabels) //set current labels (as by radios)
 
-  const oneDayLabels = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'] //graph x axis labels for one day timeframe
-  const sevenDayLabels = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'] //graph x axis labels for one week timeframe
-  const oneMonthLabels = ['1ST', '5TH', '10TH', '15TH', '20TH', '25TH', '30TH'] //graph x axis labels for one month timeframe
-  const annualLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'] //graph x axis labels for one year timeframe
+  const oneDayLabels = [
+    '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', 
+    '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', 
+    '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', 
+    '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
+  ] //graph labels for x axis for one day
+  const sevenDayLabels = ['1 DAY', '2 DAYS', '3 DAYS', '4 DAYS', '5 DAYS', '6 DAYS', '7 DAYS'] //graph labels for x axis for seven days
+  const oneMonthLabels = [
+    '1', '2', '3', '4', '5', '6', '7', '8',
+    '9', '10', '11', '12', '13', '14', '15', '16',
+    '17', '18', '19', '20', '21', '22', '23', '24',
+    '25', '26', '27', '28'
+  ] //graph labels for x axis for one month
+  const annualLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC' ]  //graph labels for x axis for annual
+
 
     return (
       <View  style={styles.page}> 
@@ -34,8 +47,7 @@ export function RiverPage ({ route, navagation, flowsite, oneDayData, sevenDayDa
         <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels}/> 
         {/*graph radios*/}
         <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
-        oneDayData={oneDayData} sevenDayData={sevenDayData} oneMonthData={oneMonthData} annualData={annualData}
-        oneDayLabels={oneDayLabels} sevenDayLabels={sevenDayLabels} oneMonthLabels={oneMonthLabels} annualLabels={annualLabels}/>
+        data={data} oneDayLabels={oneDayLabels} sevenDayLabels={sevenDayLabels} oneMonthLabels={oneMonthLabels} annualLabels={annualLabels}/>
       </View>
     )
   }

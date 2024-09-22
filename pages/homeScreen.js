@@ -8,7 +8,7 @@ import { RiverFlow } from '../components/home/riverFlow';
 import { Switch } from '../components/switch';
 
 //home screen component
-export function HomeScreen( {navigation, take, annualUsage, dailyUsage, annualMax, dailyMax, riverFlow, restriction, timePeriod}) {
+export function HomeScreen( { take, annualUsage, dailyUsage, annualMax, dailyMax, riverFlow, restriction, timePeriod}) {
   const [graphTime, setgraphTime] = useState('annual') //text for center of circular progress chart
 
     return (

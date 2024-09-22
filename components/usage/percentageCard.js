@@ -12,14 +12,16 @@ export function PercentagePill(props) {
             <ProgressPill 
                 type={props.type}
                 max={props.max} 
-                flowMeters={props.data}
+                flowmeters={props.flowmeters}
+                usage={props.usage}
             />
             {/*percentage text component*/}
             <PercentageCardText 
                 time={props.time}
                 type={props.type}
                 max={props.max}
-                flowMeters={props.data}
+                flowmeters={props.flowmeters}
+                usage={props.usage}
             />
         </View>
     )

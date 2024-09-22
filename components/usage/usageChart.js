@@ -5,14 +5,16 @@ import { Dimensions, View, StyleSheet } from "react-native";
 //component for graph of usage
 export function UsageChart(props) {
 
+    const data = props.currentData
+
     return(
         <View style={styles.container}>
             <LineChart 
                 style={{zIndex:0}}
-                data = {props.currentData} //setting data in graph
+                data = {data} //setting data in graph
                 width={Dimensions.get('window').width * 0.75} 
                 height={Dimensions.get('window').height * 0.35}
-                maxValue={Math.max(...props.currentData.map(item => item.value)) * 1.1} 
+                maxValue={Math.max(...data.map(item => item.value)) == 0 ? 10 : Math.max(...data.map(item => item.value)) * 1.1} 
                 noOfSections={12} //sections vertically
                 initialSpacing={0} //spacing between first value and y axis
                 yAxisTextStyle={{fontSize:12}} 

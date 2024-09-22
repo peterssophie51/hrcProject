@@ -22,7 +22,6 @@ const Drawer = createDrawerNavigator();
 
 
 export default function App() {
-  //VARIABLES
   const contacts = [
     {
       key: 0,
@@ -72,31 +71,31 @@ export default function App() {
   const [currentConsent, setCurrentConsent] = useState("Farm Water Consent"); //current consent nickname
   const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085"); //current consent ath
 
-  var dailyMax = 0 //maximum abstraction for a day
-  var annualMax = 0 //maximum abstraction for a year
+  var dailyMax = 50 //maximum abstraction for a day
+  var annualMax = 200 //maximum abstraction for a year
   const [take, settake] = useState(false) //consent can take water or not
   const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
   var currentRiverFlow = 0 //current river flow
   var flowAtRestriction = 0 //restriction value in home page
   var dataRecorded = '2025-01-01T00:00:00' //when all data was recorded
   var consentExpiration = '2024-09-19T00:00:00' //when the consent expires
-  var flowsite = 'Rangitikei at Mangaweka' //flowsite for consent
+  var flowsite = 'Rangitikeat Mangaweka' //flowsite for consent
   //flow meter data
   //in data, 0: one day data  1: seven day data  2: one month data  3: annual data
   const [flowmeters, setflowmeters] = useState([
     {
       name:'Flow 1',
       nickname: 'Farm',
-      annualUsage: 0,
-      dailyUsage: 0,
+      annualUsage: 100,
+      dailyUsage: 10,
       data:[
         [
-          {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-19T01:00:00'}, {value: 0, time: '2024-09-19T02:00:00'},
-          {value: 0, time: '2024-09-19T03:00:00'}, {value: 0, time: '2024-09-19T04:00:00'}, {value: 0, time: '2024-09-19T05:00:00'},
+          {value: 3, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-19T01:00:00'}, {value: 0, time: '2024-09-19T02:00:00'},
+          {value: 0, time: '2024-09-19T03:00:00'}, {value: 0, time: '2024-09-19T04:00:00'}, {value: 8, time: '2024-09-19T05:00:00'},
           {value: 0, time: '2024-09-19T06:00:00'}, {value: 0, time: '2024-09-19T07:00:00'}, {value: 0, time: '2024-09-19T08:00:00'},
-          {value: 0, time: '2024-09-19T09:00:00'}, {value: 0, time: '2024-09-1910:00:00'}, {value: 0, time: '2024-09-19T11:00:00'},
-          {value: 0, time: '2024-09-19T12:00:00'}, {value: 0, time: '2024-09-19T13:00:00'}, {value: 0, time: '2024-09-19T14:00:00'},
-          {value: 0, time: '2024-09-19T15:00:00'}, {value: 0, time: '2024-09-19T16:00:00'}, {value: 0, time: '2024-09-19T17:00:00'},
+          {value: 3, time: '2024-09-19T09:00:00'}, {value: 0, time: '2024-09-1910:00:00'}, {value: 0, time: '2024-09-19T11:00:00'},
+          {value: 0, time: '2024-09-19T12:00:00'}, {value: 6, time: '2024-09-19T13:00:00'}, {value: 0, time: '2024-09-19T14:00:00'},
+          {value: 10, time: '2024-09-19T15:00:00'}, {value: 0, time: '2024-09-19T16:00:00'}, {value: 3, time: '2024-09-19T17:00:00'},
           {value: 0, time: '2024-09-19T18:00:00'}, {value: 0, time: '2024-09-19T19:00:00'}, {value: 0, time: '2024-09-19T20:00:00'},
           {value: 0, time: '2024-09-19T21:00:00'}, {value: 0, time: '2024-09-19T22:00:00'}, {value: 0, time: '2024-09-19T23:00:00'}
         ],
@@ -128,8 +127,8 @@ export default function App() {
     {
       name:'Flow 2',
       nickname: 'Animals',
-      annualUsage: 0,
-      dailyUsage: 0,
+      annualUsage: 80,
+      dailyUsage: 20,
       data:[
         [
           {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-19T01:00:00'}, {value: 0, time: '2024-09-19T02:00:00'},
@@ -231,8 +230,8 @@ export default function App() {
       annually: 0
     }
   ]
-  var annualUsage = 0 //total annual usage
-  var dailyUsage = 0 //total daily usage
+  var annualUsage = 10 //total annual usage
+  var dailyUsage = 1 //total daily usage
  
 
   //function to load in bold calibri font
@@ -300,21 +299,21 @@ export default function App() {
       >
         {/*all different pages*/}
         <Drawer.Screen name="HOME">
-          {props => <HomeScreen {...props} take={take} settake={settake} dailyUsage={dailyUsage} annualUsage={annualUsage}
+          {props => <HomeScreen {...props} take={take} dailyUsage={dailyUsage} annualUsage={annualUsage}
               annualMax={annualMax} riverFlow={currentRiverFlow} restriction={flowAtRestriction} 
               timePeriod={dataRecorded} dailyMax={dailyMax} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="CONSENT">
           {props => <ConsentPage {...props} compliance={compliedYesterday}  
-          take={take} settake={settake} flowsite={flowsite} consentExpiration={consentExpiration} 
+          take={take} flowsite={flowsite} consentExpiration={consentExpiration} 
           annualMax={annualMax} restrictions={flowbasedRestrictions} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="USAGE">
           {props => <UsagePage {...props} dataCollected={dataRecorded} 
-          dailyMax={dailyMax} annualMax={annualMax} flowMeters={flowmeters} 
-          setflowMeters={setflowmeters} />}
+          dailyMax={dailyMax} annualMax={annualMax} flowmeters={flowmeters} 
+          setflowmeters={setflowmeters} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="RIVER">

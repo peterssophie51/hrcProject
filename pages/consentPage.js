@@ -7,7 +7,7 @@ import { SmallCard } from '../components/consents/smallCard.js';
 import { FlowbasedRestriction } from '../components/consents/flowBasedRestrictions.js';
 
 //component for the consent page
-export function ConsentPage ({ route, navagation, compliance, setcompliance, take, settake, flowsite, consentExpiration, annualMax, restrictions }) {
+export function ConsentPage ({ compliance, take, flowsite, consentExpiration, annualMax, restrictions }) {
   
     return (
       //styling the container for the page

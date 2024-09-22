@@ -7,8 +7,8 @@ export function PercentageCardText(props) {
     var totalSum = 0; 
     var totalPercentage = 0;
     
-    props.flowMeters.forEach(meter => { //totalling the usage 
-        totalSum = totalSum + meter.usage;
+    props.flowmeters.forEach(meter => { //totalling the usage 
+        totalSum = totalSum + meter[props.usage];
     });
     
     if (props.max !== 0) { //calculating percentage usage based on total usage and maximum
@@ -16,7 +16,6 @@ export function PercentageCardText(props) {
     }
 
     const [fontLoaded, setFontLoaded] = useState(false);
-
     useEffect(() => {
         async function loadFont() {
             try {
@@ -40,19 +39,19 @@ export function PercentageCardText(props) {
             {/*proportional view*/}
             {props.type == 'proportional' && (
                 <View style={{ alignContent: 'center' }}>
-                    {props.flowMeters.map((item, index) => ( //map through flowmeters to show text for each flowmeter
+                    {props.flowmeters.map((item, index) => ( //map through flowmeters to show text for each flowmeter
                         <View key={item.key} style={[styles.container, { marginLeft: Dimensions.get('window').width * 0.14, marginBottom: Dimensions.get('window').height * -0.02 }]}>
                             <View style={[styles.textHorizontal, { justifyContent: 'flex-start' }]}>
                                 {/*set number for flowmeter in graph*/}
                                 <Text style={{ fontFamily: 'CalibriBold', fontSize: 18 }}>({index + 1}) </Text> 
                                 {/*name of flowmeter*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 18, lineHeight: 28 }}>{item.key}</Text> 
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 18, lineHeight: 28 }}>{item['name']}</Text> 
                             </View>
                             <View style={[styles.textHorizontal, { justifyContent: 'flex-start' }]}>
                                 {/*usage title for each flowmeter*/}
                                 <Text style={{ fontFamily: 'CalibriBold', fontSize: 16 }}>Usage </Text>
                                 {/*usage value*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 16, lineHeight: 22 }}>{item.usage.toFixed(1)}</Text>
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 16, lineHeight: 22 }}>{item[props.usage]}</Text>
                                 {/*units for usage*/}
                                 <Text style={{ fontFamily: 'Calibri', lineHeight: 24, fontSize: 13 }}>M</Text>
                                 <Text style={{ fontFamily: 'Calibri', lineHeight: 18, fontSize: 10 }}>3</Text>

@@ -7,7 +7,7 @@ import { RestrictionInfo } from "./restrictionInfo";
 // accordion list of all flow based restrictions at bottom of consents page
 export function FlowbasedRestriction(props) {
     const [expanded, setExpanded] = React.useState(false); // set whether accordion is expanded or not
-    const [currentRestriction, setcurrentRestriction] = React.useState('NONE'); // set which flow based restriction is currently in effect
+    const [currentRestriction, setcurrentRestriction] = React.useState('Three'); // set which flow based restriction is currently in effect
 
     // index in restriction list for current flow based restriction
     const index = props.restrictions.findIndex(item => item.restriction === currentRestriction); 

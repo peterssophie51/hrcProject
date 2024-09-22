@@ -10,28 +10,35 @@ import { UsageChart } from '../components/usage/usageChart.js';
 import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 
 //compoennt for the usage page
-export function UsagePage ({ navagation, dataCollected, dailyData, dailyMax, annualData, annualMax, flowMeters, setflowMeters }) {
+export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, setflowmeters }) {
   const [type, settype] = useState('totalled') //manage state of switch and top percentage cards
 
-  //function to total the water usage for total water usage based in flow meter usage
-  const totalWaterUsage = flowMeters.reduce((acc, flowMeter) => {
-    flowMeter.data.forEach((currentArray, i) => {
-      currentArray.forEach((item, index) => {
-        if (acc[i] && acc[i][index]) {
-          acc[i][index].value += item.value;
+  const totalWaterUsage = flowmeters[0].data.map((_, dataIndex) => {
+    const map = new Map();
+  
+    flowmeters.forEach(flowmeter => {
+      flowmeter.data[dataIndex].forEach(entry => {
+        const { time, value } = entry;
+        if (map.has(time)) {
+          map.set(time, map.get(time) + value);
         } else {
-          if (!acc[i]) acc[i] = [];
-          acc[i][index] = { value: item.value };
+          map.set(time, value);
         }
       });
     });
-    return acc;
-  }, []);
   
-  const oneDayLabels = ['00:00', '02:00', '04:00'] //graph labels for x axis for one day
-  const sevenDayLabels = ['MON', 'TUE', 'WED'] //graph labels for x axis for seven days
-  const oneMonthLabels = ['1ST', '5TH', '10TH'] //graph labels for x axis for one month
-  const annualLabels = ['JAN', 'FEB', 'MAR']  //graph labels for x axis for annual
+    return Array.from(map, ([time, value]) => ({ time, value }));
+  });
+
+  const oneDayLabels = [
+    '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', 
+    '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', 
+    '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', 
+    '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
+  ] //graph labels for x axis for one day
+  const sevenDayLabels = ['1 DAY', '2 DAYS', '3 DAYS', '4 DAYS', '5 DAYS', '6 DAYS', '7 DAYS'] //graph labels for x axis for seven days
+  const oneMonthLabels = ['1 WEEK', '2 WEEKS', '3 WEEKS', '4 WEEKS'] //graph labels for x axis for one month
+  const annualLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC' ]  //graph labels for x axis for annual
 
   const [currentData, setcurrentData] = useState(totalWaterUsage[0]) //satte to manage current selected data
   const [currentLabels, setcurrentLabels] = useState(oneDayLabels) //state to manage current selected data labels
@@ -52,9 +59,9 @@ export function UsagePage ({ navagation, dataCollected, dailyData, dailyMax, ann
           {/*container to make top percentage cards inline*/}
           <View style={{display: 'flex', flexDirection:'row'}}>
             {/*annual percentage card*/}
-            <PercentagePill data={annualData} type={type} max={annualMax} time='annual'/>
+            <PercentagePill flowmeters={flowmeters} type={type} max={annualMax} time='annual' usage='annualUsage'/>
             {/*daily percentage card*/}
-            <PercentagePill data={dailyData} type={type} max={dailyMax} time='day'/>
+            <PercentagePill flowmeters={flowmeters} type={type} max={dailyMax} time='day' usage='dailyUsage'/>
           </View>
           {/*switch to change values in percentage cards*/}
           <Switch style={{
@@ -74,9 +81,9 @@ export function UsagePage ({ navagation, dataCollected, dailyData, dailyMax, ann
             setcurrentDatatype={setcurrentDatatype}
             setcurrentData={setcurrentData}
             totalWaterUsage={totalWaterUsage}
-            flowMeters={flowMeters}
+            flowMeters={flowmeters}
             selectedTime={selectedTime}
-            setflowMeters={setflowMeters}/>
+            setflowMeters={setflowmeters}/>
           {/*usage graph*/}
           <UsageChart currentLabels={currentLabels} currentData={currentData}/>
           {/*radio buttons to change timeframe of graph*/}
@@ -91,8 +98,8 @@ export function UsagePage ({ navagation, dataCollected, dailyData, dailyMax, ann
             setcurrentData={setcurrentData}
             currentDatatype={currentDatatype}
             totalWaterUsage={totalWaterUsage}
-            flowMeters={flowMeters}
-            setflowMeters={setflowMeters}/>
+            flowMeters={flowmeters}
+            setflowMeters={setflowmeters}/>
           <View style={{height: 20}}></View>
         </ScrollView>
       </View>

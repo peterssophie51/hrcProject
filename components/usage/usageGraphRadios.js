@@ -30,16 +30,21 @@ export function GraphRadios(props) {
     }
 
     const handlePress = (name, labels, listIndex) => {
+     
         props.setselectedTime(name);
         props.setcurrentLabels(labels)
+        
         props.flowMeters.map((item, index) => {
             if (props.currentDatatype == item['name']) {
                 props.setcurrentData(item['data'][listIndex])
             }
         })
+
         if (props.currentDatatype == '') {
+            console.log('hello')
             props.setcurrentData(props.totalWaterUsage[listIndex])
-        }}
+        }
+    }
 
 
     return (

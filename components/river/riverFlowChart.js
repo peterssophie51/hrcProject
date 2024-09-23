@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LineChart } from "react-native-gifted-charts";
 import { Dimensions, View, StyleSheet } from "react-native";
 
 //graph shown on the river page
 export function RiverFlowChart(props) {
-    const data = props.currentData
-    
+    const data = props.currentData 
+    const [labels, setLabels] = useState([]);
+
+    // recalculate labels when currentLabels or data changes
+    useEffect(() => {
+        console.log(data);
+        if (props.currentLabels === 'sevenDay' || props.currentLabels === 'oneMonth') {
+            const newLabels = data.map((item) => {
+                var date = new Date(item.time)
+                 return date.toLocaleDateString('en-GB').slice(0, 5)
+            }) 
+            setLabels(newLabels);
+        } else {
+            setLabels(props.currentLabels || []); // handle cases where currentLabels might be undefined
+        }
+    }, [props.currentLabels, data]);
     return(
         <View style={styles.container}>
             <LineChart 
@@ -17,7 +31,7 @@ export function RiverFlowChart(props) {
                 noOfSections={12} //sections verticlaly
                 initialSpacing={0} //spacing between first value and y axis
                 yAxisTextStyle={styles.axis} 
-                xAxisLabelTexts={props.currentLabels}
+                xAxisLabelTexts={labels}
                 xAxisLabelTextStyle={styles.axis}
                 color={'#00A7CF'} 
                 thickness={3}

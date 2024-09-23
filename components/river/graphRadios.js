@@ -34,6 +34,7 @@ export function TimeRadios(props) {
         props.setselectedTime(name);  //keep track of selected time
         props.setcurrentData(data) //assign the selected data
         props.setcurrentLabels(labels) //assign the selected labeles
+        console.log(labels)
     } 
 
     return (
@@ -58,7 +59,7 @@ export function TimeRadios(props) {
                 <View style={styles.radioTopRight}>
                     {/*radio button*/}
                     <RadioGroup 
-                        onPress={() => handlePress('7 DAYS', props.data[1], props.sevenDayLabels)}  //handle press
+                        onPress={() => handlePress('7 DAYS', props.data[1], 'sevenDay')}  //handle press
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'7 DAYS', label:'7 DAYS', color:'#72BF44', 
@@ -75,7 +76,7 @@ export function TimeRadios(props) {
                 <View style={styles.radioBottomLeft}>
                     {/*radio button*/}
                     <RadioGroup 
-                        onPress={() => handlePress('1 MONTH', props.data[2], props.oneMonthLabels)} //handle press
+                        onPress={() => handlePress('1 MONTH', props.data[2], 'oneMonth')} //handle press
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'1 MONTH', label:'1 MONTH', color:'#72BF44', 

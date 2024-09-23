@@ -23,13 +23,6 @@ export function RiverPage ({ flowsite, data, timeframe, riverFlow }) {
     '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', 
     '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
   ] //graph labels for x axis for one day
-  const sevenDayLabels = ['1 DAY', '2 DAYS', '3 DAYS', '4 DAYS', '5 DAYS', '6 DAYS', '7 DAYS'] //graph labels for x axis for seven days
-  const oneMonthLabels = [
-    '1', '2', '3', '4', '5', '6', '7', '8',
-    '9', '10', '11', '12', '13', '14', '15', '16',
-    '17', '18', '19', '20', '21', '22', '23', '24',
-    '25', '26', '27', '28'
-  ] //graph labels for x axis for one month
   const annualLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC' ]  //graph labels for x axis for annual
 
 
@@ -47,7 +40,7 @@ export function RiverPage ({ flowsite, data, timeframe, riverFlow }) {
         <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels}/> 
         {/*graph radios*/}
         <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
-        data={data} oneDayLabels={oneDayLabels} sevenDayLabels={sevenDayLabels} oneMonthLabels={oneMonthLabels} annualLabels={annualLabels}/>
+        data={data} oneDayLabels={oneDayLabels} annualLabels={annualLabels}/>
       </View>
     )
   }

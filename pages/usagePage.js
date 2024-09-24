@@ -84,6 +84,13 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
             flowMeters={flowmeters}
             selectedTime={selectedTime}
             setflowMeters={setflowmeters}/>
+          {/*heading for graph*/}
+          <View style={styles.graphHeading}>
+              <CalibriText style={styles.graphHeadingText} title='Water Usage ('/>
+              <CalibriText style={styles.graphHeadingUnits} title='M'/>
+              <CalibriText style={styles.graphHeadingSuperscript} title='3'/>
+              <CalibriText style={styles.graphHeadingText} title=')'/>
+          </View>
           {/*usage graph*/}
           <UsageChart currentLabels={currentLabels} currentData={currentData}/>
           {/*radio buttons to change timeframe of graph*/}
@@ -120,5 +127,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 17,
     marginTop: Dimensions.get('window').height * 0.02
+  },
+  graphHeading: {
+    display: 'flex',
+    flexDirection:'row',
+    marginTop: Dimensions.get('window').height * 0.14, 
+    marginLeft: Dimensions.get('window').width * 0.05,
+  },
+  graphHeadingText: {
+    fontSize: 15
+  },
+  graphHeadingUnits: {
+    fontSize: 13,
+    lineHeight: 22
+  },
+  graphHeadingSuperscript: {
+    fontSize: 11
   }
 })

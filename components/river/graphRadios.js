@@ -34,7 +34,6 @@ export function TimeRadios(props) {
         props.setselectedTime(name);  //keep track of selected time
         props.setcurrentData(data) //assign the selected data
         props.setcurrentLabels(labels) //assign the selected labeles
-        console.log(labels)
     } 
 
     return (

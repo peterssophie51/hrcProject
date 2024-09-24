@@ -39,7 +39,12 @@ export function RiverFlow(props) {
             {/*container for below information*/}
             <View style={styles.subTextContainer}> 
                 {/*what flow restriction is at*/}
-                <CalibriText style={styles.subText} title={restrictionText} />
+                <View style={styles.restrictionContainer}>
+                    <CalibriText style={styles.subText} title={restrictionText} />
+                        <CalibriText style={styles.subTextUnits} title='M'/>
+                            <CalibriText style={styles.subTextSuperscript} title='3'/>
+                        <CalibriText style={styles.subTextUnits} title='/S'/>
+                </View>
                 {/*when the data was recorded*/}
                 <CalibriText style={styles.subText} title={timePeriodText} />
             </View>
@@ -89,5 +94,17 @@ const styles = StyleSheet.create({
     subText: { //styling text in bottom container
         fontSize: 18,
         marginLeft: Dimensions.get('window').width * 0.04,
+    },
+    subTextUnits: {
+        fontSize: 15,
+        lineHeight: 23
+    }, 
+    subTextSuperscript: {
+        fontSize: 12,
+        lineHeight:18
+    },
+    restrictionContainer: {
+        display: 'flex',
+        flexDirection: 'row'
     }
 })

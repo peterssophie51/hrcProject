@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         width: Dimensions.get('window').width * 0.9,
-        height: Dimensions.get('window').height * 0.11,
+        height: Dimensions.get('window').height * 0.1,
         marginLeft: Dimensions.get('window').width * 0.05,
         marginTop: Dimensions.get('window').width * 0.05,
         zIndex: 2

@@ -51,11 +51,10 @@ export function PercentageCardText(props) {
                                 {/*usage title for each flowmeter*/}
                                 <Text style={{ fontFamily: 'CalibriBold', fontSize: 16 }}>Usage </Text>
                                 {/*usage value*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 16, lineHeight: 22 }}>{item[props.usage]}</Text>
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 16}}>{item[props.usage]}</Text>
                                 {/*units for usage*/}
-                                <Text style={{ fontFamily: 'Calibri', lineHeight: 24, fontSize: 13 }}>M</Text>
-                                <Text style={{ fontFamily: 'Calibri', lineHeight: 18, fontSize: 10 }}>3</Text>
-                                <Text style={{ fontFamily: 'Calibri', lineHeight: 24, fontSize: 13 }}>/S</Text>
+                                <Text style={{ fontFamily: 'Calibri', lineHeight: 21, fontSize: 13 }}>M</Text>
+                                <Text style={{ fontFamily: 'Calibri', lineHeight: 15, fontSize: 10 }}>3</Text>
                             </View>
                         </View>
                     ))}
@@ -78,9 +77,8 @@ export function PercentageCardText(props) {
                                 {/*total usage value*/}
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}>{totalSum}</Text>
                                 {/*total usage units*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28 }}>M</Text>
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 13 }}>3</Text>
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28 }}>/S</Text>
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28}}>M</Text>
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 13, lineHeight:20}}>3</Text>
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}> of</Text>
                             </View>
                             {/*maximum usage text*/}
@@ -89,8 +87,7 @@ export function PercentageCardText(props) {
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}>{props.max}</Text>
                                 {/*maximum usage units*/}
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28 }}>M</Text>
-                                <Text style={{ fontSize: 13, fontFamily: 'Calibri' }}>3</Text>
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28 }}>/S</Text>
+                                <Text style={{ fontSize: 13, fontFamily: 'Calibri', lineHeight: 20 }}>3</Text>
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}> per</Text>
                             </View>
                             {/*time period of data*/}
@@ -106,9 +103,8 @@ export function PercentageCardText(props) {
                                 {/*total usage value*/}
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}>{totalSum.toFixed(1)}</Text>
                                 {/*total usage units*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28 }}>M</Text>
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 17 }}>M</Text>
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 13 }}>3</Text>
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28 }}>/S</Text>
                             </View>
                             {/*total usage text*/}
                             <View style={styles.textHorizontal}>
@@ -136,7 +132,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignContent: 'center',
-        alignItems: 'baseline'
     },
     percentageTitle: { //styling title of percentage text
         fontSize: 50,

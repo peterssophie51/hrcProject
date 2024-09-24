@@ -77,9 +77,10 @@ export default function App() {
   const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
   var currentRiverFlow = 0 //current river flow
   var flowAtRestriction = 0 //restriction value in home page
-  var dataRecorded = '2025-01-01T00:00:00' //when all data was recorded
+  var time = new Date('2025-03-30T00:00:00') //date created
+  var dataRecorded = time.toLocaleDateString('en-GB') + ', ' + time.toLocaleTimeString()  //date formatted for string use
   var consentExpiration = '2024-09-19T00:00:00' //when the consent expires
-  var flowsite = 'Rangitikeat Mangaweka' //flowsite for consent
+  var flowsite = 'Rangitikei Mangaweka' //flowsite for consent
   //flow meter data
   //in data, 0: one day data  1: seven day data  2: one month data  3: annual data
   const [flowmeters, setflowmeters] = useState([
@@ -170,7 +171,7 @@ export default function App() {
   //0: one day data  1: seven day data  2: one month data  3: annual data
   var riverFlow = [
     [
-      {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-19T01:00:00'}, {value: 0, time: '2024-09-19T02:00:00'},
+      {value: 2130, time: '2024-09-19T00:00:00'}, {value: 2100, time: '2024-09-19T01:00:00'}, {value: 2000, time: '2024-09-19T02:00:00'},
       {value: 0, time: '2024-09-19T03:00:00'}, {value: 0, time: '2024-09-19T04:00:00'}, {value: 0, time: '2024-09-19T05:00:00'},
       {value: 0, time: '2024-09-19T06:00:00'}, {value: 0, time: '2024-09-19T07:00:00'}, {value: 0, time: '2024-09-19T08:00:00'},
       {value: 0, time: '2024-09-19T09:00:00'}, {value: 0, time: '2024-09-1910:00:00'}, {value: 0, time: '2024-09-19T11:00:00'},

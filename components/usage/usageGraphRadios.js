@@ -41,7 +41,6 @@ export function GraphRadios(props) {
         })
 
         if (props.currentDatatype == '') {
-            console.log('hello')
             props.setcurrentData(props.totalWaterUsage[listIndex])
         }
     }

@@ -10,12 +10,8 @@ import { TimeRadios } from '../components/river/graphRadios.js';
 
 //component for the river page
 export function RiverPage ({ flowsite, data, timeframe, riverFlow }) {
-  console.log(riverFlow)
-
   const [selectedTime, setselectedTime] =  useState('1 DAY') //current timeframe for data
   const [currentData, setcurrentData] = useState(data[0]) //set current data (as by radios)
-  console.log(currentData)
-  const [currentLabels, setcurrentLabels] = useState(oneDayLabels) //set current labels (as by radios)
 
   const oneDayLabels = [
     '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', 
@@ -25,6 +21,7 @@ export function RiverPage ({ flowsite, data, timeframe, riverFlow }) {
   ] //graph labels for x axis for one day
   const annualLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC' ]  //graph labels for x axis for annual
 
+  const [currentLabels, setcurrentLabels] = useState(oneDayLabels) //set current labels (as by radios)
 
     return (
       <View  style={styles.page}> 

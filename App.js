@@ -71,8 +71,8 @@ export default function App() {
   const [currentConsent, setCurrentConsent] = useState("Farm Water Consent"); //current consent nickname
   const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085"); //current consent ath
 
-  var dailyMax = 50 //maximum abstraction for a day
-  var annualMax = 200 //maximum abstraction for a year
+  var dailyMax = 20 //maximum abstraction for a day
+  var annualMax = 100 //maximum abstraction for a year
   const [take, settake] = useState(false) //consent can take water or not
   const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
   var currentRiverFlow = 0 //current river flow

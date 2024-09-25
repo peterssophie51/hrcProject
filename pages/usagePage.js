@@ -72,6 +72,9 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
               { label: "Totalled", value: 'totalled', activeColor:'#72BF44'},
               { label: "Proportional", value: 'proportional', activeColor:'#72BF44' },//values for switch
             ]} action={settype}
+            disabled={flowmeters.length > 1 ? false : true}
+            backgroundColour={flowmeters.length > 1 ? '#243746' : '#cccccc'}
+            textColour={flowmeters.length > 1 ? 'white' : 'black'}
           />
           {/*datatype selector to change data on graph*/}
           <DatatypeSelector 

@@ -23,6 +23,10 @@ export function HomeScreen( { take, annualUsage, dailyUsage, annualMax, dailyMax
             marginTop: Dimensions.get('window').width * 0.05, 
             width:Dimensions.get('window').width * 0.7, 
             marginLeft:Dimensions.get('window').width *0.15}} action={setgraphTime}
+           disabled={dailyMax === 0  || annualMax === 0 ? true : false} 
+           backgroundColour={dailyMax === 0 || annualMax === 0 ? '#cccccc' : '#243746'} 
+           textColour={dailyMax === 0 || annualMax === 0? 'black' : 'white'} 
+           value={dailyMax === 0  ? 0 : annualMax === 0 ? 1 : 0}
         />
         {/*take water card*/}
         <TakeWater take={take}/> 

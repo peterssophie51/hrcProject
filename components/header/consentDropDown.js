@@ -6,15 +6,28 @@ import * as Font from 'expo-font';
 //import component for header items (consents)
 import { ConsentDropdownItem } from './consentDropdownItem';
 
+//consent header function
 export function ConsentDropdownHeader(props) {
   //handling values
-  const [currentConsent, setCurrentConsent] = useState("Farm Water Consent");
-  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085");
   const [fontLoaded, setFontLoaded] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   //change variable when header expanded/minimised
   const handlePress = () => setExpanded(!expanded);
+  
+  //update the consents information
+  const updateConsent = (updatedConsent) => {
+    const updatedConsents = []
+    props.consents.map((item, index) => {
+      if (item['ath'] == updatedConsent['ath']) {
+        item['nickname'] = updatedConsent['nickname'] //if consent is updated consent, update info and push new value to list
+        updatedConsents.push(item)
+      } else {
+        updatedConsents.push(item) //if consent not updated, push current values to list
+      }
+    }) 
+    props.setconsents(updatedConsents) //update consents
+  }
 
   //function to load in calibri bold and calibri font
   useEffect(() => {
@@ -50,8 +63,8 @@ export function ConsentDropdownHeader(props) {
       {/*accordion drop down section*/}
       <List.Accordion
         style={styles.accordionDropDown}
-        title={currentConsent}
-        description={currentConsentATH}
+        title={props.currentConsent}
+        description={props.currentConsentATH}
         titleStyle={{ marginLeft: 70, color: 'white', fontSize: 25, fontFamily: 'CalibriBold' }}
         descriptionStyle={{ marginLeft: 70, color: 'white', fontSize: 20, fontFamily: 'Calibri' }}
         expanded={expanded}
@@ -69,24 +82,21 @@ export function ConsentDropdownHeader(props) {
         )}
       >
         {/*all different consents*/}
-        <ConsentDropdownItem
-          description="ATH-2002009085"
-          currentConsentATH={currentConsentATH}
-          setcurrentConsent={setCurrentConsent}
-          setcurrentConsentATH={setCurrentConsentATH}
-        />
-        <ConsentDropdownItem
-          description="ATH-2002008648"
-          currentConsentATH={currentConsentATH}
-          setcurrentConsent={setCurrentConsent}
-          setcurrentConsentATH={setCurrentConsentATH}
-        />
-        <ConsentDropdownItem
-          description="ATH-2002009348"
-          currentConsentATH={currentConsentATH}
-          setcurrentConsent={setCurrentConsent}
-          setcurrentConsentATH={setCurrentConsentATH}
-        />
+        { props.consents.map((item, index) => {
+          return(
+          <ConsentDropdownItem 
+            key={item.ath}
+            nickname={item.nickname}
+            description={item.ath}
+            currentConsentATH={props.currentConsentATH}
+            setcurrentConsent={props.setCurrentConsent}
+            setcurrentConsentATH={props.setCurrentConsentATH}
+            updateConsent={updateConsent}
+            consents={props.consents}/>
+        )})
+
+        }
+        {/*list item for add new consent*/}
         <List.Item
           title="+ Add New Consent"
           titleStyle={{ fontStyle:'Calibri' ,fontSize: 20 }}
@@ -98,27 +108,27 @@ export function ConsentDropdownHeader(props) {
 }
 
 const styles = StyleSheet.create({
-  headerContainer: {
+  headerContainer: { //styling container of header
     display: 'flex', 
     flexDirection: 'row', 
     position: 'absolute'
   },
-  hamburgerButton: {
+  hamburgerButton: { //stying hamburegr icon contianer to open nav 
     position: 'absolute', 
     zIndex: 2
   },
-  hamburgerImage: {
+  hamburgerImage: { //styling hamburger icon to open nav
     width: 50, 
     height: 50, 
     marginTop: 15, 
     marginLeft: 20 
   },
-  accordionDropDown: {
+  accordionDropDown: { //styling container of consent header drop down
     zIndex: 1, 
     width: Dimensions.get('window').width, 
     backgroundColor: 'black'
   },
-  addConsent: {
+  addConsent: { //style list item to add item 
     backgroundColor: 'white',
     borderLeftWidth: Dimensions.get('window').width * 0.05,
     borderRightWidth: Dimensions.get('window').width * 0.05,

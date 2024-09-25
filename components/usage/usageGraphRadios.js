@@ -3,6 +3,7 @@ import { RadioGroup } from "react-native-radio-buttons-group";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
 import * as Font from 'expo-font'
 
+//
 export function GraphRadios(props) {
 
     const [fontLoaded, setFontLoaded] = useState(false);
@@ -29,16 +30,20 @@ export function GraphRadios(props) {
     }
 
     const handlePress = (name, labels, listIndex) => {
+     
         props.setselectedTime(name);
         props.setcurrentLabels(labels)
+        
         props.flowMeters.map((item, index) => {
             if (props.currentDatatype == item['name']) {
                 props.setcurrentData(item['data'][listIndex])
             }
         })
+
         if (props.currentDatatype == '') {
             props.setcurrentData(props.totalWaterUsage[listIndex])
-        }}
+        }
+    }
 
 
     return (
@@ -58,7 +63,7 @@ export function GraphRadios(props) {
                 </View>
                 <View style={styles.radioTopRight}>
                     <RadioGroup 
-                        onPress={() => handlePress('7 DAYS', props.sevenDayLabels, 1)} 
+                        onPress={() => handlePress('7 DAYS', 'sevenDay', 1)} 
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'7 DAYS', label:'7 DAYS', color:'#72BF44', 
@@ -72,7 +77,7 @@ export function GraphRadios(props) {
             <View style={{display:'flex',flexDirection:'row'}}>
                 <View style={styles.radioBottomLeft}>
                     <RadioGroup 
-                        onPress={() => handlePress('1 MONTH', props.oneMonthLabels, 2)} 
+                        onPress={() => handlePress('1 MONTH', 'oneMonth', 2)} 
                         selectedId={props.selectedTime}
                         radioButtons={[
                             {id:'1 MONTH', label:'1 MONTH', color:'#72BF44', 

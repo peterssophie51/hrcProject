@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import * as Font from 'expo-font'
 import { useState, useEffect } from "react";
 
-
+//
 export function Switch(props) {
 
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -33,15 +33,18 @@ export function Switch(props) {
 
 
   return (
+  
     <SwitchSelector
       style={props.style}
       options={props.options}
       initial={0}
-      backgroundColor='#243746' 
+      backgroundColor={props.backgroundColour}
       height={Dimensions.get('window').height * 0.07}
       fontSize={25}
-      textStyle={{fontFamily:'CalibriBold', color:'white'}}
+      textStyle={{fontFamily:'CalibriBold', color:props.textColour}}
       selectedTextStyle={{fontFamily:'CalibriBold', color:'black'}}
       onPress={value => props.action(value)} 
-    />)}
-
+      disabled = {props.disabled}
+      value={props.value || 0}
+  />)}
+  

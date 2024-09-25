@@ -4,11 +4,10 @@ import { List } from 'react-native-paper';
 import { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 
+//individual component for each consent in the consent header
 export function ConsentDropdownItem(props) {
-    //handling values
-    const [visible, setVisible] = useState(false);
-    const [currentName, setCurrentName] = useState(props.consentNickname);
-    const [consentNickname, setConsentNickname] = useState("Nickname");
+    const [visible, setVisible] = useState(false); //visibility of edit section
+    const [currentName, setCurrentName] = useState(props.consentNickname); //variable to manage edited nickname
     const [fontLoaded, setFontLoaded] = useState(false);
 
     //handle visibility of edit section within list of consents 
@@ -22,7 +21,10 @@ export function ConsentDropdownItem(props) {
             props.setcurrentConsent(currentName);
         }
         toggleVisibility();
-        setConsentNickname(currentName);
+        const updatedConsent = {ath:'', nickname:''}
+        updatedConsent['ath'] = props.description
+        updatedConsent['nickname'] = currentName
+        props.updateConsent(updatedConsent)
     };
 
     //function to load in calibri bold and calibri fonts
@@ -48,7 +50,7 @@ export function ConsentDropdownItem(props) {
         <View style={styles.container}>
             
             <List.Item 
-                title={consentNickname}
+                title={props.nickname}
                 description={props.description}
 
                 titleStyle={props.currentConsentATH == props.description
@@ -64,7 +66,7 @@ export function ConsentDropdownItem(props) {
 
                 style={{ backgroundColor: 'white', width: Dimensions.get('window').width * 0.9 }}
                 onPress={() => {
-                    props.setcurrentConsent(consentNickname); 
+                    props.setcurrentConsent(props.nickname); 
                     props.setcurrentConsentATH(props.description);
                 }} 
                 right={() => (
@@ -120,23 +122,23 @@ export function ConsentDropdownItem(props) {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container: { //styling the container of the individual consent
         borderLeftWidth: Dimensions.get('window').width * 0.05, 
         borderRightWidth:Dimensions.get('window').width * 0.05, 
         borderColor: 'black' 
     },
-    editButton: {
+    editButton: { //styling edit button container
         height: Dimensions.get('window').width  * 0.07, 
         width: Dimensions.get('window').width  * 0.07, 
         marginRight: 25, 
         marginTop:3
     },
-    crossButton: {
+    crossButton: { //styling cross button container
         height: Dimensions.get('window').width  * 0.07, 
         width: Dimensions.get('window').width  * 0.07, 
         marginTop:3 
     },
-    editInput: {
+    editInput: { //styling edit nickname text input
         fontSize: 18, 
         width: Dimensions.get('window').width * 0.53, 
         height: 45, 
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
         fontFamily:'Calibri', 
         color:'black'
     },
-    submitButtonContainer: {
+    submitButtonContainer: { //styling submit button container
         marginLeft: '0.5%', 
         width:Dimensions.get('window').width * 0.135 , 
         height: 45, 
@@ -158,13 +160,13 @@ const styles = StyleSheet.create({
         marginBottom: 10, 
         borderRadius: 10
     },
-    submitButton: {
+    submitButton: { //styling button to submit edited nickname
         height: 30, 
         width: 40, 
         marginLeft: 5, 
         marginTop: 7 
     },
-    crossButtonContainer: {
+    crossButtonContainer: { //styling button to cancel edited nickname
         marginLeft: '2%', 
         width:Dimensions.get('window').width * 0.135, 
         height: 45, 
@@ -173,7 +175,7 @@ const styles = StyleSheet.create({
         marginBottom: 10, 
         borderRadius: 10
     },
-    crossButton: {
+    crossButton: { //styling cancel button
         height: 30, 
         width: 30, 
         marginLeft: 10, 

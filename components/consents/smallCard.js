@@ -1,10 +1,14 @@
 import React from "react";
 import { View, StyleSheet, Dimensions, Image } from "react-native";
+//import components
 import { CalibriText } from "../fonts/calibriFont";
 
+//small cards, based on true/false in middle of consents page
 export function SmallCard(props) {
     return (
+        //styling colour of card depending on whether true or false (default red and change to red if true)
         <View style={[styles.container, props.value && {backgroundColor:'#72BF44'}]}>
+            {/*setting image in card depending on whether true or false*/}
             <Image source={props.value == true 
                 ? require('../../images/tickWhiteThick.png')
                 : require('../../images/crossWhiteThick.png')}
@@ -15,7 +19,7 @@ export function SmallCard(props) {
 }
 
 const styles= StyleSheet.create({
-    container:{
+    container:{ //styling container of small card
         marginTop: Dimensions.get('window').width * 0.04, 
         width: Dimensions.get('window').width * 0.425,
         height:Dimensions.get('window').width * 0.4, 
@@ -23,13 +27,13 @@ const styles= StyleSheet.create({
         borderRadius: 20,
         backgroundColor: '#CE202F',
     },
-    image: {
+    image: { //styling image shown in small card
         height: Dimensions.get('window').width * 0.15,
         width: Dimensions.get('window').width * 0.15,
         marginTop: Dimensions.get('window').height * 0.02,
         marginLeft: Dimensions.get('window').width * 0.13,
     },
-    text: {
+    text: { //styling text in small card
         color: 'white',
         textAlign: 'center',
         fontSize: 19, 

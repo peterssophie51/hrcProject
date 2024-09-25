@@ -1,32 +1,38 @@
 import { View } from 'react-native';
 import { StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { useState } from 'react';
-//components
+//importing components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont.js';
 import { ConsentInfo } from '../components/consents/consentInfo.js';
 import { SmallCard } from '../components/consents/smallCard.js';
 import { FlowbasedRestriction } from '../components/consents/flowBasedRestrictions.js';
 
-
-export function ConsentPage ({ navagation }) {
-  const [compliance, setcompliance] = useState(true) //consent has complied or not
-  const [take, settake] = useState(false) //consent can take water or not
-
+//component for the consent page
+export function ConsentPage ({ compliance, take, flowsite, consentExpiration, annualMax, restrictions }) {
+  
     return (
+      //styling the container for the page
       <View style={styles.page}> 
-        <CalibriBoldText  style={styles.title} title="Consent" /> 
+        {/*page title*/}
+        <CalibriBoldText style={styles.title} title="Consent" /> 
+        {/*making the page scrollable*/}
         <ScrollView> 
-        <ConsentInfo 
-          consentExpiration="June 25th 2028" 
-          consentFlowSite="Rangitikei at Mangaweka" 
-          annualMax="No recorded data"/> 
-        <View style={{display:'flex', flexDirection:'row'}}>
-          <SmallCard title={(compliance == true) ? 'You took less than your daily limit yesterday' : 
-            'You took more than your daily limit yesterday'} value={compliance} /> 
-          <SmallCard title={(take == true) ? 'You can take\nwater today': 'You can not take\nwater today'} value={take}/>
-        </View>
-        <FlowbasedRestriction /> 
-        <View style={{height: Dimensions.get('window').height * 0.03}}></View>
+          {/*consent info card*/}
+          <ConsentInfo 
+            consentExpiration= {consentExpiration}
+            consentFlowSite= {flowsite}
+            annualMax={annualMax}/> 
+          {/*container to arrange small cards next to each other*/}
+          <View style={{display:'flex', flexDirection:'row'}}>
+            {/*compliance card*/}
+            <SmallCard title={(compliance == true) ? 'You took less than your daily limit yesterday' : 
+              'You took more than your daily limit yesterday'} value={compliance} /> 
+            {/*take water card*/}
+            <SmallCard title={(take == true) ? 'You can take\nwater today': 'You can not take\nwater today'} value={take}/>
+          </View>
+          {/*card for flow based restrictions*/}
+          <FlowbasedRestriction restrictions={restrictions}/> 
+          {/*gap at the bottom of the page*/}
+          <View style={{height: Dimensions.get('window').height * 0.03}}></View>
         </ScrollView>
       </View>
     )

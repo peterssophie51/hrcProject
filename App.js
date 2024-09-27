@@ -71,7 +71,7 @@ export default function App() {
   const [currentConsent, setCurrentConsent] = useState("Farm Water Consent"); //current consent nickname
   const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085"); //current consent ath
 
-  var dailyMax = 20 //maximum abstraction for a day
+  var dailyMax = 50 //maximum abstraction for a day
   var annualMax = 100 //maximum abstraction for a year
   const [take, settake] = useState(false) //consent can take water or not
   const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
@@ -87,8 +87,8 @@ export default function App() {
     {
       name:'Flow 1',
       nickname: 'Farm',
-      annualUsage: 100,
-      dailyUsage: 10,
+      annualUsage: 80,
+      dailyUsage: 15,
       data:[
         [
           {value: 3, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-19T01:00:00'}, {value: 0, time: '2024-09-19T02:00:00'},
@@ -128,7 +128,7 @@ export default function App() {
     {
       name:'Flow 2',
       nickname: 'Animals',
-      annualUsage: 80,
+      annualUsage: 10,
       dailyUsage: 20,
       data:[
         [
@@ -230,9 +230,28 @@ export default function App() {
       annually: 0
     }
   ]
-  var annualUsage = 10 //total annual usage
-  var dailyUsage = 1 //total daily usage
+
+  var annualUsage = 0;
+  var dailyUsage = 0;
+
+  flowmeters.map((item) => {
+    annualUsage += item.annualUsage;
+    dailyUsage += item.dailyUsage;
+  }); //total annual usage
+  
  
+  const getCurrentRiverFlow = async () => {
+    try {
+      const response = await fetch(
+        'https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=Tokomaru%20at%20Riverland%20Farm&ObservedProperty=Flow%5bWater%20Level%5d&TemporalFilter=om:phenomenonTime,P',
+      );
+      console.log(response)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  getCurrentRiverFlow()
 
   //function to load in bold calibri font
   const [fontLoaded, setFontLoaded] = useState(false);

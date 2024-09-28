@@ -22,9 +22,8 @@ const Drawer = createDrawerNavigator();
 export default function App() {
 
   var flowsite = 'Tokomaru at Riverland Farm' //flowsite for consent
-  
   const [currentConsent, setCurrentConsent] = useState("Farm Water Consent"); //current consent nickname
-  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085"); //current consent ath
+  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2001008270"); //current consent ath
 
 
   const contacts = [
@@ -74,7 +73,7 @@ export default function App() {
     {ath:'ATH-2002009348', nickname: 'Crops'}
   ])
   var dailyMax = 50 //maximum abstraction for a day
-  var annualMax = 100 //maximum abstraction for a year
+  var annualMax = 1000 //maximum abstraction for a year
   const [take, settake] = useState(false) //consent can take water or not
   const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
 
@@ -127,6 +126,8 @@ export default function App() {
   //in data, 0: one day data  1: seven day data  2: one month data  3: annual data
   const [flowmeters, setflowmeters] = useState([
   ])
+  const [annualUsage, setannualUsage] = useState(0)
+  const [dailyUsage, setdailyUsage] = useState(0)
 
   useEffect(() => {
     const getCurrentFlowmeters = async () => {
@@ -167,6 +168,55 @@ export default function App() {
     }
     getCurrentFlowmeters()
   }, [currentConsentATH])
+
+  useEffect(() => {   
+    const getAnnualFlowmeterUsage = async () => {
+      let totalAnnualUsage = 0
+      try {
+        const promises = flowmeters.map(async (item) => {
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '&Method=Total&Interval=1%20year');
+          const responseText = await response.text();
+          const convert = require('xml-js');
+          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
+          const parsedData = JSON.parse(jsonConverted);
+          const value = parsedData['Hilltop']['Measurement']['Data']['E']['I1']['_text']
+          item.annualUsage = Number(value)
+          console.log('annual' + item.name + ' ' + value)
+          totalAnnualUsage += item.annualUsage
+          console.log('ta ' + totalAnnualUsage)
+        })
+
+        await Promise.all(promises)
+      } catch (error) {
+        console.error(error);
+      }
+      setannualUsage(totalAnnualUsage)
+    }
+
+    const getDailyFlowmeterUsage = async () => {
+      let totalDailyUsage = 0
+      try {
+        const promises = flowmeters.map(async (item) => {
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '&Method=Total&Interval=1D');
+          const responseText = await response.text();
+          const convert = require('xml-js');
+          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
+          const parsedData = JSON.parse(jsonConverted);
+          const value = parsedData['Hilltop']['Measurement']['Data']['E']['I1']['_text']
+          item.dailyUsage = Number(value)
+          totalDailyUsage += item.dailyUsage
+        })
+        await Promise.all(promises)
+      } catch (error) {
+        console.error(error);
+      }
+      setdailyUsage(totalDailyUsage)
+    }
+
+    getAnnualFlowmeterUsage()
+    getDailyFlowmeterUsage()
+
+  }, [currentConsentATH, flowmeters])
 
 
   var flowAtRestriction = 0 //restriction value in home page
@@ -238,14 +288,7 @@ export default function App() {
     }
   ]
 
-  var annualUsage = 0;
-  var dailyUsage = 0;
 
-  flowmeters.map((item) => {
-    annualUsage += item.annualUsage;
-    dailyUsage += item.dailyUsage;
-  }); //total annual usage
-  
 
   //function to load in bold calibri font
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -263,8 +306,6 @@ export default function App() {
     if (!fontLoaded) {
         return null; 
     }
-
-
 
   return (
     //creating drawer navigator

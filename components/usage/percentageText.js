@@ -40,7 +40,7 @@ export function PercentageCardText(props) {
             {props.type == 'proportional' && (
                 <View style={{ alignContent: 'center' }}>
                     {props.flowmeters.map((item, index) => ( //map through flowmeters to show text for each flowmeter
-                        <View key={item.key} style={[styles.container, { marginLeft: Dimensions.get('window').width * 0.14, marginBottom: Dimensions.get('window').height * -0.02 }]}>
+                        <View key={index} style={[styles.container, { marginLeft: Dimensions.get('window').width * 0.14, marginBottom: Dimensions.get('window').height * -0.02 }]}>
                             <View style={[styles.textHorizontal, { justifyContent: 'flex-start' }]}>
                                 {/*set number for flowmeter in graph*/}
                                 <Text style={{ fontFamily: 'CalibriBold', fontSize: 18 }}>({index + 1}) </Text> 

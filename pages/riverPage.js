@@ -9,7 +9,7 @@ import { RiverFlowChart } from '../components/river/riverFlowChart.js';
 import { TimeRadios } from '../components/river/graphRadios.js';
 
 //component for the river page
-export function RiverPage ({ flowsite, data, timeframe, riverFlow }) {
+export function RiverPage ({ flowsite, data, timeframe, riverFlow, flowAtRestriction }) {
   const [selectedTime, setselectedTime] =  useState('1 DAY') //current timeframe for data
   const [currentData, setcurrentData] = useState(data[0]) //set current data (as by radios)
 
@@ -34,7 +34,7 @@ export function RiverPage ({ flowsite, data, timeframe, riverFlow }) {
         {/*river flow card*/}
         <RiverFlowTitle riverFlow={riverFlow}/> 
         {/*river flow chart*/}
-        <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels}/> 
+        <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels} flowAtRestriction={flowAtRestriction}/> 
         {/*graph radios*/}
         <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
         data={data} oneDayLabels={oneDayLabels} annualLabels={annualLabels}/>

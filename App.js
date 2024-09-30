@@ -288,7 +288,7 @@ export default function App() {
   const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
 
 
-  var flowAtRestriction = 0 //restriction value in home page
+  var flowAtRestriction = 1.5 //restriction value in home page
   var time = new Date(currentDate) //date created
   var dataRecorded = time.toLocaleDateString('en-GB') + ', ' + time.toLocaleTimeString()  //date formatted for string use
   var consentExpiration = '2024-09-19T00:00:00' //when the consent expires
@@ -445,7 +445,7 @@ export default function App() {
         </Drawer.Screen>
 
         <Drawer.Screen name="RIVER">
-          {props => <RiverPage {...props} flowsite={flowsite}  
+          {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction}
           timeframe={dataRecorded} riverFlow={currentRiverFlow} data={riverFlow}/>}
         </Drawer.Screen>
 

@@ -40,10 +40,10 @@ export function HomeScreen( { take, annualUsage, dailyUsage, annualMax, dailyMax
 
 const styles = StyleSheet.create({
   image: { ///styling horizons logo
-    marginTop: Dimensions.get('window').width * 0.01, 
-    marginLeft: Dimensions.get('window').width * 0.12, 
-    width: Dimensions.get('window').width * 0.75,
-    height: Dimensions.get('window').width * 0.25,
+    marginTop: Dimensions.get('window').width * 0.03, 
+    marginLeft: (Dimensions.get('window').width - Dimensions.get('window').width * 0.6) /2 , 
+    width: Dimensions.get('window').width * 0.6,
+    height: Dimensions.get('window').width * 0.15,
   }, 
   page: { //styling page container
     width:Dimensions.get('window').width, 

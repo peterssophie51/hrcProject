@@ -65,7 +65,7 @@ export function ConsentDropdownHeader(props) {
         style={styles.accordionDropDown}
         title={props.currentConsent}
         description={props.currentConsentATH}
-        titleStyle={{ marginLeft: 70, color: 'white', fontSize: 25, fontFamily: 'CalibriBold' }}
+        titleStyle={{ marginLeft: 70, color: 'white', fontSize: 25, fontFamily: 'CalibriBold', marginTop: Dimensions.get('window').height * 0.015 }}
         descriptionStyle={{ marginLeft: 70, color: 'white', fontSize: 20, fontFamily: 'Calibri' }}
         expanded={expanded}
         onPress={handlePress}
@@ -77,7 +77,7 @@ export function ConsentDropdownHeader(props) {
               //show drop down image if accordion dropped up
               : require('../../images/dropDownWhite.png') 
             }
-            style={{ height: 15, width: 25 }}
+            style={{ height: 15, width: 25 , marginTop: Dimensions.get('window').height * 0.04}}
           />
         )}
       >
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   headerContainer: { //styling container of header
     display: 'flex', 
     flexDirection: 'row', 
-    position: 'absolute'
+    position: 'absolute',
   },
   hamburgerButton: { //stying hamburegr icon contianer to open nav 
     position: 'absolute', 
@@ -120,13 +120,14 @@ const styles = StyleSheet.create({
   hamburgerImage: { //styling hamburger icon to open nav
     width: 50, 
     height: 50, 
-    marginTop: 15, 
+    marginTop: Dimensions.get('window').height * 0.04, 
     marginLeft: 20 
   },
   accordionDropDown: { //styling container of consent header drop down
     zIndex: 1, 
     width: Dimensions.get('window').width, 
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    height: Dimensions.get('window').width * 0.25
   },
   addConsent: { //style list item to add item 
     backgroundColor: 'white',

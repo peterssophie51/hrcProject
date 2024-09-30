@@ -47,7 +47,7 @@ export function ProgressChart(props) {
 
   return (
     //container of pie chart
-    <View style={{ marginTop: Dimensions.get('window').height * 0.12, marginLeft: screenWidth * 0.1 }}>
+    <View style={{ marginTop: Dimensions.get('window').height * 0.15, marginLeft: screenWidth * 0.1 }}>
       <PieChart
         donut
         radius={screenWidth * 0.40}

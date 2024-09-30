@@ -49,12 +49,17 @@ export function RiverFlowChart(props) {
         }
     }, [props.currentLabels, props.currentData]);
 
+    const flowAtRestrictions = data.map((item) => {
+        return { value: props.flowAtRestriction };
+    });
+
     
     return(
         <View style={styles.container}>
             <LineChart 
                 style={{zIndex:0}}
                 data = {data} //setting data in graph
+                data2={flowAtRestrictions}
                 width={Dimensions.get('window').width * 0.75} 
                 height={Dimensions.get('window').height * 0.35}
                 maxValue={Math.max(...data.map(item => item.value)) == 0 ? 10 : Math.max(...data.map(item => item.value)) * 1.1} 
@@ -63,18 +68,19 @@ export function RiverFlowChart(props) {
                 yAxisTextStyle={styles.axis} 
                 xAxisLabelTexts={labels}
                 xAxisLabelTextStyle={styles.axis}
-                color={'#00A7CF'} 
+                color1={'#00A7CF'} 
+                color2={'#CE202F'}
                 thickness={3}
                 showVerticalLines //vertical lines on graph
                 showValuesAsDataPointsText //show values on click
-
-                dataPointsColor="#00A7CF" 
+                dataPointsHeight={5}
+                dataPointsWidth={5}
                 focusEnabled //allow datapoints click
                 textShiftY={-10} //text shift for data point values
                 textShiftX={-10} //text shift for data point values
                 textColor="black" 
                 textFontSize={12} 
-                focusedDataPointColor={'#00A7CF'} 
+                focusedDataPointColor1={'black'} 
                 focusedDataPointRadius={5} 
                 showTextOnFocus={true} 
                 showDataPointLabelOnFocus //show labels on click

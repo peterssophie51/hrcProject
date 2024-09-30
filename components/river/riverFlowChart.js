@@ -62,29 +62,30 @@ export function RiverFlowChart(props) {
                 data2={flowAtRestrictions}
                 width={Dimensions.get('window').width * 0.75} 
                 height={Dimensions.get('window').height * 0.35}
-                maxValue={Math.max(...data.map(item => item.value)) == 0 ? 10 : Math.max(...data.map(item => item.value)) * 1.1} 
+                maxValue={Math.max(...data.map(item => item.value)) == 0 ? 10 : Math.max(...data.map(item => item.value), ...flowAtRestrictions.map(item => item.value)) * 1.1} 
                 noOfSections={12} //sections verticlaly
-                initialSpacing={50} //spacing between first value and y axis
                 yAxisTextStyle={styles.axis} 
                 xAxisLabelTexts={labels}
                 xAxisLabelTextStyle={styles.axis}
                 color1={'#00A7CF'} 
                 color2={'#CE202F'}
+                initialSpacing={50} //spacing between first value and y axis
                 thickness={3}
                 showVerticalLines //vertical lines on graph
-                showValuesAsDataPointsText //show values on click
-                dataPointsHeight={5}
-                dataPointsWidth={5}
+
+                dataPointsColor1="#00A7CF"
+                dataPointsColor2="#CE202F"
+                dataPointsWidth={10}
+                dataPointsHeight={10}
                 focusEnabled //allow datapoints click
                 textShiftY={-10} //text shift for data point values
                 textShiftX={-10} //text shift for data point values
                 textColor="black" 
                 textFontSize={12} 
-                focusedDataPointColor1={'black'} 
+                focusedDataPointColor={'#00A7CF'}
                 focusedDataPointRadius={5} 
                 showTextOnFocus={true} 
-                showDataPointLabelOnFocus //show labels on click
-                showDataPointOnFocus //show datapoint circle on click
+
                 delayBeforeUnFocus={5000} //time before datatpoint and label doesnt show
                 dataPointLabelShiftX={Dimensions.get('window').width * -0.115}
                 dataPointLabelShiftY={-45}

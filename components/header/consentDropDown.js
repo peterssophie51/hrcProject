@@ -119,10 +119,10 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   hamburgerImage: { //styling hamburger icon to open nav
-    width: 50, 
-    height: 50, 
-    marginTop: Dimensions.get('window').height * 0.04, 
-    marginLeft: 20 
+    width: 35, 
+    height: 30, 
+    marginTop: Dimensions.get('window').height * 0.055, 
+    marginLeft: Dimensions.get('window').width * 0.06 
   },
   accordionDropDown: { //styling container of consent header drop down
     zIndex: 1, 

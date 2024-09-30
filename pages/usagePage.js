@@ -31,10 +31,10 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
   });
 
   const oneDayLabels = [
-    '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', 
-    '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', 
-    '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', 
-    '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
+    '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', 
+    '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', 
+    '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', 
+    '19:00', '20:00', '21:00', '22:00', '23:00', '00:00'
   ] //graph labels for x axis for one day
   const sevenDayLabels = ['1 DAY', '2 DAYS', '3 DAYS', '4 DAYS', '5 DAYS', '6 DAYS', '7 DAYS'] //graph labels for x axis for seven days
   const oneMonthLabels = ['1 WEEK', '2 WEEKS', '3 WEEKS', '4 WEEKS'] //graph labels for x axis for one month

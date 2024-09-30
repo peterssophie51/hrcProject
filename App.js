@@ -22,7 +22,7 @@ const Drawer = createDrawerNavigator();
 export default function App() {
 
   var flowsite = 'Tokomaru at Riverland Farm' //flowsite for consent
-  const [currentConsent, setCurrentConsent] = useState("Farm Water Consent"); //current consent nickname
+  const [currentConsent, setCurrentConsent] = useState("Water Consent"); //current consent nickname
   const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2001008270"); //current consent ath
 
 
@@ -69,15 +69,9 @@ export default function App() {
    //all consents in list 
   const [consents, setconsents] = useState([
     {ath:'ATH-2002009085', nickname: 'Farm'}, 
-    {ath:'ATH-2002008648', nickname: 'Water'}, 
-    {ath:'ATH-2002009348', nickname: 'Crops'}
+    {ath:'ATH-2001008270', nickname: 'Water'}, 
   ])
-  var dailyMax = 50 //maximum abstraction for a day
-  var annualMax = 1000 //maximum abstraction for a year
-  const [take, settake] = useState(false) //consent can take water or not
-  const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
 
-  //var currentRiverFlow = getCurrentRiverFlow() //current river flow
   const [currentRiverFlow, setcurrentRiverFlow] = useState(null)
   const [currentDate, setcurrentDate] = useState(null)
 
@@ -126,8 +120,8 @@ export default function App() {
   //in data, 0: one day data  1: seven day data  2: one month data  3: annual data
   const [flowmeters, setflowmeters] = useState([
   ])
-  const [annualUsage, setannualUsage] = useState(0)
-  const [dailyUsage, setdailyUsage] = useState(0)
+  const [annualUsage, setannualUsage] = useState(1000)
+  const [dailyUsage, setdailyUsage] = useState(100)
 
   useEffect(() => {
     const getCurrentFlowmeters = async () => {
@@ -181,9 +175,7 @@ export default function App() {
           const parsedData = JSON.parse(jsonConverted);
           const value = parsedData['Hilltop']['Measurement']['Data']['E']['I1']['_text']
           item.annualUsage = Number(value)
-          console.log('annual' + item.name + ' ' + value)
           totalAnnualUsage += item.annualUsage
-          console.log('ta ' + totalAnnualUsage)
         })
 
         await Promise.all(promises)
@@ -213,10 +205,87 @@ export default function App() {
       setdailyUsage(totalDailyUsage)
     }
 
+    const getOneDayFlowmeterUsage = async () => {
+      try {
+        const promises = flowmeters.map(async (item) => {
+          item.data[0].length = 0
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/PublicFlowmeters.hts?service=Hilltop&request=GetData&site=' + currentConsentATH + '&measurement=' + item.name.replace(' meter', '') + '&Method=Total&Interval=1%20Hour&alignment=1%20Day')
+          const responseText = await response.text()
+          const convert = require('xml-js')
+          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
+          const parsedData = JSON.parse(jsonConverted)
+          parsedData['Hilltop']['Measurement']['Data']['E'].forEach((datapoint) => {
+            const value = {
+              value: Number(datapoint['I1']['_text']),
+              time: datapoint['T']['_text']
+            }
+            item.data[0].push(value)
+          })
+        })
+        await Promise.all(promises)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    const getSevenDayFlowmeterUsage = async () => {
+      try {
+        const promises = flowmeters.map(async (item) => {
+          item.data[1].length = 0
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/PublicFlowmeters.hts?service=Hilltop&request=GetData&site=' + currentConsentATH + '&measurement=' + item.name.replace(' meter', '') + '&Method=Total&Interval=1 Day&alignment=7 Day')
+          const responseText = await response.text()
+          const convert = require('xml-js')
+          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
+          const parsedData = JSON.parse(jsonConverted)
+          parsedData['Hilltop']['Measurement']['Data']['E'].forEach((datapoint) => {
+            const value = {
+              value: Number(datapoint['I1']['_text']),
+              time: datapoint['T']['_text']
+            }
+            item.data[1].push(value)
+          })
+        })
+        await Promise.all(promises)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    const getOneMonthFlowmeterUsage = async () => {
+      try {
+        const promises = flowmeters.map(async (item) => {
+          item.data[2].length = 0
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/PublicFlowmeters.hts?service=Hilltop&request=GetData&site=' + currentConsentATH + '&measurement=' + item.name.replace(' meter', '') + '&Method=Total&Interval=1 Day&alignment=28 Day')
+          const responseText = await response.text()
+          const convert = require('xml-js')
+          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
+          const parsedData = JSON.parse(jsonConverted)
+          parsedData['Hilltop']['Measurement']['Data']['E'].forEach((datapoint) => {
+            const value = {
+              value: Number(datapoint['I1']['_text']),
+              time: datapoint['T']['_text']
+            }
+            item.data[2].push(value)
+          })
+        })
+        await Promise.all(promises)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     getAnnualFlowmeterUsage()
     getDailyFlowmeterUsage()
+    getOneDayFlowmeterUsage()
+    getSevenDayFlowmeterUsage()
+    getOneMonthFlowmeterUsage()
 
   }, [currentConsentATH, flowmeters])
+
+  const [dailyMax, setdailyMax] =useState(0) //maximum abstraction for a day
+  const [annualMax, setannualMax] = useState(0) //maximum abstraction for a year
+  const [take, settake] = useState(false) //consent can take water or not
+  const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
 
 
   var flowAtRestriction = 0 //restriction value in home page
@@ -224,6 +293,25 @@ export default function App() {
   var dataRecorded = time.toLocaleDateString('en-GB') + ', ' + time.toLocaleTimeString()  //date formatted for string use
   var consentExpiration = '2024-09-19T00:00:00' //when the consent expires
   
+  useEffect(() => {
+      const getComplianceData = async () => {
+        try {
+          console.log('test')
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/watermatters.hts?Service=Hilltop&Request=RecentDataTable&Collection=WaterMattersDailySummary')
+          const responseText = await response.text()
+          const convert = require('xml-js')
+          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
+          const parsedData = JSON.parse(jsonConverted)
+          console.log('a' + jsonConverted.read(1000))
+          console.log(parsedData['HilltopServer']['Results'][0])
+          
+        } catch (error) {
+
+        }
+      }
+
+      getComplianceData()
+  }, [currentConsentATH])
   //river flow data for flowsite (averaged)
   //0: one day data  1: seven day data  2: one month data  3: annual data
   var riverFlow = [

@@ -56,7 +56,7 @@ export function FlowbasedRestriction(props) {
                             return (
                                 // render the flow based restriction
                                 <RestrictionInfo 
-                                    key={item.id}
+                                    key={itemIndex}
                                     lessMore={'less'}
                                     restrictionTitle={'FLOW BASED RESTRICTION: '} 
                                     restriction={item.restriction} 

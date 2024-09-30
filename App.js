@@ -399,9 +399,14 @@ export default function App() {
             backgroundColor: 'black',
           },
           headerTitleStyle: {
-            color: 'white'
+            color: 'white',
           },
-          headerTintColor: '#ffffff', 
+          headerLeftContainerStyle: {
+            position: 'absolute', 
+            zIndex: 10,
+            marginRight: 10
+          },
+          headerTintColor: 'white', 
           headerTitle: '',
           headerTitleStyle: {
             fontWeight: '600',

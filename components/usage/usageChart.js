@@ -62,6 +62,7 @@ export function UsageChart(props) {
                 xAxisLabelTexts={labels}
                 xAxisLabelTextStyle={styles.xaxis}
                 color={'#00A7CF'} 
+                initialSpacing={50}
                 thickness={3}
                 showVerticalLines //vertical lines on graph
                 dataPointsColor="#00A7CF" 

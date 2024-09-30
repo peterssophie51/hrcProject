@@ -64,7 +64,7 @@ export function RiverFlowChart(props) {
                 height={Dimensions.get('window').height * 0.35}
                 maxValue={Math.max(...data.map(item => item.value)) == 0 ? 10 : Math.max(...data.map(item => item.value)) * 1.1} 
                 noOfSections={12} //sections verticlaly
-                initialSpacing={0} //spacing between first value and y axis
+                initialSpacing={50} //spacing between first value and y axis
                 yAxisTextStyle={styles.axis} 
                 xAxisLabelTexts={labels}
                 xAxisLabelTextStyle={styles.axis}

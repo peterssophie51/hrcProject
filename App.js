@@ -293,25 +293,6 @@ export default function App() {
   var dataRecorded = time.toLocaleDateString('en-GB') + ', ' + time.toLocaleTimeString()  //date formatted for string use
   var consentExpiration = '2024-09-19T00:00:00' //when the consent expires
   
-  useEffect(() => {
-      const getComplianceData = async () => {
-        try {
-          console.log('test')
-          const response = await fetch('https://hilltopserver.horizons.govt.nz/watermatters.hts?Service=Hilltop&Request=RecentDataTable&Collection=WaterMattersDailySummary')
-          const responseText = await response.text()
-          const convert = require('xml-js')
-          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
-          const parsedData = JSON.parse(jsonConverted)
-          console.log('a' + jsonConverted.read(1000))
-          console.log(parsedData['HilltopServer']['Results'][0])
-          
-        } catch (error) {
-
-        }
-      }
-
-      getComplianceData()
-  }, [currentConsentATH])
   //river flow data for flowsite (averaged)
   //0: one day data  1: seven day data  2: one month data  3: annual data
   var riverFlow = [

@@ -23,7 +23,7 @@ export default function App() {
 
   var flowsite = 'Tokomaru at Riverland Farm' //flowsite for consent
   const [currentConsent, setCurrentConsent] = useState("Water Consent"); //current consent nickname
-  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2001008270"); //current consent ath
+  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085"); //current consent ath
 
 
   const contacts = [
@@ -283,7 +283,7 @@ export default function App() {
   }, [currentConsentATH, flowmeters])
 
   const [dailyMax, setdailyMax] =useState(0) //maximum abstraction for a day
-  const [annualMax, setannualMax] = useState(0) //maximum abstraction for a year
+  const [annualMax, setannualMax] = useState(100) //maximum abstraction for a year
   const [take, settake] = useState(false) //consent can take water or not
   const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
 

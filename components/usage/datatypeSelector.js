@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         zIndex: 2
     },
     container: { //style container for datatype selector
-        top: (Dimensions.get('window').height * 0.39) + (Dimensions.get('window').width * 0.05),
+        marginTop: (Dimensions.get('window').height * 0.39) + (Dimensions.get('window').width * 0.18),
         position:'absolute'
     }
 })

@@ -59,9 +59,9 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
           {/*container to make top percentage cards inline*/}
           <View style={{display: 'flex', flexDirection:'row'}}>
             {/*annual percentage card*/}
-            <PercentagePill flowmeters={flowmeters} type={type} max={annualMax} time='annual' usage='annualUsage'/>
+            <PercentagePill flowmeters={flowmeters} type={type} max={annualMax} time='annual' usage='annualUsage' title='Annual'/>
             {/*daily percentage card*/}
-            <PercentagePill flowmeters={flowmeters} type={type} max={dailyMax} time='day' usage='dailyUsage'/>
+            <PercentagePill flowmeters={flowmeters} type={type} max={dailyMax} time='day' usage='dailyUsage' title='Daily'/>
           </View>
           {/*switch to change values in percentage cards*/}
           <Switch style={{

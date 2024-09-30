@@ -21,6 +21,7 @@ export function DatatypeSelector(props) {
     const handleDataClick = () => {
         props.setcurrentDatatypeNickname('Total Water Usage') //set current datatype name
         props.setcurrentDatatype('') //set flow meter type
+        setExpanded(!expanded)
         //depending on the selected timeframe, change the data
         if (props.selectedTime == '1 DAY') {
             props.setcurrentData(props.totalWaterUsage[0])
@@ -106,7 +107,10 @@ export function DatatypeSelector(props) {
                             updateFlowMeter={updateFlowMeter}
                             setcurrentData={props.setcurrentData}
                             data ={item['data']}
-                            selectedTime={props.selectedTime}/>
+                            selectedTime={props.selectedTime}
+                            setExpanded={setExpanded}
+                            expanded={expanded}
+                            />
                     );
                 })}
                 <List.Item title="Total Water Usage" //list item for total water usage as needs to be seperate

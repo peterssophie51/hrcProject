@@ -12,8 +12,7 @@ export function ConsentDropdownHeader(props) {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
-  //change variable when header expanded/minimised
-  const handlePress = () => setExpanded(!expanded);
+  const handlePress = () => setExpanded(!expanded)
   
   //update the consents information
   const updateConsent = (updatedConsent) => {
@@ -92,7 +91,9 @@ export function ConsentDropdownHeader(props) {
             setcurrentConsent={props.setCurrentConsent}
             setcurrentConsentATH={props.setCurrentConsentATH}
             updateConsent={updateConsent}
-            consents={props.consents}/>
+            consents={props.consents}
+            setExpanded={setExpanded}
+            expanded={expanded}/>
         )})
 
         }

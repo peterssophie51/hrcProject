@@ -68,6 +68,7 @@ export function ConsentDropdownItem(props) {
                 onPress={() => {
                     props.setcurrentConsent(props.nickname); 
                     props.setcurrentConsentATH(props.description);
+                    props.setExpanded(!props.expanded)
                 }} 
                 right={() => (
                     <View style={{ display: 'flex', flexDirection: 'row' }}>

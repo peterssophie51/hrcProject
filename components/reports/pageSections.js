@@ -53,7 +53,7 @@ export function PageSections(props) {
               )}
             >
                 
-            <List.Item title="First item" style={[styles.item, {fontFamily: 'Calibri'}]}/>
+            <List.Item right={props.content} style={[styles.item, {fontFamily: 'Calibri'}]}/>
         </List.Accordion>
     );
 }
@@ -70,5 +70,8 @@ const styles = StyleSheet.create({
     accordionStyle: {
         color: 'white',
         fontSize: 23
+    },
+    item: {
+        width: Dimensions.get('window').width * 0.9,
     }
 })

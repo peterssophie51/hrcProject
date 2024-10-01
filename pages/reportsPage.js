@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native'
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont';
 import { PageSections } from '../components/reports/pageSections';
+import { ComparisonsContent } from '../components/reports/comparisonsContent';
 
 export function ReportsPage ({ }) {
     return(
         <View style={styles.page}>
             <CalibriBoldText title="Reports" style={styles.title}/>
-            <PageSections title='COMPARISONS'/>
+            <PageSections title='COMPARISONS'content={() => <ComparisonsContent/>}/>
             <PageSections title="ALERTS" />
             <PageSections title='REPORTS' />
         </View>

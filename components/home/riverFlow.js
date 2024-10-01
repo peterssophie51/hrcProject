@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         marginBottom: Dimensions.get('window').height * -0.009,
         fontSize:20,
         textAlign:'left',
-        marginLeft: Dimensions.get('window').width * 0.1
+        marginLeft: Dimensions.get('window').width * 0.06
     },
     subTextContainer:{ //styling subtext container for bottom text
         marginTop: Dimensions.get('window').height * -0.005

@@ -9,7 +9,7 @@ import { CalibriText } from "../fonts/calibriFont";
 export function ProgressChart(props) {
   //function to round a number to a certain amount of dp (as entered)
   function roundNumber(num, roundTo) {
-    return Number.isInteger(num) ? num : num.toFixed(roundTo);
+    return Number.isInteger(num) ? num : parseFloat(num.toFixed(roundTo));
   }
 
   const percentage = (props.abstracted / props.max) * 100; //percentage 

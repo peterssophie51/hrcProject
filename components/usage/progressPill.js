@@ -30,7 +30,7 @@ export function ProgressPill(props) {
             <View style={{marginTop: props.max == 0? 0 :
                 (Dimensions.get('window').height * 0.26) - (Dimensions.get('window').height * 0.26 * totalPercentage)}}>
             { props.type === 'proportional' && props.flowmeters.map((item, index) => ( //map through list of flowmeters to create <View> for each flowmeter
-                    <View key={item['name']} style={[styles.subContainer, 
+                    <View key={index} style={[styles.subContainer, 
                         {height: props.max == 0 || totalPercentage == 1 ? 
                             Dimensions.get('window').height * 0.26 * (item[props.usage]/totalSum) : 
                             Dimensions.get('window').height * 0.26 * (item[props.usage]/props.max), 

@@ -96,7 +96,7 @@ export function DatatypeSelector(props) {
                 {props.flowMeters.map((item, itemIndex) => {  //map through list of flowmeters to show item for each flow meter
                     return ( 
                         <DatatypeItem 
-                            key={item.annualUsage}
+                            key={itemIndex}
                             description={item.name} 
                             setcurrentDatatypeNickname={props.setcurrentDatatypeNickname} 
                             setcurrentDatatype={props. setcurrentDatatype}

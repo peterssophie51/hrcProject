@@ -5,7 +5,7 @@ import * as Font from 'expo-font'
 import { StyleSheet } from "react-native";
 import { RadioGroup } from "react-native-radio-buttons-group";
 
-export function ComparisonRadios () {
+export function ComparisonRadios (props) {
     const [selectedTime, setselectedTime] =  useState('1 DAY')
 
     const [fontLoaded, setFontLoaded] = useState(false);
@@ -31,8 +31,9 @@ export function ComparisonRadios () {
         return null; 
     }
 
-    const handlePress = (name) => {
+    const handlePress = (name, labels) => {
         setselectedTime(name)
+        props.setcurrentLabels(labels)
     }
 
     return (
@@ -43,7 +44,7 @@ export function ComparisonRadios () {
             <View style={styles.radioTopLeft}>
                 {/*radio button*/}
                 <RadioGroup 
-                    onPress={() => handlePress('1 DAY')}
+                    onPress={() => handlePress('1 DAY', props.oneDayLabels)}
                     selectedId={selectedTime} 
                     radioButtons={[
                         {id:'1 DAY', label:'1 DAY', color:'#72BF44', 
@@ -57,7 +58,7 @@ export function ComparisonRadios () {
             <View style={styles.radioTopRight}>
                 {/*radio button*/}
                 <RadioGroup 
-                    onPress={() => handlePress('7 DAYS')}
+                    onPress={() => handlePress('7 DAYS', 'sevenDay')}
                     selectedId={selectedTime}
                     radioButtons={[
                         {id:'7 DAYS', label:'7 DAYS', color:'#72BF44', 
@@ -74,7 +75,7 @@ export function ComparisonRadios () {
             <View style={styles.radioBottomLeft}>
                 {/*radio button*/}
                 <RadioGroup 
-                    onPress={() => handlePress('1 MONTH')}
+                    onPress={() => handlePress('1 MONTH', 'oneMonth')}
                     selectedId={selectedTime}
                     radioButtons={[
                         {id:'1 MONTH', label:'1 MONTH', color:'#72BF44', 
@@ -87,7 +88,7 @@ export function ComparisonRadios () {
             {/*container for bottom right radio*/}
             <View style={styles.radioBottomRight}>
                 <RadioGroup 
-                    onPress={() => handlePress('ANNUAL')}
+                    onPress={() => handlePress('ANNUAL', props.annualLabels)}
                     selectedId={selectedTime}
                     radioButtons={[
                         {id:'ANNUAL', label:'ANNUAL', color:'#72BF44', 

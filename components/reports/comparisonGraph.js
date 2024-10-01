@@ -1,19 +1,124 @@
 import { Dimensions, View, StyleSheet } from "react-native";
 import { LineChart } from "react-native-gifted-charts";
+import { useState, useEffect } from "react";
+import { color } from "@rneui/base";
 
-export function ComparisonsGraph() {
-    const data = [{value: 15}, {value: 30}, {value: 26}, {value: 40}];
+export function ComparisonsGraph(props) {
+    const [labels, setLabels] = useState([]);
+    const [data, setdata] = useState( [{
+        data: []
+    }])
+
+    useEffect(() => {
+        console.log('blah')
+        const newData = []
+        props.selectedData.map((item) => {
+            if (item == 'Total Water Usage') {
+                if (props.currentLabels[0] == '00:00') {
+                    newData.push(
+                        {
+                            data: props.totalWaterUsage[0]
+                        }
+                    )
+                } else if (props.currentLabels == 'sevenDay') {
+                    newData.push(
+                        {
+                            data: props.totalWaterUsage[1],
+                        }
+                    )
+                } else if (props.currentLabels == 'oneMonth') {
+                    newData.push(
+                        {
+                            data: props.totalWaterUsage[2]
+                        }
+                    )
+                } else if (props.currentLabels[0] == 'JAN') {
+                    newData.push(
+                        {
+                            data: props.totalWaterUsage[3]
+                        }
+                    )
+                }
+            } else if (item == 'River Flow') {
+                if (props.currentLabels[0] == '00:00') {
+                    newData.push(
+                        {
+                            data: props.riverFlow[0]
+                        }
+                    )
+                } else if (props.currentLabels == 'sevenDay') {
+                    newData.push(
+                        {
+                            data: props.riverFlow[1]
+                        }
+                    )
+                } else if (props.currentLabels == 'oneMonth') {
+                    newData.push(
+                        {
+                            data: props.riverFlow[2]
+                        }
+                    )
+                } else if (props.currentLabels[0] == 'JAN') {
+                    newData.push(
+                        {
+                            data: props.riverFlow[3]
+                        }
+                    )
+                }
+            } else if (props.flowmeters.find(obj => obj['name'] == item)) {
+                const index = props.flowmeters.findIndex(obj => obj['name'] === item);
+                if (props.currentLabels[0] == '00:00') {
+                    newData.push(
+                        {
+                            data: props.flowmeters[index]['data'][0]
+                        }
+                    )
+                } else if (props.currentLabels[0] == 'JAN') {
+                    newData.push(
+                        {
+                            data: props.flowmeters[index]['data'][3]
+                        }
+                    )
+                } else if (props.currentLabels == 'sevenDay') {
+                    newData.push(
+                        {
+                            data: props.flowmeters[index]['data'][1]
+                        }
+                    )
+                } else if (props.currentLabels == 'oneMonth') {
+                    newData.push(
+                        {
+                            data: props.flowmeters[index]['data'][2]
+                        }
+                    )
+                } 
+            }
+        }
+        )
+    
+    if (props.selectedData.length > 0) {
+        setdata(newData)
+    } else {
+        setdata( [{
+            data: []
+        }])
+    }
+    }, [props.currentLabels, props.selectedData])
+
+
+    
     return (
         <View style={styles.container}>
             <LineChart 
+                key={data.length}
                 style={styles.graph}
-                data={data} 
+                dataSet={data} 
                 width={Dimensions.get('window').width * 0.75}
                 height={Dimensions.get('window').height * 0.35}
-                maxValue={50}
+                maxValue={2500}
                 noOfSections={12}
                 yAxisTextStyle={styles.axis}
-                xAxisLabelTexts={['Mon', 'Tue', 'Wed', 'Thurs']}
+                xAxisLabelTexts={['a', 'b']}
                 xAxisLabelTextStyle={styles.axis}
                 color={'#00A7CF'}
                 initialSpacing={50}

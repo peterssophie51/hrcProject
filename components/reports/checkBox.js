@@ -6,10 +6,18 @@ import * as Font from 'expo-font'
 
 export function Checkbox (props) {
     const [checked, setchecked] = useState(false)
-    const toggleCheckbox = () => setchecked(!checked);
-
+    const toggleCheckbox = () => {
+        setchecked(!checked)
+        props.setselectedData(prevList => {
+            if (prevList.includes(props.name)) {
+              return prevList.filter(listItem => listItem !== props.name);
+            } else {
+              return [...prevList, props.name];
+            }
+          });
+    }
     const [fontLoaded, setFontLoaded] = useState(false);
-
+    
     //function to load in calibri bold and calibri font
     useEffect(() => {
         async function loadFont() {

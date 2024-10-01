@@ -7,11 +7,13 @@ import { ComparisonsContent } from '../components/reports/comparisonsContent';
 import { ScrollView } from 'react-native';
 
 export function ReportsPage ({ flowmeters, riverFlow }) {
+
+
     return(
         <View style={styles.page}>
             <CalibriBoldText title="Reports" style={styles.title}/>
             <ScrollView>
-                <PageSections title='COMPARISONS'content={() => <ComparisonsContent flowmeters={flowmeters}/>}/>
+                <PageSections title='COMPARISONS'content={() => <ComparisonsContent flowmeters={flowmeters} riverFlow={riverFlow}/>}/>
                 <PageSections title="ALERTS" />
                 <PageSections title='REPORTS' />
                 <View style={{height:25}}></View>

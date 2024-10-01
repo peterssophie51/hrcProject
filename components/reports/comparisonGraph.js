@@ -42,7 +42,7 @@ export function ComparisonsGraph() {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: Dimensions.get('window').width *-0.8, 
+        marginLeft: Dimensions.get('window').width * 0, 
         marginTop: Dimensions.get('window').height * 0.02
     },
     axis: { ///stylig the axis

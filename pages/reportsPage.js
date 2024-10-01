@@ -4,22 +4,25 @@ import { Dimensions, StyleSheet } from 'react-native'
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont';
 import { PageSections } from '../components/reports/pageSections';
 import { ComparisonsContent } from '../components/reports/comparisonsContent';
+import { ScrollView } from 'react-native';
 
-export function ReportsPage ({ }) {
+export function ReportsPage ({ flowmeters, riverFlow }) {
     return(
         <View style={styles.page}>
             <CalibriBoldText title="Reports" style={styles.title}/>
-            <PageSections title='COMPARISONS'content={() => <ComparisonsContent/>}/>
-            <PageSections title="ALERTS" />
-            <PageSections title='REPORTS' />
+            <ScrollView>
+                <PageSections title='COMPARISONS'content={() => <ComparisonsContent flowmeters={flowmeters}/>}/>
+                <PageSections title="ALERTS" />
+                <PageSections title='REPORTS' />
+                <View style={{height:25}}></View>
+            </ScrollView>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     page: {
-        width: Dimensions.get('window').width ,
-        height: Dimensions.get('window').height * 2,
+        flex: 1,
         backgroundColor: 'white'
     },
     title: {

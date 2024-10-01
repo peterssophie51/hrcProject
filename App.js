@@ -23,7 +23,7 @@ export default function App() {
 
   var flowsite = 'Tokomaru at Riverland Farm' //flowsite for consent
   const [currentConsent, setCurrentConsent] = useState("Water Consent"); //current consent nickname
-  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2001008270"); //current consent ath
+  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085"); //current consent ath
 
 
   const contacts = [
@@ -283,12 +283,12 @@ export default function App() {
   }, [currentConsentATH, flowmeters])
 
   const [dailyMax, setdailyMax] =useState(0) //maximum abstraction for a day
-  const [annualMax, setannualMax] = useState(0) //maximum abstraction for a year
+  const [annualMax, setannualMax] = useState(100) //maximum abstraction for a year
   const [take, settake] = useState(false) //consent can take water or not
   const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
 
 
-  var flowAtRestriction = 0 //restriction value in home page
+  var flowAtRestriction = 6 //restriction value in home page
   var time = new Date(currentDate) //date created
   var dataRecorded = time.toLocaleDateString('en-GB') + ', ' + time.toLocaleTimeString()  //date formatted for string use
   var consentExpiration = '2024-09-19T00:00:00' //when the consent expires
@@ -399,9 +399,14 @@ export default function App() {
             backgroundColor: 'black',
           },
           headerTitleStyle: {
-            color: 'white'
+            color: 'white',
           },
-          headerTintColor: '#ffffff', 
+          headerLeftContainerStyle: {
+            position: 'absolute', 
+            zIndex: 10,
+            marginRight: 10
+          },
+          headerTintColor: 'white', 
           headerTitle: '',
           headerTitleStyle: {
             fontWeight: '600',
@@ -440,7 +445,7 @@ export default function App() {
         </Drawer.Screen>
 
         <Drawer.Screen name="RIVER">
-          {props => <RiverPage {...props} flowsite={flowsite}  
+          {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction}
           timeframe={dataRecorded} riverFlow={currentRiverFlow} data={riverFlow}/>}
         </Drawer.Screen>
 

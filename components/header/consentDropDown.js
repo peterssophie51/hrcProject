@@ -12,8 +12,7 @@ export function ConsentDropdownHeader(props) {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
-  //change variable when header expanded/minimised
-  const handlePress = () => setExpanded(!expanded);
+  const handlePress = () => setExpanded(!expanded)
   
   //update the consents information
   const updateConsent = (updatedConsent) => {
@@ -65,7 +64,7 @@ export function ConsentDropdownHeader(props) {
         style={styles.accordionDropDown}
         title={props.currentConsent}
         description={props.currentConsentATH}
-        titleStyle={{ marginLeft: 70, color: 'white', fontSize: 25, fontFamily: 'CalibriBold' }}
+        titleStyle={{ marginLeft: 70, color: 'white', fontSize: 25, fontFamily: 'CalibriBold', marginTop: Dimensions.get('window').height * 0.015 }}
         descriptionStyle={{ marginLeft: 70, color: 'white', fontSize: 20, fontFamily: 'Calibri' }}
         expanded={expanded}
         onPress={handlePress}
@@ -77,7 +76,7 @@ export function ConsentDropdownHeader(props) {
               //show drop down image if accordion dropped up
               : require('../../images/dropDownWhite.png') 
             }
-            style={{ height: 15, width: 25 }}
+            style={{ height: 15, width: 25 , marginTop: Dimensions.get('window').height * 0.04}}
           />
         )}
       >
@@ -92,7 +91,9 @@ export function ConsentDropdownHeader(props) {
             setcurrentConsent={props.setCurrentConsent}
             setcurrentConsentATH={props.setCurrentConsentATH}
             updateConsent={updateConsent}
-            consents={props.consents}/>
+            consents={props.consents}
+            setExpanded={setExpanded}
+            expanded={expanded}/>
         )})
 
         }
@@ -111,22 +112,23 @@ const styles = StyleSheet.create({
   headerContainer: { //styling container of header
     display: 'flex', 
     flexDirection: 'row', 
-    position: 'absolute'
+    position: 'absolute',
   },
   hamburgerButton: { //stying hamburegr icon contianer to open nav 
     position: 'absolute', 
     zIndex: 2
   },
   hamburgerImage: { //styling hamburger icon to open nav
-    width: 50, 
-    height: 50, 
-    marginTop: 15, 
-    marginLeft: 20 
+    width: 35, 
+    height: 30, 
+    marginTop: Dimensions.get('window').height * 0.055, 
+    marginLeft: Dimensions.get('window').width * 0.06 
   },
   accordionDropDown: { //styling container of consent header drop down
     zIndex: 1, 
     width: Dimensions.get('window').width, 
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    height: Dimensions.get('window').width * 0.25
   },
   addConsent: { //style list item to add item 
     backgroundColor: 'white',

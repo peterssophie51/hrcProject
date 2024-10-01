@@ -34,7 +34,12 @@ const styles = StyleSheet.create({
         marginLeft: Dimensions.get('window').width * 0.05,
         marginTop: Dimensions.get('window').height * 0.02,
         backgroundColor: '#eeeeee',
-        borderRadius: 20
+        borderRadius: 20,
+        elevation: 3,
+        shadowColor: '#black',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.8,
+        shadowRadius: 1,  
     },
     contacts: { //style contact information text
         fontSize: 25,

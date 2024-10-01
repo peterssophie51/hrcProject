@@ -14,20 +14,21 @@ export function FAQPage ({ route, navagation, props, contacts, faq }) {
         {/*making page scrollable*/}
         <ScrollView>
           {/*subheading for contacts info*/}
-          <CalibriBoldText style={styles.subtitle} title="Contacts"/>
+          {/*subheading for faq info*/}
+            {faq.map((item, index) => { //map through lsit of faq to render a card for each list item
+              return(
+                <FAQCard key={item.key} question={item.question} answer={item.answer}/>
+              )
+            })
+          }
+           <CalibriBoldText style={styles.subtitle} title="Contacts"/>
           {contacts.map((item, index) => { //map through list of contacts to render a card for each list item
             return (
               <ContactCard key={item.key} title={item.name} method={item.method} link={item.link}/>
             )
           })
           }
-          {/*subheading for faq info*/}
-          <CalibriBoldText style={styles.subtitle} title="FAQ"/>
-            {faq.map((item, index) => { //map through lsit of faq to render a card for each list item
-              return(
-                <FAQCard key={item.key} question={item.question} answer={item.answer}/>
-              )
-            })}
+
           {/*horizons logo at the bottom of the page*/}
           <Image source={require('../images/horizonsFlowTransperant.png')} style={styles.image}/>
         </ScrollView>

@@ -69,7 +69,7 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
             {/*if the restriction is the last restriction rendered, show view less*/}
             {visible && ( 
                 <TouchableOpacity onPress={handlePress}>
-                    <CalibriText style={styles.viewMoreLess} title={'View ' + lessMore + ' authorised volumes'}/>
+                    <CalibriBoldText style={styles.viewMoreLess} title={'View ' + lessMore + ' authorised volumes'}/>
                 </TouchableOpacity>
             )} 
         </View>
@@ -118,9 +118,9 @@ const styles = StyleSheet.create({
         marginTop: Dimensions.get('window').height * 0.02
     },
     viewMoreLess: { //styling view/more less expand button
-        textDecorationLine: 'underline',
-        fontSize: 17, 
-        marginTop: Dimensions.get('window').height * 0.02, 
+        fontSize: 20, 
+        color: '#72BF44',
+        marginTop: Dimensions.get('window').height * 0.015, 
         marginLeft: Dimensions.get('window').width * 0.045
     },
     m3container: { //styling container for m3 units text

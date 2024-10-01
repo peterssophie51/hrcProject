@@ -8,12 +8,11 @@ import { DatatypeItem } from "./datatypeItem";
 
 //component that allows users to choose the data displayed on the graph
 export function DatatypeSelector(props) {
-    const [expanded, setExpanded] = useState(false); //manage whether datatype selector expanded or not
     const [fontLoaded, setFontLoaded] = useState(false);
 
     //function to handle click of drop down/up arrow
     const handlePress = () => {
-        setExpanded(!expanded)
+        props.setExpanded(!props.expanded)
      
     }
 
@@ -21,6 +20,7 @@ export function DatatypeSelector(props) {
     const handleDataClick = () => {
         props.setcurrentDatatypeNickname('Total Water Usage') //set current datatype name
         props.setcurrentDatatype('') //set flow meter type
+        props.setExpanded(!props.expanded)
         //depending on the selected timeframe, change the data
         if (props.selectedTime == '1 DAY') {
             props.setcurrentData(props.totalWaterUsage[0])
@@ -78,11 +78,11 @@ export function DatatypeSelector(props) {
                 description={props.currentDatatype}
                 titleStyle={{fontSize:22, fontFamily:'CalibriBold', color:'black'}}
                 descriptionStyle={{fontSize:16, fontFamily: 'Calibri', color:'black'}}
-                expanded={expanded}
+                expanded={props.expanded}
                 onPress={handlePress}
                 right={() => ( //image to expand/unexpand depending on whether expanded or not
                     <Image
-                      source={expanded 
+                      source={props.expanded 
                         //show drop up image if accordion dropped down
                         ? require('../../images/dropUpBlack.png')  
                         //show drop down image if accordion dropped up
@@ -91,8 +91,8 @@ export function DatatypeSelector(props) {
                       style={{ height: 15, width: 25 }}
                     />
                   )}
-                style={[styles.accordion, {borderBottomLeftRadius: (expanded == true) ? 0 : 20,
-                    borderBottomRightRadius: (expanded == true) ? 0 : 20,}]}> 
+                style={[styles.accordion, {borderBottomLeftRadius: (props.expanded == true) ? 0 : 20,
+                    borderBottomRightRadius: (props.expanded == true) ? 0 : 20,}]}> 
                 {props.flowMeters.map((item, itemIndex) => {  //map through list of flowmeters to show item for each flow meter
                     return ( 
                         <DatatypeItem 
@@ -106,7 +106,10 @@ export function DatatypeSelector(props) {
                             updateFlowMeter={updateFlowMeter}
                             setcurrentData={props.setcurrentData}
                             data ={item['data']}
-                            selectedTime={props.selectedTime}/>
+                            selectedTime={props.selectedTime}
+                            setExpanded={props.setExpanded}
+                            expanded={props.expanded}
+                            />
                     );
                 })}
                 <List.Item title="Total Water Usage" //list item for total water usage as needs to be seperate
@@ -139,7 +142,7 @@ const styles = StyleSheet.create({
         zIndex: 2
     },
     container: { //style container for datatype selector
-        top: (Dimensions.get('window').height * 0.39) + (Dimensions.get('window').width * 0.05),
+        marginTop: (Dimensions.get('window').height * 0.39) + (Dimensions.get('window').width * 0.18),
         position:'absolute'
     }
 })

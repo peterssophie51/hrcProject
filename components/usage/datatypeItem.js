@@ -15,6 +15,7 @@ export function DatatypeItem(props) {
     const handlePress = () => {
         props.setcurrentDatatypeNickname(props.flowMeter['nickname']); //change current nickname in title
         props.setcurrentDatatype(props.description) //change current flow meter in title
+        props.setExpanded(!props.expanded)
         
         //depending on current time selected, change the data type depending onclick
         if (props.selectedTime == '1 DAY') {

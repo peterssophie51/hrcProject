@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import * as Font from 'expo-font';
 //importing components
 import { CalibriText } from "../fonts/calibriFont";
+import { CalibriBoldText } from "../fonts/calibriBoldFont";
 
 //progress chart in the middle of the home page
 export function ProgressChart(props) {
@@ -46,7 +47,7 @@ export function ProgressChart(props) {
 
   return (
     //container of pie chart
-    <View style={{ marginTop: Dimensions.get('window').height * 0.12, marginLeft: screenWidth * 0.1 }}>
+    <View style={{ marginTop: Dimensions.get('window').height * 0.15, marginLeft: screenWidth * 0.1 }}>
       <PieChart
         donut
         radius={screenWidth * 0.40}
@@ -55,8 +56,9 @@ export function ProgressChart(props) {
         centerLabelComponent={() => { //component to render text in the middle of the progress chart
           return (
             <View style={{ marginTop: percentage > 100 ? -25 : -35 }}>
+              <CalibriBoldText title='Usage' style={{textAlign: 'center', fontSize:30, marginBottom: -10}}/>
               {/*percentage text in middle of donut*/}
-              <Text style={[styles.headerText, { fontSize: percentage > 100 ? 80 : 90 }]}>
+              <Text style={[styles.headerText, { fontSize: percentage > 100 ? 70 : 80 }]}>
                 {roundNumber(percentage, 1)}
                 {/*units*/}
                 <Text style={[styles.headerText, { fontSize: percentage > 100 ? 50 : 60 }]}>%</Text>

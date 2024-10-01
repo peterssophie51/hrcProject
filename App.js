@@ -15,6 +15,7 @@ import { ConsentPage } from './pages/consentPage.js';
 import { RiverPage } from './pages/riverPage.js';
 import { UsagePage } from './pages/usagePage.js';
 import { FAQPage } from './pages/faqPage.js';
+import { ReportsPage } from './pages/reportsPage.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -416,7 +417,7 @@ export default function App() {
             fontSize: 50,
             marginLeft:'10%',
             textAlign: 'center',
-            marginTop: '5%',
+            marginTop: '3%',
             fontFamily: "CalibriBold"
           },
 
@@ -447,6 +448,10 @@ export default function App() {
         <Drawer.Screen name="RIVER">
           {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction}
           timeframe={dataRecorded} riverFlow={currentRiverFlow} data={riverFlow}/>}
+        </Drawer.Screen>
+
+        <Drawer.Screen name="REPORTS">
+          {props => <ReportsPage {...props} flowmeters={flowmeters} riverFlow={riverFlow}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="FAQ">

@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   title: { //style page title
     textAlign:'center', 
     fontSize:40, 
-    marginTop: Dimensions.get('window').height * 0.12
+    marginTop: Dimensions.get('window').height * 0.14
   },
   lastRecorded: { //style last recorded text
     textAlign: 'center',

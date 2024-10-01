@@ -40,7 +40,7 @@ export function FAQPage ({ route, navagation, props, contacts, faq }) {
     title: { //style page title
       textAlign:'center', 
       fontSize:40, 
-      marginTop: Dimensions.get('window').height * 0.12,
+      marginTop: Dimensions.get('window').height * 0.14,
     },
     container: { //style page container
       backgroundColor: '#eeeeee',

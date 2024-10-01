@@ -12,9 +12,10 @@ import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 //compoennt for the usage page
 export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, setflowmeters }) {
   const [type, settype] = useState('totalled') //manage state of switch and top percentage cards
+  const [expanded, setExpanded] = useState(false);
 
   const totalWaterUsage = flowmeters[0].data.map((_, dataIndex) => {
-    const map = new Map();
+  const map = new Map();
   
     flowmeters.forEach(flowmeter => {
       flowmeter.data[dataIndex].forEach(entry => {
@@ -86,7 +87,9 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
             totalWaterUsage={totalWaterUsage}
             flowMeters={flowmeters}
             selectedTime={selectedTime}
-            setflowMeters={setflowmeters}/>
+            setflowMeters={setflowmeters}
+            expanded={expanded}
+            setExpanded={setExpanded}/>
           {/*heading for graph*/}
           <View style={styles.graphHeading}>
               <CalibriText style={styles.graphHeadingText} title='Water Usage ('/>

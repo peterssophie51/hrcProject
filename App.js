@@ -129,8 +129,7 @@ export default function App() {
 
   //flow meter data
   //in data, 0: one day data  1: seven day data  2: one month data  3: annual data
-  const [flowmeters, setflowmeters] = useState([
-  ])
+  const [flowmeters, setflowmeters] = useState([])
   const [annualUsage, setannualUsage] = useState(1000)
   const [dailyUsage, setdailyUsage] = useState(100)
 

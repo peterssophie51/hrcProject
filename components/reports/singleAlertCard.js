@@ -5,14 +5,14 @@ import { StyleSheet } from "react-native";
 import { useState } from "react";
 import { Switch } from "react-native-switch";
 
-export function AlertCard () {
+export function AlertCard (props) {
 const [enabled, setEnabled] = useState(false);
   const toggleSwitch = () => setEnabled(!enabled);
 
     return (
         <View style={styles.container}>
             <View style={styles.textcontainer}>
-            <CalibriBoldText title='Total Water Usage' style={styles.title}/>
+            <CalibriBoldText title={props.title.toUpperCase()} style={styles.title}/>
             </View>
             <View style={styles.switchContainer}>
             <Switch 
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         padding: 20
     },
     title: {
-        fontSize: 22
+        fontSize: 24
     },
     switchContainer: {
         justifyContent: 'center',

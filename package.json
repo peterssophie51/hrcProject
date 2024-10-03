@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@react-navigation/drawer": "^6.7.2",
+    "@rneui/base": "^4.0.0-rc.7",
+    "@rneui/themed": "^4.0.0-rc.8",
     "expo": "^51.0.34",
     "expo-app-loading": "^1.0.3",
     "expo-font": "~12.0.9",
@@ -22,13 +24,15 @@
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-element-dropdown": "^2.12.1",
     "react-native-gesture-handler": "~2.16.1",
-    "react-native-gifted-charts": "^1.4.25",
+    "react-native-gifted-charts": "^1.4.43",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-paper": "^5.12.5",
     "react-native-radio-buttons-group": "^3.1.0",
     "react-native-reanimated": "~3.10.1",
     "react-native-svg": "^15.7.1",
+    "react-native-switch": "^1.5.1",
     "react-native-switch-selector": "^2.3.0",
+    "react-native-vector-icons": "^10.2.0",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {

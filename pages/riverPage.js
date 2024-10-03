@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   title: { //style title of page
     textAlign:'center', 
     fontSize:40, 
-    marginTop: Dimensions.get('window').height * 0.12
+    marginTop: Dimensions.get('window').height * 0.14
   },
   flowsite: { //style consent flow site text
     textAlign: 'center', 

@@ -15,6 +15,7 @@ import { ConsentPage } from './pages/consentPage.js';
 import { RiverPage } from './pages/riverPage.js';
 import { UsagePage } from './pages/usagePage.js';
 import { FAQPage } from './pages/faqPage.js';
+import { ReportsPage } from './pages/reportsPage.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -23,7 +24,7 @@ export default function App() {
 
   var flowsite = 'Tokomaru at Riverland Farm' //flowsite for consent
   const [currentConsent, setCurrentConsent] = useState("Water Consent"); //current consent nickname
-  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2002009085"); //current consent ath
+  const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2001008270"); //current consent ath
 
 
   const contacts = [
@@ -62,6 +63,16 @@ export default function App() {
       key: 1,
       question:'What is my consent flowsite?',
       answer:'This is the section of the river that is linked to your abstraction. For more information, you can visit out website or contact us at Horizons!'
+    },
+    {
+      key: 2,
+      question: 'What is that smell?',
+      answer: 'Its Jake!'
+    },
+    {
+      key: 3,
+      question: "Don't press this button",
+      answer: 'HONK!'
     }
   
   ] //all faq questions and answers to be rendered in faq cards
@@ -118,8 +129,7 @@ export default function App() {
 
   //flow meter data
   //in data, 0: one day data  1: seven day data  2: one month data  3: annual data
-  const [flowmeters, setflowmeters] = useState([
-  ])
+  const [flowmeters, setflowmeters] = useState([])
   const [annualUsage, setannualUsage] = useState(1000)
   const [dailyUsage, setdailyUsage] = useState(100)
 
@@ -416,7 +426,7 @@ export default function App() {
             fontSize: 50,
             marginLeft:'10%',
             textAlign: 'center',
-            marginTop: '5%',
+            marginTop: '3%',
             fontFamily: "CalibriBold"
           },
 
@@ -447,6 +457,10 @@ export default function App() {
         <Drawer.Screen name="RIVER">
           {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction}
           timeframe={dataRecorded} riverFlow={currentRiverFlow} data={riverFlow}/>}
+        </Drawer.Screen>
+
+        <Drawer.Screen name="REPORTS">
+          {props => <ReportsPage {...props} flowmeters={flowmeters} riverFlow={riverFlow}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="FAQ">

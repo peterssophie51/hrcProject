@@ -16,7 +16,6 @@ export function AlertsContent(props) {
             </View>
         )
     }
-
     const m3 = () => {
         return (
             <View style={styles.unitsContainer}>
@@ -25,7 +24,6 @@ export function AlertsContent(props) {
             </View>
         )
     }
-
     const percentage = () => {
         return (
             <View style={styles.unitsContainer}>

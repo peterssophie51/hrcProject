@@ -65,7 +65,10 @@ export function TextinputAlertCard({Component, title}) {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={toggleExpanded}>
-                    <Image source={ expanded ? require('../../images/dropUpSlate.png'): require('../../images/dropDownSlate.png')} style={{ height: 20, width: 32 }} />
+                    <Image source={ expanded ? 
+                      require('../../images/dropUpSlate.png') 
+                      : require('../../images/dropDownSlate.png')} 
+                      style={{ height: 20, width: 32 }} />
                 </TouchableOpacity>
         </View>
       </View>

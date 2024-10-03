@@ -63,6 +63,16 @@ export default function App() {
       key: 1,
       question:'What is my consent flowsite?',
       answer:'This is the section of the river that is linked to your abstraction. For more information, you can visit out website or contact us at Horizons!'
+    },
+    {
+      key: 2,
+      question: 'What is that smell?',
+      answer: 'Its Jake!'
+    },
+    {
+      key: 3,
+      question: "Don't press this button",
+      answer: 'HONK!'
     }
   
   ] //all faq questions and answers to be rendered in faq cards

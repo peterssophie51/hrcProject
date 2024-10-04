@@ -19,8 +19,7 @@ export function RiverPage ({ flowsite, data, timeframe, riverFlow, flowAtRestric
     '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', 
     '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
   ] //graph labels for x axis for one day
-  const annualLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC' ]  //graph labels for x axis for annual
-
+ 
   const [currentLabels, setcurrentLabels] = useState(oneDayLabels) //set current labels (as by radios)
 
     return (
@@ -37,7 +36,7 @@ export function RiverPage ({ flowsite, data, timeframe, riverFlow, flowAtRestric
         <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels} flowAtRestriction={flowAtRestriction}/> 
         {/*graph radios*/}
         <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
-        data={data} oneDayLabels={oneDayLabels} annualLabels={annualLabels}/>
+        data={data} oneDayLabels={oneDayLabels} />
       </View>
     )
   }

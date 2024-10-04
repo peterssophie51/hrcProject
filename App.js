@@ -16,6 +16,7 @@ import { RiverPage } from './pages/riverPage.js';
 import { UsagePage } from './pages/usagePage.js';
 import { FAQPage } from './pages/faqPage.js';
 import { ReportsPage } from './pages/reportsPage.js';
+import { parse } from 'react-native-svg';
 
 const Drawer = createDrawerNavigator();
 
@@ -25,8 +26,6 @@ export default function App() {
   var flowsite = 'Tokomaru at Riverland Farm' //flowsite for consent
   const [currentConsent, setCurrentConsent] = useState("Water Consent"); //current consent nickname
   const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2001008270"); //current consent ath
-
-
   const contacts = [
     {
       key: 0,
@@ -76,7 +75,6 @@ export default function App() {
     }
   
   ] //all faq questions and answers to be rendered in faq cards
-
    //all consents in list 
   const [consents, setconsents] = useState([
     {ath:'ATH-2002009085', nickname: 'Farm'}, 
@@ -133,6 +131,11 @@ export default function App() {
   const [annualUsage, setannualUsage] = useState(1000)
   const [dailyUsage, setdailyUsage] = useState(100)
 
+  const [dailyMax, setdailyMax] =useState(0) //maximum abstraction for a day
+  const [annualMax, setannualMax] = useState(100) //maximum abstraction for a year
+  const [take, settake] = useState(false) //consent can take water or not
+  const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
+
   useEffect(() => {
     const getCurrentFlowmeters = async () => {
       try {
@@ -170,11 +173,27 @@ export default function App() {
         console.error(error);
       }
     }
+
+    const getComplianceData = async () => {
+      try {
+        const response = await fetch('https://hilltopserver.horizons.govt.nz/watermatters.hts?Service=Hilltop&Site=' + currentConsentATH + '&Request=GetData&Measurement=WMCDS%20-%20CompliedYesterday');
+        const responseText = await response.text();
+        const convert = require('xml-js');
+        const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
+        const parsedData = JSON.parse(jsonConverted);
+        settake(parsedData['Hilltop']['Measurement']['Data']['E']['I2']['_text'] == 0 ? true : false)
+        setcompliedYesterday(parsedData['Hilltop']['Measurement']['Data']['E']['I7']['_text'] == 0 ? true : false)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getComplianceData()
     getCurrentFlowmeters()
   }, [currentConsentATH])
 
   useEffect(() => {   
-    const getAnnualFlowmeterUsage = async () => {
+    const getAnnualTotalFlowmeterUsage = async () => {
       let totalAnnualUsage = 0
       try {
         const promises = flowmeters.map(async (item) => {
@@ -195,7 +214,7 @@ export default function App() {
       setannualUsage(totalAnnualUsage)
     }
 
-    const getDailyFlowmeterUsage = async () => {
+    const getDailyTotalFlowmeterUsage = async () => {
       let totalDailyUsage = 0
       try {
         const promises = flowmeters.map(async (item) => {
@@ -283,20 +302,50 @@ export default function App() {
         console.log(error)
       }
     }
+    
+    const getAnnualFlowmeterUsage = async () => {
+      try {
+      const promises = flowmeters.map(async (item) => {
+        item.data[3].length = 0
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth(); 
+    
+        const getMonthTimes = (month) => {
+          const startOfMonth = new Date(currentYear, month, 1).toLocaleDateString()
+          const endOfMonth = new Date(currentYear, month + 1, 0).toLocaleDateString()
+          return [startOfMonth, endOfMonth > now ? now : endOfMonth];
+        };
+    
+        for (let month = 0; month <= currentMonth; month++) {
+          const monthTimes = getMonthTimes(month);
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '&Method=Total&from=' + monthTimes[0] + '&to=' + monthTimes[1])
+          const responseText = await response.text()
+          const convert = require('xml-js')
+          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 })
+          const parsedData = JSON.parse(jsonConverted)
+          const value = {
+            value: Number(parsedData['Hilltop']['Measurement']['Data']['E']['I1']['_text']),
+            time: parsedData['Hilltop']['Measurement']['Data']['E']['T']['_text']
+          }
+          item.data[3].push(value)
+        }
+      })
 
-    getAnnualFlowmeterUsage()
-    getDailyFlowmeterUsage()
+      await Promise.all(promises)
+      } catch (error) {
+        console.error("Error fetching flowmeter usage:", error); 
+      }
+    };
+
     getOneDayFlowmeterUsage()
     getSevenDayFlowmeterUsage()
     getOneMonthFlowmeterUsage()
+    getAnnualFlowmeterUsage()
+    getAnnualTotalFlowmeterUsage()
+    getDailyTotalFlowmeterUsage()
 
   }, [currentConsentATH, flowmeters])
-
-  const [dailyMax, setdailyMax] =useState(0) //maximum abstraction for a day
-  const [annualMax, setannualMax] = useState(100) //maximum abstraction for a year
-  const [take, settake] = useState(false) //consent can take water or not
-  const [compliedYesterday, setcompliedYesterday] = useState(true) //consent has complied or not
-
 
   var flowAtRestriction = 6 //restriction value in home page
   var time = new Date(currentDate) //date created

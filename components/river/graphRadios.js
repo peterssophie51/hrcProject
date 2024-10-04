@@ -86,18 +86,6 @@ export function TimeRadios(props) {
                     />
                 </View>
                 {/*container for bottom right radio*/}
-                <View style={styles.radioBottomRight}>
-                    <RadioGroup 
-                        onPress={() => handlePress('ANNUAL', props.data[3], props.annualLabels)}  //handle press
-                        selectedId={props.selectedTime}
-                        radioButtons={[
-                            {id:'ANNUAL', label:'ANNUAL', color:'#72BF44', 
-                                borderColor: props.selectedTime == 'ANNUAL' ? '#72BF44' : 'black'}]} //change colour depending on selected
-                        layout='vertical'
-                        labelStyle={styles.labels}
-                        style={styles.radios}
-                    />
-                </View>
             </View>
         </View>
     )

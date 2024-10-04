@@ -44,7 +44,7 @@ export function UsageChart(props) {
             }) 
             setLabels(newLabels);
         } else {
-            setLabels(props.currentLabels || []); // handle cases where currentLabels might be undefined
+            setLabels(props.currentLabels); // handle cases where currentLabels might be undefined
         }
     }, [props.currentLabels, data]);
     

@@ -9,9 +9,9 @@ export function RiverFlowChart(props) {
         return props.currentData.map((item) => {
             const time = new Date(item.time);
             const timeLabel = props.currentLabels[0] === '00:00'
-                ? time.toLocaleDateString('en-GB') + ', ' + time.toLocaleTimeString()
+                ? time.toLocaleDateString() + ', ' + time.toLocaleTimeString()
                 : props.currentLabels[0] === 'JAN' ? time.toLocaleDateString('en-GB').slice(3,10) 
-                : time.toLocaleDateString('en-GB').slice(0,10)
+                : time.toLocaleDateString().slice(0,10)
             
             // memoized component for dataPointLabel
             const dataPointLabelComponent = () => (
@@ -38,15 +38,16 @@ export function RiverFlowChart(props) {
 
     // recalculate labels when currentLabels or data changes
     useEffect(() => {
-        if (props.currentLabels === 'sevenDay' || props.currentLabels === 'oneMonth') {
-            const newLabels = data.map((item) => {
-                var date = new Date(item.time)
-                 return date.toLocaleDateString('en-GB').slice(0, 5)
-            }) 
-            setLabels(newLabels);
-        } else {
-            setLabels(props.currentLabels || []); // handle cases where currentLabels might be undefined
-        }
+        const newLabels = data.map((item) => {
+            var date = new Date(item.time)
+            console.log(date)
+            if (props.currentLabels == 'sevenDay' || props.currentLabels == 'oneMonth') {
+                return date.toLocaleDateString().slice(0, 5)
+            } else {
+                return `${String(date.getHours()).padStart(2, '0')}:${ String(date.getMinutes()).padStart(2, '0')}`
+            }
+    })
+    setLabels(newLabels)
     }, [props.currentLabels, props.currentData]);
 
     const flowAtRestrictions = data.map((item) => {

@@ -83,6 +83,13 @@ export default function App() {
 
   const [currentRiverFlow, setcurrentRiverFlow] = useState(null)
   const [currentDate, setcurrentDate] = useState(null)
+  //river flow data for flowsite (averaged)
+  //0: one day data  1: seven day data  2: one month data  3: annual data
+  const [riverFlow, setriverFlow] = useState([
+    [ ],
+    [ ],
+    [ ]
+  ])
 
  useEffect(() => {
     const getCurrentRiverFlow = async () => {
@@ -121,6 +128,57 @@ export default function App() {
       }
     };
 
+    const getOneDayRiverFlow = async () => {
+      riverFlow[0].length = 0
+      const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Hour)&TemporalFilter=om:phenomenonTime,P1D')
+      const responseText = await response.text()
+      const convert = require('xml-js')
+      const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
+      const parsedData = JSON.parse(jsonConverted)
+      parsedData['wml2:Collection']['wml2:observationMember']['om:OM_Observation']['om:result']['wml2:MeasurementTimeseries']['wml2:point'].forEach((datapoint) => {
+        const value = {
+          value: Number(datapoint['wml2:MeasurementTVP']['wml2:value']['_text']),
+          time: datapoint['wml2:MeasurementTVP']['wml2:time']['_text']
+        }
+        riverFlow[0].push(value)
+      }) 
+    }
+
+    const getSevenDayRiverFlow = async () => {
+      riverFlow[1].length = 0
+      const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Day)&TemporalFilter=om:phenomenonTime,P7D')
+      const responseText = await response.text()
+      const convert = require('xml-js')
+      const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
+      const parsedData = JSON.parse(jsonConverted)
+      parsedData['wml2:Collection']['wml2:observationMember']['om:OM_Observation']['om:result']['wml2:MeasurementTimeseries']['wml2:point'].forEach((datapoint) => {
+        const value = {
+          value: Number(datapoint['wml2:MeasurementTVP']['wml2:value']['_text']),
+          time: datapoint['wml2:MeasurementTVP']['wml2:time']['_text']
+        }
+        riverFlow[1].push(value)
+      }) 
+    }
+
+    const getOneMonthRiverFlow = async () => {
+      riverFlow[2].length = 0
+      const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Day)&TemporalFilter=om:phenomenonTime,P28D')
+      const responseText = await response.text()
+      const convert = require('xml-js')
+      const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
+      const parsedData = JSON.parse(jsonConverted)
+      parsedData['wml2:Collection']['wml2:observationMember']['om:OM_Observation']['om:result']['wml2:MeasurementTimeseries']['wml2:point'].forEach((datapoint) => {
+        const value = {
+          value: Number(datapoint['wml2:MeasurementTVP']['wml2:value']['_text']),
+          time: datapoint['wml2:MeasurementTVP']['wml2:time']['_text']
+        }
+        riverFlow[2].push(value)
+      }) 
+    }
+
+    getOneDayRiverFlow()
+    getSevenDayRiverFlow()
+    getOneMonthRiverFlow()
     getCurrentRiverFlow(); 
     getCurrentDate() 
   }, [flowsite]);
@@ -352,42 +410,6 @@ export default function App() {
   var dataRecorded = time.toLocaleDateString('en-GB') + ', ' + time.toLocaleTimeString()  //date formatted for string use
   var consentExpiration = '2024-09-19T00:00:00' //when the consent expires
   
-  //river flow data for flowsite (averaged)
-  //0: one day data  1: seven day data  2: one month data  3: annual data
-  var riverFlow = [
-    [
-      {value: 2130, time: '2024-09-19T00:00:00'}, {value: 2100, time: '2024-09-19T01:00:00'}, {value: 2000, time: '2024-09-19T02:00:00'},
-      {value: 0, time: '2024-09-19T03:00:00'}, {value: 0, time: '2024-09-19T04:00:00'}, {value: 0, time: '2024-09-19T05:00:00'},
-      {value: 0, time: '2024-09-19T06:00:00'}, {value: 0, time: '2024-09-19T07:00:00'}, {value: 0, time: '2024-09-19T08:00:00'},
-      {value: 0, time: '2024-09-19T09:00:00'}, {value: 0, time: '2024-09-1910:00:00'}, {value: 0, time: '2024-09-19T11:00:00'},
-      {value: 0, time: '2024-09-19T12:00:00'}, {value: 0, time: '2024-09-19T13:00:00'}, {value: 0, time: '2024-09-19T14:00:00'},
-      {value: 0, time: '2024-09-19T15:00:00'}, {value: 0, time: '2024-09-19T16:00:00'}, {value: 0, time: '2024-09-19T17:00:00'},
-     
-    ],
-    [
-      {value: 0, time: '2024-09-20T00:00:00'}, {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-18T00:00:00'},
-      {value: 0, time: '2024-09-17T00:00:00'}, {value: 0, time: '2024-09-16T00:00:00'}, {value: 0, time: '2024-09-15T00:00:00'},
-      {value: 0, time: '2024-09-14T00:00:00'}
-    ],
-    [
-      {value: 0, time: '2024-09-20T00:00:00'}, {value: 0, time: '2024-09-19T00:00:00'}, {value: 0, time: '2024-09-18T00:00:00'},
-      {value: 0, time: '2024-09-17T00:00:00'}, {value: 0, time: '2024-09-16T00:00:00'}, {value: 0, time: '2024-09-15T00:00:00'},
-      {value: 0, time: '2024-09-14T00:00:00'}, {value: 0, time: '2024-09-13T00:00:00'}, {value: 0, time: '2024-09-12T00:00:00'}, 
-      {value: 0, time: '2024-09-11T00:00:00'}, {value: 0, time: '2024-09-10T00:00:00'}, {value: 0, time: '2024-09-09T00:00:00'}, 
-      {value: 0, time: '2024-08-15T00:00:00'}, {value: 0, time: '2024-09-07T00:00:00'}, {value: 0, time: '2024-09-06T00:00:00'}, 
-      {value: 0, time: '2024-09-05T00:00:00'}, {value: 0, time: '2024-09-04T00:00:00'}, {value: 0, time: '2024-09-03T00:00:00'}, 
-      {value: 0, time: '2024-09-02T00:00:00'}, {value: 0, time: '2024-09-01T00:00:00'}, {value: 0, time: '2024-08-31T00:00:00'},
-      {value: 0, time: '2024-08-30T00:00:00'}, {value: 0, time: '2024-08-29T00:00:00'}, {value: 0, time: '2024-08-28T00:00:00'},
-      {value: 0, time: '2024-08-27T00:00:00'}, {value: 0, time: '2024-08-26T00:00:00'}, {value: 0, time: '2024-08-25T00:00:00'},
-      {value: 0, time: '2024-08-24T00:00:00'}
-    ],
-    [
-      {value: 0, time: '2024-01-31T00:00:00'}, {value: 0, time: '2024-02-28T00:00:00'}, {value: 0, time: '2024-03-31T00:00:00'},
-      {value: 0, time: '2024-04-30T00:00:00'}, {value: 0, time: '2024-05-31T00:00:00'}, {value: 0, time: '2024-06-30T00:00:00'},
-      {value: 0, time: '2024-07-31T00:00:00'}, {value: 0, time: '2024-08-31T00:00:00'}, {value: 0, time: '2024-09-30T00:00:00'}, 
-      {value: 0, time: '2024-10-31T00:00:00'}, {value: 0, time: '2024-11-30T00:00:00'}, {value: 0, time: '2024-12-31T00:00:00'}, 
-    ]
-  ]
   //all information for flow based restrictions
   var flowbasedRestrictions = [
     {

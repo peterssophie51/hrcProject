@@ -116,13 +116,13 @@ export default function App() {
           + flowsite +
           '&ObservedProperty=Flow%5bWater%20Level%5d&TemporalFilter=om:phenomenonTime,P');
         const responseText = await response.text();
-
         const convert = require('xml-js');
         const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
         const parsedData = JSON.parse(jsonConverted);
-
         const value = parsedData['wml2:Collection']['wml2:observationMember']['om:OM_Observation']['om:result']['wml2:MeasurementTimeseries']['wml2:point']['wml2:MeasurementTVP']['wml2:time']['_text'];
-        setcurrentDate(value);  
+        var currentTime = new Date(value) //date created
+        var dataRecorded = currentTime.toLocaleDateString() + ', ' + currentTime.toLocaleTimeString()  //date formatted for string use
+        setcurrentDate(dataRecorded);  
       } catch (error) {
         console.error(error);
       }
@@ -188,6 +188,7 @@ export default function App() {
   const [flowmeters, setflowmeters] = useState([])
   const [annualUsage, setannualUsage] = useState(1000)
   const [dailyUsage, setdailyUsage] = useState(100)
+  const [usageDate, setusageDate] = useState(null)
 
   const [dailyMax, setdailyMax] =useState(0) //maximum abstraction for a day
   const [annualMax, setannualMax] = useState(100) //maximum abstraction for a year
@@ -253,9 +254,11 @@ export default function App() {
   useEffect(() => {   
     const getAnnualTotalFlowmeterUsage = async () => {
       let totalAnnualUsage = 0
+      const today = new Date()
+      const startYear = new Date(today.getFullYear(), 0, 1).toLocaleDateString()
       try {
         const promises = flowmeters.map(async (item) => {
-          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '&Method=Total&Interval=1%20year');
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '&Method=Total&from=' + startYear+ '&to=now');
           const responseText = await response.text();
           const convert = require('xml-js');
           const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
@@ -274,9 +277,10 @@ export default function App() {
 
     const getDailyTotalFlowmeterUsage = async () => {
       let totalDailyUsage = 0
+      const oneDayBefore = new Date(Date.now() - 86400000).toLocaleDateString()
       try {
         const promises = flowmeters.map(async (item) => {
-          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '&Method=Total&Interval=1D');
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '&Method=Total&from=' + oneDayBefore + '&to=now');
           const responseText = await response.text();
           const convert = require('xml-js');
           const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
@@ -294,9 +298,10 @@ export default function App() {
 
     const getOneDayFlowmeterUsage = async () => {
       try {
+        const oneDayBefore = new Date(Date.now() - 86400000).toLocaleDateString()
         const promises = flowmeters.map(async (item) => {
           item.data[0].length = 0
-          const response = await fetch('https://hilltopserver.horizons.govt.nz/PublicFlowmeters.hts?service=Hilltop&request=GetData&site=' + currentConsentATH + '&measurement=' + item.name.replace(' meter', '') + '&Method=Total&Interval=1%20Hour&alignment=1%20Day')
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '&Method=Total&from=' + oneDayBefore + '&to=now&interval=1')
           const responseText = await response.text()
           const convert = require('xml-js')
           const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
@@ -317,9 +322,11 @@ export default function App() {
 
     const getSevenDayFlowmeterUsage = async () => {
       try {
+        const today = new Date()
+        const sevenDaysBefore = new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000).toLocaleDateString()
         const promises = flowmeters.map(async (item) => {
           item.data[1].length = 0
-          const response = await fetch('https://hilltopserver.horizons.govt.nz/PublicFlowmeters.hts?service=Hilltop&request=GetData&site=' + currentConsentATH + '&measurement=' + item.name.replace(' meter', '') + '&Method=Total&Interval=1 Day&alignment=7 Day')
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '%20Total%20(1%20Day)&from=' + sevenDaysBefore + '&to=now')
           const responseText = await response.text()
           const convert = require('xml-js')
           const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
@@ -340,9 +347,11 @@ export default function App() {
 
     const getOneMonthFlowmeterUsage = async () => {
       try {
+        const today = new Date()
+        const oneMonthBefore = new Date(today.getTime() - 27 * 24 * 60 * 60 * 1000).toLocaleDateString()
         const promises = flowmeters.map(async (item) => {
           item.data[2].length = 0
-          const response = await fetch('https://hilltopserver.horizons.govt.nz/PublicFlowmeters.hts?service=Hilltop&request=GetData&site=' + currentConsentATH + '&measurement=' + item.name.replace(' meter', '') + '&Method=Total&Interval=1 Day&alignment=28 Day')
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '%20Total%20(1%20Day)&from=' + oneMonthBefore + '&to=now')
           const responseText = await response.text()
           const convert = require('xml-js')
           const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
@@ -396,18 +405,34 @@ export default function App() {
       }
     };
 
+    const getUsageDate = async () => {
+      const oneDayBefore = new Date(Date.now() - 86400000).toLocaleDateString()
+      try {
+        const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=Flow1&Method=Total&from=' + oneDayBefore + '&to=now')
+        const responseText = await response.text()
+        const convert = require('xml-js')
+        const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
+        const parsedData = JSON.parse(jsonConverted)
+        const value = parsedData['Hilltop']['Measurement']['Data']['E']['T']['_text']
+        var usageTime = new Date(value)
+        var dataRecorded = usageTime.toLocaleDateString() + ', ' + usageTime.toLocaleTimeString()
+        setusageDate(dataRecorded)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
     getOneDayFlowmeterUsage()
     getSevenDayFlowmeterUsage()
     getOneMonthFlowmeterUsage()
     getAnnualFlowmeterUsage()
     getAnnualTotalFlowmeterUsage()
     getDailyTotalFlowmeterUsage()
+    getUsageDate()
 
   }, [currentConsentATH, flowmeters])
 
   var flowAtRestriction = 6 //restriction value in home page
-  var time = new Date(currentDate) //date created
-  var dataRecorded = time.toLocaleDateString('en-GB') + ', ' + time.toLocaleTimeString()  //date formatted for string use
   var consentExpiration = '2024-09-19T00:00:00' //when the consent expires
   
   //all information for flow based restrictions
@@ -510,7 +535,7 @@ export default function App() {
         <Drawer.Screen name="HOME">
           {props => <HomeScreen {...props} take={take} dailyUsage={dailyUsage} annualUsage={annualUsage}
               annualMax={annualMax} riverFlow={currentRiverFlow} restriction={flowAtRestriction} 
-              timePeriod={dataRecorded} dailyMax={dailyMax} />}
+              timePeriod={currentDate} usageTime={usageDate} dailyMax={dailyMax} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="CONSENT">
@@ -520,14 +545,14 @@ export default function App() {
         </Drawer.Screen>
 
         <Drawer.Screen name="USAGE">
-          {props => <UsagePage {...props} dataCollected={dataRecorded} 
+          {props => <UsagePage {...props} dataCollected={usageDate} 
           dailyMax={dailyMax} annualMax={annualMax} flowmeters={flowmeters} 
           setflowmeters={setflowmeters} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="RIVER">
           {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction}
-          timeframe={dataRecorded} riverFlow={currentRiverFlow} data={riverFlow}/>}
+          timeframe={currentDate} riverFlow={currentRiverFlow} data={riverFlow}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="REPORTS">

@@ -8,10 +8,10 @@ export function UsageChart(props) {
     const data = useMemo(() => {
         return props.currentData.map((item) => {
             const time = new Date(item.time);
-            const timeLabel = props.currentLabels[0] === '00:00'
-                ? time.toLocaleDateString('en-GB') + ', ' + time.toLocaleTimeString()
-                : props.currentLabels[0] === 'JAN' ? time.toLocaleDateString('en-GB').slice(3,10) 
-                : time.toLocaleDateString('en-GB').slice(0,10)
+            const timeLabel = (props.currentLabels[0] === '01:00')
+                ? time.toLocaleDateString() + ', ' + time.toLocaleTimeString()
+                : props.currentLabels[0] === 'JAN' ? time.toLocaleDateString().slice(3,10) 
+                : time.toLocaleDateString().slice(0,10)
             
             // memoized component for dataPointLabel
             const dataPointLabelComponent = () => (

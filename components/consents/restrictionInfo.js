@@ -6,7 +6,7 @@ import { CalibriText } from "../fonts/calibriFont";
 import { VerticalData } from "./verticalRestrictionData";
 
 //individual component for each flow based restriction in flow based restriction card
-export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, visible, restrictionTitle, data ={}}) {
+export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, visible, restrictionTitle, data }) {
    
     const handlePress = () => {
         setExpanded(!expanded)
@@ -16,9 +16,9 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
     const { 
         flowAtRestriction = '', 
         instantaneous = '', 
-        hourlyRestriction = '', 
-        dailyRestriction = '', 
-        annualRestriction = '' 
+        hourly = '', 
+        daily = '', 
+        annually = '' 
     } = data; //default values for all data
 
     //function to make horizontal data dynamic sizes if other max character length (6)
@@ -60,11 +60,11 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
             {/*container of all vertical boxes*/}
             <View style={styles.verticalDataContainer}>
                 {/*vertical component for hourly rate*/}
-                <VerticalData rate="HOURLY" time='HOUR' data={hourlyRestriction}/> 
+                <VerticalData rate="HOURLY" time='HOUR' data={hourly}/> 
                 {/*vertical component for daily rate*/}
-                <VerticalData rate="DAILY" time='DAY' data={dailyRestriction}/> 
+                <VerticalData rate="DAILY" time='DAY' data={daily}/> 
                 {/*vertical component for annually rate*/}
-                <VerticalData rate="ANNUALLY" time='ANNUAL' data={annualRestriction}/> 
+                <VerticalData rate="ANNUALLY" time='ANNUAL' data={annually}/> 
             </View>
             {/*if the restriction is the last restriction rendered, show view less*/}
             {visible && ( 

@@ -7,16 +7,16 @@ import { CalibriBoldText } from "../fonts/calibriBoldFont";
 //component for the top of the river page showing river flow card
 export function RiverFlowTitle(props) {
     //calculating font size of the river flow based on if length is greater than 3
-    const dynamicFontSize = props.riverFlow.toString().length > 3
-        ? 45 - (props.riverFlow.toString().length - 3) * 5
+    const dynamicFontSize = props.riverFlow != null ? props.riverFlow.toString().length > 3
+        ? 45 - (props.riverFlow.toString().length - 3) * 5 : 45
         : 45;
     //calculating the font size of the river flow units  based on if the length of the river flow is greater than 3
-    const dynamicUnitFontSize = props.riverFlow.toString().length > 3
-        ? 30 - (props.riverFlow.toString().length - 3) * 4
+    const dynamicUnitFontSize = props.riverFlow != null ? props.riverFlow.toString().length > 3
+        ? 30 - (props.riverFlow.toString().length - 3) * 4 : 30
         : 30;
     //calculating the font size of the superscript in the units based on if the length of the river flow is greater than 3
-    const dynamicSuperscriptFontSize = props.riverFlow.toString().length > 3
-        ? 20 - (props.riverFlow.toString().length - 3) * 1
+    const dynamicSuperscriptFontSize = props.riverFlow != null ? props.riverFlow.toString().length > 3
+        ? 20 - (props.riverFlow.toString().length - 3) * 1 : 20
         : 20;
 
     return (

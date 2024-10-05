@@ -37,14 +37,14 @@ export function Switch(props) {
     <SwitchSelector
       style={props.style}
       options={props.options}
-      initial={0}
       backgroundColor={props.backgroundColour}
+      initial={props.initial}
       height={Dimensions.get('window').height * 0.07}
       fontSize={25}
       textStyle={{fontFamily:'CalibriBold', color:props.textColour}}
       selectedTextStyle={{fontFamily:'CalibriBold', color:'black'}}
       onPress={value => props.action(value)} 
       disabled = {props.disabled}
-      value={props.value || 0}
+      value={props.value}
   />)}
   

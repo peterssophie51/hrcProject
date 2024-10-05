@@ -76,6 +76,8 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
             disabled={flowmeters.length > 1 ? false : true}
             backgroundColour={flowmeters.length > 1 ? '#243746' : '#cccccc'}
             textColour={flowmeters.length > 1 ? 'white' : 'black'}
+            initial={flowmeters.length == 1 ? 0 : 1}
+            value={flowmeters.length == 1 ? 0 : 1}
           />
           {/*datatype selector to change data on graph*/}
           <DatatypeSelector 

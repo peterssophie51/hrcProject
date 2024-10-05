@@ -51,7 +51,11 @@ export function RiverFlowChart(props) {
     }, [props.currentLabels, props.currentData]);
 
     const flowAtRestrictions = data.map((item) => {
-        return { value: props.flowAtRestriction };
+        if (props.flowAtRestriction == null ) {
+            return {value: -1}
+        } else {
+            return { value: props.flowAtRestriction };
+        }
     });
 
     

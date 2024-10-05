@@ -6,7 +6,7 @@ import { CalibriText } from "../fonts/calibriFont";
 
 //rievr flow card to indicate river flows
 export function RiverFlow(props) {
-    const restrictionText = "RESTRICTION AT " + roundNumber(props.restriction, 3) //when data is restricted
+    const restrictionText = props.restriction != null ? "RESTRICTION AT " + roundNumber(props.restriction, 3) : 'None ' //when data is restricted
     const timePeriodText = 'Last Recorded at ' + props.timePeriod //when data was last recorded
     
     //function to round the number to a certain amount of decimal points

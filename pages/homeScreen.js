@@ -9,7 +9,7 @@ import { Switch } from '../components/switch';
 
 //home screen component
 export function HomeScreen( { take, annualUsage, dailyUsage, annualMax, dailyMax, riverFlow, restriction, timePeriod, usageTime}) {
-  const [graphTime, setgraphTime] = useState('annual') //text for center of circular progress chart
+  const [graphTime, setgraphTime] = useState(dailyMax === 0 ? 'annual' : 'day') //text for center of circular progress chart
 
     return (
       <View style={styles.page}>
@@ -22,11 +22,13 @@ export function HomeScreen( { take, annualUsage, dailyUsage, annualMax, dailyMax
           { label: "Today", value: 'day', activeColor:'#72BF44' }]} style={{
             marginTop: Dimensions.get('window').width * 0.05, 
             width:Dimensions.get('window').width * 0.7, 
-            marginLeft:Dimensions.get('window').width *0.15}} action={setgraphTime}
+            marginLeft:Dimensions.get('window').width *0.15}} 
+           action={setgraphTime}
            disabled={dailyMax === 0  || annualMax === 0 ? true : false} 
            backgroundColour={dailyMax === 0 || annualMax === 0 ? '#cccccc' : '#243746'} 
            textColour={dailyMax === 0 || annualMax === 0? 'black' : 'white'} 
-           value={dailyMax === 0  ? 0 : annualMax === 0 ? 1 : 0}
+           initial={dailyMax === 0  ? 0 : 1}
+           value={dailyMax === 0 ? 0 : annualMax === 0 ? 1 : 0}
         />
         {/*take water card*/}
         <TakeWater take={take}/> 

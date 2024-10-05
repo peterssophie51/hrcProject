@@ -7,7 +7,7 @@ import { RestrictionInfo } from "./restrictionInfo";
 // accordion list of all flow based restrictions at bottom of consents page
 export function FlowbasedRestriction(props) {
     const [expanded, setExpanded] = React.useState(false); // set whether accordion is expanded or not
-    const [currentRestriction, setcurrentRestriction] = React.useState('Three'); // set which flow based restriction is currently in effect
+    const [currentRestriction, setcurrentRestriction] = React.useState('One'); // set which flow based restriction is currently in effect
 
     // index in restriction list for current flow based restriction
     const index = props.restrictions.findIndex(item => item.restriction === currentRestriction); 
@@ -15,6 +15,8 @@ export function FlowbasedRestriction(props) {
 
     // max index of list ignoring current consent
     const maxIndex = props.restrictions.length - 1;
+
+    console.log(props.restrictions)
 
     return (
         <View>
@@ -39,9 +41,9 @@ export function FlowbasedRestriction(props) {
                     data={{ 
                         flowAtRestriction: props.restrictions[validIndex].flowAtRestriction,
                         instantaneous: props.restrictions[validIndex].instantaneous,
-                        hourlyRestriction: props.restrictions[validIndex].hourlyRestriction,
-                        dailyRestriction: props.restrictions[validIndex].dailyRestriction,
-                        annualRestriction: props.restrictions[validIndex].annualRestriction
+                        hourly: props.restrictions[validIndex].hourly,
+                        daily: props.restrictions[validIndex].daily,
+                        annually: props.restrictions[validIndex].annually
                     }}
                 />} 
             >
@@ -66,9 +68,9 @@ export function FlowbasedRestriction(props) {
                                     data={{ 
                                         flowAtRestriction: item.flowAtRestriction,
                                         instantaneous: item.instantaneous,
-                                        hourlyRestriction: item.hourlyRestriction,
-                                        dailyRestriction: item.dailyRestriction,
-                                        annualRestriction: item.annualRestriction
+                                        hourly: item.hourly,
+                                        daily: item.daily,
+                                        annually: item.annually
                                     }} 
                                 />
                             );

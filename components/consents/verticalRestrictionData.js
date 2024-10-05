@@ -6,6 +6,7 @@ import { CalibriText } from "../fonts/calibriFont";
 
 //individual component for the vertical data in each flow based restriction (hourly/daily/annual rates)
 export function VerticalData(props) {
+    console.log(props.data)
 
     //function to make vertical data dynamic sizes if other max character length (4)
     const verticalDataDynamicFont = (text) => {

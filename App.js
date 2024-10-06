@@ -212,7 +212,7 @@ export default function App() {
   const [consentExpiration, setconsentExpiration] = useState('2024-09-19T00:00:00') //when the consent expires
   //all information for flow based restrictions
   const [flowbasedRestrictions, setflowbasedRestrictions] = useState([])
-  const [flowsite, setflowsite] = useState('Tokomaru at Riverland Farm') //flowsite for consent
+  const [flowsite, setflowsite] = useState('Oroua at Almadale Slackline') //flowsite for consent
   const [dailyMax, setdailyMax] =useState(0) //maximum abstraction for a day
   const [annualMax, setannualMax] = useState(100) //maximum abstraction for a year
 
@@ -358,14 +358,14 @@ export default function App() {
         })
         await Promise.all(promises)
       } catch (error) {
-        //console.log(error)
+        console.log(error)
       }
     }
 
     const getSevenDayFlowmeterUsage = async () => {
       try {
         const today = new Date()
-        const sevenDaysBefore = new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000).toLocaleDateString()
+        const sevenDaysBefore = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000).toLocaleDateString()
         const promises = flowmeters.map(async (item) => {
           item.data[1].length = 0
           const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + currentConsentATH + '&Measurement=' + item.name.replace(' meter', '') + '%20Total%20(1%20Day)&from=' + sevenDaysBefore + '&to=now')
@@ -383,7 +383,7 @@ export default function App() {
         })
         await Promise.all(promises)
       } catch (error) {
-        //console.log(error)
+        console.log(error)
       }
     }
 
@@ -403,12 +403,13 @@ export default function App() {
               value: Number(datapoint['I1']['_text']),
               time: datapoint['T']['_text']
             }
+  
             item.data[2].push(value)
           })
         })
         await Promise.all(promises)
       } catch (error) {
-        //console.log(error)
+        console.log(error)
       }
     }
     
@@ -527,7 +528,7 @@ export default function App() {
 
     const getSevenDayRiverFlow = async () => {
       riverFlow[1].length = 0
-      const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Day)&TemporalFilter=om:phenomenonTime,P7D')
+      const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Day)&TemporalFilter=om:phenomenonTime,P6D')
       const responseText = await response.text()
       const convert = require('xml-js')
       const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
@@ -543,7 +544,7 @@ export default function App() {
 
     const getOneMonthRiverFlow = async () => {
       riverFlow[2].length = 0
-      const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Day)&TemporalFilter=om:phenomenonTime,P28D')
+      const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Day)&TemporalFilter=om:phenomenonTime,P27D')
       const responseText = await response.text()
       const convert = require('xml-js')
       const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
@@ -555,16 +556,18 @@ export default function App() {
         }
         riverFlow[2].push(value)
       }) 
+      console.log(riverFlow[2].length)
     }
 
     if (flowsite == null) {
       riverFlow[0].length = 0
-      riverFlow[1].length = 1
-      riverFlow[2].length = 2
+      riverFlow[1].length = 0
+      riverFlow[2].length = 0
       riverFlow[0].push({value: 0})
       riverFlow[1].push({value: 0})
       riverFlow[2].push({value: 0})
       setcurrentRiverFlow(null)
+      setcurrentDate(new Date().toLocaleDateString() + ', ' + new Date().toLocaleTimeString())
     } else {
       getOneDayRiverFlow()
       getSevenDayRiverFlow()

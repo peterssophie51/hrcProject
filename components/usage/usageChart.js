@@ -8,7 +8,7 @@ export function UsageChart(props) {
     const data = useMemo(() => {
         return props.currentData.map((item) => {
             const time = new Date(item.time);
-            const timeLabel = (props.currentLabels[0] === '01:00')
+            const timeLabel = (props.currentLabels[0] === '00:00')
                 ? time.toLocaleDateString() + ', ' + time.toLocaleTimeString()
                 : props.currentLabels[0] === 'JAN' ? time.toLocaleDateString().slice(3,10) 
                 : time.toLocaleDateString().slice(0,10)
@@ -56,7 +56,7 @@ export function UsageChart(props) {
                 data={data} //setting data in graph
                 width={Dimensions.get('window').width * 0.75} 
                 height={Dimensions.get('window').height * 0.35}
-                maxValue={Math.max(...data.map(item => item.value)) === 0 ? 10 : Math.max(...data.map(item => item.value)) * 1.1} 
+                maxValue={Math.max(...data.map(item => item.value)) === 0 ? 10 : Math.max(...data.map(item => item.value)) * 1.5} 
                 noOfSections={10} // sections vertically
                 yAxisTextStyle={{ fontSize: 12 }} 
                 xAxisLabelTexts={labels}

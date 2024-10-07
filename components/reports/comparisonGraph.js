@@ -137,20 +137,26 @@ export function ComparisonsGraph(props) {
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={(item.value / 1000).toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
+                                    <CalibriText title="/S" style={{ fontSize: 15, lineHeight: 22 }} />
                                 </View>
                                 <CalibriText title={timeLabel} />
                             </View>
                         );
                         list.push({
-                            value:item.value,
+                            value: item.value / 1000,
                             time:item.time,
                             dataPointLabelComponent
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list, 
+                        isSecondary: true, 
+                        color: '#72BF44',
+                        dataPointsColor: '#72BF44'
+                    })
                 } else if (props.currentLabels == 'sevenDay') {
                     const list = []
                     props.riverFlow[1].map((item) => {
@@ -164,20 +170,26 @@ export function ComparisonsGraph(props) {
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={(item.value) / 1000} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
+                                    <CalibriText title="/S" style={{ fontSize: 15, lineHeight: 22 }} />
                                 </View>
                                 <CalibriText title={timeLabel} />
                             </View>
                         );
                         list.push({
-                            value:item.value,
+                            value:item.value /1000,
                             time:item.time,
-                            dataPointLabelComponent
+                            dataPointLabelComponent,
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list, 
+                        isSecondary: true,
+                        color: '#72BF44',
+                        dataPointsColor: '#72BF44'
+                    })
                 } else if (props.currentLabels == 'oneMonth') {
                     const list = []
                     props.riverFlow[2].map((item) => {
@@ -191,20 +203,26 @@ export function ComparisonsGraph(props) {
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={item.value /1000} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
+                                    <CalibriText title="/S" style={{ fontSize: 15, lineHeight: 22 }} />
                                 </View>
                                 <CalibriText title={timeLabel} />
                             </View>
                         );
                         list.push({
-                            value:item.value,
+                            value:item.value /1000,
                             time:item.time,
                             dataPointLabelComponent
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list, 
+                        isSecondary: true,
+                        color: '#72BF44',
+                        dataPointsColor: '#72BF44'
+                    })
                 } else if (props.currentLabels[0] == 'JAN') {
                     newData.push(
                         {
@@ -343,7 +361,8 @@ export function ComparisonsGraph(props) {
             return current.value > max.value ? current : max;
         }, allDataObjects[0]);
         if (maxObject != undefined) {
-            setMax(maxObject.value)
+            setMax(maxObject.value * 1.3)
+            console.log(max)
         } else {
             setMax(12)
         }
@@ -381,7 +400,7 @@ export function ComparisonsGraph(props) {
                 key={data.length}
                 style={styles.graph}
                 dataSet={data} 
-                width={props.selectedData.includes('River Flow') ? Dimensions.get('window').width * 0.65 : Dimensions.get('window').width * 0.75}
+                width={props.selectedData.includes('River Flow') ? Dimensions.get('window').width * 0.7 : Dimensions.get('window').width * 0.75}
                 height={Dimensions.get('window').height * 0.35}
                 maxValue={max}
                 noOfSections={12}
@@ -393,7 +412,7 @@ export function ComparisonsGraph(props) {
                 thickness={3}
                 showVerticalLines
                 secondaryYAxis={props.selectedData.includes('River Flow') ? {
-                    maxValue: Math.max(...props.riverFlow[0].map(item => item.value), 10) * 1.5,
+                    maxValue: Math.max(...props.riverFlow[0].map(item => item.value / 1000), 10) * 1.3,
                     noOfSections: 12,
                     yAxisColor: '#72BF44',
                     yAxisTextStyle: {

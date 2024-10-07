@@ -160,13 +160,13 @@ export default function App() {
   const faq = [
     {   
       key: 0, 
-      question:'This is a long question in the FAQ', 
-      answer:"You should already have your consent ATH when applyig for a consent, if you don't have this infrormation, please contact us at Horizons!"
+      question:'Question', 
+      answer:"Answer"
     },
     {
       key: 1,
-      question:'What is my consent flowsite?',
-      answer:'This is the section of the river that is linked to your abstraction. For more information, you can visit out website or contact us at Horizons!'
+      question:'Why did the chicken cross the road?',
+      answer:'To get to the other side!'
     },
     {
       key: 2,

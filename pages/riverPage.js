@@ -26,7 +26,7 @@ export function RiverPage ({ flowsite, data, timeframe, riverFlow, flowAtRestric
         {/*river flow card*/}
         <RiverFlowTitle riverFlow={riverFlow}/> 
         {/*river flow chart*/}
-        <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels} flowAtRestriction={flowAtRestriction}/> 
+        <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels} flowAtRestriction={flowAtRestriction} flowsite={flowsite}/> 
         {/*graph radios*/}
         <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
         data={data} />

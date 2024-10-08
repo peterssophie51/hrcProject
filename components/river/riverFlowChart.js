@@ -8,16 +8,17 @@ export function RiverFlowChart(props) {
     const data = useMemo(() => {
         return props.currentData.map((item) => {
             const time = new Date(item.time);
-            const timeLabel = props.currentLabels[0] === '00:00'
+            console.log(props.currentLabels)
+            const timeLabel = (props.currentLabels == 'oneDay')
                 ? time.toLocaleDateString() + ', ' + time.toLocaleTimeString()
-                : props.currentLabels[0] === 'JAN' ? time.toLocaleDateString('en-GB').slice(3,10) 
+                : props.currentLabels[0] === 'JAN' ? time.toLocaleDateString().slice(3,10) 
                 : time.toLocaleDateString().slice(0,10)
             
             // memoized component for dataPointLabel
             const dataPointLabelComponent = () => (
                 <View style={styles.label}>
                     <View style={{ display: 'flex', flexDirection: 'row' }}>
-                        <CalibriText title={item.value /1000} style={{ fontSize: 17 }} />
+                        <CalibriText title={(item.value /1000).toFixed(3)} style={{ fontSize: 17 }} />
                         <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                         <CalibriText title="3" style={{ fontSize: 13 }} />
                         <CalibriText title="/S" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -26,11 +27,15 @@ export function RiverFlowChart(props) {
                 </View>
             );
 
-            return {
-                ...item,
-                value: item.value /1000,
-                dataPointLabelComponent
-            };
+            if (props.flowsite == null) {
+                return []
+            } else {
+                return {
+                    ...item,
+                    value: item.value /1000,
+                    dataPointLabelComponent
+                }
+            }
         });
     }, [props.currentData, props.currentLabels]);
 
@@ -40,7 +45,6 @@ export function RiverFlowChart(props) {
     useEffect(() => {
         const newLabels = data.map((item) => {
             var date = new Date(item.time)
-            console.log(date)
             if (props.currentLabels == 'sevenDay' || props.currentLabels == 'oneMonth') {
                 return date.toLocaleDateString().slice(0, 5)
             } else {
@@ -51,10 +55,23 @@ export function RiverFlowChart(props) {
     }, [props.currentLabels, props.currentData]);
 
     const flowAtRestrictions = data.map((item) => {
+
+        const dataPointLabelComponent = () => (
+            <View style={styles.label}>
+                <View style={{ display: 'flex', flexDirection: 'row' }}>
+                    <CalibriText title={props.flowAtRestriction } style={{ fontSize: 17 }} />
+                    <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
+                    <CalibriText title="3" style={{ fontSize: 13 }} />
+                    <CalibriText title="/S" style={{ fontSize: 15, lineHeight: 22 }} />
+                </View>
+                <CalibriText title="Flow at Restriction"/>
+            </View>
+        );
+
         if (props.flowAtRestriction == null ) {
-            return {value: -1}
+            return []
         } else {
-            return { value: props.flowAtRestriction };
+            return { value: props.flowAtRestriction, dataPointLabelComponent  };
         }
     });
 
@@ -67,7 +84,7 @@ export function RiverFlowChart(props) {
                 data2={flowAtRestrictions}
                 width={Dimensions.get('window').width * 0.75} 
                 height={Dimensions.get('window').height * 0.35}
-                maxValue={Math.max(...data.map(item => item.value)) == 0 ? 10 : Math.max(...data.map(item => item.value), ...flowAtRestrictions.map(item => item.value)) * 1.1} 
+                maxValue={Math.max(...data.map(item => item.value)) == 0 ? 10 : Math.max(...data.map(item => item.value), ...flowAtRestrictions.map(item => item.value)) * 1.2} 
                 noOfSections={12} //sections verticlaly
                 yAxisTextStyle={styles.axis} 
                 xAxisLabelTexts={labels}
@@ -87,7 +104,7 @@ export function RiverFlowChart(props) {
                 textShiftX={-10} //text shift for data point values
                 textColor="black" 
                 textFontSize={12} 
-                focusedDataPointColor={'#00A7CF'}
+                focusedDataPointColor={props.flowAtRestriction == null ? '#00A7CF' : 'black'}
                 focusedDataPointRadius={5} 
                 showTextOnFocus={true} 
 

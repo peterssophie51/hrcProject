@@ -10,7 +10,7 @@ import { UsageChart } from '../components/usage/usageChart.js';
 import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 
 //compoennt for the usage page
-export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, setflowmeters }) {
+export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, setflowmeters, currentConsentATH }) {
   const [type, settype] = useState('totalled') //manage state of switch and top percentage cards
   const [expanded, setExpanded] = useState(false);
 
@@ -78,6 +78,7 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
             textColour={flowmeters.length > 1 ? 'white' : 'black'}
             initial={flowmeters.length == 1 ? 0 : 1}
             value={flowmeters.length == 1 ? 0 : 1}
+            currentConsentATH={currentConsentATH}
           />
           {/*datatype selector to change data on graph*/}
           <DatatypeSelector 

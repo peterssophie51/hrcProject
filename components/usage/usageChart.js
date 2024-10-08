@@ -8,7 +8,7 @@ export function UsageChart(props) {
     const data = useMemo(() => {
         return props.currentData.map((item) => {
             const time = new Date(item.time);
-            const timeLabel = (props.currentLabels[0] === '00:00')
+            const timeLabel = (props.currentLabels[0] == '00:00')
                 ? time.toLocaleDateString() + ', ' + time.toLocaleTimeString()
                 : props.currentLabels[0] === 'JAN' ? time.toLocaleDateString().slice(3,10) 
                 : time.toLocaleDateString().slice(0,10)
@@ -17,7 +17,7 @@ export function UsageChart(props) {
             const dataPointLabelComponent = () => (
                 <View style={styles.label}>
                     <View style={{ display: 'flex', flexDirection: 'row' }}>
-                        <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                        <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                         <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                         <CalibriText title="3" style={{ fontSize: 13 }} />
                     </View>
@@ -56,7 +56,7 @@ export function UsageChart(props) {
                 data={data} //setting data in graph
                 width={Dimensions.get('window').width * 0.75} 
                 height={Dimensions.get('window').height * 0.35}
-                maxValue={Math.max(...data.map(item => item.value)) === 0 ? 10 : Math.max(...data.map(item => item.value)) * 1.5} 
+                maxValue={Math.max(...data.map(item => item.value)) === 0 ? 10 : Math.max(...data.map(item => item.value)) * 1.3} 
                 noOfSections={10} // sections vertically
                 yAxisTextStyle={{ fontSize: 12 }} 
                 xAxisLabelTexts={labels}
@@ -74,7 +74,7 @@ export function UsageChart(props) {
                 textShiftX={-10} //text shift for data point values
                 textColor="black" 
                 textFontSize={12} 
-                focusedDataPointColor={'#00A7CF'} 
+                focusedDataPointColor={'black'} 
                 focusedDataPointRadius={5} 
                 showTextOnFocus={true} 
                 showDataPointLabelOnFocus // show labels on click

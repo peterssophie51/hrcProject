@@ -7,15 +7,15 @@ import { ComparisonsContent } from '../components/reports/comparisonsContent';
 import { ScrollView } from 'react-native';
 import { AlertsContent } from '../components/reports/alertsContent';
 
-export function ReportsPage ({ flowmeters, riverFlow }) {
+export function ReportsPage ({ flowmeters, riverFlow, dailyMax, flowAtRestriction, flowsite }) {
 
 
     return(
         <View style={styles.page}>
             <CalibriBoldText title="Reports" style={styles.title}/>
             <ScrollView>
-                <PageSections title='COMPARISONS'content={() => <ComparisonsContent flowmeters={flowmeters} riverFlow={riverFlow}/>}/>
-                <PageSections title="ALERTS" content={() => <AlertsContent flowmeters={flowmeters}/>}/>
+                <PageSections title='COMPARISONS'content={() => <ComparisonsContent flowmeters={flowmeters} riverFlow={riverFlow} flowsite={flowsite}/>}/>
+                <PageSections title="ALERTS" content={() => <AlertsContent flowmeters={flowmeters} dailyMax={dailyMax} flowAtRestriction={flowAtRestriction}/>}/>
                 <PageSections title='REPORTS' />
                 <View style={{height:25}}></View>
             </ScrollView>

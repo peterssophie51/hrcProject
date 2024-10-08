@@ -556,7 +556,6 @@ export default function App() {
         }
         riverFlow[2].push(value)
       }) 
-      console.log(riverFlow[2].length)
     }
 
     if (flowsite == null) {
@@ -654,22 +653,23 @@ export default function App() {
         <Drawer.Screen name="CONSENT">
           {props => <ConsentPage {...props} compliance={compliedYesterday}  
           take={take} flowsite={flowsite} consentExpiration={consentExpiration} 
-          annualMax={annualMax} restrictions={flowbasedRestrictions} />}
+          annualMax={annualMax} restrictions={flowbasedRestrictions} currentRiverFlow={currentRiverFlow}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="USAGE">
           {props => <UsagePage {...props} dataCollected={usageDate} 
           dailyMax={dailyMax} annualMax={annualMax} flowmeters={flowmeters} 
-          setflowmeters={setflowmeters} />}
+          setflowmeters={setflowmeters} currentConsentATH={currentConsentATH}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="RIVER">
           {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction}
-          timeframe={currentDate} riverFlow={currentRiverFlow} data={riverFlow}/>}
+          timeframe={currentDate} riverFlow={currentRiverFlow} data={riverFlow} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="REPORTS">
-          {props => <ReportsPage {...props} flowmeters={flowmeters} riverFlow={riverFlow}/>}
+          {props => <ReportsPage {...props} flowmeters={flowmeters} riverFlow={riverFlow}
+          dailyMax={dailyMax} flowAtRestriction={flowAtRestriction} flowsite={flowsite} />}
         </Drawer.Screen>
 
         <Drawer.Screen name="FAQ">

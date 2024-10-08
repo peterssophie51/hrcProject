@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Dimensions} from "react-native";
 import { List } from "react-native-paper";
 // importing components
@@ -7,16 +7,31 @@ import { RestrictionInfo } from "./restrictionInfo";
 // accordion list of all flow based restrictions at bottom of consents page
 export function FlowbasedRestriction(props) {
     const [expanded, setExpanded] = React.useState(false); // set whether accordion is expanded or not
-    const [currentRestriction, setcurrentRestriction] = React.useState('One'); // set which flow based restriction is currently in effect
-
-    // index in restriction list for current flow based restriction
+    const [currentRestriction, setcurrentRestriction] = React.useState(''); // set which flow based restriction is currently in effect
+    useEffect(() => {
+        function getRestriction(value, restrictions) {
+            for (let i = 1; i < restrictions.length; i++) { // Start from index 1
+                const item = restrictions[i];
+        
+                // Check if flfowAtRestriction is a number and not an empty string
+                if (typeof item.flowAtRestriction === 'number' && value > item.flowAtRestriction) {
+                    return restrictions[i - 1].restriction; // Return the previous restriction
+                }
+            }
+            
+            // If x is less than or equal to the smallest flowAtRestriction
+            return restrictions[restrictions.length - 1].restriction; // Return the last restriction
+        }
+        const result = getRestriction(props.currentRiverFlow, props.restrictions);
+        
+        setcurrentRestriction(result)
+    }, [props.restrictions, props.currentRiverFlow])
+    // ifndex in restriction list for current flow based restriction
     const index = props.restrictions.findIndex(item => item.restriction === currentRestriction); 
     const validIndex = index !== -1 ? index : 0; // default to 0 if no match is found
 
     // max index of list ignoring current consent
     const maxIndex = props.restrictions.length - 1;
-
-    console.log(props.restrictions)
 
     return (
         <View>

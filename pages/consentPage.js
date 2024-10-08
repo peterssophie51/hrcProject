@@ -7,7 +7,7 @@ import { SmallCard } from '../components/consents/smallCard.js';
 import { FlowbasedRestriction } from '../components/consents/flowBasedRestrictions.js';
 
 //component for the consent page
-export function ConsentPage ({ compliance, take, flowsite, consentExpiration, annualMax, restrictions }) {
+export function ConsentPage ({ compliance, take, flowsite, consentExpiration, annualMax, restrictions, currentRiverFlow }) {
   
     return (
       //styling the container for the page
@@ -30,7 +30,7 @@ export function ConsentPage ({ compliance, take, flowsite, consentExpiration, an
             <SmallCard title={(take == true) ? 'You can take\nwater today': 'You can not take\nwater today'} value={take}/>
           </View>
           {/*card for flow based restrictions*/}
-          <FlowbasedRestriction restrictions={restrictions}/> 
+          <FlowbasedRestriction restrictions={restrictions} currentRiverFlow={currentRiverFlow}/> 
           {/*gap at the bottom of the page*/}
           <View style={{height: Dimensions.get('window').height * 0.03}}></View>
         </ScrollView>

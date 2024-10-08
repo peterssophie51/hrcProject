@@ -26,8 +26,9 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={'Total Water Usage'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
                                 </View>
@@ -53,8 +54,9 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={'Total Water Usage'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
                                 </View>
@@ -80,8 +82,9 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={'Total Water Usage'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
                                 </View>
@@ -107,8 +110,9 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={'Total Water Usage'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
                                 </View>
@@ -136,6 +140,7 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={'River Flow'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                                     <CalibriText title={(item.value / 1000).toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -145,11 +150,13 @@ export function ComparisonsGraph(props) {
                                 <CalibriText title={timeLabel} />
                             </View>
                         );
-                        list.push({
-                            value: item.value / 1000,
-                            time:item.time,
-                            dataPointLabelComponent
-                        })
+                        if (props.flowsite != null) {
+                            list.push({
+                                value: item.value / 1000,
+                                time:item.time,
+                                dataPointLabelComponent
+                            })
+                        }
                     })
                     newData.push({ 
                         data: list, 
@@ -169,8 +176,9 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={'River Flow'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={(item.value) / 1000} style={{ fontSize: 17 }} />
+                                    <CalibriText title={((item.value) / 1000).toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
                                     <CalibriText title="/S" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -202,8 +210,9 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={'River Flow'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value /1000} style={{ fontSize: 17 }} />
+                                    <CalibriText title={(item.value /1000).toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
                                     <CalibriText title="/S" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -244,8 +253,9 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={props.flowmeters[index].nickname + ': ' + props.flowmeters[index].name} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
                                 </View>
@@ -272,7 +282,7 @@ export function ComparisonsGraph(props) {
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
                                 </View>
@@ -299,7 +309,7 @@ export function ComparisonsGraph(props) {
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
                                 </View>
@@ -326,7 +336,7 @@ export function ComparisonsGraph(props) {
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <CalibriText title={item.value} style={{ fontSize: 17 }} />
+                                    <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
                                     <CalibriText title="3" style={{ fontSize: 13 }} />
                                 </View>
@@ -361,7 +371,7 @@ export function ComparisonsGraph(props) {
             return current.value > max.value ? current : max;
         }, allDataObjects[0]);
         if (maxObject != undefined) {
-            setMax(maxObject.value * 1.3)
+            setMax(maxObject.value * 1.5)
             console.log(max)
         } else {
             setMax(12)
@@ -401,7 +411,7 @@ export function ComparisonsGraph(props) {
                 style={styles.graph}
                 dataSet={data} 
                 width={props.selectedData.includes('River Flow') ? Dimensions.get('window').width * 0.7 : Dimensions.get('window').width * 0.75}
-                height={Dimensions.get('window').height * 0.35}
+                height={Dimensions.get('window').height * 0.4}
                 maxValue={max}
                 noOfSections={12}
                 yAxisTextStyle={styles.axis}
@@ -412,7 +422,7 @@ export function ComparisonsGraph(props) {
                 thickness={3}
                 showVerticalLines
                 secondaryYAxis={props.selectedData.includes('River Flow') ? {
-                    maxValue: Math.max(...props.riverFlow[0].map(item => item.value / 1000), 10) * 1.3,
+                    maxValue: Math.max(...props.riverFlow[0].map(item => item.value / 1000), 10) * 1.5,
                     noOfSections: 12,
                     yAxisColor: '#72BF44',
                     yAxisTextStyle: {
@@ -427,13 +437,13 @@ export function ComparisonsGraph(props) {
                 textShiftY={-10}
                 textColor="black"
                 textFontSize={12}
-                focusedDataPointColor={'#00A7CF'}
+                focusedDataPointColor={'black'}
                 focusedDataPointRadius={5}
                 showTextOnFocus={true}
 
                 delayBeforeUnFocus={5000}
                 dataPointLabelShiftX={Dimensions.get('window').width * -0.115}
-                dataPointLabelShiftY={-45}
+                dataPointLabelShiftY={-75}
             />
         </View>
     )

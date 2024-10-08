@@ -36,20 +36,22 @@ export function AlertsContent(props) {
         <View>
             <AlertCard title='Compliance'/>
             <AlertCard title='Complied' />
-            <TextinputAlertCard title='River Flow' Component={m3s}/>
+            <TextinputAlertCard title='River Flow' Component={m3s} defaultValue={props.flowAtRestriction == null ? '' : props.flowAtRestriction}/>
             {
                 props.flowmeters.map((item, index) => {
                     return (
                         <TextinputAlertCard 
                             key={index}
                             title={item.nickname + ': ' + item.name} 
-                            Component={m3}/>
+                            Component={m3}
+                            defaultValue={props.dailyMax}
+                        />
                     )
                 })
             }
-            <TextinputAlertCard title='Total Usage' Component={m3}/>
-            <TextinputAlertCard title='Daily % Usage' Component={percentage}/>
-            <TextinputAlertCard title='Annual % Usage' Component={percentage}/>
+            <TextinputAlertCard title='Total Usage' Component={m3} defaultValue={props.dailyMax}/>
+            <TextinputAlertCard title='Daily % Usage' Component={percentage} defaultValue={100}/>
+            <TextinputAlertCard title='Annual % Usage' Component={percentage} defaultValue={100}/>
         </View>
     )
 }

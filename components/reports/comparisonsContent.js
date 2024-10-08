@@ -55,7 +55,7 @@ export function ComparisonsContent(props) {
                 </View>
                 )}
             </View>
-            <ComparisonsGraph currentLabels={currentLabels} totalWaterUsage={totalWaterUsage} flowmeters={props.flowmeters} riverFlow={props.riverFlow} selectedData={selectedData}/>
+            <ComparisonsGraph currentLabels={currentLabels} totalWaterUsage={totalWaterUsage} flowsite={props.flowsite} flowmeters={props.flowmeters} riverFlow={props.riverFlow} selectedData={selectedData}/>
             <CheckboxCard flowmeters={props.flowmeters} setselectedData={setselectedData} selectedData={selectedData}/>
             <ComparisonRadios setcurrentLabels={setcurrentLabels} oneDayLabels={oneDayLabels} annualLabels={annualLabels}/>
         </View>

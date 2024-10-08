@@ -19,7 +19,7 @@ export function Switch(props) {
         });
         setFontLoaded(true);
       } catch (error) {
-        console.error("Error loading fonts: ", error);
+        console.error("Error loading font: ", error);
       }
     }
 

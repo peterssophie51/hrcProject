@@ -49,10 +49,10 @@ export function Checkbox (props) {
            uncheckedIcon="checkbox-blank-outline"
            size={40}
            containerStyle={{backgroundColor: '#EEEEEE', padding: 0}}
-           checkedColor='#72BF44'
-           uncheckedColor='#243746'
+           checkedColor='black'
+           uncheckedColor='black'
            title={props.title}
-           textStyle={{color: (checked == true) ? '#72BF44' : '#243746', fontFamily: 'Calibri', fontSize: 20}}
+           textStyle={{color: 'black', fontFamily: 'Calibri', fontSize: 20}}
          />
     )
 }

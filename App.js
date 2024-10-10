@@ -168,28 +168,19 @@ export default function App() {
       question:'Why did the chicken cross the road?',
       answer:'To get to the other side!'
     },
-    {
-      key: 2,
-      question: 'What is that smell?',
-      answer: 'Its Jake!'
-    },
-    {
-      key: 3,
-      question: "Don't press this button",
-      answer: 'HONK!'
-    }
+  
   
   ] //all faq questions and answers to be rendered in faq cards
 
-  const [currentConsent, setCurrentConsent] = useState("ATH-2006010907"); //current consent nickname
+  const [currentConsent, setCurrentConsent] = useState("Consent E"); //current consent nickname
   const [currentConsentATH, setCurrentConsentATH] = useState("ATH-2006010907"); //current consent ath
    //all consents in list 
   const [consents, setconsents] = useState([
-    {ath:'ATH-2014015277', nickname: 'ATH-2014015277'}, 
-    {ath:'ATH-2005010697', nickname: 'ATH-2005010697'}, 
-    {ath:'ATH-2007011553', nickname: 'ATH-2007011553'}, 
-    {ath:'ATH-2007011829', nickname: 'ATH-2007011829'}, 
-    {ath:'ATH-2006010907', nickname: 'ATH-2006010907'}, 
+    {ath:'ATH-2014015277', nickname: 'Consent A'}, 
+    {ath:'ATH-2005010697', nickname: 'Consent B'}, 
+    {ath:'ATH-2007011553', nickname: 'Consent C'}, 
+    {ath:'ATH-2007011829', nickname: 'Consent D'}, 
+    {ath:'ATH-2006010907', nickname: 'Consent E'}, 
 
   ])
   const [currentRiverFlow, setcurrentRiverFlow] = useState(null)

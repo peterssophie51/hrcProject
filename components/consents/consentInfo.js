@@ -19,7 +19,7 @@ export function ConsentInfo(props) {
             {/*header for consent flow site data*/}
             <CalibriBoldText title="CONSENT FLOW SITE" style={styles.subHeader}/> 
                 {/*consent flowsite data*/}
-                <CalibriText title={props.consentFlowSite} style={styles.subText}/> 
+                <CalibriText title={props.consentFlowSite || ' —'} style={styles.subText}/> 
             {/*header for annual max data*/}
             <CalibriBoldText title="ANNUAL MAX" style={styles.subHeader}/>
                 <View style={styles.annualMaxContainer}>

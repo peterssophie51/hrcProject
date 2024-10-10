@@ -24,10 +24,16 @@ export function ConsentPage ({ compliance, take, flowsite, consentExpiration, an
           {/*container to arrange small cards next to each other*/}
           <View style={{display:'flex', flexDirection:'row'}}>
             {/*compliance card*/}
-            <SmallCard title={(compliance == true) ? 'You took less than your daily limit yesterday' : 
-              'You took more than your daily limit yesterday'} value={compliance} /> 
+            <SmallCard title={(compliance == true) ? 'You complied yesterday' : 
+              'You did not comply yesterday'} value={compliance} 
+              trueImage={require('../images/waterDrop.png')} falseImage={require('../images/waterDrop.png')}
+              style={{width:Dimensions.get('window').width * 0.1, height: Dimensions.get('window').width * 0.152}}
+              /> 
             {/*take water card*/}
-            <SmallCard title={(take == true) ? 'You can take\nwater today': 'You can not take\nwater today'} value={take}/>
+            <SmallCard title={(take == true) ? 'You can take water today': 'You cannot take\nwater today'} value={take}
+            trueImage={require('../images/tickWhiteThick.png')} falseImage={require('../images/crossWhiteThick.png')}
+            style={{width:Dimensions.get('window').width * 0.185, height: Dimensions.get('window').width * 0.15}}
+            />
           </View>
           {/*card for flow based restrictions*/}
           <FlowbasedRestriction restrictions={restrictions} currentRiverFlow={currentRiverFlow}/> 

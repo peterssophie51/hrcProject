@@ -49,6 +49,15 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
                 <CalibriText style={[styles.horizontalDataFlow, {fontSize:horizontalDataDynamicFont(flowAtRestriction) ,marginLeft: Dimensions.get('window').width * 0.245}]} title={flowAtRestriction}/> 
             </View>
             {/*instantaneous rate*/}
+            <View
+                style={{
+                    borderBottomColor: 'black',
+                    borderBottomWidth: 0.5,
+                    marginTop: Dimensions.get('window').height * 0.01,
+                    width: (Dimensions.get('window').width) - Dimensions.get('window').width * 0.185,
+                    marginLeft: Dimensions.get('window').width * 0.045,
+                }}
+            />
             <View style={styles.horizontalDataContainer}>
                 {/*title*/}
                 <CalibriBoldText style={styles.horizontalDataTitle} title={'INSTANTANEOUS '}/> 

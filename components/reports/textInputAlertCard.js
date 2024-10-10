@@ -6,11 +6,12 @@ import { Switch } from "react-native-switch";
 import { List } from "react-native-paper";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Font from 'expo-font';
+import { CalibriText } from "../fonts/calibriFont";
 
 export function TextinputAlertCard({ Component, title, defaultValue }) {
   const [enabled, setEnabled] = useState(false);
   const toggleSwitch = () => setEnabled(!enabled);
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const toggleExpanded = () => setExpanded(!expanded);
   
   // Move inputValue state outside of useEffect
@@ -83,6 +84,8 @@ export function TextinputAlertCard({ Component, title, defaultValue }) {
         expanded && (
           <List.Item
             right={() => (
+              <View>
+                <CalibriText title="Alert me at" style={styles.descriptionText}/>
               <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <TextInput
                   value={inputValue}
@@ -90,6 +93,7 @@ export function TextinputAlertCard({ Component, title, defaultValue }) {
                   style={styles.input}
                 />
                 {Component && <Component />}
+              </View>
               </View>
             )}
             style={styles.item}
@@ -162,4 +166,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 23,
   },
+  descriptionText: {
+    fontSize: 16,
+    marginBottom: 10,
+    marginTop: -20,
+    marginLeft: 2
+  }
 });

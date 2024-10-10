@@ -250,7 +250,7 @@ export default function App() {
         function createFlowmeter(name)  {
           return {
             name,
-            nickname: 'Nickname',
+            nickname: name.replace(/(meter)(\d+)/, '$1 $2'),
             annualUsage: 0,
             dailyUsage: 0,
             data: [

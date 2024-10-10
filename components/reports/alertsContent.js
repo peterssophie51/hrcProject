@@ -42,7 +42,7 @@ export function AlertsContent(props) {
                     return (
                         <TextinputAlertCard 
                             key={index}
-                            title={item.nickname + ': ' + item.name} 
+                            title={item.nickname} 
                             Component={m3}
                             defaultValue={props.dailyMax}
                         />

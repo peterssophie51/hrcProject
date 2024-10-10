@@ -45,7 +45,7 @@ export function PercentageCardText(props) {
                                 {/*set number for flowmeter in graph*/}
                                 <Text style={{ fontFamily: 'CalibriBold', fontSize: 18 }}>({index + 1}) </Text> 
                                 {/*name of flowmeter*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 18, lineHeight: 28 }}>{item['name']}</Text> 
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 18, lineHeight: 28 }}>{item.nickname}</Text> 
                             </View>
                             <View style={[styles.textHorizontal, { justifyContent: 'flex-start' }]}>
                                 {/*usage title for each flowmeter*/}

@@ -25,7 +25,7 @@ export function ConsentInfo(props) {
                 <View style={styles.annualMaxContainer}>
                     {/*annual max data*/}
                     <CalibriText title={props.annualMax} style={styles.subText}/>
-                        <CalibriText title='M' style={styles.subTextUnits}/>
+                        <CalibriText title='m' style={styles.subTextUnits}/>
                             <CalibriText title='3' style={styles.subTextSuperscript}/>
                 </View>
         </View>
@@ -58,7 +58,7 @@ const styles= StyleSheet.create({
         flexDirection: 'row'
     },
     subTextUnits: {
-        fontSize: 16,
+        fontSize: 18,
         lineHeight: 25
     },
     subTextSuperscript: {

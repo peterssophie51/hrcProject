@@ -10,16 +10,16 @@ export function NotificationContent(props) {
     const m3s = () => {
         return (
             <View style={styles.unitsContainer}>
-                  <CalibriBoldText title='M' style={styles.units} />
+                  <CalibriBoldText title='m' style={styles.units} />
                   <CalibriBoldText title='3' style={styles.superscript} />
-                  <CalibriBoldText title='/S' style={styles.units} />
+                  <CalibriBoldText title='/s' style={styles.units} />
             </View>
         )
     }
     const m3 = () => {
         return (
             <View style={styles.unitsContainer}>
-                  <CalibriBoldText title='M' style={styles.units} />
+                  <CalibriBoldText title='m' style={styles.units} />
                   <CalibriBoldText title='3' style={styles.superscript} />
             </View>
         )

@@ -241,8 +241,8 @@ export default function App() {
         const flowmeterList = []
         parsedData['HilltopServer']['DataSource'].forEach((item) => {
           if (item['_attributes']['Name'].slice(0, 10) === 'Flow meter') {
-            if (flowmeterList.find((element) => element === item['_attributes']['Name'].replace(/(meter)(\d+)/, '$1 $2')) == undefined) {
-              flowmeterList.push(item['_attributes']['Name'].replace(/(meter)(\d+)/, '$1 $2'))
+            if (flowmeterList.find((element) => element === item['_attributes']['Name']) == undefined) {
+              flowmeterList.push(item['_attributes']['Name'])
             }
           }
         })

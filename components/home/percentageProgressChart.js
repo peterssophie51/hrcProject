@@ -68,12 +68,12 @@ export function ProgressChart(props) {
                 {/*amount abstracted rounded to 2 dp*/}
                 <Text style={styles.subText}>{roundNumber(props.abstracted, 2)}</Text>
                 {/*units*/}
-                <Text style={styles.units}>M</Text>
+                <Text style={styles.units}>m</Text>
                 <Text style={styles.superscript}>3 </Text>
                 {/*maximum*/}
                 <Text style={styles.subText}>of {roundNumber(props.max, 2)}</Text>
                 {/*units*/}
-                <Text style={styles.units}>M</Text>
+                <Text style={styles.units}>m</Text>
                 <Text style={styles.superscript}>3 </Text>
                 {/*indicates timeframe*/}
                 <Text style={styles.subText}>per {props.graphTime}</Text>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Calibri'
   },
   units: { //style units text
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 16,
     fontFamily: 'Calibri'
   }

@@ -53,7 +53,7 @@ export function PercentageCardText(props) {
                                 {/*usage value*/}
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 16}}>{item[props.usage]}</Text>
                                 {/*units for usage*/}
-                                <Text style={{ fontFamily: 'Calibri', lineHeight: 21, fontSize: 13 }}>M</Text>
+                                <Text style={{ fontFamily: 'Calibri', lineHeight: 21, fontSize: 13 }}>m</Text>
                                 <Text style={{ fontFamily: 'Calibri', lineHeight: 15, fontSize: 10 }}>3</Text>
                             </View>
                         </View>
@@ -77,7 +77,7 @@ export function PercentageCardText(props) {
                                 {/*total usage value*/}
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}>{totalSum}</Text>
                                 {/*total usage units*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28}}>M</Text>
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28}}>m</Text>
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 13, lineHeight:20}}>3</Text>
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}> of</Text>
                             </View>
@@ -86,7 +86,7 @@ export function PercentageCardText(props) {
                                 {/*maximum usage value*/}
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}>{props.max}</Text>
                                 {/*maximum usage units*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28 }}>M</Text>
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28 }}>m</Text>
                                 <Text style={{ fontSize: 13, fontFamily: 'Calibri', lineHeight: 20 }}>3</Text>
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}> per</Text>
                             </View>

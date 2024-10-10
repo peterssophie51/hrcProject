@@ -96,7 +96,7 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
           {/*heading for graph*/}
           <View style={styles.graphHeading}>
               <CalibriText style={styles.graphHeadingText} title='Water Usage ('/>
-              <CalibriText style={styles.graphHeadingUnits} title='M'/>
+              <CalibriText style={styles.graphHeadingUnits} title='m'/>
               <CalibriText style={styles.graphHeadingSuperscript} title='3'/>
               <CalibriText style={styles.graphHeadingText} title=')'/>
           </View>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   graphHeadingUnits: {
-    fontSize: 13,
+    fontSize: 15,
     lineHeight: 22
   },
   graphHeadingSuperscript: {

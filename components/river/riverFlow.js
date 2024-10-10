@@ -12,8 +12,8 @@ export function RiverFlowTitle(props) {
         : 45;
     //calculating the font size of the river flow units  based on if the length of the river flow is greater than 3
     const dynamicUnitFontSize = props.riverFlow != null ? props.riverFlow.toString().length > 3
-        ? 30 - (props.riverFlow.toString().length - 3) * 4 : 30
-        : 30;
+        ? 35 - (props.riverFlow.toString().length - 3) * 4 : 35
+        : 35;
     //calculating the font size of the superscript in the units based on if the length of the river flow is greater than 3
     const dynamicSuperscriptFontSize = props.riverFlow != null ? props.riverFlow.toString().length > 3
         ? 20 - (props.riverFlow.toString().length - 3) * 1 : 20
@@ -37,7 +37,7 @@ export function RiverFlowTitle(props) {
                 {/*river flow units*/}
                 <CalibriBoldText
                     style={[styles.units, { fontSize: dynamicUnitFontSize }]}
-                    title="M"
+                    title="m"
                 />
                 {/*river flow units superscript*/}
                 <CalibriBoldText
@@ -47,7 +47,7 @@ export function RiverFlowTitle(props) {
                 {/*river flow units*/}
                 <CalibriBoldText
                     style={[styles.units, { fontSize: dynamicUnitFontSize }]}
-                    title="/S"
+                    title="/s"
                 />
             </View>
         </View>

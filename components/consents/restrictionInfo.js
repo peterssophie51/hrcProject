@@ -41,9 +41,9 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
                 <CalibriBoldText style={styles.horizontalDataTitle} title={'FLOW AT\nRESTRICTION '}/>
                 {/*units container to use subscript*/} 
                 <View style={styles.m3container}>
-                    <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(M'} /> 
+                    <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(m'} /> 
                     <CalibriBoldText style={styles.horizontalDataTitleSuperscript} title={'3'} /> 
-                    <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'/S)'} /> 
+                    <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'/s)'} /> 
                 </View>
                 {/*iflow at restriction value*/}
                 <CalibriText style={[styles.horizontalDataFlow, {fontSize:horizontalDataDynamicFont(flowAtRestriction) ,marginLeft: Dimensions.get('window').width * 0.245}]} title={flowAtRestriction}/> 
@@ -53,18 +53,18 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
                 {/*title*/}
                 <CalibriBoldText style={styles.horizontalDataTitle} title={'INSTANTANEOUS '}/> 
                 {/*units*/}
-                <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(L/S)'} /> 
+                <CalibriBoldText style={styles.horizontalDataTitleUnits} title={'(L/s)'} /> 
                 {/*instantaneous value*/}
                 <CalibriText style={[{fontSize: horizontalDataDynamicFont(instantaneous), marginLeft: Dimensions.get('window').width * 0.2}]} title={instantaneous}/> 
             </View>
             {/*container of all vertical boxes*/}
             <View style={styles.verticalDataContainer}>
                 {/*vertical component for hourly rate*/}
-                <VerticalData rate="HOURLY" time='HOUR' data={hourly}/> 
+                <VerticalData rate="HOURLY" time='hour' data={hourly}/> 
                 {/*vertical component for daily rate*/}
-                <VerticalData rate="DAILY" time='DAY' data={daily}/> 
+                <VerticalData rate="DAILY" time='day' data={daily}/> 
                 {/*vertical component for annually rate*/}
-                <VerticalData rate="ANNUALLY" time='ANNUAL' data={annually}/> 
+                <VerticalData rate="ANNUALLY" time='annual' data={annually}/> 
             </View>
             {/*if the restriction is the last restriction rendered, show view less*/}
             {visible && ( 

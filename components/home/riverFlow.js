@@ -26,9 +26,9 @@ export function RiverFlow(props) {
                 {/*river flow value*/}
                 <CalibriBoldText title={props.riverFlow} style={styles.flow}/>
                     {/*units for river flow*/}
-                    <CalibriBoldText style={styles.units} title='M'/>
+                    <CalibriBoldText style={styles.units} title='m'/>
                         <CalibriBoldText style={styles.superscript} title='3'/>
-                    <CalibriBoldText style={styles.units} title='/S'/>
+                    <CalibriBoldText style={styles.units} title='/s'/>
                 {/*container for data title*/}
                 <View style={{display:'flex', flexDirection:'column'}}> 
                     {/*title*/}
@@ -41,9 +41,9 @@ export function RiverFlow(props) {
                 {/*what flow restriction is at*/}
                 <View style={styles.restrictionContainer}>
                     <CalibriText style={styles.subText} title={restrictionText} />
-                        <CalibriText style={styles.subTextUnits} title='M'/>
+                        <CalibriText style={styles.subTextUnits} title='m'/>
                             <CalibriText style={styles.subTextSuperscript} title='3'/>
-                        <CalibriText style={styles.subTextUnits} title='/S'/>
+                        <CalibriText style={styles.subTextUnits} title='/s'/>
                 </View>
                 {/*when the data was recorded*/}
                 <CalibriText style={styles.subText} title={timePeriodText} />
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         fontFamily:'Calibri'
     },
     units: { //styling units in title text
-        fontSize:30,
+        fontSize:32,
         lineHeight:70,
         fontFamily:'Calibri'
     },

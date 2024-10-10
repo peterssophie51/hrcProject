@@ -13,7 +13,7 @@ export function ComparisonsGraph(props) {
     useEffect(() => {
         const newData = []
         props.selectedData.map((item) => {
-            if (item == 'Total Water Usage') {
+            if (item == 'Consented Water Usage') {
                 if (props.currentLabels[0] == '00:00') {
                     const list = []
                     props.totalWaterUsage[0].map((item) => {
@@ -26,7 +26,7 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
-                                <CalibriText title={'Total Water Usage'} />
+                                <CalibriText title={'Consented Water Usage'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                                     <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -54,7 +54,7 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
-                                <CalibriText title={'Total Water Usage'} />
+                                <CalibriText title={'Consented Water Usage'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                                     <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -82,7 +82,7 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
-                                <CalibriText title={'Total Water Usage'} />
+                                <CalibriText title={'Consented Water Usage'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                                     <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -110,7 +110,7 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
-                                <CalibriText title={'Total Water Usage'} />
+                                <CalibriText title={'Consented Water Usage'} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                                     <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />

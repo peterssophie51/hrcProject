@@ -44,7 +44,7 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
   const [currentData, setcurrentData] = useState(totalWaterUsage[0]) //satte to manage current selected data
   const [currentLabels, setcurrentLabels] = useState(oneDayLabels) //state to manage current selected data labels
 
-  const [currentDatatypeNickname, setcurrentDatatypeNickname] =useState('Total Water Usage') //state to maage current selected data nickname for header
+  const [currentDatatypeNickname, setcurrentDatatypeNickname] =useState('Consented Water Usage') //state to maage current selected data nickname for header
   const [currentDatatype, setcurrentDatatype] = useState('') //state to manage current selected data flow meter for header
 
   const [selectedTime, setselectedTime] = useState('1 DAY') //state to manage selected timeframe

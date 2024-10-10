@@ -12,7 +12,7 @@ export function CheckboxCard (props) {
                     <Checkbox key={index} name={item.name} title={item.nickname} setselectedData={props.setselectedData}/>
                 )
             })}
-            <Checkbox title='Total Water Usage' name='Total Water Usage' setselectedData={props.setselectedData} selectedData={props.selectedData}/>
+            <Checkbox title='Consented Water Usage' name='Consented Water Usage' setselectedData={props.setselectedData} selectedData={props.selectedData}/>
             <Checkbox title='River Flow' name='River Flow' setselectedData={props.setselectedData} selectedData={props.selectedData}/>
         </View>
     )

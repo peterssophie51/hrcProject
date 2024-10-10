@@ -18,7 +18,7 @@ export function DatatypeSelector(props) {
 
     //handle total water usage clicked
     const handleDataClick = () => {
-        props.setcurrentDatatypeNickname('Total Water Usage') //set current datatype name
+        props.setcurrentDatatypeNickname('Consented Water Usage') //set current datatype name
         props.setcurrentDatatype('') //set flow meter type
         props.setExpanded(!props.expanded)
         //depending on the selected timeframe, change the data
@@ -112,10 +112,10 @@ export function DatatypeSelector(props) {
                             />
                     );
                 })}
-                <List.Item title="Total Water Usage" //list item for total water usage as needs to be seperate
+                <List.Item title="Consented Water Usage" //list item for total water usage as needs to be seperate
                     onPress={handleDataClick}
                     titleStyle={{fontFamily:'Calibri', fontSize:18, 
-                        color: props.currentDatatypeNickname == 'Total Water Usage' ? '#72BF44' : 'black'}}
+                        color: props.currentDatatypeNickname == 'Consented Water Usage' ? '#72BF44' : 'black'}}
                     style={{
                         width: Dimensions.get('window').width * 0.9,
                         marginLeft: Dimensions.get('window').width * 0.05,

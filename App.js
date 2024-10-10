@@ -241,8 +241,8 @@ export default function App() {
         const flowmeterList = []
         parsedData['HilltopServer']['DataSource'].forEach((item) => {
           if (item['_attributes']['Name'].slice(0, 10) === 'Flow meter') {
-            if (flowmeterList.find((element) => element === item['_attributes']['Name']) == undefined) {
-              flowmeterList.push(item['_attributes']['Name'])
+            if (flowmeterList.find((element) => element === item['_attributes']['Name'].replace(/(meter)(\d+)/, '$1 $2')) == undefined) {
+              flowmeterList.push(item['_attributes']['Name'].replace(/(meter)(\d+)/, '$1 $2'))
             }
           }
         })
@@ -556,7 +556,7 @@ export default function App() {
       riverFlow[0].push({value: 0})
       riverFlow[1].push({value: 0})
       riverFlow[2].push({value: 0})
-      setcurrentRiverFlow('-')
+      setcurrentRiverFlow()
       setcurrentDate(new Date().toLocaleDateString() + ', ' + new Date().toLocaleTimeString())
     } else {
       getOneDayRiverFlow()

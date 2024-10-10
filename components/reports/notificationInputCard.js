@@ -8,7 +8,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Font from 'expo-font';
 import { CalibriText } from "../fonts/calibriFont";
 
-export function TextinputAlertCard({ Component, title, defaultValue }) {
+export function TextinputNotificationCard({ Component, title, defaultValue }) {
   const [enabled, setEnabled] = useState(false);
   const toggleSwitch = () => setEnabled(!enabled);
   const [expanded, setExpanded] = useState(true);

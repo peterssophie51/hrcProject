@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import { useState } from "react";
 import { Switch } from "react-native-switch";
 
-export function AlertCard (props) {
+export function NotificationCard (props) {
 const [enabled, setEnabled] = useState(false);
   const toggleSwitch = () => setEnabled(!enabled);
 

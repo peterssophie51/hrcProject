@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
-import { AlertCard } from "./singleAlertCard";
-import { TextinputAlertCard } from "./textinputAlertCard";
+import { NotificationCard } from "./notifiationCard";
+import { TextinputNotificationCard } from "./notificationInputCard";
 import { StyleSheet, Dimensions} from "react-native";
 import { CalibriBoldText } from "../fonts/calibriBoldFont";
 
-export function AlertsContent(props) {
+export function NotificationContent(props) {
 
     const m3s = () => {
         return (
@@ -34,13 +34,13 @@ export function AlertsContent(props) {
 
     return(
         <View>
-            <AlertCard title='Compliance'/>
-            <AlertCard title='Complied' />
-            <TextinputAlertCard title='River Flow' Component={m3s} defaultValue={props.flowAtRestriction == null ? '' : props.flowAtRestriction}/>
+            <NotificationCard title='Compliance'/>
+            <NotificationCard title='Complied' />
+            <TextinputNotificationCard title='River Flow' Component={m3s} defaultValue={props.flowAtRestriction == null ? '' : props.flowAtRestriction}/>
             {
                 props.flowmeters.map((item, index) => {
                     return (
-                        <TextinputAlertCard 
+                        <TextinputNotificationCard 
                             key={index}
                             title={item.nickname} 
                             Component={m3}
@@ -49,9 +49,9 @@ export function AlertsContent(props) {
                     )
                 })
             }
-            <TextinputAlertCard title='Total Usage' Component={m3} defaultValue={props.dailyMax}/>
-            <TextinputAlertCard title='Daily % Usage' Component={percentage} defaultValue={100}/>
-            <TextinputAlertCard title='Annual % Usage' Component={percentage} defaultValue={100}/>
+            <TextinputNotificationCard title='Total Usage' Component={m3} defaultValue={props.dailyMax}/>
+            <TextinputNotificationCard title='Daily % Usage' Component={percentage} defaultValue={100}/>
+            <TextinputNotificationCard title='Annual % Usage' Component={percentage} defaultValue={100}/>
         </View>
     )
 }

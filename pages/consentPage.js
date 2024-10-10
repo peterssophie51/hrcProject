@@ -20,7 +20,7 @@ export function ConsentPage ({ compliance, take, flowsite, consentExpiration, an
           <ConsentInfo 
             consentExpiration= {consentExpiration}
             consentFlowSite= {flowsite}
-            annualMax={annualMax}/> 
+            annualMax={annualMax || '— '}/> 
           {/*container to arrange small cards next to each other*/}
           <View style={{display:'flex', flexDirection:'row'}}>
             {/*compliance card*/}

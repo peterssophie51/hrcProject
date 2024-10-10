@@ -51,7 +51,7 @@ export function PercentageCardText(props) {
                                 {/*usage title for each flowmeter*/}
                                 <Text style={{ fontFamily: 'CalibriBold', fontSize: 16 }}>Usage </Text>
                                 {/*usage value*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 16}}>{item[props.usage]}</Text>
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 16}}>{item[props.usage].toFixed(0)}</Text>
                                 {/*units for usage*/}
                                 <Text style={{ fontFamily: 'Calibri', lineHeight: 21, fontSize: 13 }}>m</Text>
                                 <Text style={{ fontFamily: 'Calibri', lineHeight: 15, fontSize: 10 }}>3</Text>
@@ -75,7 +75,7 @@ export function PercentageCardText(props) {
                             {/*usage text*/}
                             <View style={styles.textHorizontal}>
                                 {/*total usage value*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}>{totalSum}</Text>
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}>{totalSum.toFixed(0)}</Text>
                                 {/*total usage units*/}
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28}}>m</Text>
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 13, lineHeight:20}}>3</Text>
@@ -84,7 +84,7 @@ export function PercentageCardText(props) {
                             {/*maximum usage text*/}
                             <View style={styles.textHorizontal}>
                                 {/*maximum usage value*/}
-                                <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}>{props.max}</Text>
+                                <Text style={{ fontFamily: 'Calibri', fontSize: 22 }}>{props.max.toFixed(0)}</Text>
                                 {/*maximum usage units*/}
                                 <Text style={{ fontFamily: 'Calibri', fontSize: 17, lineHeight: 28 }}>m</Text>
                                 <Text style={{ fontSize: 13, fontFamily: 'Calibri', lineHeight: 20 }}>3</Text>

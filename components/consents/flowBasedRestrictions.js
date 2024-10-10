@@ -54,11 +54,11 @@ export function FlowbasedRestriction(props) {
                     expanded={expanded} 
                     setExpanded={setExpanded}
                     data={{ 
-                        flowAtRestriction: props.restrictions[validIndex].flowAtRestriction,
-                        instantaneous: props.restrictions[validIndex].instantaneous,
-                        hourly: props.restrictions[validIndex].hourly,
-                        daily: props.restrictions[validIndex].daily,
-                        annually: props.restrictions[validIndex].annually
+                        flowAtRestriction: props.restrictions[validIndex].flowAtRestriction || '—',
+                        instantaneous: props.restrictions[validIndex].instantaneous || '—',
+                        hourly: props.restrictions[validIndex].hourly || '—',
+                        daily: props.restrictions[validIndex].daily || '—',
+                        annually: props.restrictions[validIndex].annually || '—'
                     }}
                 />} 
             >
@@ -81,11 +81,11 @@ export function FlowbasedRestriction(props) {
                                     expanded={expanded} 
                                     setExpanded={setExpanded}
                                     data={{ 
-                                        flowAtRestriction: item.flowAtRestriction,
-                                        instantaneous: item.instantaneous,
-                                        hourly: item.hourly,
-                                        daily: item.daily,
-                                        annually: item.annually
+                                        flowAtRestriction: item.flowAtRestriction || '—',
+                                        instantaneous: item.instantaneous || '—',
+                                        hourly: item.hourly || '—',
+                                        daily: item.daily || '—',
+                                        annually: item.annually || '—'
                                     }} 
                                 />
                             );

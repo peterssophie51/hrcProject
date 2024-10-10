@@ -20,7 +20,7 @@ export function RiverPage ({ flowsite, data, timeframe, riverFlow, flowAtRestric
         {/*page title*/}
         <CalibriBoldText style={styles.title} title="River" /> 
         {/*consent flowsite*/}
-        <CalibriBoldText  style={styles.flowsite} title={flowsite} />
+        <CalibriBoldText  style={styles.flowsite} title={flowsite || 'No associated flowsite'} />
         {/*when data recorded*/}
         <CalibriText style={styles.timeRecorded} title={`Last Recorded at ${timeframe}`} />
         {/*river flow card*/}

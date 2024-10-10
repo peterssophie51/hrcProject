@@ -556,7 +556,7 @@ export default function App() {
       riverFlow[0].push({value: 0})
       riverFlow[1].push({value: 0})
       riverFlow[2].push({value: 0})
-      setcurrentRiverFlow(null)
+      setcurrentRiverFlow('-')
       setcurrentDate(new Date().toLocaleDateString() + ', ' + new Date().toLocaleTimeString())
     } else {
       getOneDayRiverFlow()

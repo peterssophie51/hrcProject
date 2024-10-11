@@ -92,7 +92,7 @@ export function FlowbasedRestriction(props) {
                         })}
                     </View>
                 } 
-                style={[styles.dropDown, {height:(Dimensions.get('window').height * 0.45 + 
+                style={[styles.dropDown, {height:(Dimensions.get('window').height * 0.48 + 
                         (Dimensions.get('window').height * 0.4 * (props.restrictions.length -2)))}]} 
             />
         </List.Accordion>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     container:{ // style the container of the flow based restrictions
         marginTop: Dimensions.get('window').width * 0.04, 
         width: Dimensions.get('window').width * 0.9,
-        height:Dimensions.get('window').height * 0.45, 
+        height:Dimensions.get('window').height * 0.48, 
         marginLeft:Dimensions.get('window').width *0.05, 
         marginRight:Dimensions.get('window').width * 0.08,
         borderRadius: 20,

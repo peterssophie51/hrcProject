@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, Dimensions, TouchableOpacity, Image } from "react-native";
 //import components
 import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
@@ -77,8 +77,17 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
             </View>
             {/*if the restriction is the last restriction rendered, show view less*/}
             {visible && ( 
-                <TouchableOpacity onPress={handlePress}>
+                <TouchableOpacity onPress={handlePress} style={styles.buttonContainer}>
                     <CalibriBoldText style={styles.viewMoreLess} title={'View ' + lessMore + ' authorised volumes'}/>
+                    <Image
+                  source={expanded 
+                    //show drop up image if accordion dropped down
+                    ? require('../../images/dropUpWhite.png')  
+                    //show drop down image if accordion dropped up
+                    : require('../../images/dropDownWhite.png') 
+                  }
+                  style={{ height: 15.5, width: 25 }}
+                />
                 </TouchableOpacity>
             )} 
         </View>
@@ -87,7 +96,7 @@ export function RestrictionInfo({restriction, expanded, setExpanded, lessMore, v
 
 const styles = StyleSheet.create({
     container: { //styling container of flow based restriction
-        marginBottom: Dimensions.get('window').height * 0.03,
+        marginBottom: Dimensions.get('window').height * 0.035,
     },
     titleContainer: { //styling container of the title for flow based restriction
         marginLeft: Dimensions.get('window').width * 0.045
@@ -128,14 +137,25 @@ const styles = StyleSheet.create({
     },
     viewMoreLess: { //styling view/more less expand button
         fontSize: 20, 
-        color: '#72BF44',
-        marginTop: Dimensions.get('window').height * 0.015, 
-        marginLeft: Dimensions.get('window').width * 0.045
+        color: 'white',
+       
     },
     m3container: { //styling container for m3 units text
         marginTop: Dimensions.get('window').height * 0.027, 
         display: 'flex',
         flexDirection: 'row'
+    },
+    buttonContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center', 
+        justifyContent: 'space-evenly', 
+        height: 40, 
+        width: Dimensions.get('window').width * 0.82,
+        backgroundColor: '#243746',
+        marginTop: Dimensions.get('window').height * 0.015, 
+        marginLeft: Dimensions.get('window').width * 0.045,
+        borderRadius: 20
     }
 })
 

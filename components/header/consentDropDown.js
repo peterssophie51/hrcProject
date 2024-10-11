@@ -55,9 +55,6 @@ export function ConsentDropdownHeader(props) {
     <View style={styles.headerContainer}>
 
       {/*clickable hamburger image*/}
-      <Pressable style={styles.hamburgerButton} onPress={() => props.navigation.toggleDrawer()}>
-        <Image source={require('../../images/whiteHamburger.png')} style={styles.hamburgerImage} />
-      </Pressable>
 
       {/*accordion drop down section*/}
       <List.Accordion
@@ -113,16 +110,6 @@ const styles = StyleSheet.create({
     display: 'flex', 
     flexDirection: 'row', 
     position: 'absolute',
-  },
-  hamburgerButton: { //stying hamburegr icon contianer to open nav 
-    position: 'absolute', 
-    zIndex: 2
-  },
-  hamburgerImage: { //styling hamburger icon to open nav
-    width: 35, 
-    height: 30, 
-    marginTop: Dimensions.get('window').height * 0.055, 
-    marginLeft: Dimensions.get('window').width * 0.06 
   },
   accordionDropDown: { //styling container of consent header drop down
     zIndex: 1, 

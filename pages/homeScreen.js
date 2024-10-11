@@ -1,5 +1,5 @@
 import { View, Dimensions } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Image,  StyleSheet } from 'react-native';
 //importing components
 import { ProgressChart } from '../components/home/percentageProgressChart';
@@ -9,7 +9,13 @@ import { Switch } from '../components/switch';
 
 //home screen component
 export function HomeScreen( { take, annualUsage, dailyUsage, annualMax, dailyMax, riverFlow, restriction, timePeriod, usageTime}) {
-  const [graphTime, setgraphTime] = useState(dailyMax === 0 ? 'annual' : 'day') //text for center of circular progress chart
+  const [graphTime, setgraphTime] = useState('day') //text for center of circular progress chart
+
+  	useEffect(() => {
+      if (annualMax == 0) {
+        setgraphTime('day')
+      }
+    })
 
     return (
       <View style={styles.page}>
@@ -17,19 +23,18 @@ export function HomeScreen( { take, annualUsage, dailyUsage, annualMax, dailyMax
         <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime} abstracted={(graphTime=='annual') ? annualUsage : dailyUsage} 
         max={(graphTime == 'annual') ? annualMax : dailyMax} timeframe={usageTime}/>
         {/*switch to handle values shown on pie chart*/}
-        <Switch options={annualMax == 0? [
-          { label: "Annual", value: 'annual', activeColor:'#72BF44' }] : [{ label: "Annual", value: 'annual', activeColor:'#72BF44'},
+        <Switch options={ 
+        [{ label: "Annual", value: 'annual', activeColor:'#72BF44'},
           { label: "Today", value: 'day', activeColor:'#72BF44' }]
         } style={{
             marginTop: Dimensions.get('window').width * 0.05, 
             width:Dimensions.get('window').width * 0.7, 
             marginLeft:Dimensions.get('window').width *0.15}} 
-           action={setgraphTime}
+           action={setgraphTime} 
            disabled={dailyMax === 0  || annualMax === 0 ? true : false} 
            backgroundColour={dailyMax === 0 || annualMax === 0 ? '#cccccc' : '#243746'} 
            textColour={dailyMax === 0 || annualMax === 0? 'black' : 'white'} 
-           initial={dailyMax === 0  ? 0 : 1}
-           value={dailyMax === 0 ? 0 : annualMax === 0 ? 1 : 0}
+           initial={1}
         />
         {/*take water card*/}
         <TakeWater take={take}/> 

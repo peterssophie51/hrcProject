@@ -31,7 +31,6 @@ export function Switch(props) {
     return null; 
   }
 
-    
 
   return (
   
@@ -42,10 +41,10 @@ export function Switch(props) {
       initial={props.initial}
       height={Dimensions.get('window').height * 0.07}
       fontSize={25}
-      textStyle={{fontFamily:'CalibriBold', color:props.textColour}}
+      textStyle={{fontFamily:'CalibriBold', color:props.disabled ? '#999999' : 'white'}}
       selectedTextStyle={{fontFamily:'CalibriBold', color:'black'}}
-      onPress={value => props.action(value)} 
+      onPress={value => {props.action(value)}} 
       disabled = {props.disabled}
-      value={props.type}
+      value={props.disabled ? props.initial : null}
   />)}
   

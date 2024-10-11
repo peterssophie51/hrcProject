@@ -3,7 +3,7 @@ import './gesture-handler';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Image, Pressable, Dimensions } from 'react-native';
 //imports to create drawer navigator
 import { createDrawerNavigator} from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -592,9 +592,15 @@ export default function App() {
         initialRouteName="Home"
         screenOptions={({navigation}) => ({
           //custom header for drawer navigator
-          header: () => < ConsentDropdownHeader navigation={navigation} consents={consents} setconsents={setconsents}
-            currentConsent={currentConsent} setCurrentConsent={setCurrentConsent} currentConsentATH={currentConsentATH} setCurrentConsentATH={setCurrentConsentATH}
-          />,
+          header: () => (
+            <View>
+              <Pressable style={styles.hamburgerButton} onPress={() => navigation.toggleDrawer()}>
+                <Image source={require('./images/whiteHamburger.png')} style={styles.hamburgerImage} />
+              </Pressable>
+              <ConsentDropdownHeader navigation={navigation} consents={consents} setconsents={setconsents}
+                currentConsent={currentConsent} setCurrentConsent={setCurrentConsent} currentConsentATH={currentConsentATH} setCurrentConsentATH={setCurrentConsentATH}
+              />
+            </View>),
           swipeEnabled: false,
           drawerActiveTintColor: '#72BF44',
           drawerActiveBackgroundColor: 'transperant',
@@ -675,3 +681,16 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  hamburgerButton: { //stying hamburegr icon contianer to open nav 
+    position: 'absolute', 
+    zIndex: 2
+  },
+  hamburgerImage: { //styling hamburger icon to open nav
+    width: 35, 
+    height: 30, 
+    marginTop: Dimensions.get('window').height * 0.055, 
+    marginLeft: Dimensions.get('window').width * 0.06 
+  },
+})

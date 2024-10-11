@@ -50,9 +50,7 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
   const [selectedTime, setselectedTime] = useState('1 DAY') //state to manage selected timeframe
 
   useEffect(() => {
-    if (flowmeters.length == 1) {
       settype('totalled')
-    }
   }, [flowmeters])
     return (
       <View style={styles.page}>
@@ -70,23 +68,27 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
             <PercentagePill flowmeters={flowmeters} type={type} max={dailyMax} time='day' usage='dailyUsage' title='Daily'/>
           </View>
           {/*switch to change values in percentage cards*/}
-          <Switch style={{
-            marginTop: Dimensions.get('window').width * 0.05, 
-            width:Dimensions.get('window').width * 0.9, 
-            marginLeft:Dimensions.get('window').width *0.05, }} 
-            options={flowmeters.length == 1 ? [
-              { label: "Totalled", value: 'totalled', activeColor:'#72BF44'},
-            ] : [
-              { label: "Totalled", value: 'totalled', activeColor:'#72BF44'},
-              { label: "Proportional", value: 'proportional', activeColor:'#72BF44' },//values for switch
-            ]} type={type} action={settype} settype={settype}
-            disabled={flowmeters.length > 1 ? false : true}
+          <Switch 
+            style={{
+              marginTop: Dimensions.get('window').width * 0.05, 
+              width: Dimensions.get('window').width * 0.9, 
+              marginLeft: Dimensions.get('window').width * 0.05,
+            }} 
+            options={ [
+              { label: "Totalled", value: 'totalled', activeColor: '#72BF44' },
+              { label: "Proportional", value: 'proportional', activeColor: '#72BF44' },
+            ]}
+            type={type} // Pass the current type state
+            action={settype} 
+            settype={settype}
+            disabled={flowmeters.length <= 1}
             backgroundColour={flowmeters.length > 1 ? '#243746' : '#cccccc'}
             textColour={flowmeters.length > 1 ? 'white' : 'black'}
-            initial={0}
-            value={0}
+            initial={0} 
+            
             currentConsentATH={currentConsentATH}
           />
+
           {/*datatype selector to change data on graph*/}
           <DatatypeSelector 
             currentDatatypeNickname={currentDatatypeNickname} 

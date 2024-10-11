@@ -4,7 +4,7 @@ import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { CalibriText } from "../fonts/calibriFont";
 import { CheckboxCard } from "./checkBoxCard";
 import { ComparisonRadios } from "./comparisonRadios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function ComparisonsContent(props) {
 
@@ -36,6 +36,10 @@ export function ComparisonsContent(props) {
     const [currentLabels, setcurrentLabels] = useState(oneDayLabels) //set current labels (as by radios)
     const [selectedData, setselectedData] = useState([])
 
+    useEffect(() => {
+      setselectedData([])
+    }, [props.currentConsentATH])
+
     return (
         <View style={{display: 'flex', flexDirection:'column'}}>
             <View style={styles.graphHeading}>
@@ -56,7 +60,7 @@ export function ComparisonsContent(props) {
                 )}
             </View>
             <ComparisonsGraph currentLabels={currentLabels} totalWaterUsage={totalWaterUsage} flowsite={props.flowsite} flowmeters={props.flowmeters} riverFlow={props.riverFlow} selectedData={selectedData}/>
-            <CheckboxCard flowmeters={props.flowmeters} setselectedData={setselectedData} selectedData={selectedData}/>
+            <CheckboxCard flowsite={props.flowsite} currentConsentATH={props.currentConsentATH} flowmeters={props.flowmeters} setselectedData={setselectedData} selectedData={selectedData}/>
             <ComparisonRadios setcurrentLabels={setcurrentLabels} oneDayLabels={oneDayLabels} annualLabels={annualLabels}/>
         </View>
     )

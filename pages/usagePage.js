@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
 //importing components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont';
@@ -11,7 +11,7 @@ import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 
 //compoennt for the usage page
 export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, setflowmeters, currentConsentATH }) {
-  const [type, settype] = useState('totalled') //manage state of switch and top percentage cards
+  const [type, settype] = useState(flowmeters.length == 1 ? 'totalled' : 'proportioanl') //manage state of switch and top percentage cards
   const [expanded, setExpanded] = useState(false);
 
   const totalWaterUsage = flowmeters[0].data.map((_, dataIndex) => {
@@ -49,6 +49,11 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
 
   const [selectedTime, setselectedTime] = useState('1 DAY') //state to manage selected timeframe
 
+  useEffect(() => {
+    if (flowmeters.length == 1) {
+      settype('totalled')
+    }
+  }, [flowmeters])
     return (
       <View style={styles.page}>
         {/*page title*/}
@@ -69,15 +74,17 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
             marginTop: Dimensions.get('window').width * 0.05, 
             width:Dimensions.get('window').width * 0.9, 
             marginLeft:Dimensions.get('window').width *0.05, }} 
-            options={[
+            options={flowmeters.length == 1 ? [
+              { label: "Totalled", value: 'totalled', activeColor:'#72BF44'},
+            ] : [
               { label: "Totalled", value: 'totalled', activeColor:'#72BF44'},
               { label: "Proportional", value: 'proportional', activeColor:'#72BF44' },//values for switch
-            ]} action={settype}
+            ]} type={type} action={settype} settype={settype}
             disabled={flowmeters.length > 1 ? false : true}
             backgroundColour={flowmeters.length > 1 ? '#243746' : '#cccccc'}
             textColour={flowmeters.length > 1 ? 'white' : 'black'}
-            initial={flowmeters.length == 1 ? 0 : 1}
-            value={flowmeters.length == 1 ? 0 : 1}
+            initial={0}
+            value={0}
             currentConsentATH={currentConsentATH}
           />
           {/*datatype selector to change data on graph*/}

@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 //
 export function Switch(props) {
 
-  const [fontLoaded, setFontLoaded] = useState(false);
+ /* const [fontLoaded, setFontLoaded] = useState(false);
   //function to load in calibri bold and calibri font
   useEffect(() => {
     async function loadFont() {
@@ -29,7 +29,7 @@ export function Switch(props) {
   //do not load content if font does not load
   if (!fontLoaded) {
     return null; 
-  }
+  }*/
 
     
 

@@ -17,9 +17,10 @@ export function HomeScreen( { take, annualUsage, dailyUsage, annualMax, dailyMax
         <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime} abstracted={(graphTime=='annual') ? annualUsage : dailyUsage} 
         max={(graphTime == 'annual') ? annualMax : dailyMax} timeframe={usageTime}/>
         {/*switch to handle values shown on pie chart*/}
-        <Switch options={[
-          { label: "Annual", value: 'annual', activeColor:'#72BF44'},
-          { label: "Today", value: 'day', activeColor:'#72BF44' }]} style={{
+        <Switch options={annualMax == 0? [
+          { label: "Annual", value: 'annual', activeColor:'#72BF44' }] : [{ label: "Annual", value: 'annual', activeColor:'#72BF44'},
+          { label: "Today", value: 'day', activeColor:'#72BF44' }]
+        } style={{
             marginTop: Dimensions.get('window').width * 0.05, 
             width:Dimensions.get('window').width * 0.7, 
             marginLeft:Dimensions.get('window').width *0.15}} 

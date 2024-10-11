@@ -5,9 +5,6 @@ import { CalibriText } from "../fonts/calibriFont";
 
 //small cards, based on true/false in middle of consents page
 export function SmallCard(props) {
-
-    console.log(props.trueImage)
-    console.log(props.falseImage)
     return (
         //styling colour of card depending on whether true or false (default red and change to red if true)
         <View style={[styles.container, props.value && {backgroundColor:'#72BF44'}]}>

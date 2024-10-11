@@ -1,23 +1,13 @@
 import React from "react";
+import { useEffect } from "react";
 import { View, Dimensions, StyleSheet, Text } from "react-native";
 //importing components
 import { CalibriBoldText} from '../fonts/calibriBoldFont'
 
 //component showing the pill progress bar
 export function ProgressPill(props) {
-    var totalSum = 0 
-    var totalPercentage = 0
-
-    props.flowmeters.map((meter) => {
-        totalSum = totalSum + meter[props.usage] //total sum of usage 
-    })
-
-    if (props.max !== 0) { //calculating percentage usage based on max
-        totalPercentage = totalSum/props.max
-        if (totalPercentage > 1) { //set percenatge to 1 if usage over maximum
-            totalPercentage = 1
-        }
-    }
+    const totalSum = props.flowmeters.reduce((sum, meter) => sum + meter[props.usage], 0);
+    const totalPercentage = props.max !== 0 ?  Math.min(totalSum / props.max, 1) : 0;
 
     return (
         <View style={styles.pillContainer}>
@@ -27,21 +17,19 @@ export function ProgressPill(props) {
                 </View>
 
             )}
-            <View style={{marginTop: props.max == 0? 0 :
-                (Dimensions.get('window').height * 0.26) - (Dimensions.get('window').height * 0.26 * totalPercentage)}}>
-            { props.type === 'proportional' && props.flowmeters.map((item, index) => ( //map through list of flowmeters to create <View> for each flowmeter
+            <View style={{marginTop:  0 }}>
+            { props.type === 'proportional' && props.flowmeters.map((item, index) => { //map through list of flowmeters to create <View> for each flowmeter
+                   return (
                     <View key={index} style={[styles.subContainer, 
-                        {height: props.max == 0 || totalPercentage == 1 ? 
-                            Dimensions.get('window').height * 0.26 * (item[props.usage]/totalSum) : 
-                            Dimensions.get('window').height * 0.26 * (item[props.usage]/props.max), 
+                        {height: totalSum > 0 ? (item[props.usage] / totalSum) * Dimensions.get('window').height * 0.26 : 0,
                             backgroundColor:item.color, 
                             borderTopRightRadius: index == 0 ? 20 : 0, 
                             borderTopLeftRadius: index == 0 ? 20 : 0, 
-                            borderBottomLeftRadius: (props.flowmeters.length - 1) == index ? 20 :0, 
-                            borderBottomRightRadius: (props.flowmeters.length - 1) == index ? 20 :0 ,
+                            borderBottomLeftRadius: (props.flowmeters.length- 1) == index ? 20 : props.flowmeters[index + 1][props.usage] == 0 ? 20 : 0, 
+                            borderBottomRightRadius: (props.flowmeters.length - 1) == index ? 20 : props.flowmeters[index + 1][props.usage] == 0 ? 20 : 0,
                             backgroundColor: index & 1 ? '#00A7CF' : '#007DA5'}]}>
                         <CalibriBoldText title={index + 1} style={styles.flowMeterLabel}/></View>
-                ))} 
+                )})} 
             </View>
         </View>
     )

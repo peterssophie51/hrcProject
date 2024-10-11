@@ -372,7 +372,6 @@ export function ComparisonsGraph(props) {
         }, allDataObjects[0]);
         if (maxObject != undefined) {
             setMax(maxObject.value * 1.5)
-            console.log(max)
         } else {
             setMax(12)
         }

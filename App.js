@@ -349,7 +349,7 @@ export default function App() {
         })
         await Promise.all(promises)
       } catch (error) {
-        console.log(error)
+        console.log('yay' + error)
       }
     }
 
@@ -653,14 +653,18 @@ export default function App() {
           setflowmeters={setflowmeters} currentConsentATH={currentConsentATH}/>}
         </Drawer.Screen>
 
-        <Drawer.Screen name="RIVER">
-          {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction}
-          timeframe={currentDate} riverFlow={currentRiverFlow} data={riverFlow} />}
-        </Drawer.Screen>
+        { flowsite && (
+          <Drawer.Screen name="RIVER">
+            {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction}
+            timeframe={currentDate} riverFlow={currentRiverFlow} data={riverFlow} />}
+          </Drawer.Screen>
+        )
+
+        }
 
         <Drawer.Screen name="REPORTS">
           {props => <ReportsPage {...props} flowmeters={flowmeters} riverFlow={riverFlow}
-          dailyMax={dailyMax} flowAtRestriction={flowAtRestriction} flowsite={flowsite} />}
+          dailyMax={dailyMax} flowAtRestriction={flowAtRestriction} flowsite={flowsite} currentConsentATH={currentConsentATH}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="FAQ">

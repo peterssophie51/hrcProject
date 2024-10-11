@@ -8,7 +8,6 @@ export function RiverFlowChart(props) {
     const data = useMemo(() => {
         return props.currentData.map((item) => {
             const time = new Date(item.time);
-            console.log(props.currentLabels)
             const timeLabel = (props.currentLabels == 'oneDay')
                 ? time.toLocaleDateString() + ', ' + time.toLocaleTimeString()
                 : props.currentLabels[0] === 'JAN' ? time.toLocaleDateString().slice(3,10) 

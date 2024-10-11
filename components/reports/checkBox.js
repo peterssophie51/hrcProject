@@ -17,6 +17,10 @@ export function Checkbox (props) {
           });
     }
     const [fontLoaded, setFontLoaded] = useState(false);
+
+    useEffect(() => {
+        setchecked(false)
+    }, [props.currentConsentATH])
     
     //function to load in calibri bold and calibri font
     useEffect(() => {

@@ -9,11 +9,27 @@ export function CheckboxCard (props) {
         <View style={styles.container}>
             {props.flowmeters.map((item, index) => {
                 return (
-                    <Checkbox key={index} name={item.name} title={item.nickname} setselectedData={props.setselectedData}/>
+                    <Checkbox 
+                        currentConsentATH={props.currentConsentATH} 
+                        key={index} name={item.name} 
+                        title={item.nickname} 
+                        setselectedData={props.setselectedData}/>
                 )
             })}
-            <Checkbox title='Consented Water Usage' name='Consented Water Usage' setselectedData={props.setselectedData} selectedData={props.selectedData}/>
-            <Checkbox title='River Flow' name='River Flow' setselectedData={props.setselectedData} selectedData={props.selectedData}/>
+            <Checkbox 
+                	currentConsentATH={props.currentConsentATH} 
+                    title='Consented Water Usage' 
+                    name='Consented Water Usage' 
+                    setselectedData={props.setselectedData} 
+                    selectedData={props.selectedData}/>
+           { props.flowsite && (
+                <Checkbox 
+                    currentConsentATH={props.currentConsentATH} 
+                    title='River Flow' name='River Flow' 
+                    setselectedData={props.setselectedData} 
+                    selectedData={props.selectedData}
+                />
+           )}
         </View>
     )
 }

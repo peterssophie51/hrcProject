@@ -40,6 +40,11 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.8,
         shadowRadius: 1,  
+        shadowColor: "#000", 
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
     },
     contacts: { //style contact information text
         fontSize: 25,

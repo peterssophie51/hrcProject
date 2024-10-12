@@ -8,6 +8,7 @@ import { Switch } from '../components/switch.js';
 import { DatatypeSelector } from '../components/usage/datatypeSelector.js';
 import { UsageChart } from '../components/usage/usageChart.js';
 import { GraphRadios } from '../components/usage/usageGraphRadios.js';
+import { GraphInform } from '../components/graphInform.js';
 
 //compoennt for the usage page
 export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, setflowmeters, currentConsentATH }) {
@@ -54,6 +55,7 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
   }, [flowmeters])
     return (
       <View style={styles.page}>
+        <GraphInform />
         {/*page title*/}
         <CalibriBoldText  style={styles.title} title="Usage" />
         {/*when data last recorded*/}

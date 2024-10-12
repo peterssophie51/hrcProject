@@ -7,6 +7,7 @@ import { CalibriText } from '../components/fonts/calibriFont.js';
 import { RiverFlowTitle } from '../components/river/riverFlow.js';
 import { RiverFlowChart } from '../components/river/riverFlowChart.js';
 import { TimeRadios } from '../components/river/graphRadios.js';
+import { GraphInform } from '../components/graphInform.js';
 
 //component for the river page
 export function RiverPage ({ riverFlowAtCompliance, flowsite, data, timeframe, riverFlow, flowAtRestriction }) {
@@ -17,6 +18,7 @@ export function RiverPage ({ riverFlowAtCompliance, flowsite, data, timeframe, r
 
     return (
       <View  style={styles.page}> 
+        <GraphInform />
         {/*page title*/}
         <CalibriBoldText style={styles.title} title="River" /> 
         {/*consent flowsite*/}

@@ -5,6 +5,7 @@ import { CalibriText } from "../fonts/calibriFont";
 import { CheckboxCard } from "./checkBoxCard";
 import { ComparisonRadios } from "./comparisonRadios";
 import { useEffect, useState } from "react";
+import { GraphInform } from "../graphInform";
 
 export function ComparisonsContent(props) {
 
@@ -42,6 +43,7 @@ export function ComparisonsContent(props) {
 
     return (
         <View style={{display: 'flex', flexDirection:'column'}}>
+          <GraphInform />
             <View style={styles.graphHeading}>
                 <View style={styles.waterUsageTitle}>
                     <CalibriText style={styles.graphHeadingText} title='Water Usage ('/>

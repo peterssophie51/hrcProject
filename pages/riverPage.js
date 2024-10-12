@@ -9,7 +9,7 @@ import { RiverFlowChart } from '../components/river/riverFlowChart.js';
 import { TimeRadios } from '../components/river/graphRadios.js';
 
 //component for the river page
-export function RiverPage ({ flowsite, data, timeframe, riverFlow, flowAtRestriction }) {
+export function RiverPage ({ riverFlowAtCompliance, flowsite, data, timeframe, riverFlow, flowAtRestriction }) {
   const [selectedTime, setselectedTime] =  useState('1 DAY') //current timeframe for data
   const [currentData, setcurrentData] = useState(data[0]) //set current data (as by radios)
 
@@ -24,7 +24,7 @@ export function RiverPage ({ flowsite, data, timeframe, riverFlow, flowAtRestric
         {/*when data recorded*/}
         <CalibriText style={styles.timeRecorded} title={`Last Recorded at ${timeframe}`} />
         {/*river flow card*/}
-        <RiverFlowTitle riverFlow={riverFlow}/> 
+        <RiverFlowTitle riverFlow={riverFlow} riverFlowAtCompliance={riverFlowAtCompliance}/> 
         {/*river flow chart*/}
         <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels} flowAtRestriction={flowAtRestriction} flowsite={flowsite}/> 
         {/*graph radios*/}
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   flowsite: { //style consent flow site text
     textAlign: 'center', 
-    fontSize: 30, 
+    fontSize: 25, 
     marginTop: Dimensions.get('window').height * 0.01
   },
   timeRecorded: { //style time recorded text

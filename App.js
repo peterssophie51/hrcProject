@@ -184,6 +184,7 @@ export default function App() {
 
   ])
   const [currentRiverFlow, setcurrentRiverFlow] = useState(null)
+  const [riverFlowAtCompliance, setriverflowAtCompliance] = useState(null)
   const [currentDate, setcurrentDate] = useState('')
   //river flow data for flowsite (averaged)
   //0: one day data  1: seven day data  2: one month data  3: annual data
@@ -483,6 +484,19 @@ export default function App() {
       }
     };
 
+    const getRiverFlowAtCompliance = async () => {
+      try {
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%5bWater%20Level%5d&TemporalFilter=om:phenomenonTime,PT3H');
+          const responseText = await response.text();
+          const convert = require('xml-js');
+          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
+          const parsedData = JSON.parse(jsonConverted);
+          setriverflowAtCompliance(1.23);  
+      } catch (error) {
+        //console.error(error);
+      }
+    };
+
     const getCurrentDate = async () => {
       try {
         const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest='
@@ -557,12 +571,14 @@ export default function App() {
       riverFlow[1].push({value: 0})
       riverFlow[2].push({value: 0})
       setcurrentRiverFlow()
+      setriverflowAtCompliance()
       setcurrentDate(new Date().toLocaleDateString() + ', ' + new Date().toLocaleTimeString())
     } else {
       getOneDayRiverFlow()
       getSevenDayRiverFlow()
       getOneMonthRiverFlow()
-      getCurrentRiverFlow(); 
+      getCurrentRiverFlow()
+      getRiverFlowAtCompliance()
       getCurrentDate() 
     }
 
@@ -643,8 +659,8 @@ export default function App() {
         {/*all different pages*/}
         <Drawer.Screen name="HOME">
           {props => <HomeScreen {...props} take={take} dailyUsage={dailyUsage} annualUsage={annualUsage}
-              annualMax={annualMax} riverFlow={currentRiverFlow} restriction={flowAtRestriction} 
-              timePeriod={currentDate} usageTime={usageDate} dailyMax={dailyMax} />}
+              annualMax={annualMax} riverFlow={currentRiverFlow} restriction={flowAtRestriction} flowsite={flowsite}
+              timePeriod={currentDate} usageTime={usageDate} dailyMax={dailyMax} riverFlowAtCompliance={riverFlowAtCompliance}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="CONSENT">
@@ -662,7 +678,7 @@ export default function App() {
         { flowsite && (
           <Drawer.Screen name="RIVER">
             {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction}
-            timeframe={currentDate} riverFlow={currentRiverFlow} data={riverFlow} />}
+            timeframe={currentDate} riverFlow={currentRiverFlow} data={riverFlow} riverFlowAtCompliance={riverFlowAtCompliance}/>}
           </Drawer.Screen>
         )
 

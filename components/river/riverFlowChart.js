@@ -82,7 +82,7 @@ export function RiverFlowChart(props) {
                 data = {data} //setting data in graph
                 data2={flowAtRestrictions}
                 width={Dimensions.get('window').width * 0.75} 
-                height={Dimensions.get('window').height * 0.35}
+                height={Dimensions.get('window').height * 0.32}
                 maxValue={Math.max(...data.map(item => item.value)) == 0 ? 10 : Math.max(...data.map(item => item.value), ...flowAtRestrictions.map(item => item.value)) * 1.2} 
                 noOfSections={12} //sections verticlaly
                 yAxisTextStyle={styles.axis} 
@@ -107,7 +107,7 @@ export function RiverFlowChart(props) {
                 focusedDataPointRadius={5} 
                 showTextOnFocus={true} 
 
-                delayBeforeUnFocus={5000} //time before datatpoint and label doesnt show
+                delayBeforeUnFocus={10000} //time before datatpoint and label doesnt show
                 dataPointLabelShiftX={Dimensions.get('window').width * -0.115}
                 dataPointLabelShiftY={-45}
             />

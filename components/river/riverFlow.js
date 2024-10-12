@@ -20,63 +20,101 @@ export function RiverFlowTitle(props) {
         : 20;
 
     return (
-        <View style={styles.container}>
-            {/*container for river flow title to data*/}
-            <View style={styles.titleContainer}>
-                {/*river flow title*/}
-                <CalibriBoldText title="RIVER" style={styles.title} />
-                <CalibriBoldText title="FLOW" style={styles.title} />
+        <View style={styles.card}>
+            <View style={styles.container}>
+                {/*container for river flow title to data*/}
+                <View style={styles.titleContainer}>
+                    {/*river flow title*/}
+                    <CalibriBoldText title="CURRENT RIVER" style={styles.title} />
+                    <CalibriBoldText title="FLOW" style={styles.title} />
+                </View>
+                {/*container for river flow data*/}
+                <View style={styles.valueContainer}>
+                    {/*river flow data*/}
+                    <CalibriBoldText
+                        title={props.riverFlow}
+                        style={[styles.flow, { fontSize: dynamicFontSize }]}
+                    />
+                    {/*river flow units*/}
+                    <CalibriBoldText
+                        style={[styles.units, { fontSize: dynamicUnitFontSize }]}
+                        title="m"
+                    />
+                    {/*river flow units superscript*/}
+                    <CalibriBoldText
+                        style={[styles.superscript, { fontSize: dynamicSuperscriptFontSize }]}
+                        title="3"
+                    />
+                    {/*river flow units*/}
+                    <CalibriBoldText
+                        style={[styles.units, { fontSize: dynamicUnitFontSize }]}
+                        title="/s"
+                    />
+                </View>
             </View>
-            {/*container for river flow data*/}
-            <View style={styles.valueContainer}>
-                {/*river flow data*/}
-                <CalibriBoldText
-                    title={props.riverFlow}
-                    style={[styles.flow, { fontSize: dynamicFontSize }]}
-                />
-                {/*river flow units*/}
-                <CalibriBoldText
-                    style={[styles.units, { fontSize: dynamicUnitFontSize }]}
-                    title="m"
-                />
-                {/*river flow units superscript*/}
-                <CalibriBoldText
-                    style={[styles.superscript, { fontSize: dynamicSuperscriptFontSize }]}
-                    title="3"
-                />
-                {/*river flow units*/}
-                <CalibriBoldText
-                    style={[styles.units, { fontSize: dynamicUnitFontSize }]}
-                    title="/s"
-                />
+            <View style={{height:5}}></View>
+            <View style={styles.container}>
+                {/*container for river flow title to data*/}
+                <View style={styles.titleContainer}>
+                    {/*river flow title*/}
+                    <CalibriBoldText title="RIVER FLOW AT" style={styles.title} />
+                    <CalibriBoldText title="3AM" style={styles.title} />
+                </View>
+                {/*container for river flow data*/}
+                <View style={styles.valueContainer}>
+                    {/*river flow data*/}
+                    <CalibriBoldText
+                        title={props.riverFlowAtCompliance}
+                        style={[styles.flow, { fontSize: dynamicFontSize }]}
+                    />
+                    {/*river flow units*/}
+                    <CalibriBoldText
+                        style={[styles.units, { fontSize: dynamicUnitFontSize }]}
+                        title="m"
+                    />
+                    {/*river flow units superscript*/}
+                    <CalibriBoldText
+                        style={[styles.superscript, { fontSize: dynamicSuperscriptFontSize }]}
+                        title="3"
+                    />
+                    {/*river flow units*/}
+                    <CalibriBoldText
+                        style={[styles.units, { fontSize: dynamicUnitFontSize }]}
+                        title="/s"
+                    />
+                </View>
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: { //styling the container of the top river flow card
+    card: {
         marginTop: Dimensions.get('window').width * 0.05,
         width: Dimensions.get('window').width * 0.9,
-        height: Dimensions.get('window').height * 0.12,
+        height: Dimensions.get('window').height * 0.155,
         marginLeft: Dimensions.get('window').width * 0.05,
-        marginRight: Dimensions.get('window').width * 0.08,
         borderRadius: 20,
         backgroundColor: '#eeeeee',
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+    container: { //styling the container of the top river flow card
+        display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 20, 
     },
     titleContainer: { //stying the container of the title to the card
-        marginLeft: Dimensions.get('window').width * 0.02,
+        marginLeft: Dimensions.get('window').width * 0.05,
     },
     title: { //styling the title of the card
-        fontSize: 25,
+        fontSize: 18,
     },
     valueContainer: { //styling the container to the river flow values
         flexDirection: 'row',
         alignItems: 'flex-end', 
-        marginLeft: Dimensions.get('window').width * 0.22,
+        marginLeft: Dimensions.get('window').width * 0.43,
+        position: 'absolute'
     },
     flow: { //styling the river flow value
         marginLeft: Dimensions.get('window').width * 0.09,

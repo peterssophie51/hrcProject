@@ -440,7 +440,7 @@ export function ComparisonsGraph(props) {
                 focusedDataPointRadius={5}
                 showTextOnFocus={true}
 
-                delayBeforeUnFocus={5000}
+                delayBeforeUnFocus={10000}
                 dataPointLabelShiftX={Dimensions.get('window').width * -0.115}
                 dataPointLabelShiftY={-75}
             />

@@ -8,7 +8,7 @@ import { RiverFlow } from '../components/home/riverFlow';
 import { Switch } from '../components/switch';
 
 //home screen component
-export function HomeScreen( { take, annualUsage, dailyUsage, annualMax, dailyMax, riverFlow, restriction, timePeriod, usageTime}) {
+export function HomeScreen( { flowsite, take, riverFlowAtCompliance, annualUsage, dailyUsage, annualMax, dailyMax, riverFlow, restriction, timePeriod, usageTime}) {
   const [graphTime, setgraphTime] = useState('day') //text for center of circular progress chart
 
   	useEffect(() => {
@@ -39,9 +39,9 @@ export function HomeScreen( { take, annualUsage, dailyUsage, annualMax, dailyMax
         {/*take water card*/}
         <TakeWater take={take}/> 
         {/*river flow card*/}
-        <RiverFlow riverFlow={riverFlow} restriction={restriction} timePeriod={timePeriod}/> 
+        <RiverFlow flowsite={flowsite} riverFlow={riverFlow} restriction={restriction} timePeriod={timePeriod} riverFlowAtCompliance={riverFlowAtCompliance}/> 
         {/*horizons logo at the bottom of the page*/}
-        <Image source={require('../images/horizonsFlowTransperant.png')} style={styles.image} /> 
+       
       </View>
     )
   }

@@ -56,7 +56,7 @@ export function Checkbox (props) {
            checkedColor='black'
            uncheckedColor='black'
            title={props.title}
-           textStyle={{color: 'black', fontFamily: 'Calibri', fontSize: 20}}
+           textStyle={{color: checked ? props.checkColour : 'black', fontFamily: 'Calibri', fontSize: 20}}
          />
     )
 }

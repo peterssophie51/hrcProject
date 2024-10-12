@@ -350,7 +350,7 @@ export default function App() {
         })
         await Promise.all(promises)
       } catch (error) {
-        console.log('yay' + error)
+        //console.log('yay' + error)
       }
     }
 
@@ -375,7 +375,7 @@ export default function App() {
         })
         await Promise.all(promises)
       } catch (error) {
-        console.log(error)
+        //console.log(error)
       }
     }
 

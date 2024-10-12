@@ -12,6 +12,7 @@ export function ComparisonsGraph(props) {
 
     useEffect(() => {
         const newData = []
+        const colours = ['#7A2982', '#F18A00', '#FFCE02']
         props.selectedData.map((item) => {
             if (item == 'Consented Water Usage') {
                 if (props.currentLabels[0] == '00:00') {
@@ -38,10 +39,16 @@ export function ComparisonsGraph(props) {
                         list.push({
                             value:item.value,
                             time:item.time,
-                            dataPointLabelComponent
+                            dataPointLabelComponent,
+                            
+                            
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list,
+                        color: '#00A7CF',
+                        dataPointsColor: '#00A7CF' 
+                    })
                 } else if (props.currentLabels == 'sevenDay') {
                     const list = []
                     props.totalWaterUsage[1].map((item) => {
@@ -66,10 +73,14 @@ export function ComparisonsGraph(props) {
                         list.push({
                             value:item.value,
                             time:item.time,
-                            dataPointLabelComponent
+                            dataPointLabelComponent,
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list,
+                        color: '#00A7CF',
+                        dataPointsColor: '#00A7CF'
+                    })
                 } else if (props.currentLabels == 'oneMonth') {
                     const list = []
                     props.totalWaterUsage[2].map((item) => {
@@ -94,10 +105,14 @@ export function ComparisonsGraph(props) {
                         list.push({
                             value:item.value,
                             time:item.time,
-                            dataPointLabelComponent
+                            dataPointLabelComponent,
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list,
+                        color: '#00A7CF',
+                        dataPointsColor: '#00A7CF'
+                    })
                 } else if (props.currentLabels[0] == 'JAN') {
                     const list = []
                     props.totalWaterUsage[3].map((item) => {
@@ -122,10 +137,14 @@ export function ComparisonsGraph(props) {
                         list.push({
                             value:item.value,
                             time:item.time,
-                            dataPointLabelComponent
+                            dataPointLabelComponent,
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list, 
+                        color: '#00A7CF',
+                        dataPointsColor: '#00A7CF'
+                    })
                 }
             } else if (item == 'River Flow') {
                 if (props.currentLabels[0] == '00:00') {
@@ -241,6 +260,7 @@ export function ComparisonsGraph(props) {
                 }
             } else if (props.flowmeters.find(obj => obj['name'] == item)) {
                 const index = props.flowmeters.findIndex(obj => obj['name'] === item);
+                const colour = colours[index]
                 if (props.currentLabels[0] == '00:00') {
                     const list = []
                     props.flowmeters[index]['data'][0].map((item) => {
@@ -253,7 +273,7 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
-                                <CalibriText title={props.flowmeters[index].nickname + ': ' + props.flowmeters[index].name} />
+                                <CalibriText title={props.flowmeters[index].nickname} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                                     <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -265,10 +285,13 @@ export function ComparisonsGraph(props) {
                         list.push({
                             value:item.value,
                             time:item.time,
-                            dataPointLabelComponent
+                            dataPointLabelComponent,
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list,  
+                        color: colour,
+                        dataPointsColor: colour})
                 } else if (props.currentLabels[0] == 'JAN') {
                     const list = []
                     props.flowmeters[index]['data'][3].map((item) => {
@@ -281,6 +304,7 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={props.flowmeters[index].nickname} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                                     <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -292,10 +316,15 @@ export function ComparisonsGraph(props) {
                         list.push({
                             value:item.value,
                             time:item.time,
-                            dataPointLabelComponent
+                            dataPointLabelComponent,
+                            color: colour
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list,
+                        color: colour, 
+                        dataPointsColor: colour
+                    })
                 } else if (props.currentLabels == 'sevenDay') {
                     const list = []
                     props.flowmeters[index]['data'][1].map((item) => {
@@ -308,6 +337,7 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={props.flowmeters[index].nickname} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                                     <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -319,10 +349,14 @@ export function ComparisonsGraph(props) {
                         list.push({
                             value:item.value,
                             time:item.time,
-                            dataPointLabelComponent
+                            dataPointLabelComponent,
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list,
+                        color: colour,
+                        dataPointsColor: colour 
+                    })
                 } else if (props.currentLabels == 'oneMonth') {
                     const list = []
                     props.flowmeters[index]['data'][2].map((item) => {
@@ -335,6 +369,7 @@ export function ComparisonsGraph(props) {
                         // memoized component for dataPointLabel
                         const dataPointLabelComponent = () => (
                             <View style={styles.label}>
+                                <CalibriText title={props.flowmeters[index].nickname} />
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                                     <CalibriText title={item.value.toFixed(3)} style={{ fontSize: 17 }} />
                                     <CalibriText title="M" style={{ fontSize: 15, lineHeight: 22 }} />
@@ -346,10 +381,14 @@ export function ComparisonsGraph(props) {
                         list.push({
                             value:item.value,
                             time:item.time,
-                            dataPointLabelComponent
+                            dataPointLabelComponent,
                         })
                     })
-                    newData.push({ data: list })
+                    newData.push({ 
+                        data: list,
+                        color: colour,
+                        dataPointsColor: colour 
+                    })
                 } 
             }
         }
@@ -416,7 +455,6 @@ export function ComparisonsGraph(props) {
                 yAxisTextStyle={styles.axis}
                 xAxisLabelTexts={labels}
                 xAxisLabelTextStyle={styles.axis}
-                color={'#00A7CF'}
                 initialSpacing={50}
                 thickness={3}
                 showVerticalLines

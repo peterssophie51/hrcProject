@@ -106,7 +106,7 @@ export function RiverFlowChart(props) {
                 focusedDataPointColor={props.flowAtRestriction == null ? '#00A7CF' : 'black'}
                 focusedDataPointRadius={5} 
                 showTextOnFocus={true} 
-
+                scrollToEnd={true}
                 delayBeforeUnFocus={10000} //time before datatpoint and label doesnt show
                 dataPointLabelShiftX={Dimensions.get('window').width * -0.115}
                 dataPointLabelShiftY={-45}

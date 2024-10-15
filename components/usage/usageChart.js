@@ -65,7 +65,6 @@ export function UsageChart(props) {
                 initialSpacing={50}
                 thickness={3}
                 showVerticalLines //vertical lines on graph
-
                 dataPointsColor="#00A7CF" 
                 dataPointsWidth={10}
                 dataPointsHeight={10}
@@ -78,7 +77,7 @@ export function UsageChart(props) {
                 focusedDataPointRadius={5} 
                 showTextOnFocus={true} 
                 showDataPointLabelOnFocus // show labels on click
-                
+                scrollToEnd={true}
                 delayBeforeUnFocus={10000} // time before datapoint and label disappear
                 dataPointLabelShiftX={Dimensions.get('window').width * -0.115} //move labels for datapoints to the left
                 dataPointLabelShiftY={-45} //move labels for datapoints up

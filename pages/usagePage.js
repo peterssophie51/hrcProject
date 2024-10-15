@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { View, StyleSheet, Dimensions, ScrollView, TouchableWithoutFeedback } from 'react-native';
 //importing components
 import { CalibriBoldText } from '../components/fonts/calibriBoldFont';
 import { CalibriText } from '../components/fonts/calibriFont.js'
@@ -11,7 +11,7 @@ import { GraphRadios } from '../components/usage/usageGraphRadios.js';
 import { GraphInform } from '../components/graphInform.js';
 
 //compoennt for the usage page
-export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, setflowmeters, currentConsentATH }) {
+export function UsagePage ({ dataCollected, handlePress, dailyMax, annualMax, flowmeters, setflowmeters, currentConsentATH }) {
   const [type, settype] = useState(flowmeters.length == 1 ? 'totalled' : 'proportioanl') //manage state of switch and top percentage cards
   const [expanded, setExpanded] = useState(false);
 
@@ -54,82 +54,84 @@ export function UsagePage ({ dataCollected, dailyMax, annualMax, flowmeters, set
       settype('totalled')
   }, [flowmeters])
     return (
-      <View style={styles.page}>
-        <GraphInform />
-        {/*page title*/}
-        <CalibriBoldText  style={styles.title} title="Usage" />
-        {/*when data last recorded*/}
-        <CalibriText style={styles.lastRecorded} title={'Last Recorded ' + dataCollected} time='annual'/>
-        {/*make page scrollable*/}
-        <ScrollView>
-          {/*container to make top percentage cards inline*/}
-          <View style={{display: 'flex', flexDirection:'row'}}>
-            {/*annual percentage card*/}
-            <PercentagePill flowmeters={flowmeters} type={type} max={annualMax} time='annual' usage='annualUsage' title='Annual'/>
-            {/*daily percentage card*/}
-            <PercentagePill flowmeters={flowmeters} type={type} max={dailyMax} time='day' usage='dailyUsage' title='Daily'/>
-          </View>
-          {/*switch to change values in percentage cards*/}
-          <Switch 
-            style={{
-              marginTop: Dimensions.get('window').width * 0.05, 
-              width: Dimensions.get('window').width * 0.9, 
-              marginLeft: Dimensions.get('window').width * 0.05,
-            }} 
-            options={ [
-              { label: "Totalled", value: 'totalled', activeColor: '#72BF44' },
-              { label: "Proportional", value: 'proportional', activeColor: '#72BF44' },
-            ]}
-            type={type} // Pass the current type state
-            action={settype} 
-            settype={settype}
-            disabled={flowmeters.length <= 1}
-            backgroundColour={flowmeters.length > 1 ? '#243746' : '#cccccc'}
-            textColour={flowmeters.length > 1 ? 'white' : 'black'}
-            initial={0} 
-            
-            currentConsentATH={currentConsentATH}
-          />
+      <TouchableWithoutFeedback onPress={() => handlePress()}>
+        <View style={styles.page}>
+          <GraphInform />
+          {/*page title*/}
+          <CalibriBoldText  style={styles.title} title="Usage" />
+          {/*when data last recorded*/}
+          <CalibriText style={styles.lastRecorded} title={'Last Recorded ' + dataCollected} time='annual'/>
+          {/*make page scrollable*/}
+          <ScrollView>
+            {/*container to make top percentage cards inline*/}
+            <View style={{display: 'flex', flexDirection:'row'}}>
+              {/*annual percentage card*/}
+              <PercentagePill flowmeters={flowmeters} type={type} max={annualMax} time='annual' usage='annualUsage' title='Annual'/>
+              {/*daily percentage card*/}
+              <PercentagePill flowmeters={flowmeters} type={type} max={dailyMax} time='day' usage='dailyUsage' title='Daily'/>
+            </View>
+            {/*switch to change values in percentage cards*/}
+            <Switch 
+              style={{
+                marginTop: Dimensions.get('window').width * 0.05, 
+                width: Dimensions.get('window').width * 0.9, 
+                marginLeft: Dimensions.get('window').width * 0.05,
+              }} 
+              options={ [
+                { label: "Totalled", value: 'totalled', activeColor: '#72BF44' },
+                { label: "Proportional", value: 'proportional', activeColor: '#72BF44' },
+              ]}
+              type={type} // Pass the current type state
+              action={settype} 
+              settype={settype}
+              disabled={flowmeters.length <= 1}
+              backgroundColour={flowmeters.length > 1 ? '#243746' : '#cccccc'}
+              textColour={flowmeters.length > 1 ? 'white' : 'black'}
+              initial={0} 
+              
+              currentConsentATH={currentConsentATH}
+            />
 
-          {/*datatype selector to change data on graph*/}
-          <DatatypeSelector 
-            currentDatatypeNickname={currentDatatypeNickname} 
-            setcurrentDatatypeNickname={setcurrentDatatypeNickname}
-            currentDatatype={currentDatatype}
-            setcurrentDatatype={setcurrentDatatype}
-            setcurrentData={setcurrentData}
-            totalWaterUsage={totalWaterUsage}
-            flowMeters={flowmeters}
-            selectedTime={selectedTime}
-            setflowMeters={setflowmeters}
-            expanded={expanded}
-            setExpanded={setExpanded}/>
-          {/*heading for graph*/}
-          <View style={styles.graphHeading}>
-              <CalibriText style={styles.graphHeadingText} title='Water Usage ('/>
-              <CalibriText style={styles.graphHeadingUnits} title='m'/>
-              <CalibriText style={styles.graphHeadingSuperscript} title='3'/>
-              <CalibriText style={styles.graphHeadingText} title=')'/>
-          </View>
-          {/*usage graph*/}
-          <UsageChart currentLabels={currentLabels} currentData={currentData}/>
-          {/*radio buttons to change timeframe of graph*/}
-          <GraphRadios 
-            selectedTime={selectedTime}
-            setselectedTime={setselectedTime}
-            setcurrentLabels={setcurrentLabels}
-            oneDayLabels={oneDayLabels} 
-            sevenDayLabels={sevenDayLabels} 
-            oneMonthLabels={oneMonthLabels} 
-            annualLabels={annualLabels}
-            setcurrentData={setcurrentData}
-            currentDatatype={currentDatatype}
-            totalWaterUsage={totalWaterUsage}
-            flowMeters={flowmeters}
-            setflowMeters={setflowmeters}/>
-          <View style={{height: 20}}></View>
-        </ScrollView>
-      </View>
+            {/*datatype selector to change data on graph*/}
+            <DatatypeSelector 
+              currentDatatypeNickname={currentDatatypeNickname} 
+              setcurrentDatatypeNickname={setcurrentDatatypeNickname}
+              currentDatatype={currentDatatype}
+              setcurrentDatatype={setcurrentDatatype}
+              setcurrentData={setcurrentData}
+              totalWaterUsage={totalWaterUsage}
+              flowMeters={flowmeters}
+              selectedTime={selectedTime}
+              setflowMeters={setflowmeters}
+              expanded={expanded}
+              setExpanded={setExpanded}/>
+            {/*heading for graph*/}
+            <View style={styles.graphHeading}>
+                <CalibriText style={styles.graphHeadingText} title='Water Usage ('/>
+                <CalibriText style={styles.graphHeadingUnits} title='m'/>
+                <CalibriText style={styles.graphHeadingSuperscript} title='3'/>
+                <CalibriText style={styles.graphHeadingText} title=')'/>
+            </View>
+            {/*usage graph*/}
+            <UsageChart currentLabels={currentLabels} currentData={currentData}/>
+            {/*radio buttons to change timeframe of graph*/}
+            <GraphRadios 
+              selectedTime={selectedTime}
+              setselectedTime={setselectedTime}
+              setcurrentLabels={setcurrentLabels}
+              oneDayLabels={oneDayLabels} 
+              sevenDayLabels={sevenDayLabels} 
+              oneMonthLabels={oneMonthLabels} 
+              annualLabels={annualLabels}
+              setcurrentData={setcurrentData}
+              currentDatatype={currentDatatype}
+              totalWaterUsage={totalWaterUsage}
+              flowMeters={flowmeters}
+              setflowMeters={setflowmeters}/>
+            <View style={{height: 20}}></View>
+          </ScrollView>
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 

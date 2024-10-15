@@ -23,6 +23,8 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
 
+  const [expanded, setExpanded] = useState(false)
+
   const ATH2014015277 = {
     flowsite: null,
     dailyMax: 750,
@@ -486,12 +488,14 @@ export default function App() {
 
     const getRiverFlowAtCompliance = async () => {
       try {
-          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%5bWater%20Level%5d&TemporalFilter=om:phenomenonTime,PT3H');
-          const responseText = await response.text();
-          const convert = require('xml-js');
-          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
-          const parsedData = JSON.parse(jsonConverted);
-          setriverflowAtCompliance(1.23);  
+        const today = new Date().toISOString().slice(0, 10);
+        const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + flowsite + '&Measurement=Flow&From=' + today + '2003:00:00&To=' + today + '2003:00:00');
+        const responseText = await response.text();
+        const convert = require('xml-js');
+        const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
+        const parsedData = JSON.parse(jsonConverted);
+        const value = parsedData['Hilltop']['Measurement']['Data']['E']['I1']['_text']
+        setriverflowAtCompliance((value/ 1000).toFixed(3))
       } catch (error) {
         //console.error(error);
       }
@@ -601,6 +605,10 @@ export default function App() {
         return ''; 
     }
 
+    const handlePress = () => {
+      setExpanded(false)
+    }
+
   return (
     //creating drawer navigator
     <NavigationContainer>
@@ -613,7 +621,7 @@ export default function App() {
               <Pressable style={styles.hamburgerButton} onPress={() => navigation.toggleDrawer()}>
                 <Image source={require('./images/whiteHamburger.png')} style={styles.hamburgerImage} />
               </Pressable>
-              <ConsentDropdownHeader navigation={navigation} consents={consents} setconsents={setconsents}
+              <ConsentDropdownHeader navigation={navigation} consents={consents} setconsents={setconsents} expanded={expanded} setExpanded={setExpanded}
                 currentConsent={currentConsent} setCurrentConsent={setCurrentConsent} currentConsentATH={currentConsentATH} setCurrentConsentATH={setCurrentConsentATH}
               />
             </View>),
@@ -658,26 +666,26 @@ export default function App() {
       >
         {/*all different pages*/}
         <Drawer.Screen name="HOME">
-          {props => <HomeScreen {...props} take={take} dailyUsage={dailyUsage} annualUsage={annualUsage}
+          {props => <HomeScreen {...props} take={take} handlePress={handlePress} dailyUsage={dailyUsage} annualUsage={annualUsage}
               annualMax={annualMax} riverFlow={currentRiverFlow} restriction={flowAtRestriction} flowsite={flowsite}
               timePeriod={currentDate} usageTime={usageDate} dailyMax={dailyMax} riverFlowAtCompliance={riverFlowAtCompliance}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="CONSENT">
-          {props => <ConsentPage {...props} compliance={compliedYesterday}  
+          {props => <ConsentPage {...props} compliance={compliedYesterday} handlePress={handlePress}  
           take={take} flowsite={flowsite} consentExpiration={consentExpiration} 
           annualMax={annualMax} restrictions={flowbasedRestrictions} currentRiverFlow={currentRiverFlow}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="USAGE">
-          {props => <UsagePage {...props} dataCollected={usageDate} 
+          {props => <UsagePage {...props} dataCollected={usageDate} handlePress={handlePress} 
           dailyMax={dailyMax} annualMax={annualMax} flowmeters={flowmeters} 
           setflowmeters={setflowmeters} currentConsentATH={currentConsentATH}/>}
         </Drawer.Screen>
 
         { flowsite && (
           <Drawer.Screen name="RIVER">
-            {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction}
+            {props => <RiverPage {...props} flowsite={flowsite} flowAtRestriction={flowAtRestriction} handlePress={handlePress}
             timeframe={currentDate} riverFlow={currentRiverFlow} data={riverFlow} riverFlowAtCompliance={riverFlowAtCompliance}/>}
           </Drawer.Screen>
         )
@@ -685,12 +693,12 @@ export default function App() {
         }
 
         <Drawer.Screen name="REPORTS">
-          {props => <ReportsPage {...props} flowmeters={flowmeters} riverFlow={riverFlow}
+          {props => <ReportsPage {...props} flowmeters={flowmeters} riverFlow={riverFlow} handlePress={handlePress}
           dailyMax={dailyMax} flowAtRestriction={flowAtRestriction} flowsite={flowsite} currentConsentATH={currentConsentATH}/>}
         </Drawer.Screen>
 
         <Drawer.Screen name="FAQ">
-          {props => <FAQPage {...props} contacts={contacts} faq={faq} />}
+          {props => <FAQPage {...props} contacts={contacts} faq={faq} handlePress={handlePress}/>}
         </Drawer.Screen>
 
       </Drawer.Navigator>

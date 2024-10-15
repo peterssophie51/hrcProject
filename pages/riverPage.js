@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { TouchableWithoutFeedback, View } from 'react-native';
 import { useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 //importing components
@@ -10,29 +10,31 @@ import { TimeRadios } from '../components/river/graphRadios.js';
 import { GraphInform } from '../components/graphInform.js';
 
 //component for the river page
-export function RiverPage ({ riverFlowAtCompliance, flowsite, data, timeframe, riverFlow, flowAtRestriction }) {
+export function RiverPage ({ riverFlowAtCompliance, handlePress, flowsite, data, timeframe, riverFlow, flowAtRestriction }) {
   const [selectedTime, setselectedTime] =  useState('1 DAY') //current timeframe for data
   const [currentData, setcurrentData] = useState(data[0]) //set current data (as by radios)
 
   const [currentLabels, setcurrentLabels] = useState([]) //set current labels (as by radios)
 
     return (
-      <View  style={styles.page}> 
-        <GraphInform />
-        {/*page title*/}
-        <CalibriBoldText style={styles.title} title="River" /> 
-        {/*consent flowsite*/}
-        <CalibriBoldText  style={styles.flowsite} title={flowsite || 'No associated flowsite'} />
-        {/*when data recorded*/}
-        <CalibriText style={styles.timeRecorded} title={`Last Recorded at ${timeframe}`} />
-        {/*river flow card*/}
-        <RiverFlowTitle riverFlow={riverFlow} riverFlowAtCompliance={riverFlowAtCompliance}/> 
-        {/*river flow chart*/}
-        <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels} flowAtRestriction={flowAtRestriction} flowsite={flowsite}/> 
-        {/*graph radios*/}
-        <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
-        data={data} />
-      </View>
+      <TouchableWithoutFeedback onPress={() => handlePress()}>
+        <View style={styles.page}> 
+          <GraphInform />
+          {/*page title*/}
+          <CalibriBoldText style={styles.title} title="River" /> 
+          {/*consent flowsite*/}
+          <CalibriBoldText  style={styles.flowsite} title={flowsite || 'No associated flowsite'} />
+          {/*when data recorded*/}
+          <CalibriText style={styles.timeRecorded} title={`Last Recorded at ${timeframe}`} />
+          {/*river flow card*/}
+          <RiverFlowTitle riverFlow={riverFlow} riverFlowAtCompliance={riverFlowAtCompliance}/> 
+          {/*river flow chart*/}
+          <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels} flowAtRestriction={flowAtRestriction} flowsite={flowsite}/> 
+          {/*graph radios*/}
+          <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
+          data={data} />
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 

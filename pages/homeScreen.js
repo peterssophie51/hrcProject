@@ -1,4 +1,4 @@
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import { useEffect, useState } from 'react';
 import { Image,  StyleSheet } from 'react-native';
 //importing components
@@ -8,7 +8,7 @@ import { RiverFlow } from '../components/home/riverFlow';
 import { Switch } from '../components/switch';
 
 //home screen component
-export function HomeScreen( { flowsite, take, riverFlowAtCompliance, annualUsage, dailyUsage, annualMax, dailyMax, riverFlow, restriction, timePeriod, usageTime}) {
+export function HomeScreen( { flowsite, handlePress, take, riverFlowAtCompliance, annualUsage, dailyUsage, annualMax, dailyMax, riverFlow, restriction, timePeriod, usageTime}) {
   const [graphTime, setgraphTime] = useState('day') //text for center of circular progress chart
 
   	useEffect(() => {
@@ -18,6 +18,7 @@ export function HomeScreen( { flowsite, take, riverFlowAtCompliance, annualUsage
     })
 
     return (
+      <TouchableWithoutFeedback onPress={handlePress}>
       <View style={styles.page}>
         {/*pie chart at top of home screen*/}
         <ProgressChart graphTime={graphTime} setgraphTime={setgraphTime} abstracted={(graphTime=='annual') ? annualUsage : dailyUsage} 
@@ -43,6 +44,7 @@ export function HomeScreen( { flowsite, take, riverFlowAtCompliance, annualUsage
         {/*horizons logo at the bottom of the page*/}
        
       </View>
+      </TouchableWithoutFeedback>
     )
   }
 

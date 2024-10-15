@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 //
 export function Switch(props) {
 
-  const [fontLoaded, setFontLoaded] = useState(false);
+ /* const [fontLoaded, setFontLoaded] = useState(false);
   //function to load in calibri bold and calibri font
   useEffect(() => {
     async function loadFont() {
@@ -29,8 +29,9 @@ export function Switch(props) {
   //do not load content if font does not load
   if (!fontLoaded) {
     return null; 
-  }
+  }*/
 
+    
 
   return (
   
@@ -41,10 +42,10 @@ export function Switch(props) {
       initial={props.initial}
       height={Dimensions.get('window').height * 0.07}
       fontSize={25}
-      textStyle={{fontFamily:'CalibriBold', color:props.disabled ? '#999999' : 'white'}}
+      textStyle={{fontFamily:'CalibriBold', color:props.textColour}}
       selectedTextStyle={{fontFamily:'CalibriBold', color:'black'}}
-      onPress={value => {props.action(value)}} 
+      onPress={value => props.action(value)} 
       disabled = {props.disabled}
-      value={props.disabled ? props.initial : null}
+      value={props.type}
   />)}
   

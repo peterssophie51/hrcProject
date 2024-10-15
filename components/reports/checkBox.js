@@ -17,6 +17,10 @@ export function Checkbox (props) {
           });
     }
     const [fontLoaded, setFontLoaded] = useState(false);
+
+    useEffect(() => {
+        setchecked(false)
+    }, [props.currentConsentATH])
     
     //function to load in calibri bold and calibri font
     useEffect(() => {
@@ -49,10 +53,10 @@ export function Checkbox (props) {
            uncheckedIcon="checkbox-blank-outline"
            size={40}
            containerStyle={{backgroundColor: '#EEEEEE', padding: 0}}
-           checkedColor='#72BF44'
-           uncheckedColor='#243746'
+           checkedColor='black'
+           uncheckedColor='black'
            title={props.title}
-           textStyle={{color: (checked == true) ? '#72BF44' : '#243746', fontFamily: 'Calibri', fontSize: 20}}
+           textStyle={{color: checked ? props.checkColour : 'black', fontFamily: 'Calibri', fontSize: 20}}
          />
     )
 }

@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { TouchableWithoutFeedback, View } from 'react-native';
 import { useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 //importing components
@@ -7,38 +7,34 @@ import { CalibriText } from '../components/fonts/calibriFont.js';
 import { RiverFlowTitle } from '../components/river/riverFlow.js';
 import { RiverFlowChart } from '../components/river/riverFlowChart.js';
 import { TimeRadios } from '../components/river/graphRadios.js';
+import { GraphInform } from '../components/graphInform.js';
 
 //component for the river page
-export function RiverPage ({ flowsite, data, timeframe, riverFlow, flowAtRestriction }) {
+export function RiverPage ({ riverFlowAtCompliance, handlePress, flowsite, data, timeframe, riverFlow, flowAtRestriction }) {
   const [selectedTime, setselectedTime] =  useState('1 DAY') //current timeframe for data
   const [currentData, setcurrentData] = useState(data[0]) //set current data (as by radios)
 
-  const oneDayLabels = [
-    '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', 
-    '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', 
-    '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', 
-    '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
-  ] //graph labels for x axis for one day
-  const annualLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC' ]  //graph labels for x axis for annual
-
-  const [currentLabels, setcurrentLabels] = useState(oneDayLabels) //set current labels (as by radios)
+  const [currentLabels, setcurrentLabels] = useState([]) //set current labels (as by radios)
 
     return (
-      <View  style={styles.page}> 
-        {/*page title*/}
-        <CalibriBoldText style={styles.title} title="River" /> 
-        {/*consent flowsite*/}
-        <CalibriBoldText  style={styles.flowsite} title={flowsite} />
-        {/*when data recorded*/}
-        <CalibriText style={styles.timeRecorded} title={`Last Recorded at ${timeframe}`} />
-        {/*river flow card*/}
-        <RiverFlowTitle riverFlow={riverFlow}/> 
-        {/*river flow chart*/}
-        <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels} flowAtRestriction={flowAtRestriction}/> 
-        {/*graph radios*/}
-        <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
-        data={data} oneDayLabels={oneDayLabels} annualLabels={annualLabels}/>
-      </View>
+      <TouchableWithoutFeedback onPress={() => handlePress()}>
+        <View style={styles.page}> 
+          <GraphInform />
+          {/*page title*/}
+          <CalibriBoldText style={styles.title} title="River" /> 
+          {/*consent flowsite*/}
+          <CalibriBoldText  style={styles.flowsite} title={flowsite || 'No associated flowsite'} />
+          {/*when data recorded*/}
+          <CalibriText style={styles.timeRecorded} title={`Last Recorded at ${timeframe}`} />
+          {/*river flow card*/}
+          <RiverFlowTitle riverFlow={riverFlow} riverFlowAtCompliance={riverFlowAtCompliance}/> 
+          {/*river flow chart*/}
+          <RiverFlowChart selectedTime={selectedTime} currentData={currentData} currentLabels={currentLabels} flowAtRestriction={flowAtRestriction} flowsite={flowsite}/> 
+          {/*graph radios*/}
+          <TimeRadios selectedTime={selectedTime} setselectedTime={setselectedTime} setcurrentData={setcurrentData} setcurrentLabels={setcurrentLabels}
+          data={data} />
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 
@@ -55,7 +51,7 @@ const styles = StyleSheet.create({
   },
   flowsite: { //style consent flow site text
     textAlign: 'center', 
-    fontSize: 30, 
+    fontSize: 25, 
     marginTop: Dimensions.get('window').height * 0.01
   },
   timeRecorded: { //style time recorded text

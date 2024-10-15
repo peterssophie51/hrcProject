@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Dimensions} from "react-native";
 import { List } from "react-native-paper";
 // importing components
@@ -7,9 +7,26 @@ import { RestrictionInfo } from "./restrictionInfo";
 // accordion list of all flow based restrictions at bottom of consents page
 export function FlowbasedRestriction(props) {
     const [expanded, setExpanded] = React.useState(false); // set whether accordion is expanded or not
-    const [currentRestriction, setcurrentRestriction] = React.useState('Three'); // set which flow based restriction is currently in effect
-
-    // index in restriction list for current flow based restriction
+    const [currentRestriction, setcurrentRestriction] = React.useState(''); // set which flow based restriction is currently in effect
+    useEffect(() => {
+        function getRestriction(value, restrictions) {
+            for (let i = 1; i < restrictions.length; i++) { // Start from index 1
+                const item = restrictions[i];
+        
+                // Check if flfowAtRestriction is a number and not an empty string
+                if (typeof item.flowAtRestriction === 'number' && value > item.flowAtRestriction) {
+                    return restrictions[i - 1].restriction; // Return the previous restriction
+                }
+            }
+            
+            // If x is less than or equal to the smallest flowAtRestriction
+            return restrictions[restrictions.length - 1].restriction; // Return the last restriction
+        }
+        const result = getRestriction(props.currentRiverFlow, props.restrictions);
+        
+        setcurrentRestriction(result)
+    }, [props.restrictions, props.currentRiverFlow])
+    // ifndex in restriction list for current flow based restriction
     const index = props.restrictions.findIndex(item => item.restriction === currentRestriction); 
     const validIndex = index !== -1 ? index : 0; // default to 0 if no match is found
 
@@ -37,11 +54,11 @@ export function FlowbasedRestriction(props) {
                     expanded={expanded} 
                     setExpanded={setExpanded}
                     data={{ 
-                        flowAtRestriction: props.restrictions[validIndex].flowAtRestriction,
-                        instantaneous: props.restrictions[validIndex].instantaneous,
-                        hourlyRestriction: props.restrictions[validIndex].hourlyRestriction,
-                        dailyRestriction: props.restrictions[validIndex].dailyRestriction,
-                        annualRestriction: props.restrictions[validIndex].annualRestriction
+                        flowAtRestriction: props.restrictions[validIndex].flowAtRestriction || '—',
+                        instantaneous: props.restrictions[validIndex].instantaneous || '—',
+                        hourly: props.restrictions[validIndex].hourly || '—',
+                        daily: props.restrictions[validIndex].daily || '—',
+                        annually: props.restrictions[validIndex].annually || '—'
                     }}
                 />} 
             >
@@ -64,18 +81,18 @@ export function FlowbasedRestriction(props) {
                                     expanded={expanded} 
                                     setExpanded={setExpanded}
                                     data={{ 
-                                        flowAtRestriction: item.flowAtRestriction,
-                                        instantaneous: item.instantaneous,
-                                        hourlyRestriction: item.hourlyRestriction,
-                                        dailyRestriction: item.dailyRestriction,
-                                        annualRestriction: item.annualRestriction
+                                        flowAtRestriction: item.flowAtRestriction || '—',
+                                        instantaneous: item.instantaneous || '—',
+                                        hourly: item.hourly || '—',
+                                        daily: item.daily || '—',
+                                        annually: item.annually || '—'
                                     }} 
                                 />
                             );
                         })}
                     </View>
                 } 
-                style={[styles.dropDown, {height:(Dimensions.get('window').height * 0.45 + 
+                style={[styles.dropDown, {height:(Dimensions.get('window').height * 0.48 + 
                         (Dimensions.get('window').height * 0.4 * (props.restrictions.length -2)))}]} 
             />
         </List.Accordion>
@@ -87,7 +104,7 @@ const styles = StyleSheet.create({
     container:{ // style the container of the flow based restrictions
         marginTop: Dimensions.get('window').width * 0.04, 
         width: Dimensions.get('window').width * 0.9,
-        height:Dimensions.get('window').height * 0.45, 
+        height:Dimensions.get('window').height * 0.48, 
         marginLeft:Dimensions.get('window').width *0.05, 
         marginRight:Dimensions.get('window').width * 0.08,
         borderRadius: 20,

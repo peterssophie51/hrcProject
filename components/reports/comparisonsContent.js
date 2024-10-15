@@ -1,8 +1,11 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { ComparisonsGraph } from "./comparisonGraph";
+import { CalibriBoldText } from "../fonts/calibriBoldFont";
+import { CalibriText } from "../fonts/calibriFont";
 import { CheckboxCard } from "./checkBoxCard";
 import { ComparisonRadios } from "./comparisonRadios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { GraphInform } from "../graphInform";
 
 export function ComparisonsContent(props) {
 
@@ -34,11 +37,60 @@ export function ComparisonsContent(props) {
     const [currentLabels, setcurrentLabels] = useState(oneDayLabels) //set current labels (as by radios)
     const [selectedData, setselectedData] = useState([])
 
+    useEffect(() => {
+      setselectedData([])
+    }, [props.currentConsentATH])
+
     return (
         <View style={{display: 'flex', flexDirection:'column'}}>
-            <ComparisonsGraph currentLabels={currentLabels} totalWaterUsage={totalWaterUsage} flowmeters={props.flowmeters} riverFlow={props.riverFlow} selectedData={selectedData}/>
-            <CheckboxCard flowmeters={props.flowmeters} setselectedData={setselectedData} selectedData={selectedData}/>
+          <GraphInform />
+            <View style={styles.graphHeading}>
+                <View style={styles.waterUsageTitle}>
+                    <CalibriText style={styles.graphHeadingText} title='Water Usage ('/>
+                    <CalibriText style={styles.graphHeadingUnits} title='m'/>
+                    <CalibriText style={styles.graphHeadingSuperscript} title='3'/>
+                    <CalibriText style={styles.graphHeadingText} title=')'/>
+                </View>
+                { selectedData.includes('River Flow') && (
+                <View style={styles.riverFlowTitle}>
+                    <CalibriText style={styles.graphHeadingText} title='River Flow ('/>
+                    <CalibriText style={styles.graphHeadingUnits} title='m'/>
+                    <CalibriText style={styles.graphHeadingSuperscript} title='3'/>
+                    <CalibriText style={styles.graphHeadingUnits} title='/s'/>
+                    <CalibriText style={styles.graphHeadingText} title=')'/>
+                </View>
+                )}
+            </View>
+            <ComparisonsGraph currentLabels={currentLabels} totalWaterUsage={totalWaterUsage} flowsite={props.flowsite} flowmeters={props.flowmeters} riverFlow={props.riverFlow} selectedData={selectedData}/>
+            <CheckboxCard flowsite={props.flowsite} currentConsentATH={props.currentConsentATH} flowmeters={props.flowmeters} setselectedData={setselectedData} selectedData={selectedData}/>
             <ComparisonRadios setcurrentLabels={setcurrentLabels} oneDayLabels={oneDayLabels} annualLabels={annualLabels}/>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    graphHeading: {
+        display: 'flex',
+        flexDirection:'row',
+        marginLeft: Dimensions.get('window').width * 0.05,
+      },
+      graphHeadingText: {
+        fontSize: 15
+      },
+      graphHeadingUnits: {
+        fontSize: 15,
+        lineHeight: 22
+      },
+      graphHeadingSuperscript: {
+        fontSize: 11
+      },
+      waterUsageTitle: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginRight: Dimensions.get('window').width * 0.35
+      },
+      riverFlowTitle: {
+        display: 'flex',
+        flexDirection: 'row'
+      }
+})

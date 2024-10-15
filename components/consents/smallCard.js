@@ -10,9 +10,9 @@ export function SmallCard(props) {
         <View style={[styles.container, props.value && {backgroundColor:'#72BF44'}]}>
             {/*setting image in card depending on whether true or false*/}
             <Image source={props.value == true 
-                ? require('../../images/tickWhiteThick.png')
-                : require('../../images/crossWhiteThick.png')}
-                style={[styles.image, props.value && {width:Dimensions.get('window').width * 0.185}]}/> 
+                ? props.trueImage
+                : props.falseImage}
+                style={[styles.image, props.style]}/> 
             <CalibriText title={props.title} style={styles.text}/>
         </View>
     )
@@ -22,16 +22,15 @@ const styles= StyleSheet.create({
     container:{ //styling container of small card
         marginTop: Dimensions.get('window').width * 0.04, 
         width: Dimensions.get('window').width * 0.425,
-        height:Dimensions.get('window').width * 0.4, 
+        height:Dimensions.get('window').width * 0.35, 
         marginLeft:Dimensions.get('window').width * 0.05, 
         borderRadius: 20,
         backgroundColor: '#CE202F',
+        alignItems: 'center'
     },
     image: { //styling image shown in small card
-        height: Dimensions.get('window').width * 0.15,
         width: Dimensions.get('window').width * 0.15,
         marginTop: Dimensions.get('window').height * 0.02,
-        marginLeft: Dimensions.get('window').width * 0.13,
     },
     text: { //styling text in small card
         color: 'white',

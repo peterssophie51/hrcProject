@@ -1,25 +1,25 @@
 import React from "react";
 import { View } from "react-native";
-import { AlertCard } from "./singleAlertCard";
-import { TextinputAlertCard } from "./textinputAlertCard";
+import { NotificationCard } from "./notifiationCard";
+import { TextinputNotificationCard } from "./notificationInputCard";
 import { StyleSheet, Dimensions} from "react-native";
 import { CalibriBoldText } from "../fonts/calibriBoldFont";
 
-export function AlertsContent(props) {
+export function NotificationContent(props) {
 
     const m3s = () => {
         return (
             <View style={styles.unitsContainer}>
-                  <CalibriBoldText title='M' style={styles.units} />
+                  <CalibriBoldText title='m' style={styles.units} />
                   <CalibriBoldText title='3' style={styles.superscript} />
-                  <CalibriBoldText title='/S' style={styles.units} />
+                  <CalibriBoldText title='/s' style={styles.units} />
             </View>
         )
     }
     const m3 = () => {
         return (
             <View style={styles.unitsContainer}>
-                  <CalibriBoldText title='M' style={styles.units} />
+                  <CalibriBoldText title='m' style={styles.units} />
                   <CalibriBoldText title='3' style={styles.superscript} />
             </View>
         )
@@ -34,22 +34,24 @@ export function AlertsContent(props) {
 
     return(
         <View>
-            <AlertCard title='Compliance'/>
-            <AlertCard title='Complied' />
-            <TextinputAlertCard title='River Flow' Component={m3s}/>
+            <NotificationCard title='Compliance'/>
+            <NotificationCard title='Complied' />
+            <TextinputNotificationCard title='River Flow' Component={m3s} defaultValue={props.flowAtRestriction == null ? '' : props.flowAtRestriction}/>
             {
                 props.flowmeters.map((item, index) => {
                     return (
-                        <TextinputAlertCard 
+                        <TextinputNotificationCard 
                             key={index}
-                            title={item.nickname + ': ' + item.name} 
-                            Component={m3}/>
+                            title={item.nickname} 
+                            Component={m3}
+                            defaultValue={props.dailyMax}
+                        />
                     )
                 })
             }
-            <TextinputAlertCard title='Total Usage' Component={m3}/>
-            <TextinputAlertCard title='Daily % Usage' Component={percentage}/>
-            <TextinputAlertCard title='Annual % Usage' Component={percentage}/>
+            <TextinputNotificationCard title='Total Usage' Component={m3} defaultValue={props.dailyMax}/>
+            <TextinputNotificationCard title='Daily % Usage' Component={percentage} defaultValue={100}/>
+            <TextinputNotificationCard title='Annual % Usage' Component={percentage} defaultValue={100}/>
         </View>
     )
 }

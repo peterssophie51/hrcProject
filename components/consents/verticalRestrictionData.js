@@ -20,7 +20,7 @@ export function VerticalData(props) {
             <CalibriBoldText title={props.rate} style={styles.verticalDataTitle}/>
             {/*units for vertical data*/}
             <View style={styles.verticalDataTitleContainer}>
-                <CalibriText title="M" style={styles.verticalDataTitleUnits}/> 
+                <CalibriText title="m" style={styles.verticalDataTitleUnits}/> 
                 <CalibriText title="3" style={styles.verticalDataTitleSuperscript}/> 
                 <CalibriText title={'/' + props.time} style={styles.verticalDataTitleUnits}/> 
             </View>

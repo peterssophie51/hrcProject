@@ -44,7 +44,7 @@ export function TimeRadios(props) {
                 <View style={styles.radioTopLeft}>
                     {/*radio button*/}
                     <RadioGroup 
-                        onPress={() => handlePress('1 DAY', props.data[0], props.oneDayLabels)} //handle press
+                        onPress={() => handlePress('1 DAY', props.data[0], 'oneDay')} //handle press
                         selectedId={props.selectedTime} 
                         radioButtons={[
                             {id:'1 DAY', label:'1 DAY', color:'#72BF44', 
@@ -86,18 +86,6 @@ export function TimeRadios(props) {
                     />
                 </View>
                 {/*container for bottom right radio*/}
-                <View style={styles.radioBottomRight}>
-                    <RadioGroup 
-                        onPress={() => handlePress('ANNUAL', props.data[3], props.annualLabels)}  //handle press
-                        selectedId={props.selectedTime}
-                        radioButtons={[
-                            {id:'ANNUAL', label:'ANNUAL', color:'#72BF44', 
-                                borderColor: props.selectedTime == 'ANNUAL' ? '#72BF44' : 'black'}]} //change colour depending on selected
-                        layout='vertical'
-                        labelStyle={styles.labels}
-                        style={styles.radios}
-                    />
-                </View>
             </View>
         </View>
     )

@@ -5,15 +5,37 @@ import { StyleSheet } from 'react-native';
 import { Dimensions } from 'react-native';
 
 export function CheckboxCard (props) {
+    const colours = ['#7A2982', '#F18A00', '#FFCE02']
     return (
         <View style={styles.container}>
             {props.flowmeters.map((item, index) => {
                 return (
-                    <Checkbox key={index} name={item.name} title={item.nickname + ': '+ item.name} setselectedData={props.setselectedData}/>
+                    <Checkbox 
+                        currentConsentATH={props.currentConsentATH} 
+                        key={index} name={item.name} 
+                        title={item.nickname} 
+                        setselectedData={props.setselectedData}
+                        checkColour={colours[index]}
+                    />
                 )
             })}
-            <Checkbox title='Total Water Usage' name='Total Water Usage' setselectedData={props.setselectedData} selectedData={props.selectedData}/>
-            <Checkbox title='River Flow' name='River Flow' setselectedData={props.setselectedData} selectedData={props.selectedData}/>
+            <Checkbox 
+                	currentConsentATH={props.currentConsentATH} 
+                    title='Consented Water Usage' 
+                    name='Consented Water Usage' 
+                    setselectedData={props.setselectedData} 
+                    selectedData={props.selectedData}
+                    checkColour='#00A7CF'
+            />
+           { props.flowsite && (
+                <Checkbox 
+                    currentConsentATH={props.currentConsentATH} 
+                    title='River Flow' name='River Flow' 
+                    setselectedData={props.setselectedData} 
+                    selectedData={props.selectedData}
+                    checkColour='#72BF44'
+                />
+           )}
         </View>
     )
 }

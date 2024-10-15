@@ -19,8 +19,6 @@ export function ProgressChart(props) {
     { value: (props.abstracted/props.max) * 100 > 100 ? 100 : ((props.abstracted/props.max) * 100), color: '#00A7CF' },
     { value: (props.abstracted/props.max) * 100 > 100 ? 0 : 100 - ((props.abstracted/props.max) * 100), color: '#95C6DD' }
   ];  //values for pie chart
-  
-  const screenWidth = Dimensions.get('window').width; //screen width of page
 
   const [fontLoaded, setFontLoaded] = useState(false);
   //function to load in calibri bold and calibri font
@@ -47,15 +45,15 @@ export function ProgressChart(props) {
 
   return (
     //container of pie chart
-    <View style={{ marginTop: Dimensions.get('window').height * 0.15, marginLeft: screenWidth * 0.1 }}>
+    <View style={{ marginTop: Dimensions.get('window').height * 0.14, marginLeft: Dimensions.get('window').width * 0.1, justifyContent: 'center' }}>
       <PieChart
         donut
-        radius={screenWidth * 0.40}
-        innerRadius={screenWidth * 0.3}
+        radius={Dimensions.get('window').width * 0.4}
+        innerRadius={Dimensions.get('window').width * 0.3}
         data={data}
         centerLabelComponent={() => { //component to render text in the middle of the progress chart
           return (
-            <View style={{ marginTop: percentage > 100 ? -25 : -35 }}>
+            <View style={{ marginTop: percentage > 100 ? -25 : -35}}>
               <CalibriBoldText title='Usage' style={{textAlign: 'center', fontSize:30, marginBottom: -10}}/>
               {/*percentage text in middle of donut*/}
               <Text style={[styles.headerText, { fontSize: percentage > 100 ? 70 : 80 }]}>
@@ -68,12 +66,12 @@ export function ProgressChart(props) {
                 {/*amount abstracted rounded to 2 dp*/}
                 <Text style={styles.subText}>{roundNumber(props.abstracted, 2)}</Text>
                 {/*units*/}
-                <Text style={styles.units}>M</Text>
+                <Text style={styles.units}>m</Text>
                 <Text style={styles.superscript}>3 </Text>
                 {/*maximum*/}
                 <Text style={styles.subText}>of {roundNumber(props.max, 2)}</Text>
                 {/*units*/}
-                <Text style={styles.units}>M</Text>
+                <Text style={styles.units}>m</Text>
                 <Text style={styles.superscript}>3 </Text>
                 {/*indicates timeframe*/}
                 <Text style={styles.subText}>per {props.graphTime}</Text>
@@ -107,7 +105,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Calibri'
   },
   units: { //style units text
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 16,
     fontFamily: 'Calibri'
   }

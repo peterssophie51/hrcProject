@@ -1,19 +1,26 @@
-import React from "react";
-import { Dimensions, View, Text, TextInput, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Dimensions, View, TextInput, Image } from "react-native";
 import { CalibriBoldText } from "../fonts/calibriBoldFont";
 import { StyleSheet } from "react-native";
-import { useState, useEffect } from "react";
 import { Switch } from "react-native-switch";
 import { List } from "react-native-paper";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Font from 'expo-font';
+import { CalibriText } from "../fonts/calibriFont";
 
-export function TextinputAlertCard({Component, title}) {
+export function TextinputNotificationCard({ Component, title, defaultValue }) {
   const [enabled, setEnabled] = useState(false);
   const toggleSwitch = () => setEnabled(!enabled);
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const toggleExpanded = () => setExpanded(!expanded);
-  const [inputValue, setInputValue] = useState("");
+  
+  // Move inputValue state outside of useEffect
+  const [inputValue, setInputValue] = useState(String(defaultValue));
+
+  // Update inputValue when defaultValue changes
+  useEffect(() => {
+    setInputValue(String(defaultValue));
+  }, [defaultValue]);
 
   const [fontLoaded, setFontLoaded] = useState(false);
   useEffect(() => {
@@ -32,9 +39,8 @@ export function TextinputAlertCard({Component, title}) {
     return null; 
   }
 
-
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <View style={styles.headerContainer}>
         <List.Accordion
           style={[styles.container, {
@@ -48,41 +54,46 @@ export function TextinputAlertCard({Component, title}) {
           )}
         >
         </List.Accordion>
-        <View style={[styles.switchesContainer, {borderBottomRightRadius: expanded ? 0 : 20}]}>
-                <TouchableOpacity>
-                    <Switch
-                    value={enabled}
-                    onPress={toggleSwitch}
-                    circleSize={Dimensions.get('window').width * 0.07}
-                    barHeight={Dimensions.get('window').width * 0.08}
-                    switchWidthMultiplier={2}
-                    backgroundActive={'#72BF44'}
-                    backgroundInactive={'#CCCCCC'}
-                    circleActiveColor={'#243746'}
-                    circleInActiveColor={'#243746'}
-                    renderActiveText={false}
-                    renderInActiveText={false}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={toggleExpanded}>
-                    <Image source={ expanded ? 
-                      require('../../images/dropUpSlate.png') 
-                      : require('../../images/dropDownSlate.png')} 
-                      style={{ height: 20, width: 32 }} />
-                </TouchableOpacity>
+        <View style={[styles.switchesContainer, { borderBottomRightRadius: expanded ? 0 : 20 }]}>
+          <TouchableOpacity>
+            <Switch
+              value={enabled}
+              onPress={toggleSwitch}
+              circleSize={Dimensions.get('window').width * 0.07}
+              barHeight={Dimensions.get('window').width * 0.08}
+              switchWidthMultiplier={2}
+              backgroundActive={'#72BF44'}
+              backgroundInactive={'#CCCCCC'}
+              circleActiveColor={'#243746'}
+              circleInActiveColor={'#243746'}
+              renderActiveText={false}
+              renderInActiveText={false}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={toggleExpanded}>
+            <Image 
+              source={expanded ? 
+                require('../../images/dropUpSlate.png') 
+                : require('../../images/dropDownSlate.png')} 
+              style={{ height: 20, width: 32 }} 
+            />
+          </TouchableOpacity>
         </View>
       </View>
       {
         expanded && (
-            <List.Item
+          <List.Item
             right={() => (
+              <View>
+                <CalibriText title="Alert me at" style={styles.descriptionText}/>
               <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <TextInput
                   value={inputValue}
                   onChangeText={text => setInputValue(text)}
                   style={styles.input}
                 />
-                { Component && <Component /> }
+                {Component && <Component />}
+              </View>
               </View>
             )}
             style={styles.item}
@@ -126,7 +137,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     width: Dimensions.get('window').width * 0.35,
     marginTop: Dimensions.get('window').width * 0.04,
-    alignItems: 'center' ,
+    alignItems: 'center',
     justifyContent: 'space-evenly'
   },
   input: {
@@ -155,4 +166,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 23,
   },
+  descriptionText: {
+    fontSize: 16,
+    marginBottom: 10,
+    marginTop: -20,
+    marginLeft: 2
+  }
 });

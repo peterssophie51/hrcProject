@@ -36,7 +36,10 @@ export function FlowbasedRestriction(props) {
     return (
         <View>
         <List.Accordion 
-            style={styles.container} 
+            style={[styles.container, props.restrictions.length == 1  || expanded ? 
+                { height:Dimensions.get('window').height * 0.42} :
+                { height:Dimensions.get('window').height * 0.48}
+            ]} 
             expanded={expanded}
             // expand the flow based restrictions (if there are restrictions to show)
             onPress={() => { 
@@ -103,8 +106,7 @@ export function FlowbasedRestriction(props) {
 const styles = StyleSheet.create({
     container:{ // style the container of the flow based restrictions
         marginTop: Dimensions.get('window').width * 0.04, 
-        width: Dimensions.get('window').width * 0.9,
-        height:Dimensions.get('window').height * 0.48, 
+        width: Dimensions.get('window').width * 0.9, 
         marginLeft:Dimensions.get('window').width *0.05, 
         marginRight:Dimensions.get('window').width * 0.08,
         borderRadius: 20,

@@ -62,7 +62,7 @@ export function ProgressChart(props) {
                 <Text style={[styles.headerText, { fontSize: percentage > 100 ? 50 : 60 }]}>%</Text>
               </Text>
               {/*container of values in pie chart*/}
-              <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center', flexWrap: 'wrap' }}>
                 {/*amount abstracted rounded to 2 dp*/}
                 <Text style={styles.subText}>{roundNumber(props.abstracted, 2)}</Text>
                 {/*units*/}
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
   units: { //style units text
     fontSize: 16,
     lineHeight: 16,
-    fontFamily: 'Calibri'
+    fontFamily: 'Calibri',
+    flexShrink: 1
   }
 });

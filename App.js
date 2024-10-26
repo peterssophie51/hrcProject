@@ -106,7 +106,7 @@ export default function App() {
   }
 
   const ATH2006010907 = {
-    flowsite: 'Ōroua at Almadale Slackline',
+    flowsite: 'Oroua at Almadale Slackline',
     dailyMax: 9000,
     annualMax: 0,
     flowAtRestriction: 1.850,
@@ -168,7 +168,7 @@ export default function App() {
     {
       key: 1,
       question:'Why did the chicken cross the road?',
-      answer:'To get to the other side!'
+      answer:'To get to the water meter!'
     },
   
   
@@ -480,31 +480,32 @@ export default function App() {
           const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
           const parsedData = JSON.parse(jsonConverted);
           const value = parsedData['wml2:Collection']['wml2:observationMember']['om:OM_Observation']['om:result']['wml2:MeasurementTimeseries']['wml2:point']['wml2:MeasurementTVP']['wml2:value']['_text'];
-          setcurrentRiverFlow(value / 1000);  
+          setcurrentRiverFlow((value / 1000).toFixed(3));  
       } catch (error) {
         setcurrentRiverFlow(null)
-        //console.error(error);
+        console.error(error);
       }
     };
 
     const getRiverFlowAtCompliance = async () => {
       try {
         const formattedCurrentDate = (() => { const today = new Date(); return `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getFullYear()).slice(-2)}`; })();
-
-        console.log(formattedCurrentDate)
-        console.log(flowsite)
-        const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + flowsite +'&Measurement=Flow&From=' + formattedCurrentDate + '%2003:00:00&To=' + formattedCurrentDate + '%2003:00:00');
-        const responseText = await response.text();
-        const convert = require('xml-js');
-        const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 })
-        
-        const parsedData = JSON.parse(jsonConverted);
-        const value = parsedData['Hilltop']['Measurement']['Data']['E']['I1']['_text']
-        console.log(value)
-        setriverflowAtCompliance((value/ 1000).toFixed(3))
+        const now = new Date()
+        const hours = now.getHours();
+        if (hours > 2) {
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + flowsite +'&Measurement=Flow&From=' + formattedCurrentDate + '%2003:00:00&To=' + formattedCurrentDate + '%2003:00:00');
+          const responseText = await response.text();
+          const convert = require('xml-js');
+          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 })
+          const parsedData = JSON.parse(jsonConverted);
+          const value = parsedData['Hilltop']['Measurement']['Data']['E']['I1']['_text']
+          setriverflowAtCompliance((value/ 1000).toFixed(3))
+        } else {
+          setriverflowAtCompliance(null)
+        }
       } catch (error) {
         setriverflowAtCompliance(null)
-        //console.error(error);
+        console.log(error);
       }
     };
 

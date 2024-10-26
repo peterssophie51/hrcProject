@@ -168,7 +168,7 @@ export default function App() {
     {
       key: 1,
       question:'Why did the chicken cross the road?',
-      answer:'To get to the other side!'
+      answer:'To get to the water meter!'
     },
   
   
@@ -480,24 +480,32 @@ export default function App() {
           const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
           const parsedData = JSON.parse(jsonConverted);
           const value = parsedData['wml2:Collection']['wml2:observationMember']['om:OM_Observation']['om:result']['wml2:MeasurementTimeseries']['wml2:point']['wml2:MeasurementTVP']['wml2:value']['_text'];
-          setcurrentRiverFlow(value / 1000);  
+          setcurrentRiverFlow((value / 1000).toFixed(3));  
       } catch (error) {
-        //console.error(error);
+        setcurrentRiverFlow(null)
+        console.error(error);
       }
     };
 
     const getRiverFlowAtCompliance = async () => {
       try {
-        const today = new Date().toISOString().slice(0, 10);
-        const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + flowsite + '&Measurement=Flow&From=' + today + '2003:00:00&To=' + today + '2003:00:00');
-        const responseText = await response.text();
-        const convert = require('xml-js');
-        const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 });
-        const parsedData = JSON.parse(jsonConverted);
-        const value = parsedData['Hilltop']['Measurement']['Data']['E']['I1']['_text']
-        setriverflowAtCompliance((value/ 1000).toFixed(3))
+        const formattedCurrentDate = (() => { const today = new Date(); return `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getFullYear()).slice(-2)}`; })();
+        const now = new Date()
+        const hours = now.getHours();
+        if (hours > 2) {
+          const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=Hilltop&Request=GetData&Site=' + flowsite +'&Measurement=Flow&From=' + formattedCurrentDate + '%2003:00:00&To=' + formattedCurrentDate + '%2003:00:00');
+          const responseText = await response.text();
+          const convert = require('xml-js');
+          const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4 })
+          const parsedData = JSON.parse(jsonConverted);
+          const value = parsedData['Hilltop']['Measurement']['Data']['E']['I1']['_text']
+          setriverflowAtCompliance((value/ 1000).toFixed(3))
+        } else {
+          setriverflowAtCompliance(null)
+        }
       } catch (error) {
-        //console.error(error);
+        setriverflowAtCompliance(null)
+        console.log(error);
       }
     };
 
@@ -520,22 +528,27 @@ export default function App() {
     };
 
     const getOneDayRiverFlow = async () => {
-      riverFlow[0].length = 0
-      const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Hour)&TemporalFilter=om:phenomenonTime,P1D')
-      const responseText = await response.text()
-      const convert = require('xml-js')
-      const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
-      const parsedData = JSON.parse(jsonConverted)
-      parsedData['wml2:Collection']['wml2:observationMember']['om:OM_Observation']['om:result']['wml2:MeasurementTimeseries']['wml2:point'].forEach((datapoint) => {
-        const value = {
-          value: Number(datapoint['wml2:MeasurementTVP']['wml2:value']['_text']),
-          time: datapoint['wml2:MeasurementTVP']['wml2:time']['_text']
-        }
+      try {
+        riverFlow[0].length = 0
+        const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Hour)&TemporalFilter=om:phenomenonTime,P1D')
+        const responseText = await response.text()
+        const convert = require('xml-js')
+        const jsonConverted = convert.xml2json(responseText, { compact: true, spaces: 4})
+        const parsedData = JSON.parse(jsonConverted)
+        parsedData['wml2:Collection']['wml2:observationMember']['om:OM_Observation']['om:result']['wml2:MeasurementTimeseries']['wml2:point'].forEach((datapoint) => {
+          const value = {
+            value: Number(datapoint['wml2:MeasurementTVP']['wml2:value']['_text']),
+            time: datapoint['wml2:MeasurementTVP']['wml2:time']['_text']
+          }
         riverFlow[0].push(value)
       }) 
+      } catch (error) {
+        riverFlow[0].length = 0
+      }
     }
 
     const getSevenDayRiverFlow = async () => {
+      try {
       riverFlow[1].length = 0
       const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Day)&TemporalFilter=om:phenomenonTime,P6D')
       const responseText = await response.text()
@@ -549,9 +562,13 @@ export default function App() {
         }
         riverFlow[1].push(value)
       }) 
+    } catch (error) {
+      riverFlow[1].length = 0
+    }
     }
 
     const getOneMonthRiverFlow = async () => {
+      try {
       riverFlow[2].length = 0
       const response = await fetch('https://hilltopserver.horizons.govt.nz/boo.hts?Service=SOS&Request=GetObservation&FeatureOfInterest=' + flowsite + '&ObservedProperty=Flow%20mean%20(1%20Day)&TemporalFilter=om:phenomenonTime,P27D')
       const responseText = await response.text()
@@ -565,6 +582,9 @@ export default function App() {
         }
         riverFlow[2].push(value)
       }) 
+    } catch (error) {
+      riverFlow[2].length = 0
+    }
     }
 
     if (flowsite == null) {

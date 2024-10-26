@@ -53,6 +53,7 @@ export function UsagePage ({ dataCollected, handlePress, dailyMax, annualMax, fl
   useEffect(() => {
       settype('totalled')
   }, [flowmeters])
+
     return (
       <TouchableWithoutFeedback onPress={() => handlePress()}>
         <View style={styles.page}>
@@ -81,14 +82,12 @@ export function UsagePage ({ dataCollected, handlePress, dailyMax, annualMax, fl
                 { label: "Totalled", value: 'totalled', activeColor: '#72BF44' },
                 { label: "Proportional", value: 'proportional', activeColor: '#72BF44' },
               ]}
-              type={type} // Pass the current type state
               action={settype} 
-              settype={settype}
-              disabled={flowmeters.length <= 1}
+              disabled={flowmeters.length == 1 ? true : false}
               backgroundColour={flowmeters.length > 1 ? '#243746' : '#cccccc'}
               textColour={flowmeters.length > 1 ? 'white' : 'black'}
               initial={0} 
-              
+              type={type}
               currentConsentATH={currentConsentATH}
             />
 

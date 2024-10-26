@@ -405,7 +405,9 @@ export function ComparisonsGraph(props) {
 
     const [max, setMax] = useState(10);
     useEffect(() => {
-        const allDataObjects = data.flatMap(item => item.data);
+        const riverFlowIndex = props.selectedData.indexOf('River Flow')
+        const newList = data.filter(((_, index) => index !== riverFlowIndex))
+        const allDataObjects = newList.flatMap(item => item.data);
         const maxObject = allDataObjects.reduce((max, current) => {
             return current.value > max.value ? current : max;
         }, allDataObjects[0]);
@@ -459,7 +461,7 @@ export function ComparisonsGraph(props) {
                 thickness={3}
                 showVerticalLines
                 secondaryYAxis={props.selectedData.includes('River Flow') ? {
-                    maxValue: Math.max(...props.riverFlow[0].map(item => item.value / 1000), 10) * 1.5,
+                    maxValue: Math.max(...props.riverFlow[props.currentLabels[0] == '00:00' ? 0 : props.currentLabels == 'oneDay' ? 1 : 2].map(item => item.value / 1000), 10) * 1.5,
                     noOfSections: 12,
                     yAxisColor: '#72BF44',
                     yAxisTextStyle: {

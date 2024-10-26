@@ -33,7 +33,6 @@ export function Switch(props) {
 
 
   return (
-  
     <SwitchSelector
       style={props.style}
       options={props.options}
@@ -45,6 +44,6 @@ export function Switch(props) {
       selectedTextStyle={{fontFamily:'CalibriBold', color:'black'}}
       onPress={value => {props.action(value)}} 
       disabled = {props.disabled}
-      value={props.disabled ? props.initial : null}
+      value={ props.type == 'totalled' ? 0 : props.disabled ? props.initial : null}
   />)}
   

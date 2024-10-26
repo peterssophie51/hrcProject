@@ -5,7 +5,7 @@ import { Image,  StyleSheet } from 'react-native';
 import { ProgressChart } from '../components/home/percentageProgressChart';
 import { TakeWater } from '../components/home/takeWater';
 import { RiverFlow } from '../components/home/riverFlow';
-import { Switch } from '../components/switch';
+import { Switch } from '../components/switch.js';
 
 //home screen component
 export function HomeScreen( { flowsite, handlePress, take, riverFlowAtCompliance, annualUsage, dailyUsage, annualMax, dailyMax, riverFlow, restriction, timePeriod, usageTime}) {
